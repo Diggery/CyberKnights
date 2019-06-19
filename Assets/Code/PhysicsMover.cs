@@ -8,6 +8,8 @@ public class PhysicsMover : MonoBehaviour {
     Rigidbody rbody;
     bool startMoving = false;
 
+    float speed = 8;
+
     private void Start() {
         GameObject terrainObj = GameObject.FindGameObjectWithTag("Terrain");
         terrain = terrainObj.GetComponent<TerrainMananer>();
@@ -19,15 +21,13 @@ public class PhysicsMover : MonoBehaviour {
     private void Update() {
         if (startMoving && terrain.HasData) {
             Vector3 movementVector = terrain.GetFlowDirection(transform.position);
-            rbody.AddForce(movementVector * 8, ForceMode.Force);
-            Debug.Log("Moving " + movementVector);
+            rbody.AddForce(movementVector * speed, ForceMode.Force);
         }
     }
 
     IEnumerator TestPath() {
       yield return new WaitForSeconds(1f);
-                      terrain.BuildPath(new Vector3(2, 0, 3));
-
+                      
       yield return new WaitForSeconds(1f);
       startMoving = true;
     }

@@ -5,8 +5,8 @@ using UnityEngine;
 public class TerrainMananer : MonoBehaviour {
     public Vector2Int terrainSize = new Vector2Int(8, 8);
     int terrainCellSize = 8;
-    Vector3Int[,] terrainData;
-    public Vector3Int[,] flowField;
+    int[,] terrainData;
+    public Vector3Int[,] flowField;   // x: direction index  y: weight amount   z: distance to goal
 
     public Vector2Int[] testPoints;
 
@@ -14,14 +14,13 @@ public class TerrainMananer : MonoBehaviour {
     Vector3[] directionLookUp;
     bool hasData = false;
     public bool HasData {
-      get {return hasData;}
+        get { return hasData; }
     }
     void Start() {
         GenerateDirectionLookUp();
         GenerateTerrainData();
-        //GenerateDistanceData(testPoints);
-        //GenerateFlowData();
-        //ShowDebug();
+        BuildPath(new Vector3(2, 0, 3));
+
     }
     void GenerateDirectionLookUp() {
         directionLookUp = new Vector3[8];
@@ -50,67 +49,51 @@ public class TerrainMananer : MonoBehaviour {
     }
 
     public void BuildPath(Vector2Int[] endPoints) {
-        GenerateDistanceData(endPoints);
+        GenerateDistanceField(endPoints);
         GenerateFlowData();
     }
 
+
     public Vector3 GetFlowDirection(Vector3 position) {
-
-        //Work out the force to apply to us based on the flow field grid squares we are on.
-        //we apply bilinear interpolation on the 4 grid squares nearest to us to work out our force.
-        // http://en.wikipedia.org/wiki/Bilinear_interpolation#Nonlinear
-
-        Vector2Int floor = new Vector2Int(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.z)); //Top left Coordinate of the 4
+        Vector3Int floor = new Vector3Int(Mathf.FloorToInt(position.x), 0, Mathf.FloorToInt(position.z)); //Top left Coordinate of the 4
 
         //The 4 weights we'll interpolate, see http://en.wikipedia.org/wiki/File:Bilininterp.png for the coordinates
-        Vector3 f00 = directionLookUp[flowField[floor.x, floor.y].x];
-        Vector3 f01 = directionLookUp[flowField[floor.x, floor.y + 1].x];
-        Vector3 f10 = directionLookUp[flowField[floor.x + 1, floor.y].x];
-        Vector3 f11 = directionLookUp[flowField[floor.x + 1, floor.y + 1].x];
+        Vector3 a = directionLookUp[flowField[floor.x, floor.z].x];
+        Vector3 b = directionLookUp[flowField[floor.x + 1, floor.z].x];
+        Vector3 c = directionLookUp[flowField[floor.x + 1, floor.z + 1].x];
+        Vector3 d = directionLookUp[flowField[floor.x, floor.z + 1].x];
 
-        return f00;
+        float u = position.x - floor.x;
+        float v = position.z - floor.z;
 
-        //Do the x interpolations
-        float xWeight = position.x - floor.x;
+        Vector3 abu = Vector3.Lerp(a, b, u);
+        Vector3 dcu = Vector3.Lerp(d, c, u);
+        Debug.DrawLine(position, position + Vector3.Lerp(abu, dcu, v), Color.green);
 
-        Vector3 top = (f00 * (1 - xWeight)) + (f10 * (xWeight));
-        Vector3 bottom = (f01 * (1 - xWeight)) + (f11 * (xWeight));
-
-        //Do the y interpolation
-        float yWeight = position.y - floor.y;
-
-        //This is now the direction we want to be travelling in (needs to be normalized)
-        Vector3 direction = ((top * (1 - yWeight)) + (bottom * yWeight)).normalized;
-
-        //If we are centered on a grid square with no vector this will happen
-        if (float.IsNaN(direction.magnitude)) {
-            return Vector3.zero;
-        }
-        return direction;
+        return Vector3.Lerp(abu, dcu, v);
     }
 
+
     public void GenerateTerrainData() {
-        terrainData = new Vector3Int[
-            terrainSize.x * terrainCellSize,
-            terrainSize.y * terrainCellSize
-        ];
+        terrainData = new int[ terrainSize.x, terrainSize.y  ];
         Debug.Log("Building data...");
         for (var x = 0; x < terrainSize.x; x++) {
             for (var y = 0; y < terrainSize.y; y++) {
                 RaycastHit hit;
                 LayerMask terrainMask = LayerMask.GetMask("Terrain");
-                Vector3 origin = new Vector3(x + 0.5f, 100, y + 0.5f);
+                Vector3 origin = new Vector3(x, 100, y);
                 Ray ray = new Ray(origin, Vector3.down);
                 if (Physics.Raycast(ray, out hit, 200, terrainMask)) {
                     if (hit.transform.tag.Equals("Impassible")) {
-                        terrainData[x, y] = new Vector3Int(-1, 2, 3);
+                        terrainData[x, y] = -1;
                     } else {
-                        terrainData[x, y] = new Vector3Int(1, 2, 3);
+                        terrainData[x, y] = 1;
                     }
                 }
             }
         }
     }
+
     void GenerateDistanceData(Vector2Int[] endPoints) {
         Debug.Log("Building Distance data...");
 
@@ -121,31 +104,26 @@ public class TerrainMananer : MonoBehaviour {
         //integrate collision and weights
         for (var y = 0; y < terrainSize.y; y++) {
             for (var x = 0; x < terrainSize.x; x++) {
-                if (terrainData[x, y].x < 0) {
-                    flowField[x, y].z = int.MaxValue;
-                } else {
-                    flowField[x, y].z = -1;
-
-                }
+                flowField[x, y] = new Vector3Int(0, terrainData[x, y], -1);
             }
         }
 
         foreach (Vector2Int endPoint in endPoints) {
-            flowField[endPoint.x, endPoint.y].y = 0;
+            flowField[endPoint.x, endPoint.y].z = 0;
             toVisit.Add(new Vector2Int(endPoint.x, endPoint.y));
         }
 
-
         //for each node we need to visit, starting with the pathEnd
         for (int i = 0; i < toVisit.Count; i++) {
-            Vector2Int[] neighbors = GetCellNeighbors(flowField, toVisit[i]);
+            Vector2Int[] neighbors = GetCellNeighbors(terrainData, toVisit[i]);
 
             //for each neighbour of this node (only straight line neighbours, not diagonals)
             for (var j = 0; j < neighbors.Length; j++) {
                 var neighbor = neighbors[j];
 
                 //We will only ever visit every node once as we are always visiting nodes in the most efficient order
-                if (flowField[neighbor.x, neighbor.y].z < 0) {
+
+                if (flowField[neighbor.x, neighbor.y].y > 0) {
                     flowField[neighbor.x, neighbor.y].z = flowField[toVisit[i].x, toVisit[i].y].z + 1;
                     toVisit.Add(neighbor);
                 }
@@ -157,7 +135,7 @@ public class TerrainMananer : MonoBehaviour {
         for (var y = 0; y < terrainSize.y; y++) {
             for (var x = 0; x < terrainSize.x; x++) {
                 int closestDistance = int.MaxValue;
-                int closestDirection = -1;
+                int closestDirection = 0;
                 for (var i = 0; i < 8; i++) {
                     int xPos = 0;
                     int yPos = 0;
@@ -200,7 +178,6 @@ public class TerrainMananer : MonoBehaviour {
                     }
                     if (xPos < 0 || xPos >= terrainSize.x) continue;
                     if (yPos < 0 || yPos >= terrainSize.y) continue;
-
                     if (flowField[xPos, yPos].z < closestDistance) {
                         closestDistance = flowField[xPos, yPos].z;
                         closestDirection = i;
@@ -209,28 +186,11 @@ public class TerrainMananer : MonoBehaviour {
                 flowField[x, y].x = closestDirection;
             }
         }
-        hasData = true; 
+        hasData = true;
+        ShowDebug();
     }
 
-
-
-    TerrainSection GenerateTerrainSection(Vector2Int sectionPos, int size) {
-        bool allPassible = true;
-        Vector3Int[,] sectionData = new Vector3Int[size, size];
-        for (int y = 0; y < size; ++y) {
-            for (int x = 0; x < size; ++x) {
-                int xPos = x + sectionPos.x;
-                int yPos = y + sectionPos.y;
-                sectionData[x, y] = terrainData[xPos, yPos];
-                if (sectionData[x, y].x < 0) allPassible = false;
-            }
-        }
-        TerrainSection newSection = new TerrainSection(sectionPos, sectionData);
-        newSection.IsOpen = allPassible;
-        return newSection;
-    }
-
-    Vector2Int[] GetCellNeighbors(Vector3Int[,] sectionData, Vector2Int cell) {
+    Vector2Int[] GetCellNeighbors(int[,] terrainData, Vector2Int cell) {
         List<Vector2Int> neighbors = new List<Vector2Int>();
         int xPos = 0;
         int yPos = 0;
@@ -238,21 +198,21 @@ public class TerrainMananer : MonoBehaviour {
             switch (i) {
                 case 0:
                     xPos = cell.x;
-                    yPos = cell.y - 1;
-                    break;
-
-                case 1:
-                    xPos = cell.x;
                     yPos = cell.y + 1;
                     break;
 
-                case 2:
-                    xPos = cell.x - 1;
+                case 1:
+                    xPos = cell.x + 1;
                     yPos = cell.y;
                     break;
 
+                case 2:
+                    xPos = cell.x;
+                    yPos = cell.y - 1;
+                    break;
+
                 case 3:
-                    xPos = cell.x + 1;
+                    xPos = cell.x - 1;
                     yPos = cell.y;
                     break;
                 default:
@@ -260,37 +220,74 @@ public class TerrainMananer : MonoBehaviour {
                     break;
 
             }
-            if (xPos < 0 || xPos >= sectionData.GetLength(0)) {
+            if (xPos < 0 || xPos >= terrainData.GetLength(0)) {
                 continue;
             }
-            if (yPos < 0 || yPos >= sectionData.GetLength(1)) {
+            if (yPos < 0 || yPos >= terrainData.GetLength(1)) {
                 continue;
             }
-
-            if (sectionData[xPos, yPos].z < int.MaxValue) {
-                neighbors.Add(new Vector2Int(xPos, yPos));
+            if (terrainData[xPos, yPos] < 0) {
+                continue;
             }
+            neighbors.Add(new Vector2Int(xPos, yPos));
         }
+
         return neighbors.ToArray();
     }
 
     void ShowDebug() {
         foreach (Vector2Int endPoint in testPoints) {
-            Debug.DrawLine(new Vector3(endPoint.x + 0.5f, 0, endPoint.y + 0.5f), new Vector3(endPoint.x + 0.5f, 1, endPoint.y + 0.5f), Color.green, 100);
-            Debug.Log("Drawing Enpoiuntds");
+            Debug.DrawLine(new Vector3(endPoint.x, 0, endPoint.y), new Vector3(endPoint.x, 1, endPoint.y), Color.green, 100);
         }
 
         for (var y = 0; y < terrainSize.y; y++) {
             for (var x = 0; x < terrainSize.x; x++) {
                 GameObject quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
-                quad.transform.position = new Vector3(x + 0.5f, 0, y + 0.5f);
+                quad.transform.position = new Vector3(x, 0, y);
                 quad.transform.eulerAngles = new Vector3(90, 0, 0);
+                quad.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
                 quad.GetComponent<Renderer>().material.color = Color.Lerp(Color.white, Color.black, (float)flowField[x, y].z / 100.0f);
                 quad.name = "pos: " + x + ", " + y + ": " + flowField[x, y].z;
 
-                Vector3 startPos = new Vector3(x + 0.5f, 0, y + 0.5f);
+                Vector3 startPos = new Vector3(x, 0, y);
                 Vector3 endPos = startPos + (directionLookUp[flowField[x, y].x] * 0.5f);
                 Debug.DrawLine(startPos, endPos, Color.white, 100);
+            }
+        }
+    }
+
+
+    void GenerateDistanceField(Vector2Int[] endPoints) {
+        //Generate an empty grid, set all places as index -1, which will stand for unvisited
+        flowField = new Vector3Int[terrainSize.x, terrainSize.y];
+        for (var y = 0; y < flowField.GetLength(1); y++) {
+            for (var x = 0; x < flowField.GetLength(0); x++) {
+                flowField[x, y] = new Vector3Int(-1, terrainData[x, y], int.MaxValue);
+            }
+        }
+
+        //Set all places where towers are as being weight MAXINT, which will stand for not able to go here
+        List<Vector2Int> toVisit = new List<Vector2Int>();
+
+        foreach (Vector2Int endPoint in endPoints) {
+            flowField[endPoint.x, endPoint.y].z = 0;
+            toVisit.Add(new Vector2Int(endPoint.x, endPoint.y));
+        }
+
+        //for each node we need to visit, starting with the pathEnd
+        for (int i = 0; i < toVisit.Count; i++) {
+            Vector2Int[] neighbors = GetCellNeighbors(terrainData, toVisit[i]);
+
+            //for each neighbour of this node (only straight line neighbours, not diagonals)
+            for (var j = 0; j < neighbors.Length; j++) {
+                Vector2Int neighbor = neighbors[j];
+
+                //We will only ever visit every node once as we are always visiting nodes in the most efficient order
+                if (flowField[neighbor.x, neighbor.y].x < 0) {
+                    flowField[neighbor.x, neighbor.y].x = 0;
+                    flowField[neighbor.x, neighbor.y].z = flowField[toVisit[i].x, toVisit[i].y].z + 1;
+                    toVisit.Add(neighbor);
+                }
             }
         }
     }
