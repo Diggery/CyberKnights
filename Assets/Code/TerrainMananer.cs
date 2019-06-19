@@ -12,6 +12,10 @@ public class TerrainMananer : MonoBehaviour {
 
     TerrainSection[,] sections;
     Vector3[] directionLookUp;
+    bool hasData = false;
+    public bool HasData {
+      get {return hasData;}
+    }
     void Start() {
         GenerateDirectionLookUp();
         GenerateTerrainData();
@@ -29,7 +33,6 @@ public class TerrainMananer : MonoBehaviour {
         directionLookUp[5] = new Vector3(-1, 0, -1).normalized;
         directionLookUp[6] = new Vector3(-1, 0, 0).normalized;
         directionLookUp[7] = new Vector3(-1, 0, 1).normalized;
-
     }
 
     public void BuildPath(Vector3 endPoint) {
@@ -49,6 +52,41 @@ public class TerrainMananer : MonoBehaviour {
     public void BuildPath(Vector2Int[] endPoints) {
         GenerateDistanceData(endPoints);
         GenerateFlowData();
+    }
+
+    public Vector3 GetFlowDirection(Vector3 position) {
+
+        //Work out the force to apply to us based on the flow field grid squares we are on.
+        //we apply bilinear interpolation on the 4 grid squares nearest to us to work out our force.
+        // http://en.wikipedia.org/wiki/Bilinear_interpolation#Nonlinear
+
+        Vector2Int floor = new Vector2Int(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.z)); //Top left Coordinate of the 4
+
+        //The 4 weights we'll interpolate, see http://en.wikipedia.org/wiki/File:Bilininterp.png for the coordinates
+        Vector3 f00 = directionLookUp[flowField[floor.x, floor.y].x];
+        Vector3 f01 = directionLookUp[flowField[floor.x, floor.y + 1].x];
+        Vector3 f10 = directionLookUp[flowField[floor.x + 1, floor.y].x];
+        Vector3 f11 = directionLookUp[flowField[floor.x + 1, floor.y + 1].x];
+
+        return f00;
+
+        //Do the x interpolations
+        float xWeight = position.x - floor.x;
+
+        Vector3 top = (f00 * (1 - xWeight)) + (f10 * (xWeight));
+        Vector3 bottom = (f01 * (1 - xWeight)) + (f11 * (xWeight));
+
+        //Do the y interpolation
+        float yWeight = position.y - floor.y;
+
+        //This is now the direction we want to be travelling in (needs to be normalized)
+        Vector3 direction = ((top * (1 - yWeight)) + (bottom * yWeight)).normalized;
+
+        //If we are centered on a grid square with no vector this will happen
+        if (float.IsNaN(direction.magnitude)) {
+            return Vector3.zero;
+        }
+        return direction;
     }
 
     public void GenerateTerrainData() {
@@ -73,11 +111,6 @@ public class TerrainMananer : MonoBehaviour {
             }
         }
     }
-
-    public Vector3 GetFlowDirection(Vector3 terrainPos) {
-        return directionLookUp[flowField[Mathf.FloorToInt(terrainPos.x), Mathf.FloorToInt(terrainPos.z)].x];
-    }
-
     void GenerateDistanceData(Vector2Int[] endPoints) {
         Debug.Log("Building Distance data...");
 
@@ -176,6 +209,7 @@ public class TerrainMananer : MonoBehaviour {
                 flowField[x, y].x = closestDirection;
             }
         }
+        hasData = true; 
     }
 
 
