@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour {
     }
 
   
-    public InventoryObject inventory;
     public UnitInventory unitInventory;
 
     static GameManager instance;
@@ -48,10 +47,6 @@ public class GameManager : MonoBehaviour {
 
     public GameObject GetUnitPrefab(string name) {
         return unitInventory.GetUnitPrefab(name);
-    }
-
-    public GameObject GetPrefab(string name) {
-        return inventory.GetPrefab(name);
     }
 }
 

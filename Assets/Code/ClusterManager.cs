@@ -7,15 +7,12 @@ public class ClusterManager : MonoBehaviour {
   public string teamName = "Player";
   GameManager gameManager;
   public int unitsInCluster = 50;
-  List<GameObject> units = new List<GameObject>();
+  List<UnitControl> units = new List<UnitControl>();
   int rankWidth = 6;
   float rankOffset = 1.5f;
   private void Start() {
     gameManager = GameManager.Instance;
-    GameObject[] unitGOs = GameObject.FindGameObjectsWithTag("Player");
-    foreach (var item in unitGOs) {
-      units.Add(item);
-    }
+    CreateUnits();
   }
   private void Update() {
     if (Input.GetMouseButtonDown(0)) {
@@ -29,6 +26,11 @@ public class ClusterManager : MonoBehaviour {
     if (Input.GetKeyDown(KeyCode.X)) {
       FormRanks(transform.position, transform.forward);
     }
+
+    foreach (var item in units)
+    {
+        item.UpdateState();
+    }
   }
 
   public void SetDestination(Vector3 mapPos) {
@@ -41,7 +43,7 @@ public class ClusterManager : MonoBehaviour {
     int unitNumber = 0;
     for (int y = 0; y < Mathf.CeilToInt((float)units.Count / 6.0f); y++) {
       for (int x = 0; x < rankWidth; x++) {
-        GameObject unit = units[unitNumber];
+        UnitControl unit = units[unitNumber];
         unitNumber++;
         if (unitNumber > units.Count)
           break;
@@ -55,7 +57,7 @@ public class ClusterManager : MonoBehaviour {
         if (Physics.Raycast(ray, out hit, unitOffset.magnitude, terrainMask)) {
           unitMovePos = hit.point;
         }
-        unit.GetComponent<NavMeshAgent>().SetDestination(unitMovePos);
+        unit.gameObject.GetComponent<NavMeshAgent>().SetDestination(unitMovePos);
       }
     }
   }
@@ -65,6 +67,7 @@ public class ClusterManager : MonoBehaviour {
       GameObject newUnit = GameObject.Instantiate(gameManager.GetUnitPrefab("Warrior"), transform.position, transform.rotation);
       UnitControl newUnitControl = newUnit.GetComponent<UnitControl>(); 
       newUnitControl.TeamName = teamName;
+      units.Add(newUnitControl);
     }
   }
 }

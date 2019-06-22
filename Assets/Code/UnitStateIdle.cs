@@ -5,22 +5,21 @@ using UnityEngine;
 public class UnitStateIdle : UnitState {
 
 
-    public override void StateInit() {
-        base.StateInit();
-        stateName = "Attacking";
-    }
+  public override void StateInit() {
+    base.StateInit();
+    stateName = "Idle";
+  }
 
-    public override void StateEnter() {
-        base.StateEnter();
+  public override void StateEnter() {
+    base.StateEnter();
 
-    }
+  }
 
-    public override void StateUpdate() {
-        base.StateUpdate();
+  public override void StateUpdate() {
+    base.StateUpdate();
+  }
 
-    }
-
-    public override void StateExit() {
-        base.StateExit();
-    }
+  public override void StateExit() {
+    base.StateExit();
+  }
 }
