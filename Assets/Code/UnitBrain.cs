@@ -32,7 +32,7 @@ public class UnitBrain : MonoBehaviour {
     }
   }
 
-  void Start() {
+  public void Init() {
 
     UnitStateIdle unitStateIdle = gameObject.AddComponent<UnitStateIdle>();
     unitStateIdle.StateInit();
@@ -46,12 +46,10 @@ public class UnitBrain : MonoBehaviour {
     aiStateAttacking.StateInit();
     states.Add(aiStateAttacking.StateName, aiStateAttacking);
 
-    State = "Waiting";
+    State = "Idle";
   }
 
-  void Update() {
-
-
+  public void UpdateState() {
     currentState.StateUpdate();
   }
 
@@ -106,7 +104,7 @@ public class UnitBrain : MonoBehaviour {
   }
 
   public void AttackEnemy(UnitControl target) {
-    
+
   }
 
 

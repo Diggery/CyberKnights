@@ -13,11 +13,10 @@ public class UnitInventory : ScriptableObject {
 
   public List<UnitEntry> units = new List<UnitEntry>();
 
-  public GameObject GetUnitPrefab(string unit) {
-
+  public GameObject GetUnitPrefab(string unitName) {
     GameObject unitPrefab = null;
     foreach (UnitEntry entry in units) {
-      if (entry.name.Equals(name) && entry.prefab) {
+      if (entry.name.Equals(unitName) && entry.prefab) {
         unitPrefab = entry.prefab;
         break;
       }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Impassible
   - Terrain
+  - Unit
   layers:
   - Default
   - TransparentFX
