@@ -14,7 +14,6 @@ public class UnitInventory : ScriptableObject {
   public List<UnitEntry> units = new List<UnitEntry>();
 
   public GameObject GetUnitPrefab(string unitName) {
-    Debug.Log("Getting " + unitName);
     GameObject unitPrefab = null;
     foreach (UnitEntry entry in units) {
       if (entry.name.Equals(unitName) && entry.prefab) {

@@ -8,47 +8,67 @@ public class ClusterManager : MonoBehaviour {
   GameManager gameManager;
   public int unitsInCluster = 50;
   List<UnitControl> units = new List<UnitControl>();
-  int rankWidth = 6;
+  int MinRankWidth = 4;
+  int perferedRankWidth = 6;
+  int MaxRankWidth = 16;
   float rankOffset = 1.5f;
+
+  enum Formation {
+    Ranks, Vanguard, Mob
+  }
+
+  Formation currentFormation = Formation.Ranks;
+
   private void Start() {
     gameManager = GameManager.Instance;
     CreateUnits();
   }
+
   private void Update() {
-    if (Input.GetMouseButtonDown(0)) {
-      Vector2 pos = Input.mousePosition;
-      Ray ray = Camera.main.ScreenPointToRay(new Vector3(pos.x, pos.y, 0.0f));
-      RaycastHit hit;
-      if (Physics.Raycast(ray, out hit)) {
-        SetDestination(hit.point);
-      }
-    }
-    if (Input.GetKeyDown(KeyCode.X)) {
-      FormRanks(transform.position, transform.forward);
-    }
 
-    foreach (var item in units)
-    {
-        item.UpdateState();
+    foreach (var item in units) {
+      item.UpdateState();
     }
   }
 
-  public void SetDestination(Vector3 mapPos) {
-    foreach (var unit in units) {
-      unit.GetComponent<NavMeshAgent>().SetDestination(mapPos);
+  public void Command(Vector3 mapPos, Vector3 dir, float size) {
+    switch (currentFormation) {
+      case Formation.Ranks:
+        FormRanks(mapPos, dir, size);
+        break;
+      case Formation.Vanguard:
+        break;
+      case Formation.Mob:
+        break;
     }
   }
 
-  public void FormRanks(Vector3 pos, Vector3 dir) {
+  public void FormRanks(Vector3 pos, Vector3 dir, float width) {
     int unitNumber = 0;
-    for (int y = 0; y < Mathf.CeilToInt((float)units.Count / 6.0f); y++) {
+
+    int rankWidth = Mathf.Clamp(Mathf.CeilToInt(
+        (float)width / (float)rankOffset),
+          MinRankWidth,
+          MaxRankWidth
+        );
+    if (width < rankOffset) {
+      rankWidth = perferedRankWidth;
+      dir = pos - transform.position;
+    }
+
+    Debug.Log("Width is " + rankWidth);
+    dir.Normalize();
+
+    for (int y = 0; y < Mathf.CeilToInt((float)units.Count / rankWidth); y++) {
       for (int x = 0; x < rankWidth; x++) {
-        UnitControl unit = units[unitNumber];
-        unitNumber++;
-        if (unitNumber > units.Count)
+        if (unitNumber >= units.Count)
           break;
+        UnitControl unit = units[unitNumber];
+
+        unitNumber++;
+
         float centerOffset = ((float)rankWidth / 2.0f) - 0.5f;
-        Vector3 sideDir = Vector3.Cross(dir.normalized, Vector3.up);
+        Vector3 sideDir = Vector3.Cross(dir, Vector3.up);
         Vector3 unitOffset = (sideDir * (x - centerOffset) * rankOffset) + (dir * -y * rankOffset);
         RaycastHit hit;
         LayerMask terrainMask = LayerMask.GetMask("Terrain");
@@ -60,13 +80,20 @@ public class ClusterManager : MonoBehaviour {
         unit.gameObject.GetComponent<NavMeshAgent>().SetDestination(unitMovePos);
       }
     }
+    transform.position = pos;
+    transform.rotation = Quaternion.LookRotation(dir);
+  }
+
+  public void FormMob() {
+
   }
 
   void CreateUnits() {
     for (int i = 0; i < unitsInCluster; i++) {
       GameObject newUnit = GameObject.Instantiate(gameManager.GetUnitPrefab("Warrior"), transform.position, transform.rotation);
-      UnitControl newUnitControl = newUnit.GetComponent<UnitControl>(); 
+      UnitControl newUnitControl = newUnit.GetComponent<UnitControl>();
       newUnitControl.TeamName = teamName;
+      newUnit.name = "Warrior-" + i;
       units.Add(newUnitControl);
     }
   }
