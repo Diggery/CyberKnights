@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 126989642}
   m_Layer: 0
   m_Name: pCube4 (2)
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 134819166}
   m_Layer: 0
   m_Name: pCube1 (4)
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -318,7 +318,7 @@ GameObject:
   - component: {fileID: 208671404}
   m_Layer: 0
   m_Name: pCube1 (3)
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -410,7 +410,7 @@ GameObject:
   - component: {fileID: 392018910}
   m_Layer: 0
   m_Name: pCube1 (5)
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -502,7 +502,7 @@ GameObject:
   - component: {fileID: 421333518}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -742,7 +742,7 @@ GameObject:
   - component: {fileID: 869126264}
   m_Layer: 0
   m_Name: pCube4 (1)
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -834,7 +834,7 @@ GameObject:
   - component: {fileID: 948657496}
   m_Layer: 0
   m_Name: pCube1 (2)
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -926,7 +926,7 @@ GameObject:
   - component: {fileID: 958553361}
   m_Layer: 0
   m_Name: pCube4 (3)
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1021,15 +1021,30 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: -8052994932809076077, guid: 73813c883692c43458512d0c65ecfb50,
+        type: 3}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
     - target: {fileID: -8626751840527039810, guid: 73813c883692c43458512d0c65ecfb50,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: -8626751840527039810, guid: 73813c883692c43458512d0c65ecfb50,
+        type: 3}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
+    - target: {fileID: -4214470490016819149, guid: 73813c883692c43458512d0c65ecfb50,
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: -4214470490016819149, guid: 73813c883692c43458512d0c65ecfb50,
         type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 73813c883692c43458512d0c65ecfb50,
         type: 3}
@@ -1261,7 +1276,7 @@ GameObject:
   - component: {fileID: 1780548870}
   m_Layer: 0
   m_Name: pCube5 (1)
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1353,7 +1368,7 @@ GameObject:
   - component: {fileID: 2015676825}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1444,7 +1459,7 @@ GameObject:
   - component: {fileID: 2096960157}
   m_Layer: 0
   m_Name: pCube1 (1)
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1564,7 +1579,7 @@ Transform:
   m_GameObject: {fileID: 2104974811}
   m_LocalRotation: {x: -0, y: -0.05809525, z: -0, w: 0.99831104}
   m_LocalPosition: {x: 16.15, y: 1.2009506, z: -2.28}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
