@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DrawCircle : MonoBehaviour {
+public class DrawCircleShape : MonoBehaviour {
 
     Mesh circleMesh;
     Renderer circleRenderer;
@@ -14,7 +14,7 @@ public class DrawCircle : MonoBehaviour {
     Color endColor = new Color(1.0f, 1.0f, 1.0f, 0.1f);
 
 
-	public DrawCircle Init () {
+	public DrawCircleShape Init () {
         CreateReticleVertices();
         return this;
 	}
