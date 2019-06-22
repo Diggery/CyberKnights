@@ -2,52 +2,26 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PartsInventory : ScriptableObject {
+public class UnitInventory : ScriptableObject {
 
 
-	[System.Serializable]
-	public class PartEntry {	
-        public string name;
-        public CombotPart.Type type;
-        public GameObject prefab;
-	}
+  [System.Serializable]
+  public class UnitEntry {
+    public string name;
+    public GameObject prefab;
+  }
 
-    public List<PartEntry> parts = new List<PartEntry>();
+  public List<UnitEntry> units = new List<UnitEntry>();
 
-    public GameObject GetPart(string part) {
+  public GameObject GetUnitPrefab(string unit) {
 
-        int separatorIndex = part.IndexOf("_");
-
-        CombotPart.Type type = CombotPart.Type.Head;
-
-        string typeName = part.Substring(0, separatorIndex);
-        switch (typeName) {
-            case "Head" :
-                type = CombotPart.Type.Head;
-                break;
-            case "Arms" :
-                type = CombotPart.Type.Arms;
-                break;
-            case "Torso" :
-                type = CombotPart.Type.Torso;
-                break;
-            case "Legs" :
-                type = CombotPart.Type.Legs;
-                break;
-        }
-
-        int runLength = (part.Length - 1) - separatorIndex;
-        string name = part.Substring(separatorIndex + 1, runLength);
-
-        GameObject partPrefab = null;
-        foreach (PartEntry entry in parts) {
-            if (entry.type == type) {
-                if (entry.name.Equals(name) && entry.prefab) {
-                    partPrefab = entry.prefab;
-                    break;
-                }
-            }
-        }
-        return partPrefab;
+    GameObject unitPrefab = null;
+    foreach (UnitEntry entry in units) {
+      if (entry.name.Equals(name) && entry.prefab) {
+        unitPrefab = entry.prefab;
+        break;
+      }
     }
+    return unitPrefab;
+  }
 }

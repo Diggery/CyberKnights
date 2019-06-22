@@ -4,11 +4,14 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class ClusterManager : MonoBehaviour {
+  public string teamName = "Player";
+  GameManager gameManager;
   public int unitsInCluster = 50;
   List<GameObject> units = new List<GameObject>();
   int rankWidth = 6;
   float rankOffset = 1.5f;
   private void Start() {
+    gameManager = GameManager.Instance;
     GameObject[] unitGOs = GameObject.FindGameObjectsWithTag("Player");
     foreach (var item in unitGOs) {
       units.Add(item);
@@ -58,9 +61,10 @@ public class ClusterManager : MonoBehaviour {
   }
 
   void CreateUnits() {
-    for (int i = 0; i < unitsInCluster; i++)
-    {
-        GameObject newUnit = GameObject.Instantiate(warriorPrefab);
+    for (int i = 0; i < unitsInCluster; i++) {
+      GameObject newUnit = GameObject.Instantiate(gameManager.GetUnitPrefab("Warrior"), transform.position, transform.rotation);
+      UnitControl newUnitControl = newUnit.GetComponent<UnitControl>(); 
+      newUnitControl.TeamName = teamName;
     }
   }
 }
