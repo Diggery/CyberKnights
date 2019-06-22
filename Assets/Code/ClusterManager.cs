@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class ClusterManager : MonoBehaviour {
-  public List<GameObject> units = new List<GameObject>();
+  public int unitsInCluster = 50;
+  List<GameObject> units = new List<GameObject>();
   int rankWidth = 6;
   float rankOffset = 1.5f;
   private void Start() {
@@ -53,6 +54,13 @@ public class ClusterManager : MonoBehaviour {
         }
         unit.GetComponent<NavMeshAgent>().SetDestination(unitMovePos);
       }
+    }
+  }
+
+  void CreateUnits() {
+    for (int i = 0; i < unitsInCluster; i++)
+    {
+        GameObject newUnit = GameObject.Instantiate(warriorPrefab);
     }
   }
 }

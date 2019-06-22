@@ -2,14 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIState : MonoBehaviour {
+public class UnitState : MonoBehaviour {
 
-    protected AIController ai;
-    protected GameManager gameManager;
-    protected UnitControl unitControl;
-    protected UnitAttack unitAttack;
-    protected UnitMover unitMover;
-    protected MapControl mapControl;
 
     protected bool isActive = false;
     public bool IsActive {
@@ -22,14 +16,8 @@ public class AIState : MonoBehaviour {
         get { return stateName; }
     }
 
-
     public virtual void StateInit() {
-        gameManager = GameManager.Instance;
-        ai = GetComponent<AIController>();
-        unitControl = GetComponent<UnitControl>();
-        unitAttack = GetComponent<UnitAttack>();
-        unitMover = GetComponent<UnitMover>();
-        mapControl = gameManager.ActiveMap;
+
     }
 
     public virtual void StateEnter() {
