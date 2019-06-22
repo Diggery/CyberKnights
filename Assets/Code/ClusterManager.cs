@@ -17,7 +17,7 @@ public class ClusterManager : MonoBehaviour {
     Ranks, Vanguard, Mob
   }
 
-  Formation currentFormation = Formation.Ranks;
+  Formation currentFormation = Formation.Mob;
 
   private void Start() {
     gameManager = GameManager.Instance;
@@ -31,33 +31,34 @@ public class ClusterManager : MonoBehaviour {
     }
   }
 
-  public void Command(Vector3 mapPos, Vector3 dir, float size) {
+  public void Command(Vector3 start, Vector3 end) {
     switch (currentFormation) {
       case Formation.Ranks:
-        FormRanks(mapPos, dir, size);
+        FormRanks(start, end);
         break;
       case Formation.Vanguard:
         break;
       case Formation.Mob:
+        FormMob(start, end);
         break;
     }
   }
 
-  public void FormRanks(Vector3 pos, Vector3 dir, float width) {
+  public void FormRanks(Vector3 startPos, Vector3 endPos) {
     int unitNumber = 0;
+    Vector3 movePos = Vector3.Lerp(startPos, endPos, 0.5f);
+    Vector3 offset = (startPos - endPos);
+    float size = offset.magnitude;
+    Vector3 rightDir = offset.normalized;
+    Vector3 forwardDir = Vector3.Cross(offset.normalized, Vector3.up);
 
     int rankWidth = Mathf.Clamp(Mathf.CeilToInt(
-        (float)width / (float)rankOffset),
-          MinRankWidth,
-          MaxRankWidth
+          size / (float)rankOffset), MinRankWidth, MaxRankWidth
         );
-    if (width < rankOffset) {
+    if (size < rankOffset) {
       rankWidth = perferedRankWidth;
-      dir = pos - transform.position;
+      forwardDir = (movePos - transform.position).normalized;
     }
-
-    Debug.Log("Width is " + rankWidth);
-    dir.Normalize();
 
     for (int y = 0; y < Mathf.CeilToInt((float)units.Count / rankWidth); y++) {
       for (int x = 0; x < rankWidth; x++) {
@@ -68,24 +69,35 @@ public class ClusterManager : MonoBehaviour {
         unitNumber++;
 
         float centerOffset = ((float)rankWidth / 2.0f) - 0.5f;
-        Vector3 sideDir = Vector3.Cross(dir, Vector3.up);
-        Vector3 unitOffset = (sideDir * (x - centerOffset) * rankOffset) + (dir * -y * rankOffset);
+        Vector3 unitOffset = (rightDir * (x - centerOffset) * rankOffset) + (forwardDir * -y * rankOffset);
         RaycastHit hit;
         LayerMask terrainMask = LayerMask.GetMask("Terrain");
-        Ray ray = new Ray(pos, pos + unitOffset);
-        Vector3 unitMovePos = pos + unitOffset;
+        Ray ray = new Ray(movePos, movePos + unitOffset);
+        Vector3 unitMovePos = movePos + unitOffset;
         if (Physics.Raycast(ray, out hit, unitOffset.magnitude, terrainMask)) {
           unitMovePos = hit.point;
         }
         unit.gameObject.GetComponent<NavMeshAgent>().SetDestination(unitMovePos);
       }
     }
-    transform.position = pos;
-    transform.rotation = Quaternion.LookRotation(dir);
+    transform.position = movePos;
+    transform.rotation = Quaternion.LookRotation(forwardDir);
   }
 
-  public void FormMob() {
-
+  public void FormMob(Vector3 startPos, Vector3 endPos) {
+    Vector3 offset = (startPos - endPos);
+    Vector3 center = Vector3.Lerp(startPos, endPos, 0.5f);
+    float size = offset.magnitude / 2.0f;
+    for (int i = 0; i < units.Count; i++) {
+      bool isValid = false;
+      Vector3 posOffset = Vector3.zero;
+      //while (!isValid) {
+      posOffset = new Vector3(Random.Range(-size, size), 0, Random.Range(-size, size));
+      isValid = offset.magnitude < size;
+      //}
+      units[i].gameObject.GetComponent<NavMeshAgent>().SetDestination(center + posOffset);
+    }
+    transform.position = center;
   }
 
   void CreateUnits() {

@@ -29,11 +29,7 @@ public class InputControl : MonoBehaviour {
       RaycastHit hit;
       if (mouseInputInProgress && Physics.Raycast(ray, out hit)) {
         mouseUpPos = hit.point;
-        Vector3 movePos = Vector3.Lerp(mouseDownPos, mouseUpPos, 0.5f);
-        Vector3 offset = (mouseDownPos - mouseUpPos);
-        Vector3 direction = Vector3.Cross(offset.normalized, Vector3.up);
-        Debug.Log("Sending from " + mouseDownPos + ", " + mouseUpPos + " to " + movePos);
-        inputTarget.Command(movePos, direction, offset.magnitude);
+        inputTarget.Command(mouseDownPos, mouseUpPos);
       }
     }
   }
