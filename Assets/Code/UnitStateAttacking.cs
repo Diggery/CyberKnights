@@ -12,7 +12,7 @@ public class UnitStateAttacking : UnitState {
 
   public override void StateEnter() {
     base.StateEnter();
-
+    navAgent.isStopped = true;
   }
 
   public override void StateUpdate() {

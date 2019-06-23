@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class UnitStateMoving : UnitState {
 
@@ -17,7 +18,9 @@ public class UnitStateMoving : UnitState {
 
   public override void StateUpdate() {
     base.StateUpdate();
-
+    if (navAgent.pathStatus == NavMeshPathStatus.PathComplete) {
+      brain.State = "Idle";
+    }
   }
 
   public override void StateExit() {

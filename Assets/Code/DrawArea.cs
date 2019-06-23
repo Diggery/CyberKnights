@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class DrawAreaShape : MonoBehaviour {
+public class DrawArea : MonoBehaviour {
 
     float viewRadius;
 
@@ -23,12 +23,12 @@ public class DrawAreaShape : MonoBehaviour {
     bool isVisible;
     float fadeTimer;
 
-    public DrawAreaShape Init(float range) {
+    public DrawArea Init(float range) {
         viewMesh = new Mesh ();
         viewMesh.name = "View Mesh";
         MeshFilter viewMeshFilter = gameObject.AddComponent<MeshFilter>();
         viewRenderer = gameObject.AddComponent<MeshRenderer>();
-        Material areaMaterial = new Material(Shader.Find("Custom/DrawAreaShape"));
+        Material areaMaterial = new Material(Shader.Find("Custom/DrawArea"));
         areaMaterial.name = "AreaMaterial";
         viewRenderer.material = areaMaterial;
         viewMeshFilter.mesh = viewMesh;

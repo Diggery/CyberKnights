@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DrawCircleShape : MonoBehaviour {
+public class DrawCircle : MonoBehaviour {
 
     Mesh circleMesh;
     Renderer circleRenderer;
@@ -14,44 +14,26 @@ public class DrawCircleShape : MonoBehaviour {
     Color endColor = new Color(1.0f, 1.0f, 1.0f, 0.1f);
 
 
-	public DrawCircleShape Init () {
-        CreateReticleVertices();
+	public DrawCircle Init () {
+        CreateCircle();
         return this;
 	}
 	
-	void Update () {
-        if (fadeTimer < 1.0f) {
-            fadeTimer += Time.deltaTime * 2;
-            float amount = (Mathf.SmoothStep(0, 1, Mathf.Clamp01(fadeTimer)));
-            circleRenderer.material.color = Color.Lerp(startColor, endColor, amount);
-            float size = Mathf.Lerp(range * 0.75f, range, amount);
-            SetSize(size);
-        }
-	}
-
-    public void SetPosition(Vector3 position) {
-        circleRenderer.enabled = true;
-        transform.position = position + new Vector3(0.0f, 0.1f, 0.0f);
-        fadeTimer = 0;
+    public void SetPosition(Vector3 center, float radius, float thickness) {
+        transform.position = center;
+        circleRenderer.material.SetFloat("_InnerRadius", radius - thickness);
+        circleRenderer.material.SetFloat("_OuterRadius", radius);
     }
 
-    public void SetRange(float newRange) {
-        range = newRange;
-    }
-
-    public void SetSize(float size) {
-        circleRenderer.material.SetFloat("_InnerRadius", size - 0.1f);
-        circleRenderer.material.SetFloat("_OuterRadius", size);
-    }
-
-    private void CreateReticleVertices() {
+    private void CreateCircle() {
 
         circleMesh = new Mesh ();
-        circleMesh.name = "View Mesh";
+        circleMesh.name = "CircleShape";
         MeshFilter circleMeshFilter = gameObject.AddComponent<MeshFilter>();
         circleRenderer = gameObject.AddComponent<MeshRenderer>();
         Material circleMaterial = new Material(Shader.Find("Custom/DrawCircle"));
-        circleMaterial.name = "AreaMaterial";
+        circleMaterial.name = "CircleMaterial";
+        circleMaterial.color = Color.red;
         circleRenderer.material = circleMaterial;
         circleMeshFilter.mesh = circleMesh;
 
@@ -102,7 +84,5 @@ public class DrawCircleShape : MonoBehaviour {
         circleMesh.uv = uvs;
         circleMesh.triangles = indices;
         circleMesh.bounds = new Bounds(Vector3.zero, new Vector3(15, 3, 15));
-        ;
-        circleRenderer.enabled = false;
     }
 }

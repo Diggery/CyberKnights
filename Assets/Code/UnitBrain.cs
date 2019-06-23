@@ -1,19 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class UnitBrain : MonoBehaviour {
   UnitControl unitControl;
-
+  NavMeshAgent navAgent;
   UnitControl currentTarget;
+  string friendlyTag = "Friend";
+  string enemyTag = "Enemy";
   public UnitControl CurrentTarget {
     get { return currentTarget; }
     set { currentTarget = value; }
   }
 
   float visualRange = 15.0f;
-
-  int hitShots = 0;
+  float attackRange = 2.0f;
 
   Dictionary<string, UnitState> states = new Dictionary<string, UnitState>();
   UnitState currentState;
@@ -33,6 +35,11 @@ public class UnitBrain : MonoBehaviour {
   }
 
   public void Init() {
+    unitControl = GetComponent<UnitControl>();
+    navAgent = GetComponent<NavMeshAgent>();
+
+    friendlyTag = gameObject.tag.Equals("Friend") ? "Friend" : "Enemy";
+    enemyTag = gameObject.tag.Equals("Friend") ? "Enemy" : "Friend";
 
     UnitStateIdle unitStateIdle = gameObject.AddComponent<UnitStateIdle>();
     unitStateIdle.StateInit();
@@ -49,7 +56,7 @@ public class UnitBrain : MonoBehaviour {
     State = "Idle";
   }
 
-  public void UpdateState() {
+  public void UpdateBrain() {
     currentState.StateUpdate();
   }
 
@@ -58,7 +65,7 @@ public class UnitBrain : MonoBehaviour {
   }
 
   public UnitControl ScanForTargets(UnitControl excludeThisGuy) {
-    GameObject[] possibleTargets = GameObject.FindGameObjectsWithTag("Enemy");
+    GameObject[] possibleTargets = GameObject.FindGameObjectsWithTag(enemyTag);
     LayerMask terrainMask = LayerMask.GetMask("Terrain");
     float closestDistance = Mathf.Infinity;
     UnitControl closestTarget = null;
@@ -98,14 +105,24 @@ public class UnitBrain : MonoBehaviour {
     if (closestTarget) {
       return closestTarget;
     } else {
-      Debug.Log(transform.name + "'s scan found noone");
       return null;
     }
   }
 
-  public void AttackEnemy(UnitControl target) {
-
+  public void AttackTarget(UnitControl target) {
+    float distance = Vector3.Distance(target.transform.position, transform.position);
+    if (distance < attackRange) {
+      State = "Attacking";
+    } else {
+      State = "Moving";
+      navAgent.SetDestination(target.transform.position);
+    }
   }
 
-
+  private void OnCollisionEnter(Collision other) {
+    if (other.transform.tag.Equals(enemyTag)) {
+      Debug.Log("This is an Enemy");
+      AttackTarget(other.gameObject.GetComponent<UnitControl>());
+    }
+  }
 }

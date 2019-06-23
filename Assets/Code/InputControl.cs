@@ -23,6 +23,14 @@ public class InputControl : MonoBehaviour {
       }
     }
 
+    if (mouseInputInProgress) {
+      Ray ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
+      RaycastHit hit;
+      if (Physics.Raycast(ray, out hit)) {
+        inputTarget.DrawShape(mouseDownPos, hit.point);
+      }
+    }
+
     if (Input.GetMouseButtonUp(0)) {
       Ray ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
       Vector3 mouseUpPos = Vector3.zero;
@@ -31,6 +39,7 @@ public class InputControl : MonoBehaviour {
         mouseUpPos = hit.point;
         inputTarget.Command(mouseDownPos, mouseUpPos);
       }
+      mouseInputInProgress = false;
     }
   }
 }

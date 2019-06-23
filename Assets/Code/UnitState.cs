@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class UnitState : MonoBehaviour {
 
-
+  protected UnitBrain brain;
+  protected NavMeshAgent navAgent;
   protected bool isActive = false;
   public bool IsActive {
     get { return IsActive; }
@@ -17,7 +19,8 @@ public class UnitState : MonoBehaviour {
   }
 
   public virtual void StateInit() {
-
+    brain = GetComponent<UnitBrain>();
+    navAgent = GetComponent<NavMeshAgent>();
   }
 
   public virtual void StateEnter() {
