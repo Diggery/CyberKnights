@@ -6,7 +6,8 @@ TagManager:
   tags:
   - Impassible
   - Terrain
-  - Unit
+  - Friend
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -23,18 +23,23 @@ public class InputControl : MonoBehaviour {
       }
     }
 
+    if (mouseInputInProgress) {
+      Ray ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
+      RaycastHit hit;
+      if (Physics.Raycast(ray, out hit)) {
+        inputTarget.DrawShape(mouseDownPos, hit.point);
+      }
+    }
+
     if (Input.GetMouseButtonUp(0)) {
       Ray ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
       Vector3 mouseUpPos = Vector3.zero;
       RaycastHit hit;
       if (mouseInputInProgress && Physics.Raycast(ray, out hit)) {
         mouseUpPos = hit.point;
-        Vector3 movePos = Vector3.Lerp(mouseDownPos, mouseUpPos, 0.5f);
-        Vector3 offset = (mouseDownPos - mouseUpPos);
-        Vector3 direction = Vector3.Cross(offset.normalized, Vector3.up);
-        Debug.Log("Sending from " + mouseDownPos + ", " + mouseUpPos + " to " + movePos);
-        inputTarget.Command(movePos, direction, offset.magnitude);
+        inputTarget.Command(mouseDownPos, mouseUpPos);
       }
+      mouseInputInProgress = false;
     }
   }
 }
