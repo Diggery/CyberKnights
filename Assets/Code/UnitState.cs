@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class UnitState : MonoBehaviour {
 
+  protected UnitControl unitControl;
   protected UnitBrain brain;
   protected NavMeshAgent navAgent;
   protected bool isActive = false;
@@ -13,19 +14,23 @@ public class UnitState : MonoBehaviour {
     set { IsActive = value; }
   }
 
+  protected LayerMask terrainMask;
+
   protected string stateName = "none";
   public string StateName {
     get { return stateName; }
   }
 
   public virtual void StateInit() {
+    unitControl = GetComponent<UnitControl>();
     brain = GetComponent<UnitBrain>();
     navAgent = GetComponent<NavMeshAgent>();
+    terrainMask = LayerMask.GetMask("Terrain");
   }
 
   public virtual void StateEnter() {
     isActive = true;
-    Debug.Log("------>  Entering " + stateName + " state.");
+    // Debug.Log("------>  Entering " + stateName + " state.");
   }
 
   public virtual void StateUpdate() {
@@ -33,6 +38,6 @@ public class UnitState : MonoBehaviour {
 
   public virtual void StateExit() {
     isActive = false;
-    Debug.Log("------>  Exiting " + stateName + " state.");
+    // Debug.Log("------>  Exiting " + stateName + " state.");
   }
 }

@@ -13,6 +13,7 @@ public class UnitStateAttacking : UnitState {
   public override void StateEnter() {
     base.StateEnter();
     navAgent.isStopped = true;
+    Debug.Log("Entering Attacking");
   }
 
   public override void StateUpdate() {
@@ -22,5 +23,6 @@ public class UnitStateAttacking : UnitState {
 
   public override void StateExit() {
     base.StateExit();
+        Debug.Log("Done Attacking");
   }
 }

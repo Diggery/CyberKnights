@@ -91,7 +91,7 @@ public class ClusterManager : MonoBehaviour {
         if (Physics.Raycast(ray, out hit, unitOffset.magnitude, terrainMask)) {
           unitMovePos = hit.point;
         }
-        unit.gameObject.GetComponent<NavMeshAgent>().SetDestination(unitMovePos);
+        unit.SetDestination(unitMovePos);
       }
     }
     transform.position = movePos;
@@ -140,12 +140,22 @@ public class ClusterManager : MonoBehaviour {
         GameObject newUnit = GameObject.Instantiate(gameManager.GetUnitPrefab("Warrior"), transform.position + offset, transform.rotation);
         UnitControl newUnitControl = newUnit.GetComponent<UnitControl>();
         newUnitControl.TeamName = teamName;
-        newUnit.name = "Warrior-" + unitNumber;
+        newUnit.name = gameObject.tag + "-Warrior-" + unitNumber;
         newUnit.tag = gameObject.tag;
         units.Add(newUnitControl);
         unitNumber++;
       }
     }
     FormMob(transform.position, transform.position + (Vector3.forward * 3));
+  }
+
+  public Vector3 GetFlockingVector(UnitControl target) {
+    Vector3 flockVector = Vector3.zero;
+    foreach (var unit in units) {
+      if (unit.Equals(target)) continue;
+      float sqrDist = (unit.transform.position - target.transform.position).sqrMagnitude;
+
+    }
+    return flockVector.normalized;
   }
 }

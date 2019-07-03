@@ -12,7 +12,6 @@ public class UnitStateIdle : UnitState {
 
   public override void StateEnter() {
     base.StateEnter();
-
   }
 
   public override void StateUpdate() {
@@ -25,5 +24,12 @@ public class UnitStateIdle : UnitState {
 
   public override void StateExit() {
     base.StateExit();
+  }
+
+  
+  private void OnCollisionEnter(Collision other) {
+    if (isActive && other.transform.tag.Equals(brain.EnemyTag)) {
+      brain.AttackTarget(other.gameObject.GetComponent<UnitControl>());
+    }
   }
 }

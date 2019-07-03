@@ -4,18 +4,25 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class UnitBrain : MonoBehaviour {
+  public bool showDebug = false;
   UnitControl unitControl;
   NavMeshAgent navAgent;
   UnitControl currentTarget;
   string friendlyTag = "Friend";
+  public string FriendlyTag {
+    get { return friendlyTag; }
+  }
   string enemyTag = "Enemy";
+  public string EnemyTag {
+    get { return enemyTag; }
+  }
   public UnitControl CurrentTarget {
     get { return currentTarget; }
     set { currentTarget = value; }
   }
 
   float visualRange = 15.0f;
-  float attackRange = 2.0f;
+  float attackRange = 1.0f;
 
   Dictionary<string, UnitState> states = new Dictionary<string, UnitState>();
   UnitState currentState;
@@ -49,6 +56,11 @@ public class UnitBrain : MonoBehaviour {
     unitStateMoving.StateInit();
     states.Add(unitStateMoving.StateName, unitStateMoving);
 
+    UnitStateChasing unitStateChasing = gameObject.AddComponent<UnitStateChasing>();
+    unitStateChasing.StateInit();
+    states.Add(unitStateChasing.StateName, unitStateChasing);
+
+
     UnitStateAttacking aiStateAttacking = gameObject.AddComponent<UnitStateAttacking>();
     aiStateAttacking.StateInit();
     states.Add(aiStateAttacking.StateName, aiStateAttacking);
@@ -57,6 +69,9 @@ public class UnitBrain : MonoBehaviour {
   }
 
   public void UpdateBrain() {
+    if (CurrentTarget)
+      Debug.DrawLine(transform.position, CurrentTarget.transform.position, Color.red, 1.0f);
+
     currentState.StateUpdate();
   }
 
@@ -97,8 +112,6 @@ public class UnitBrain : MonoBehaviour {
         Debug.DrawRay(ray.origin, ray.direction * targetDistance, Color.green, 1.0f);
         closestTarget = targetControl;
         closestDistance = targetDistance;
-      } else {
-        Debug.DrawRay(ray.origin, ray.direction * targetDistance, Color.red, 1.0f);
       }
     }
 
@@ -111,18 +124,27 @@ public class UnitBrain : MonoBehaviour {
 
   public void AttackTarget(UnitControl target) {
     float distance = Vector3.Distance(target.transform.position, transform.position);
+    CurrentTarget = target;
+
+
+
     if (distance < attackRange) {
       State = "Attacking";
     } else {
-      State = "Moving";
-      navAgent.SetDestination(target.transform.position);
-    }
-  }
 
-  private void OnCollisionEnter(Collision other) {
-    if (other.transform.tag.Equals(enemyTag)) {
-      Debug.Log("This is an Enemy");
-      AttackTarget(other.gameObject.GetComponent<UnitControl>());
+      LayerMask terrainMask = LayerMask.GetMask("Terrain");
+      Vector3 offset = target.transform.position - transform.position;
+      Ray ray = new Ray(
+          transform.position + (Vector3.up * 0.75f),
+          offset.normalized
+      );
+      bool canSeeEnemy = !Physics.Raycast(ray, offset.magnitude, terrainMask);
+
+      if (canSeeEnemy) {
+        State = "Chasing";
+      } else {
+        navAgent.SetDestination(target.transform.position);
+      }
     }
   }
 }
