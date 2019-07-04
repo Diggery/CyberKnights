@@ -24,6 +24,7 @@ public class UnitControl : MonoBehaviour {
     get { return chaseSpeed; }
   }
 
+  float hitPoints = 5;
   bool isDead;
 
   UnitBrain unitBrain;
@@ -47,5 +48,35 @@ public class UnitControl : MonoBehaviour {
 
   public void Push(Vector3 direction) {
     rbody.AddForce(-direction, ForceMode.Impulse);
+  }
+
+  public void AnimEvent(string type) {
+    switch (type) {
+      case "Attack":
+        DamageTarget();
+        break;
+      default:
+        Debug.Log("Can't handle event type " + type);
+        break;
+    }
+  }
+
+  void DamageTarget() {
+    if (!unitBrain.CurrentTarget) {
+      Debug.Log("No target to damage");
+      return;
+    }
+    unitBrain.CurrentTarget.TakeDamage(1);
+  }
+
+  public void TakeDamage(float amount) {
+    hitPoints -= amount;
+    if (hitPoints < 0 ) {
+      Die();
+    }
+  }
+
+  void Die() {
+    Destroy(gameObject);
   }
 }
