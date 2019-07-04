@@ -35,7 +35,6 @@ public class UnitControl : MonoBehaviour {
     unitBrain = gameObject.AddComponent<UnitBrain>();
     unitBrain.Init();
     rbody = gameObject.GetComponent<Rigidbody>();
-    GetComponent<Renderer>().material.color = gameObject.tag.Equals("Friend") ? Color.green : Color.red;
   }
 
   public void UpdateBrain() {

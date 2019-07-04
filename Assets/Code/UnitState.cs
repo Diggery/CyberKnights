@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class UnitState : MonoBehaviour {
 
   protected UnitControl unitControl;
+  protected Animator animator;
   protected UnitBrain brain;
   protected NavMeshAgent navAgent;
   protected bool isActive = false;
@@ -23,6 +24,7 @@ public class UnitState : MonoBehaviour {
 
   public virtual void StateInit() {
     unitControl = GetComponent<UnitControl>();
+    animator = GetComponent<Animator>();
     brain = GetComponent<UnitBrain>();
     navAgent = GetComponent<NavMeshAgent>();
     terrainMask = LayerMask.GetMask("Terrain");
@@ -39,5 +41,19 @@ public class UnitState : MonoBehaviour {
   public virtual void StateExit() {
     isActive = false;
     // Debug.Log("------>  Exiting " + stateName + " state.");
+  }
+
+  protected bool CanSeeEnemy(UnitControl target) {
+    Vector3 dirToTarget = (target.transform.position - transform.position);
+
+    Ray ray = new Ray(
+        transform.position + (Vector3.up * 0.75f),
+        dirToTarget.normalized
+    );
+
+    RaycastHit hit;
+    bool canSeeEnemy = !Physics.Raycast(ray, out hit, dirToTarget.magnitude, terrainMask);
+
+    return canSeeEnemy;
   }
 }

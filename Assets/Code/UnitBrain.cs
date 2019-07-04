@@ -12,17 +12,35 @@ public class UnitBrain : MonoBehaviour {
   public string FriendlyTag {
     get { return friendlyTag; }
   }
+
   string enemyTag = "Enemy";
   public string EnemyTag {
     get { return enemyTag; }
   }
+
   public UnitControl CurrentTarget {
     get { return currentTarget; }
     set { currentTarget = value; }
   }
 
+  public float DistanceToTarget {
+    get {
+      if (!currentTarget) return -1;
+      return Vector3.Distance(currentTarget.transform.position, transform.position);
+    }
+  }
+
   float visualRange = 15.0f;
-  float attackRange = 1.0f;
+  public float VisualRange {
+    get { return visualRange; }
+    set { visualRange = value; }
+  }
+
+  float attackRange = 2.0f;
+  public float AttackRange {
+    get { return attackRange; }
+    set { attackRange = value; }
+  }
 
   Dictionary<string, UnitState> states = new Dictionary<string, UnitState>();
   UnitState currentState;
@@ -55,11 +73,6 @@ public class UnitBrain : MonoBehaviour {
     UnitStateMoving unitStateMoving = gameObject.AddComponent<UnitStateMoving>();
     unitStateMoving.StateInit();
     states.Add(unitStateMoving.StateName, unitStateMoving);
-
-    UnitStateChasing unitStateChasing = gameObject.AddComponent<UnitStateChasing>();
-    unitStateChasing.StateInit();
-    states.Add(unitStateChasing.StateName, unitStateChasing);
-
 
     UnitStateAttacking aiStateAttacking = gameObject.AddComponent<UnitStateAttacking>();
     aiStateAttacking.StateInit();
@@ -109,7 +122,6 @@ public class UnitBrain : MonoBehaviour {
       );
 
       if (!Physics.Raycast(ray, targetDistance, terrainMask)) {
-        Debug.DrawRay(ray.origin, ray.direction * targetDistance, Color.green, 1.0f);
         closestTarget = targetControl;
         closestDistance = targetDistance;
       }
@@ -125,26 +137,6 @@ public class UnitBrain : MonoBehaviour {
   public void AttackTarget(UnitControl target) {
     float distance = Vector3.Distance(target.transform.position, transform.position);
     CurrentTarget = target;
-
-
-
-    if (distance < attackRange) {
-      State = "Attacking";
-    } else {
-
-      LayerMask terrainMask = LayerMask.GetMask("Terrain");
-      Vector3 offset = target.transform.position - transform.position;
-      Ray ray = new Ray(
-          transform.position + (Vector3.up * 0.75f),
-          offset.normalized
-      );
-      bool canSeeEnemy = !Physics.Raycast(ray, offset.magnitude, terrainMask);
-
-      if (canSeeEnemy) {
-        State = "Chasing";
-      } else {
-        navAgent.SetDestination(target.transform.position);
-      }
-    }
+    State = "Attacking";
   }
 }
