@@ -27,15 +27,37 @@ public class UnitControl : MonoBehaviour {
   float hitPoints = 5;
   bool isDead;
 
+  CapsuleCollider collision;
+
   UnitBrain unitBrain;
+  Animator animator;
   public bool IsDead {
     get { return isDead; }
   }
 
   private void Start() {
+    navAgent = gameObject.GetComponent<NavMeshAgent>();
     unitBrain = gameObject.AddComponent<UnitBrain>();
     unitBrain.Init();
+    animator = gameObject.GetComponent<Animator>();
     rbody = gameObject.GetComponent<Rigidbody>();
+    collision = gameObject.AddComponent<CapsuleCollider>();
+    collision.radius = 0.5f;
+    collision.height = 1.8f;
+    collision.center = new Vector3(0, 0.9f, 0);
+
+    if (TeamName.Equals("Enemy")) {
+      Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>();
+      foreach (var item in renderers) {
+        item.material.color = Color.red;
+      }
+    }
+  }
+
+  private void Update() {
+    float velocity = navAgent.velocity.magnitude;
+    Debug.Log(velocity);
+    animator.SetBool("IsMoving", velocity > 0.1f);
   }
 
   public void UpdateBrain() {
@@ -71,12 +93,13 @@ public class UnitControl : MonoBehaviour {
 
   public void TakeDamage(float amount) {
     hitPoints -= amount;
-    if (hitPoints < 0 ) {
+    if (hitPoints < 0) {
       Die();
     }
   }
 
   void Die() {
-    Destroy(gameObject);
+    isDead = true;
+    //  Destroy(gameObject);
   }
 }

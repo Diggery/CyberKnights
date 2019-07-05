@@ -60,6 +60,9 @@ public class UnitBrain : MonoBehaviour {
   }
 
   public void Init() {
+    visualRange *= visualRange;  // power of 2 for square distance
+    attackRange *= attackRange;  // power of 2 for square distance
+
     unitControl = GetComponent<UnitControl>();
     navAgent = GetComponent<NavMeshAgent>();
 
@@ -107,10 +110,7 @@ public class UnitBrain : MonoBehaviour {
 
       if (excludeThisGuy && excludeThisGuy.Equals(targetControl)) continue;
 
-      float targetDistance = Vector3.Distance(
-          target.transform.position,
-          transform.position
-      );
+      float targetDistance = (target.transform.position - transform.position).sqrMagnitude;
 
       if (targetDistance > visualRange) continue;
 
@@ -135,7 +135,8 @@ public class UnitBrain : MonoBehaviour {
   }
 
   public void AttackTarget(UnitControl target) {
-    float distance = Vector3.Distance(target.transform.position, transform.position);
+    if (target == CurrentTarget) return;
+    
     CurrentTarget = target;
     State = "Attacking";
   }

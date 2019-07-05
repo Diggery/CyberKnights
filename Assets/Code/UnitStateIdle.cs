@@ -27,9 +27,5 @@ public class UnitStateIdle : UnitState {
   }
 
   
-  private void OnCollisionEnter(Collision other) {
-    if (isActive && other.transform.tag.Equals(brain.EnemyTag)) {
-      brain.AttackTarget(other.gameObject.GetComponent<UnitControl>());
-    }
-  }
+
 }
