@@ -9,6 +9,7 @@ public class UnitState : MonoBehaviour {
   protected Animator animator;
   protected UnitBrain brain;
   protected NavMeshAgent navAgent;
+  protected Rigidbody rbody;
   protected bool isActive = false;
   public bool IsActive {
     get { return IsActive; }
@@ -27,20 +28,20 @@ public class UnitState : MonoBehaviour {
     animator = GetComponent<Animator>();
     brain = GetComponent<UnitBrain>();
     navAgent = GetComponent<NavMeshAgent>();
+    rbody = GetComponent<Rigidbody>();
     terrainMask = LayerMask.GetMask("Terrain");
   }
 
   public virtual void StateEnter() {
     isActive = true;
-    // Debug.Log("------>  Entering " + stateName + " state.");
+    Debug.Log(gameObject.name + "------>  Entering " + stateName + " state.");
   }
 
-  public virtual void StateUpdate() {
-  }
+  public virtual void StateUpdate() { }
 
   public virtual void StateExit() {
     isActive = false;
-    // Debug.Log("------>  Exiting " + stateName + " state.");
+    Debug.Log(gameObject.name + "------>  Exiting " + stateName + " state.");
   }
 
   protected bool CanSeeEnemy(UnitControl target) {
@@ -56,4 +57,14 @@ public class UnitState : MonoBehaviour {
 
     return canSeeEnemy;
   }
+
+  private void OnCollisionEnter(Collision other) {
+    UnitControl control = other.gameObject.GetComponent<UnitControl>();
+    if (control && control.transform.tag.Equals(brain.EnemyTag)) {
+      CollidedWithEnemy(control);
+    }
+  }
+
+  protected virtual void CollidedWithEnemy(UnitControl other) { }
+
 }

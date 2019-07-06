@@ -15,11 +15,11 @@ public class UnitControl : MonoBehaviour {
   NavMeshAgent navAgent;
   Rigidbody rbody;
 
-  float moveSpeed = 3.5f;
+  float moveSpeed = 2.5f;
   public float MoveSpeed {
     get { return moveSpeed; }
   }
-  float chaseSpeed = 5.0f;
+  float chaseSpeed = 3.0f;
   public float ChaseSpeed {
     get { return chaseSpeed; }
   }
@@ -55,9 +55,11 @@ public class UnitControl : MonoBehaviour {
   }
 
   private void Update() {
-    float velocity = navAgent.velocity.magnitude;
-    Debug.Log(velocity);
-    animator.SetBool("IsMoving", velocity > 0.1f);
+    bool movingOnPath = navAgent.velocity.magnitude > 0.1f;
+    bool movingWithPhysics = new Vector3(rbody.velocity.x, 0, rbody.velocity.z).magnitude > 0.1f;
+    animator.SetBool("IsMoving", movingOnPath || movingWithPhysics);
+
+    animator.SetFloat("Random", Random.value);
   }
 
   public void UpdateBrain() {
@@ -65,6 +67,7 @@ public class UnitControl : MonoBehaviour {
   }
 
   public void SetDestination(Vector3 pos) {
+    unitBrain.State = "Moving";
     navAgent.SetDestination(pos);
   }
 

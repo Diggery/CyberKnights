@@ -113,7 +113,7 @@ public class ClusterManager : MonoBehaviour {
         posOffset = new Vector3(Random.Range(-size, size), 0, Random.Range(-size, size));
         isValid = posOffset.magnitude < size;
       }
-      units[i].gameObject.GetComponent<NavMeshAgent>().SetDestination(center + posOffset);
+      units[i].SetDestination(center + posOffset);
     }
     transform.position = center;
   }
@@ -153,8 +153,9 @@ public class ClusterManager : MonoBehaviour {
     Vector3 flockVector = Vector3.zero;
     foreach (var unit in units) {
       if (unit.Equals(target)) continue;
-      float sqrDist = (unit.transform.position - target.transform.position).sqrMagnitude;
-
+      Vector3 offset = unit.transform.position - target.transform.position;
+      float sqrDist = offset.sqrMagnitude;
+      flockVector += offset;
     }
     return flockVector.normalized;
   }

@@ -9,48 +9,60 @@ public class UnitStateChasing : UnitState {
   public override void StateInit() {
     base.StateInit();
     stateName = "Chasing";
+
   }
 
   public override void StateEnter() {
     base.StateEnter();
+    animator.SetBool("InChaseMode", true);
+
   }
 
   public override void StateUpdate() {
     base.StateUpdate();
-
-  }
-
-  public override void StateExit() {
-    base.StateExit();
-  }
-
-  private void Update() {
-    if (!isActive) return;
     if (!brain.CurrentTarget) {
       brain.State = "Idle";
       return;
     }
-
-    Vector3 dirToTarget = (brain.CurrentTarget.transform.position - transform.position);
-
-    Ray ray = new Ray(
-        transform.position + (Vector3.up * 0.75f),
-        dirToTarget.normalized
-    );
-
-    RaycastHit hit;
-    bool canSeeEnemy = !Physics.Raycast(ray, out hit, dirToTarget.magnitude, terrainMask);
-
-    if (canSeeEnemy) {
-      navAgent.Move(dirToTarget.normalized * unitControl.ChaseSpeed * Time.deltaTime);
-    } else {
-      Debug.Log("Cant see enemy");
+    if (!CanSeeEnemy(brain.CurrentTarget)) {
+      brain.State = "Idle";
+      return;
+    }
+    float distance = brain.DistanceToTarget;
+    if (distance > brain.VisualRange * 0.5f) {
+      UnitControl betterTarget = brain.ScanForTargets();
+      if (betterTarget && betterTarget != brain.CurrentTarget) brain.AttackTarget(betterTarget);
     }
   }
 
-  private void OnCollisionEnter(Collision other) {
-    if (isActive && other.transform.tag.Equals(brain.EnemyTag)) {
-      brain.AttackTarget(other.gameObject.GetComponent<UnitControl>());
+  public override void StateExit() {
+    base.StateExit();
+    animator.SetBool("InChaseMode", false);
+
+  }
+
+  private void Update() {
+    if (!isActive) return;
+
+    if (!brain.CurrentTarget) {
+      brain.State = "Idle";
+      return;
+    }
+    navAgent.velocity = Vector3.zero;
+
+    float distanceToTarget = (brain.CurrentTarget.transform.position - transform.position).sqrMagnitude;
+    if (distanceToTarget > brain.AttackRange) {
+      Vector3 offset = (brain.CurrentTarget.transform.position - transform.position).normalized;
+      rbody.AddForce(offset * unitControl.ChaseSpeed * 500, ForceMode.Force);
+    } else {
+      animator.SetTrigger("Attack");
+      brain.State = "Attacking";
+    }
+  }
+
+  protected override void CollidedWithEnemy(UnitControl enemy) {
+    if (isActive && enemy.transform.tag.Equals(brain.EnemyTag)) {
+      brain.AttackTarget(enemy.gameObject.GetComponent<UnitControl>());
     }
   }
 }

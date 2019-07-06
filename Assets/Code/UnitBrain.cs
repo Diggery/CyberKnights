@@ -81,6 +81,10 @@ public class UnitBrain : MonoBehaviour {
     aiStateAttacking.StateInit();
     states.Add(aiStateAttacking.StateName, aiStateAttacking);
 
+    UnitStateChasing aiStateChasing = gameObject.AddComponent<UnitStateChasing>();
+    aiStateChasing.StateInit();
+    states.Add(aiStateChasing.StateName, aiStateChasing);
+
     State = "Idle";
   }
 
@@ -124,6 +128,10 @@ public class UnitBrain : MonoBehaviour {
       if (!Physics.Raycast(ray, targetDistance, terrainMask)) {
         closestTarget = targetControl;
         closestDistance = targetDistance;
+        Debug.Log("Spotted " + target.name);
+      } else {
+                Debug.Log("Missed " + target.name);
+
       }
     }
 
@@ -135,9 +143,20 @@ public class UnitBrain : MonoBehaviour {
   }
 
   public void AttackTarget(UnitControl target) {
-    if (target == CurrentTarget) return;
-    
+    Debug.Log(gameObject.name + " should attack " + target.name);
+    if (target == CurrentTarget) {
+      if (State == "Chasing"  || State == "Attacking") {
+        return;
+      }
+    }
+
     CurrentTarget = target;
-    State = "Attacking";
+    float distance = DistanceToTarget;
+
+    if (distance < AttackRange) {
+      State = "Attacking";
+    } else {
+      State = "Chasing";
+    }
   }
 }

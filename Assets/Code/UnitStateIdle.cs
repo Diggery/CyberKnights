@@ -17,15 +17,18 @@ public class UnitStateIdle : UnitState {
   public override void StateUpdate() {
     base.StateUpdate();
     UnitControl target = brain.ScanForTargets();
-    if (target && !brain.CurrentTarget) {
+   
+    if (target) {
+      Debug.Log(gameObject.name + " shoudl attack");
       brain.AttackTarget(target);
+    } else {
+            Debug.Log(gameObject.name + " no target attack");
+
     }
   }
 
   public override void StateExit() {
     base.StateExit();
   }
-
   
-
 }

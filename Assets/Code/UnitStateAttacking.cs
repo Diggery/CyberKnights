@@ -5,6 +5,8 @@ using UnityEngine;
 public class UnitStateAttacking : UnitState {
 
 
+  float attackSpeed = 1.0f;
+
   public override void StateInit() {
     base.StateInit();
     stateName = "Attacking";
@@ -15,6 +17,11 @@ public class UnitStateAttacking : UnitState {
     Debug.Log("Entering Attacking");
     navAgent.isStopped = true;
     navAgent.ResetPath();
+    animator.ResetTrigger("Attack");
+    animator.SetBool("InAttackMode", true);
+
+    rbody.constraints = RigidbodyConstraints.FreezeAll;
+
   }
 
   public override void StateUpdate() {
@@ -27,35 +34,28 @@ public class UnitStateAttacking : UnitState {
       brain.State = "Idle";
       return;
     }
-    if (brain.DistanceToTarget > brain.VisualRange * 0.5f) {
-      UnitControl betterTarget = brain.ScanForTargets();
-      if (betterTarget && betterTarget != brain.CurrentTarget) brain.AttackTarget(betterTarget);
-    }
-  }
+    animator.SetFloat("AttackSpeed", attackSpeed - (Random.value * 0.25f));
 
-  private void Update() {
-    if (!isActive) return;
+    float distance = brain.DistanceToTarget;
 
-    if (!brain.CurrentTarget) {
-      brain.State = "Idle";
-      return;
-    }
-    float distanceToTarget = (brain.CurrentTarget.transform.position - transform.position).sqrMagnitude;
-
-    if (distanceToTarget > brain.AttackRange) {
-      Vector3 offset = (brain.CurrentTarget.transform.position - transform.position).normalized;
-      navAgent.Move(offset * unitControl.ChaseSpeed * Time.deltaTime);
+    if (distance < brain.AttackRange) {
+      animator.SetTrigger("Attack");
+    } else {
+      brain.State = "Chasing";
     }
   }
 
   public override void StateExit() {
     base.StateExit();
     Debug.Log("Done Attacking");
+    animator.SetBool("InAttackMode", false);
+
+    rbody.constraints = RigidbodyConstraints.FreezeRotation;
   }
 
-    private void OnCollisionEnter(Collision other) {
-    if (isActive && other.transform.tag.Equals(brain.EnemyTag)) {
-      brain.AttackTarget(other.gameObject.GetComponent<UnitControl>());
+  protected override void CollidedWithEnemy(UnitControl enemy) {
+    if (isActive && enemy.transform.tag.Equals(brain.EnemyTag)) {
+      brain.AttackTarget(enemy.gameObject.GetComponent<UnitControl>());
     }
   }
 }
