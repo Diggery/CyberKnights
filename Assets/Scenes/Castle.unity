@@ -656,7 +656,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamName: Enemy
-  unitsInCluster: 1
+  unitsInCluster: 32
 --- !u!4 &590166669
 Transform:
   m_ObjectHideFlags: 0
@@ -1752,7 +1752,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamName: Player
-  unitsInCluster: 1
+  unitsInCluster: 32
 --- !u!4 &2104974813
 Transform:
   m_ObjectHideFlags: 0

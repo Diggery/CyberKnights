@@ -32,7 +32,7 @@ public class ClusterManager : MonoBehaviour {
       circle = new GameObject("CircleShape").AddComponent<DrawCircle>().Init();
     }
 
-    CreateUnits();
+    StartCoroutine(CreateUnits());
   }
 
   int unitTicker = 0;
@@ -129,9 +129,8 @@ public class ClusterManager : MonoBehaviour {
     circle.SetPosition(center, size, 0.2f);
   }
 
-  void CreateUnits() {
+  IEnumerator CreateUnits() {
     int unitNumber = 0;
-
     for (int y = 0; y < Mathf.CeilToInt((float)unitsInCluster / perferedRankWidth); y++) {
       for (int x = 0; x < perferedRankWidth; x++) {
         if (unitNumber >= unitsInCluster)
@@ -144,9 +143,14 @@ public class ClusterManager : MonoBehaviour {
         newUnit.tag = gameObject.tag;
         units.Add(newUnitControl);
         unitNumber++;
+        yield return new WaitForEndOfFrame();
+
       }
     }
+    yield return new WaitForSeconds(1);
+
     FormMob(transform.position, transform.position + (Vector3.forward * 3));
+
   }
 
   public Vector3 GetFlockingVector(UnitControl target) {

@@ -39,10 +39,22 @@ public class UnitStateAttacking : UnitState {
     float distance = brain.DistanceToTarget;
 
     if (distance < brain.AttackRange) {
-      animator.SetTrigger("Attack");
+      if (unitControl.ReadyToAttack) {
+        Vector3 directionToEnemy = (brain.CurrentTarget.transform.position - transform.position).normalized;
+        Quaternion rotationToEnemy = Quaternion.LookRotation(directionToEnemy, Vector3.up);
+        transform.rotation = Quaternion.RotateTowards(
+          transform.rotation,
+          rotationToEnemy,
+          unitControl.RotationSpeed);
+        animator.SetTrigger("Attack");
+      }
     } else {
       brain.State = "Chasing";
     }
+
+    UnitControl betterTarget = brain.ScanForTargets();
+    if (betterTarget && betterTarget != brain.CurrentTarget) brain.AttackTarget(betterTarget);
+
   }
 
   public override void StateExit() {

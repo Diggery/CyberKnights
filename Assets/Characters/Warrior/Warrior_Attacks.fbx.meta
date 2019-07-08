@@ -140,7 +140,7 @@ ModelImporter:
       events:
       - time: 0.3958333
         functionName: AnimEvent
-        data: Attack
+        data: MeleeAttack
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
@@ -176,7 +176,7 @@ ModelImporter:
       events:
       - time: 0.45138887
         functionName: AnimEvent
-        data: Attack
+        data: MeleeAttack
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
@@ -270,7 +270,7 @@ ModelImporter:
       events:
       - time: 0.48611116
         functionName: AnimEvent
-        data: Attack
+        data: MeleeAttack
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
@@ -306,7 +306,7 @@ ModelImporter:
       events:
       - time: 0.46180534
         functionName: AnimEvent
-        data: Attack
+        data: MeleeAttack
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0

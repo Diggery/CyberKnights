@@ -15,7 +15,7 @@ public class UnitControl : MonoBehaviour {
   NavMeshAgent navAgent;
   Rigidbody rbody;
 
-  float moveSpeed = 2.5f;
+  float moveSpeed = 1.5f;
   public float MoveSpeed {
     get { return moveSpeed; }
   }
@@ -24,6 +24,10 @@ public class UnitControl : MonoBehaviour {
     get { return chaseSpeed; }
   }
 
+  float rotationSpeed = 10.0f;
+  public float RotationSpeed {
+    get { return rotationSpeed; }
+  }
   float hitPoints = 5;
   bool isDead;
 
@@ -31,11 +35,31 @@ public class UnitControl : MonoBehaviour {
 
   UnitBrain unitBrain;
   Animator animator;
+
+  float attackTimer = 0;
+  float attackCooldown = 1;
+  float AttackCooldown {
+    get {
+      float variance = Random.value * (attackCooldown * 0.5f);
+      return attackCooldown - variance;
+    }
+  }
+
+  public bool ReadyToAttack {
+    get { return attackTimer < 0; }
+  }
+
+  float targetPopularity = 0;
   public bool IsDead {
     get { return isDead; }
   }
 
+  Vector3 lastPosition;
+  Vector3 velocityDir;
+  float velocity;
+
   private void Start() {
+
     navAgent = gameObject.GetComponent<NavMeshAgent>();
     unitBrain = gameObject.AddComponent<UnitBrain>();
     unitBrain.Init();
@@ -46,20 +70,34 @@ public class UnitControl : MonoBehaviour {
     collision.height = 1.8f;
     collision.center = new Vector3(0, 0.9f, 0);
 
+    animator.SetFloat("CycleOffset", Random.value);
+
+
     if (TeamName.Equals("Enemy")) {
       Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>();
       foreach (var item in renderers) {
         item.material.color = Color.red;
       }
     }
+
+    lastPosition = transform.position;
   }
 
   private void Update() {
     bool movingOnPath = navAgent.velocity.magnitude > 0.1f;
     bool movingWithPhysics = new Vector3(rbody.velocity.x, 0, rbody.velocity.z).magnitude > 0.1f;
-    animator.SetBool("IsMoving", movingOnPath || movingWithPhysics);
+
+    velocityDir = transform.position - lastPosition;
+    velocity = Mathf.Lerp(velocity, velocityDir.magnitude / Time.deltaTime, Time.deltaTime * 5);
+    lastPosition = transform.position;
+
+    animator.SetFloat("MovementSpeed", velocity);
 
     animator.SetFloat("Random", Random.value);
+
+    if (attackTimer >= 0) {
+      attackTimer -= Time.deltaTime;
+    }
   }
 
   public void UpdateBrain() {
@@ -77,8 +115,8 @@ public class UnitControl : MonoBehaviour {
 
   public void AnimEvent(string type) {
     switch (type) {
-      case "Attack":
-        DamageTarget();
+      case "MeleeAttack":
+        DamageTarget("Melee");
         break;
       default:
         Debug.Log("Can't handle event type " + type);
@@ -86,23 +124,27 @@ public class UnitControl : MonoBehaviour {
     }
   }
 
-  void DamageTarget() {
+  void DamageTarget(string type) {
     if (!unitBrain.CurrentTarget) {
       Debug.Log("No target to damage");
       return;
     }
-    unitBrain.CurrentTarget.TakeDamage(1);
+    unitBrain.CurrentTarget.TakeDamage(1, this, type);
+    attackTimer = AttackCooldown;
   }
 
-  public void TakeDamage(float amount) {
+  public void TakeDamage(float amount, UnitControl attacker, string type) {
     hitPoints -= amount;
     if (hitPoints < 0) {
       Die();
     }
+    if (type.Equals("Melee") && unitBrain.CurrentTarget != attacker) {
+      unitBrain.AttackTarget(attacker);
+    }
   }
 
   void Die() {
-    isDead = true;
+    //  isDead = true;
     //  Destroy(gameObject);
   }
 }

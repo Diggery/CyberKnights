@@ -26,7 +26,7 @@ public class UnitBrain : MonoBehaviour {
   public float DistanceToTarget {
     get {
       if (!currentTarget) return -1;
-      return Vector3.Distance(currentTarget.transform.position, transform.position);
+      return (currentTarget.transform.position  - transform.position).sqrMagnitude;
     }
   }
 
@@ -41,6 +41,8 @@ public class UnitBrain : MonoBehaviour {
     get { return attackRange; }
     set { attackRange = value; }
   }
+
+
 
   Dictionary<string, UnitState> states = new Dictionary<string, UnitState>();
   UnitState currentState;
@@ -130,7 +132,7 @@ public class UnitBrain : MonoBehaviour {
         closestDistance = targetDistance;
         Debug.Log("Spotted " + target.name);
       } else {
-                Debug.Log("Missed " + target.name);
+        Debug.Log("Missed " + target.name);
 
       }
     }
@@ -145,7 +147,7 @@ public class UnitBrain : MonoBehaviour {
   public void AttackTarget(UnitControl target) {
     Debug.Log(gameObject.name + " should attack " + target.name);
     if (target == CurrentTarget) {
-      if (State == "Chasing"  || State == "Attacking") {
+      if (State == "Chasing" || State == "Attacking") {
         return;
       }
     }

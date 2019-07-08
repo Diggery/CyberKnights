@@ -19,12 +19,8 @@ public class UnitStateIdle : UnitState {
     UnitControl target = brain.ScanForTargets();
    
     if (target) {
-      Debug.Log(gameObject.name + " shoudl attack");
       brain.AttackTarget(target);
-    } else {
-            Debug.Log(gameObject.name + " no target attack");
-
-    }
+    } 
   }
 
   public override void StateExit() {

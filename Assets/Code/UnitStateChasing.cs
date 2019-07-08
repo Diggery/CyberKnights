@@ -14,7 +14,7 @@ public class UnitStateChasing : UnitState {
 
   public override void StateEnter() {
     base.StateEnter();
-    animator.SetBool("InChaseMode", true);
+    animator.SetBool("InAttackMode", true);
 
   }
 
@@ -29,15 +29,13 @@ public class UnitStateChasing : UnitState {
       return;
     }
     float distance = brain.DistanceToTarget;
-    if (distance > brain.VisualRange * 0.5f) {
-      UnitControl betterTarget = brain.ScanForTargets();
-      if (betterTarget && betterTarget != brain.CurrentTarget) brain.AttackTarget(betterTarget);
-    }
+    UnitControl betterTarget = brain.ScanForTargets();
+    if (betterTarget && betterTarget != brain.CurrentTarget) brain.AttackTarget(betterTarget);
   }
 
   public override void StateExit() {
     base.StateExit();
-    animator.SetBool("InChaseMode", false);
+    animator.SetBool("InAttackMode", false);
 
   }
 
@@ -52,9 +50,15 @@ public class UnitStateChasing : UnitState {
 
     float distanceToTarget = (brain.CurrentTarget.transform.position - transform.position).sqrMagnitude;
     if (distanceToTarget > brain.AttackRange) {
-      Vector3 offset = (brain.CurrentTarget.transform.position - transform.position).normalized;
-      rbody.AddForce(offset * unitControl.ChaseSpeed * 500, ForceMode.Force);
+      Vector3 directionToEnemy = (brain.CurrentTarget.transform.position - transform.position).normalized;
+      rbody.AddForce(directionToEnemy * unitControl.ChaseSpeed * 1000, ForceMode.Force);
+      Quaternion rotationToEnemy = Quaternion.LookRotation(directionToEnemy, Vector3.up);
+      transform.rotation = Quaternion.RotateTowards(
+        transform.rotation,
+        rotationToEnemy,
+        unitControl.RotationSpeed);
     } else {
+      Debug.Log(distanceToTarget + " is greater than " + brain.AttackRange);
       animator.SetTrigger("Attack");
       brain.State = "Attacking";
     }
