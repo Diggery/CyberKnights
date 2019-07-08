@@ -12,17 +12,37 @@ public class UnitBrain : MonoBehaviour {
   public string FriendlyTag {
     get { return friendlyTag; }
   }
+
   string enemyTag = "Enemy";
   public string EnemyTag {
     get { return enemyTag; }
   }
+
   public UnitControl CurrentTarget {
     get { return currentTarget; }
     set { currentTarget = value; }
   }
 
+  public float DistanceToTarget {
+    get {
+      if (!currentTarget) return -1;
+      return (currentTarget.transform.position  - transform.position).sqrMagnitude;
+    }
+  }
+
   float visualRange = 15.0f;
-  float attackRange = 1.0f;
+  public float VisualRange {
+    get { return visualRange; }
+    set { visualRange = value; }
+  }
+
+  float attackRange = 2.0f;
+  public float AttackRange {
+    get { return attackRange; }
+    set { attackRange = value; }
+  }
+
+
 
   Dictionary<string, UnitState> states = new Dictionary<string, UnitState>();
   UnitState currentState;
@@ -42,6 +62,9 @@ public class UnitBrain : MonoBehaviour {
   }
 
   public void Init() {
+    visualRange *= visualRange;  // power of 2 for square distance
+    attackRange *= attackRange;  // power of 2 for square distance
+
     unitControl = GetComponent<UnitControl>();
     navAgent = GetComponent<NavMeshAgent>();
 
@@ -56,14 +79,13 @@ public class UnitBrain : MonoBehaviour {
     unitStateMoving.StateInit();
     states.Add(unitStateMoving.StateName, unitStateMoving);
 
-    UnitStateChasing unitStateChasing = gameObject.AddComponent<UnitStateChasing>();
-    unitStateChasing.StateInit();
-    states.Add(unitStateChasing.StateName, unitStateChasing);
-
-
     UnitStateAttacking aiStateAttacking = gameObject.AddComponent<UnitStateAttacking>();
     aiStateAttacking.StateInit();
     states.Add(aiStateAttacking.StateName, aiStateAttacking);
+
+    UnitStateChasing aiStateChasing = gameObject.AddComponent<UnitStateChasing>();
+    aiStateChasing.StateInit();
+    states.Add(aiStateChasing.StateName, aiStateChasing);
 
     State = "Idle";
   }
@@ -94,10 +116,7 @@ public class UnitBrain : MonoBehaviour {
 
       if (excludeThisGuy && excludeThisGuy.Equals(targetControl)) continue;
 
-      float targetDistance = Vector3.Distance(
-          target.transform.position,
-          transform.position
-      );
+      float targetDistance = (target.transform.position - transform.position).sqrMagnitude;
 
       if (targetDistance > visualRange) continue;
 
@@ -109,9 +128,12 @@ public class UnitBrain : MonoBehaviour {
       );
 
       if (!Physics.Raycast(ray, targetDistance, terrainMask)) {
-        Debug.DrawRay(ray.origin, ray.direction * targetDistance, Color.green, 1.0f);
         closestTarget = targetControl;
         closestDistance = targetDistance;
+        Debug.Log("Spotted " + target.name);
+      } else {
+        Debug.Log("Missed " + target.name);
+
       }
     }
 
@@ -123,28 +145,20 @@ public class UnitBrain : MonoBehaviour {
   }
 
   public void AttackTarget(UnitControl target) {
-    float distance = Vector3.Distance(target.transform.position, transform.position);
+    Debug.Log(gameObject.name + " should attack " + target.name);
+    if (target == CurrentTarget) {
+      if (State == "Chasing" || State == "Attacking") {
+        return;
+      }
+    }
+
     CurrentTarget = target;
+    float distance = DistanceToTarget;
 
-
-
-    if (distance < attackRange) {
+    if (distance < AttackRange) {
       State = "Attacking";
     } else {
-
-      LayerMask terrainMask = LayerMask.GetMask("Terrain");
-      Vector3 offset = target.transform.position - transform.position;
-      Ray ray = new Ray(
-          transform.position + (Vector3.up * 0.75f),
-          offset.normalized
-      );
-      bool canSeeEnemy = !Physics.Raycast(ray, offset.magnitude, terrainMask);
-
-      if (canSeeEnemy) {
-        State = "Chasing";
-      } else {
-        navAgent.SetDestination(target.transform.position);
-      }
+      State = "Chasing";
     }
   }
 }

@@ -17,19 +17,14 @@ public class UnitStateIdle : UnitState {
   public override void StateUpdate() {
     base.StateUpdate();
     UnitControl target = brain.ScanForTargets();
-    if (target && !brain.CurrentTarget) {
+   
+    if (target) {
       brain.AttackTarget(target);
-    }
+    } 
   }
 
   public override void StateExit() {
     base.StateExit();
   }
-
   
-  private void OnCollisionEnter(Collision other) {
-    if (isActive && other.transform.tag.Equals(brain.EnemyTag)) {
-      brain.AttackTarget(other.gameObject.GetComponent<UnitControl>());
-    }
-  }
 }

@@ -6,8 +6,10 @@ using UnityEngine.AI;
 public class UnitState : MonoBehaviour {
 
   protected UnitControl unitControl;
+  protected Animator animator;
   protected UnitBrain brain;
   protected NavMeshAgent navAgent;
+  protected Rigidbody rbody;
   protected bool isActive = false;
   public bool IsActive {
     get { return IsActive; }
@@ -23,21 +25,46 @@ public class UnitState : MonoBehaviour {
 
   public virtual void StateInit() {
     unitControl = GetComponent<UnitControl>();
+    animator = GetComponent<Animator>();
     brain = GetComponent<UnitBrain>();
     navAgent = GetComponent<NavMeshAgent>();
+    rbody = GetComponent<Rigidbody>();
     terrainMask = LayerMask.GetMask("Terrain");
   }
 
   public virtual void StateEnter() {
     isActive = true;
-    // Debug.Log("------>  Entering " + stateName + " state.");
+    Debug.Log(gameObject.name + "------>  Entering " + stateName + " state.");
   }
 
-  public virtual void StateUpdate() {
-  }
+  public virtual void StateUpdate() { }
 
   public virtual void StateExit() {
     isActive = false;
-    // Debug.Log("------>  Exiting " + stateName + " state.");
+    Debug.Log(gameObject.name + "------>  Exiting " + stateName + " state.");
   }
+
+  protected bool CanSeeEnemy(UnitControl target) {
+    Vector3 dirToTarget = (target.transform.position - transform.position);
+
+    Ray ray = new Ray(
+        transform.position + (Vector3.up * 0.75f),
+        dirToTarget.normalized
+    );
+
+    RaycastHit hit;
+    bool canSeeEnemy = !Physics.Raycast(ray, out hit, dirToTarget.magnitude, terrainMask);
+
+    return canSeeEnemy;
+  }
+
+  private void OnCollisionEnter(Collision other) {
+    UnitControl control = other.gameObject.GetComponent<UnitControl>();
+    if (control && control.transform.tag.Equals(brain.EnemyTag)) {
+      CollidedWithEnemy(control);
+    }
+  }
+
+  protected virtual void CollidedWithEnemy(UnitControl other) { }
+
 }

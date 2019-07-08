@@ -18,9 +18,11 @@ public class UnitStateMoving : UnitState {
 
   public override void StateUpdate() {
     base.StateUpdate();
-    if (navAgent.pathStatus == NavMeshPathStatus.PathComplete) {
+    if (navAgent.hasPath && navAgent.remainingDistance < 1) {
       brain.State = "Idle";
     }
+    UnitControl newTarget = brain.ScanForTargets();
+    if (newTarget) brain.AttackTarget(newTarget);
   }
 
   public override void StateExit() {
