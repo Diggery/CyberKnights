@@ -14,7 +14,11 @@ public class UnitControl : MonoBehaviour {
   Vector3 anchorPos;
   NavMeshAgent navAgent;
   Rigidbody rbody;
-
+  ClusterManager clusterManager;
+  public ClusterManager Cluster {
+    get { return clusterManager; }
+    set { clusterManager = value; }
+  }
   float moveSpeed = 1.5f;
   public float MoveSpeed {
     get { return moveSpeed; }
@@ -105,7 +109,8 @@ public class UnitControl : MonoBehaviour {
   }
 
   public void SetDestination(Vector3 pos) {
-    unitBrain.State = "Moving";
+    if (!unitBrain.State.Equals("Retreating"))
+      unitBrain.State = "Moving";
     navAgent.SetDestination(pos);
   }
 
@@ -138,13 +143,14 @@ public class UnitControl : MonoBehaviour {
     if (hitPoints < 0) {
       Die();
     }
-    if (type.Equals("Melee") && unitBrain.CurrentTarget != attacker) {
+
+    if (unitBrain.CanAttack && type.Equals("Melee") && unitBrain.CurrentTarget != attacker) {
       unitBrain.AttackTarget(attacker);
     }
   }
 
   void Die() {
-    //  isDead = true;
-    //  Destroy(gameObject);
+    unitBrain.State = "Retreating";
+
   }
 }

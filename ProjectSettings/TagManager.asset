@@ -18,10 +18,10 @@ TagManager:
   - 
   - 
   - Terrain
-  - 
-  - 
-  - 
-  - 
+  - Friend
+  - FriendRetreating
+  - Enemy
+  - EnemyRetreating
   - 
   - 
   - 
