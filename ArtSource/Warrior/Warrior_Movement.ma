@@ -1,6 +1,6 @@
 //Maya ASCII 2018 scene
 //Name: Warrior_Movement.ma
-//Last modified: Tue, Jul 02, 2019 08:49:56 AM
+//Last modified: Sun, Jul 07, 2019 11:01:44 AM
 //Codeset: UTF-8
 file -rdi 1 -ns "Warrior" -rfn "WarriorRN" -op "v=0;" -typ "mayaAscii" "/Users/briancollins/Unity/CyberKnights/ArtSource/Warrior/Warrior.ma";
 file -r -ns "Warrior" -dr 1 -rfn "WarriorRN" -op "v=0;" -typ "mayaAscii" "/Users/briancollins/Unity/CyberKnights/ArtSource/Warrior/Warrior.ma";
@@ -17,8 +17,8 @@ fileInfo "osv" "Mac OS X 10.14.5";
 createNode transform -s -n "persp";
 	rename -uid "77021BB7-4549-9021-2BAB-8BA79FE80384";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 258.56272704108676 142.55657838228339 530.99975979137423 ;
-	setAttr ".r" -type "double3" -8.738352730284209 -702.19999999997992 -2.0877904737190293e-16 ;
+	setAttr ".t" -type "double3" -303.83046814736832 289.78454874528336 334.01496014638195 ;
+	setAttr ".r" -type "double3" -24.338352730284122 -769.39999999996917 0 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "4A2071D2-AA42-012D-3BC1-8EB859721CFE";
 	setAttr -k off ".v" no;
@@ -164,7 +164,7 @@ createNode script -n "uiConfigurationScriptNode";
 	setAttr ".st" 3;
 createNode script -n "sceneConfigurationScriptNode";
 	rename -uid "04758DCD-504B-2302-17D2-C2A0D99B45D6";
-	setAttr ".b" -type "string" "playbackOptions -min 52 -max 67 -ast 0 -aet 100 ";
+	setAttr ".b" -type "string" "playbackOptions -min 10 -max 67 -ast 0 -aet 100 ";
 	setAttr ".st" 6;
 createNode reference -n "WarriorRN";
 	rename -uid "522B0397-2541-6C5F-0DA4-10BE51E10B01";
@@ -338,7 +338,7 @@ createNode reference -n "WarriorRN";
 		2 "|Warrior:Warrior_Geo|Warrior:Sword|Warrior:SwordShape" "uvPivot" " -type \"double2\" 0.54938453435897827 0.46439105272293091"
 		
 		2 "|Warrior:Warrior_Control|Warrior:ikHandle1" "visibility" " 1"
-		2 "|Warrior:Warrior_Control|Warrior:ikHandle1" "translate" " -type \"double3\" 31.81981915402049665 0 20.10195675710823338"
+		2 "|Warrior:Warrior_Control|Warrior:ikHandle1" "translate" " -type \"double3\" 16.01328620159686267 15.28494390734077868 27.09914358639953136"
 		
 		2 "|Warrior:Warrior_Control|Warrior:ikHandle1" "translateX" " -av"
 		2 "|Warrior:Warrior_Control|Warrior:ikHandle1" "translateY" " -av"
@@ -350,7 +350,7 @@ createNode reference -n "WarriorRN";
 		2 "|Warrior:Warrior_Control|Warrior:ikHandle1" "twist" " 0"
 		2 "|Warrior:Warrior_Control|Warrior:ikHandle1" "ikBlend" " 1"
 		2 "|Warrior:Warrior_Control|Warrior:ikHandle2" "visibility" " 1"
-		2 "|Warrior:Warrior_Control|Warrior:ikHandle2" "translate" " -type \"double3\" -23.36645793732179044 0.0027483799494802917 -24.65160587762492028"
+		2 "|Warrior:Warrior_Control|Warrior:ikHandle2" "translate" " -type \"double3\" -1.4376929631276576 17.15791818011817327 -52.84457926205394074"
 		
 		2 "|Warrior:Warrior_Control|Warrior:ikHandle2" "translateX" " -av"
 		2 "|Warrior:Warrior_Control|Warrior:ikHandle2" "translateY" " -av"
@@ -382,7 +382,7 @@ createNode reference -n "WarriorRN";
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control" "visibility" 
 		" -av 1"
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control" "translate" 
-		" -type \"double3\" 0.022947600323754602 -0.17181330287028415 -0.11402607791607491"
+		" -type \"double3\" 0.068448051311049002 -0.11521981638290577 0.055014475683134743"
 		
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control" "translateX" 
 		" -av"
@@ -391,7 +391,8 @@ createNode reference -n "WarriorRN";
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control" "translateZ" 
 		" -av"
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control" "rotate" 
-		" -type \"double3\" 0 -14.439754980503686 0"
+		" -type \"double3\" 32.18984962406012329 -16.29629629629630116 5.11111111111111338"
+		
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control" "rotateX" 
 		" -av"
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control" "rotateY" 
@@ -418,7 +419,8 @@ createNode reference -n "WarriorRN";
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control" 
 		"translateZ" " -av"
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control" 
-		"rotate" " -type \"double3\" 0 0 0"
+		"rotate" " -type \"double3\" -5.7182547000322872 7.61770010961928712 -6.88663083123315189"
+		
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control" 
 		"rotateX" " -av"
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control" 
@@ -444,7 +446,8 @@ createNode reference -n "WarriorRN";
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control|Warrior:Head_Control" 
 		"translateZ" " -av"
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control|Warrior:Head_Control" 
-		"rotate" " -type \"double3\" 0 0 0"
+		"rotate" " -type \"double3\" -13.66990604480949756 7.49904232093403866 -5.19938059610715708"
+		
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control|Warrior:Head_Control" 
 		"rotateX" " -av"
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control|Warrior:Head_Control" 
@@ -470,7 +473,7 @@ createNode reference -n "WarriorRN";
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control|Warrior:LeftUpperArm_Control" 
 		"translateZ" " -av"
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control|Warrior:LeftUpperArm_Control" 
-		"rotate" " -type \"double3\" -4.09716627591941585 -36.25537857320066593 -5.69153221597007075"
+		"rotate" " -type \"double3\" -30.01299168911997839 -21.94028107252619364 22.77865030126428536"
 		
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control|Warrior:LeftUpperArm_Control" 
 		"rotateX" " -av"
@@ -498,7 +501,7 @@ createNode reference -n "WarriorRN";
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control|Warrior:LeftUpperArm_Control|Warrior:LeftLowerArm_Control" 
 		"translateZ" " -av"
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control|Warrior:LeftUpperArm_Control|Warrior:LeftLowerArm_Control" 
-		"rotate" " -type \"double3\" -48.75447454671387248 -14.50233867339913907 10.17687277035774329"
+		"rotate" " -type \"double3\" -53.35686446798190019 -13.8989628681057571 13.31702643793837026"
 		
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control|Warrior:LeftUpperArm_Control|Warrior:LeftLowerArm_Control" 
 		"rotateX" " -av"
@@ -525,7 +528,7 @@ createNode reference -n "WarriorRN";
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control|Warrior:RightUpperArm_Control" 
 		"translateZ" " -av"
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control|Warrior:RightUpperArm_Control" 
-		"rotate" " -type \"double3\" 18.44356050007837666 -15.24019151209710898 -10.80755508625799877"
+		"rotate" " -type \"double3\" -96.53472004147435825 -13.13506445565749381 -42.66557521268204312"
 		
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control|Warrior:RightUpperArm_Control" 
 		"rotateX" " -av"
@@ -553,7 +556,7 @@ createNode reference -n "WarriorRN";
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control|Warrior:RightUpperArm_Control|Warrior:RightLowerArm_Control" 
 		"translateZ" " -av"
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control|Warrior:RightUpperArm_Control|Warrior:RightLowerArm_Control" 
-		"rotate" " -type \"double3\" -19.25990367374459211 9.32054242031751556 -1.05543045180554995"
+		"rotate" " -type \"double3\" -53.67674894664637719 -23.21412466488081705 4.57180935692972312"
 		
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control|Warrior:RightUpperArm_Control|Warrior:RightLowerArm_Control" 
 		"rotateX" " -av"
@@ -580,7 +583,8 @@ createNode reference -n "WarriorRN";
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control|Warrior:RightUpperArm_Control|Warrior:RightLowerArm_Control|Warrior:RightHand_Control" 
 		"translateZ" " -av"
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control|Warrior:RightUpperArm_Control|Warrior:RightLowerArm_Control|Warrior:RightHand_Control" 
-		"rotate" " -type \"double3\" 0 0 0"
+		"rotate" " -type \"double3\" 24.83341387815034551 1.16539312897073422 33.60404144919878178"
+		
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control|Warrior:RightUpperArm_Control|Warrior:RightLowerArm_Control|Warrior:RightHand_Control" 
 		"rotateX" " -av"
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:Hips_Control|Warrior:Torso_Control|Warrior:RightUpperArm_Control|Warrior:RightLowerArm_Control|Warrior:RightHand_Control" 
@@ -624,7 +628,8 @@ createNode reference -n "WarriorRN";
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:RightFoot_Control" 
 		"visibility" " -av 1"
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:RightFoot_Control" 
-		"translate" " -type \"double3\" -0.02245564158508874 0 -0.31810001721357023"
+		"translate" " -type \"double3\" 0.26057008784102104 0.22141486088410889 -0.68197535931373132"
+		
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:RightFoot_Control" 
 		"translateX" " -av"
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:RightFoot_Control" 
@@ -632,7 +637,8 @@ createNode reference -n "WarriorRN";
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:RightFoot_Control" 
 		"translateZ" " -av"
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:RightFoot_Control" 
-		"rotate" " -type \"double3\" 0 -20.61283496228424994 0"
+		"rotate" " -type \"double3\" 43.08320438717875334 -33.72495468711495192 -5.07747909198234737"
+		
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:RightFoot_Control" 
 		"rotateX" " -av"
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:RightFoot_Control" 
@@ -692,7 +698,8 @@ createNode reference -n "WarriorRN";
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:LeftFoot_Control" 
 		"visibility" " -av 1"
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:LeftFoot_Control" 
-		"translate" " -type \"double3\" 0.13349856848758129 0 0.25944785220544569"
+		"translate" " -type \"double3\" -0.070509980275751116 0.19727660922551679 0.34975772185024612"
+		
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:LeftFoot_Control" 
 		"translateX" " -av"
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:LeftFoot_Control" 
@@ -700,7 +707,7 @@ createNode reference -n "WarriorRN";
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:LeftFoot_Control" 
 		"translateZ" " -av"
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:LeftFoot_Control" 
-		"rotate" " -type \"double3\" 0.028856696787589047 -0.56364952324190121 3.7525356778111596"
+		"rotate" " -type \"double3\" 1.34574228433027243 -0.8276087225918517 -5.79855284430517681"
 		
 		2 "|Warrior:Warrior_Control|Warrior:Root_Control|Warrior:LeftFoot_Control" 
 		"rotateX" " -av"
@@ -1102,13 +1109,16 @@ createNode gameFbxExporter -n "gameExporterPreset2";
 	setAttr ".eti" 2;
 	setAttr ".esi" 3;
 	setAttr ".ssn" -type "string" "Warrior:ExportSet";
-	setAttr -s 2 ".ac";
+	setAttr -s 3 ".ac";
 	setAttr ".ac[0].acn" -type "string" "Move";
 	setAttr ".ac[0].acs" 10;
 	setAttr ".ac[0].ace" 24;
 	setAttr ".ac[1].acn" -type "string" "Charge";
 	setAttr ".ac[1].acs" 40;
 	setAttr ".ac[1].ace" 52;
+	setAttr ".ac[2].acn" -type "string" "ChargeAttack";
+	setAttr ".ac[2].acs" 52;
+	setAttr ".ac[2].ace" 67;
 	setAttr ".ic" no;
 	setAttr ".ebm" yes;
 	setAttr ".fv" -type "string" "FBX201800";
@@ -2888,8 +2898,8 @@ select -ne :time1;
 	setAttr -av -cb on ".ihi";
 	setAttr -av -k on ".nds";
 	setAttr -cb on ".bnm";
-	setAttr -k on ".o" 67;
-	setAttr -av -k on ".unw" 67;
+	setAttr -k on ".o" 48;
+	setAttr -av -k on ".unw" 48;
 	setAttr -av -k on ".etw";
 	setAttr -av -k on ".tps";
 	setAttr -av -k on ".tms";
