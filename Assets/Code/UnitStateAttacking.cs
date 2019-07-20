@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class UnitStateAttacking : UnitState {
 
@@ -17,11 +18,10 @@ public class UnitStateAttacking : UnitState {
     Debug.Log("Entering Attacking");
     navAgent.isStopped = true;
     navAgent.ResetPath();
-    animator.ResetTrigger("Attack");
+    animator.SetTrigger("Attack");
     animator.SetBool("InAttackMode", true);
 
     rbody.constraints = RigidbodyConstraints.FreezeAll;
-
   }
 
   public override void StateUpdate() {
@@ -38,14 +38,17 @@ public class UnitStateAttacking : UnitState {
 
     float distance = brain.DistanceToTarget;
 
-    if (distance < brain.AttackRange) {
+    bool inAttackRange = distance < brain.AttackRange;
+    animator.SetBool("InAttackRange", inAttackRange);
+
+    if (inAttackRange) {
       if (unitControl.ReadyToAttack) {
         Vector3 directionToEnemy = (brain.CurrentTarget.transform.position - transform.position).normalized;
         Quaternion rotationToEnemy = Quaternion.LookRotation(directionToEnemy, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(
           transform.rotation,
           rotationToEnemy,
-          unitControl.RotationSpeed);
+          unitControl.RotationSpeed * Time.deltaTime);
         animator.SetTrigger("Attack");
       }
     } else {

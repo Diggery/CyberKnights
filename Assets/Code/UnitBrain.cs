@@ -146,6 +146,10 @@ public class UnitBrain : MonoBehaviour {
 
   public void AttackTarget(UnitControl target) {
     Debug.Log(gameObject.name + " should attack " + target.name);
+    if (!CanAttack) {
+      return;
+    }
+    
     if (target == CurrentTarget) {
       if (State == "Chasing" || State == "Attacking") {
         return;

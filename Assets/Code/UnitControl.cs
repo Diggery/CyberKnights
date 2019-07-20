@@ -28,7 +28,7 @@ public class UnitControl : MonoBehaviour {
     get { return chaseSpeed; }
   }
 
-  float rotationSpeed = 10.0f;
+  float rotationSpeed = 180.0f;
   public float RotationSpeed {
     get { return rotationSpeed; }
   }
@@ -40,6 +40,10 @@ public class UnitControl : MonoBehaviour {
   UnitBrain unitBrain;
   Animator animator;
 
+  float navRadius = 0.5f;
+  public float NavRadius {
+    get { return navRadius; }
+  }
   float attackTimer = 0;
   float attackCooldown = 1;
   float AttackCooldown {
@@ -48,9 +52,11 @@ public class UnitControl : MonoBehaviour {
       return attackCooldown - variance;
     }
   }
-
   public bool ReadyToAttack {
     get { return attackTimer < 0; }
+  }
+  public bool InAttackState {
+    get; set;
   }
 
   float targetPopularity = 0;
@@ -64,7 +70,11 @@ public class UnitControl : MonoBehaviour {
 
   private void Start() {
 
-    navAgent = gameObject.GetComponent<NavMeshAgent>();
+    navAgent = gameObject.AddComponent<NavMeshAgent>();
+    navAgent.radius = navRadius;
+    navAgent.speed = moveSpeed;
+    navAgent.angularSpeed = rotationSpeed;
+
     unitBrain = gameObject.AddComponent<UnitBrain>();
     unitBrain.Init();
     animator = gameObject.GetComponent<Animator>();
@@ -144,13 +154,12 @@ public class UnitControl : MonoBehaviour {
       Die();
     }
 
-    if (unitBrain.CanAttack && type.Equals("Melee") && unitBrain.CurrentTarget != attacker) {
+    if (type.Equals("Melee") && unitBrain.CurrentTarget != attacker) {
       unitBrain.AttackTarget(attacker);
     }
   }
 
   void Die() {
     unitBrain.State = "Retreating";
-
   }
 }
