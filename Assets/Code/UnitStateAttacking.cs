@@ -57,14 +57,12 @@ public class UnitStateAttacking : UnitState {
 
     UnitControl betterTarget = brain.ScanForTargets();
     if (betterTarget && betterTarget != brain.CurrentTarget) brain.AttackTarget(betterTarget);
-
   }
 
   public override void StateExit() {
     base.StateExit();
     Debug.Log("Done Attacking");
     animator.SetBool("InAttackMode", false);
-
     rbody.constraints = RigidbodyConstraints.FreezeRotation;
   }
 

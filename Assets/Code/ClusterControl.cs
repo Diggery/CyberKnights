@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ClusterManager : MonoBehaviour {
+public class ClusterControl : MonoBehaviour {
   public string teamName = "Player";
   GameManager gameManager;
   public int unitsInCluster = 50;
@@ -18,7 +18,7 @@ public class ClusterManager : MonoBehaviour {
 
   DrawCircle circle;
 
-
+  public Gizmo currentGizmo;
   Vector3 homePos;
   public Vector3 HomePos {
     get { return homePos; }
@@ -29,7 +29,7 @@ public class ClusterManager : MonoBehaviour {
     Ranks, Vanguard, Mob
   }
 
-  Formation currentFormation = Formation.Mob;
+  Formation currentFormation = Formation.Ranks;
 
   private void Start() {
     gameManager = GameManager.Instance;
@@ -62,6 +62,7 @@ public class ClusterManager : MonoBehaviour {
 
   public void DrawShape(Vector3 start, Vector3 end) {
     DrawMobShape(start, end);
+    currentGizmo.Place(start, end);
   }
 
   public void FormRanks(Vector3 startPos, Vector3 endPos) {

@@ -14,8 +14,8 @@ public class UnitControl : MonoBehaviour {
   Vector3 anchorPos;
   NavMeshAgent navAgent;
   Rigidbody rbody;
-  ClusterManager clusterManager;
-  public ClusterManager Cluster {
+  ClusterControl clusterManager;
+  public ClusterControl Cluster {
     get { return clusterManager; }
     set { clusterManager = value; }
   }
@@ -40,7 +40,7 @@ public class UnitControl : MonoBehaviour {
   UnitBrain unitBrain;
   Animator animator;
 
-  float navRadius = 0.5f;
+  float navRadius = 0.25f;
   public float NavRadius {
     get { return navRadius; }
   }

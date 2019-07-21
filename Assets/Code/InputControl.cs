@@ -5,10 +5,11 @@ using UnityEngine;
 public class InputControl : MonoBehaviour {
   bool mouseInputInProgress = false;
   Vector3 mouseDownPos = Vector3.zero;
-
-  public ClusterManager inputTarget;
+  public ClusterControl inputTarget;
+  Gizmo[] inputGizmos;
   void Start() {
-
+    inputGizmos = transform.GetComponentsInChildren<Gizmo>();
+    foreach (var gizmo in inputGizmos) gizmo.Init();
   }
 
   // Update is called once per frame

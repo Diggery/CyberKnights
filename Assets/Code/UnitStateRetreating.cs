@@ -17,7 +17,6 @@ public class UnitStateRetreating : UnitState {
       LayerMask.NameToLayer("FriendRetreating") :
       LayerMask.NameToLayer("EnemyRetreating");
 
-    navAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
     navAgent.radius = 0.1f;
 
   }
@@ -33,7 +32,6 @@ public class UnitStateRetreating : UnitState {
 
   public override void StateExit() {
     base.StateExit();
-    navAgent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
     navAgent.radius = unitControl.NavRadius;
 
   }
