@@ -14,7 +14,7 @@ public class UnitStateChasing : UnitState {
 
   public override void StateEnter() {
     base.StateEnter();
-    animator.SetBool("InAttackMode", true);
+   // animator.SetBool("InAttackMode", true);
 
   }
 
@@ -35,7 +35,7 @@ public class UnitStateChasing : UnitState {
 
   public override void StateExit() {
     base.StateExit();
-    animator.SetBool("InAttackMode", false);
+  // animator.SetBool("InAttackMode", false);
 
   }
 

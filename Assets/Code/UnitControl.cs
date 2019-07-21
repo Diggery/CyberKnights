@@ -14,7 +14,11 @@ public class UnitControl : MonoBehaviour {
   Vector3 anchorPos;
   NavMeshAgent navAgent;
   Rigidbody rbody;
-
+  ClusterManager clusterManager;
+  public ClusterManager Cluster {
+    get { return clusterManager; }
+    set { clusterManager = value; }
+  }
   float moveSpeed = 1.5f;
   public float MoveSpeed {
     get { return moveSpeed; }
@@ -24,7 +28,7 @@ public class UnitControl : MonoBehaviour {
     get { return chaseSpeed; }
   }
 
-  float rotationSpeed = 10.0f;
+  float rotationSpeed = 180.0f;
   public float RotationSpeed {
     get { return rotationSpeed; }
   }
@@ -36,6 +40,10 @@ public class UnitControl : MonoBehaviour {
   UnitBrain unitBrain;
   Animator animator;
 
+  float navRadius = 0.5f;
+  public float NavRadius {
+    get { return navRadius; }
+  }
   float attackTimer = 0;
   float attackCooldown = 1;
   float AttackCooldown {
@@ -44,9 +52,11 @@ public class UnitControl : MonoBehaviour {
       return attackCooldown - variance;
     }
   }
-
   public bool ReadyToAttack {
     get { return attackTimer < 0; }
+  }
+  public bool InAttackState {
+    get; set;
   }
 
   float targetPopularity = 0;
@@ -60,7 +70,11 @@ public class UnitControl : MonoBehaviour {
 
   private void Start() {
 
-    navAgent = gameObject.GetComponent<NavMeshAgent>();
+    navAgent = gameObject.AddComponent<NavMeshAgent>();
+    navAgent.radius = navRadius;
+    navAgent.speed = moveSpeed;
+    navAgent.angularSpeed = rotationSpeed;
+
     unitBrain = gameObject.AddComponent<UnitBrain>();
     unitBrain.Init();
     animator = gameObject.GetComponent<Animator>();
@@ -105,7 +119,8 @@ public class UnitControl : MonoBehaviour {
   }
 
   public void SetDestination(Vector3 pos) {
-    unitBrain.State = "Moving";
+    if (!unitBrain.State.Equals("Retreating"))
+      unitBrain.State = "Moving";
     navAgent.SetDestination(pos);
   }
 
@@ -138,13 +153,13 @@ public class UnitControl : MonoBehaviour {
     if (hitPoints < 0) {
       Die();
     }
+
     if (type.Equals("Melee") && unitBrain.CurrentTarget != attacker) {
       unitBrain.AttackTarget(attacker);
     }
   }
 
   void Die() {
-    //  isDead = true;
-    //  Destroy(gameObject);
+    unitBrain.State = "Retreating";
   }
 }

@@ -8,6 +8,7 @@ public class UnitBrain : MonoBehaviour {
   UnitControl unitControl;
   NavMeshAgent navAgent;
   UnitControl currentTarget;
+
   string friendlyTag = "Friend";
   public string FriendlyTag {
     get { return friendlyTag; }
@@ -29,20 +30,24 @@ public class UnitBrain : MonoBehaviour {
       return (currentTarget.transform.position  - transform.position).sqrMagnitude;
     }
   }
-
   float visualRange = 15.0f;
   public float VisualRange {
     get { return visualRange; }
     set { visualRange = value; }
   }
-
   float attackRange = 2.0f;
   public float AttackRange {
     get { return attackRange; }
     set { attackRange = value; }
   }
-
-
+  public Vector3 ClusterHome {
+    get { return unitControl.Cluster.HomePos; }
+  }
+  public bool CanAttack {
+    get {
+      return !State.Equals("Retreating");
+    }
+  }
 
   Dictionary<string, UnitState> states = new Dictionary<string, UnitState>();
   UnitState currentState;
@@ -71,23 +76,18 @@ public class UnitBrain : MonoBehaviour {
     friendlyTag = gameObject.tag.Equals("Friend") ? "Friend" : "Enemy";
     enemyTag = gameObject.tag.Equals("Friend") ? "Enemy" : "Friend";
 
-    UnitStateIdle unitStateIdle = gameObject.AddComponent<UnitStateIdle>();
-    unitStateIdle.StateInit();
-    states.Add(unitStateIdle.StateName, unitStateIdle);
-
-    UnitStateMoving unitStateMoving = gameObject.AddComponent<UnitStateMoving>();
-    unitStateMoving.StateInit();
-    states.Add(unitStateMoving.StateName, unitStateMoving);
-
-    UnitStateAttacking aiStateAttacking = gameObject.AddComponent<UnitStateAttacking>();
-    aiStateAttacking.StateInit();
-    states.Add(aiStateAttacking.StateName, aiStateAttacking);
-
-    UnitStateChasing aiStateChasing = gameObject.AddComponent<UnitStateChasing>();
-    aiStateChasing.StateInit();
-    states.Add(aiStateChasing.StateName, aiStateChasing);
+    AddState(gameObject.AddComponent<UnitStateIdle>());
+    AddState(gameObject.AddComponent<UnitStateMoving>());
+    AddState(gameObject.AddComponent<UnitStateAttacking>());
+    AddState(gameObject.AddComponent<UnitStateChasing>());
+    AddState(gameObject.AddComponent<UnitStateRetreating>());
 
     State = "Idle";
+  }
+
+  void AddState(UnitState state) {
+    state.StateInit();
+    states.Add(state.StateName, state);
   }
 
   public void UpdateBrain() {
@@ -146,6 +146,10 @@ public class UnitBrain : MonoBehaviour {
 
   public void AttackTarget(UnitControl target) {
     Debug.Log(gameObject.name + " should attack " + target.name);
+    if (!CanAttack) {
+      return;
+    }
+    
     if (target == CurrentTarget) {
       if (State == "Chasing" || State == "Attacking") {
         return;

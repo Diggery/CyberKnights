@@ -14,10 +14,16 @@ public class ClusterManager : MonoBehaviour {
   int MinMobSize = 3;
   int perferedMobSize = 10;
   int MaxMobSize = 16;
-
   float rankOffset = 1.5f;
 
   DrawCircle circle;
+
+
+  Vector3 homePos;
+  public Vector3 HomePos {
+    get { return homePos; }
+  }
+
 
   enum Formation {
     Ranks, Vanguard, Mob
@@ -31,7 +37,7 @@ public class ClusterManager : MonoBehaviour {
     if (gameObject.tag.Equals("Friend")) {
       circle = new GameObject("CircleShape").AddComponent<DrawCircle>().Init();
     }
-
+    homePos = transform.position;
     StartCoroutine(CreateUnits());
   }
 
@@ -139,8 +145,10 @@ public class ClusterManager : MonoBehaviour {
         GameObject newUnit = GameObject.Instantiate(gameManager.GetUnitPrefab("Warrior"), transform.position + offset, transform.rotation);
         UnitControl newUnitControl = newUnit.GetComponent<UnitControl>();
         newUnitControl.TeamName = teamName;
+        newUnitControl.Cluster = this;
         newUnit.name = gameObject.tag + "-Warrior-" + unitNumber;
         newUnit.tag = gameObject.tag;
+        newUnit.layer = LayerMask.NameToLayer(gameObject.tag);
         units.Add(newUnitControl);
         unitNumber++;
         yield return new WaitForEndOfFrame();
@@ -148,9 +156,7 @@ public class ClusterManager : MonoBehaviour {
       }
     }
     yield return new WaitForSeconds(1);
-
     FormMob(transform.position, transform.position + (Vector3.forward * 3));
-
   }
 
   public Vector3 GetFlockingVector(UnitControl target) {
