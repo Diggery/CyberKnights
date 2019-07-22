@@ -28,7 +28,10 @@ public class InputControl : MonoBehaviour {
       Ray ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
       RaycastHit hit;
       if (Physics.Raycast(ray, out hit)) {
-        inputTarget.DrawShape(mouseDownPos, hit.point);
+        inputTarget.PlaceFormation(mouseDownPos, hit.point);
+      }
+      if (Input.GetMouseButtonDown(1)) {
+        inputTarget.FlipFormation();
       }
     }
 

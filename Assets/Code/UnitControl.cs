@@ -74,18 +74,18 @@ public class UnitControl : MonoBehaviour {
     navAgent.radius = navRadius;
     navAgent.speed = moveSpeed;
     navAgent.angularSpeed = rotationSpeed;
+    navAgent.stoppingDistance = 0.35f;
 
     unitBrain = gameObject.AddComponent<UnitBrain>();
     unitBrain.Init();
     animator = gameObject.GetComponent<Animator>();
     rbody = gameObject.GetComponent<Rigidbody>();
     collision = gameObject.AddComponent<CapsuleCollider>();
-    collision.radius = 0.5f;
+    collision.radius = 0.35f;
     collision.height = 1.8f;
     collision.center = new Vector3(0, 0.9f, 0);
 
     animator.SetFloat("CycleOffset", Random.value);
-
 
     if (TeamName.Equals("Enemy")) {
       Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>();
@@ -98,8 +98,6 @@ public class UnitControl : MonoBehaviour {
   }
 
   private void Update() {
-    bool movingOnPath = navAgent.velocity.magnitude > 0.1f;
-    bool movingWithPhysics = new Vector3(rbody.velocity.x, 0, rbody.velocity.z).magnitude > 0.1f;
 
     velocityDir = transform.position - lastPosition;
     velocity = Mathf.Lerp(velocity, velocityDir.magnitude / Time.deltaTime, Time.deltaTime * 5);

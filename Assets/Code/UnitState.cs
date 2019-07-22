@@ -34,14 +34,14 @@ public class UnitState : MonoBehaviour {
 
   public virtual void StateEnter() {
     isActive = true;
-    Debug.Log(gameObject.name + "------>  Entering " + stateName + " state.");
+   // Debug.Log(gameObject.name + "------>  Entering " + stateName + " state.");
   }
 
   public virtual void StateUpdate() { }
 
   public virtual void StateExit() {
     isActive = false;
-    Debug.Log(gameObject.name + "------>  Exiting " + stateName + " state.");
+   // Debug.Log(gameObject.name + "------>  Exiting " + stateName + " state.");
   }
 
   protected bool CanSeeEnemy(UnitControl target) {

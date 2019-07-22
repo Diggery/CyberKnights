@@ -13,7 +13,6 @@ public class UnitStateMoving : UnitState {
 
   public override void StateEnter() {
     base.StateEnter();
-    Debug.Log("Moving");
   }
 
   public override void StateUpdate() {

@@ -60,10 +60,15 @@ public class ClusterControl : MonoBehaviour {
     }
   }
 
-  public void DrawShape(Vector3 start, Vector3 end) {
+  public void PlaceFormation(Vector3 start, Vector3 end) {
     DrawMobShape(start, end);
     currentGizmo.Place(start, end);
   }
+
+  public void FlipFormation() {
+    currentGizmo.Flip();
+  }
+
 
   public void FormRanks(Vector3 startPos, Vector3 endPos) {
     int unitNumber = 0;
@@ -82,6 +87,8 @@ public class ClusterControl : MonoBehaviour {
     }
 
     for (int y = 0; y < Mathf.CeilToInt((float)units.Count / rankWidth); y++) {
+      float rowFill = Mathf.Max(rankWidth - (units.Count - unitNumber), 0);
+      Debug.Log("Row fill is " + rowFill);
       for (int x = 0; x < rankWidth; x++) {
         if (unitNumber >= units.Count)
           break;
@@ -89,8 +96,9 @@ public class ClusterControl : MonoBehaviour {
 
         unitNumber++;
 
-        float centerOffset = ((float)rankWidth / 2.0f) - 0.5f;
-        Vector3 unitOffset = (rightDir * (x - centerOffset) * rankOffset) + (forwardDir * -y * rankOffset);
+        float centerOffset = (((float)rankWidth / 2.0f) - 0.5f) - (rowFill / 2.0f);
+        float yPos = currentGizmo.Flipped ? -y : y;
+        Vector3 unitOffset = (rightDir * (x - centerOffset) * rankOffset) + (forwardDir * -yPos * rankOffset);
         RaycastHit hit;
         LayerMask terrainMask = LayerMask.GetMask("Terrain");
         Ray ray = new Ray(movePos, movePos + unitOffset);
