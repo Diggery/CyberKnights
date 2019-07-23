@@ -26,7 +26,7 @@ public class DrawCircle : MonoBehaviour {
     }
 
     private void CreateCircle() {
-
+        Debug.Log("Creating Circle");
         circleMesh = new Mesh ();
         circleMesh.name = "CircleShape";
         MeshFilter circleMeshFilter = gameObject.AddComponent<MeshFilter>();

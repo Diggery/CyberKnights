@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GizmoRankSelector : Gizmo {
+public class SelectorRanks : Selector {
   LineRenderer line;
   Vector3[] linePositions;
   int MinRankWidth = 4;
@@ -10,6 +10,8 @@ public class GizmoRankSelector : Gizmo {
   int MaxRankWidth = 16;
   float rankOffset = 1.5f;
   protected override void Setup() {
+    formationType = InputControl.Formation.Ranks;
+
     line = transform.Find("line").GetComponent<LineRenderer>();
     linePositions = new Vector3[7];
   }
@@ -45,6 +47,8 @@ public class GizmoRankSelector : Gizmo {
     linePositions[6] = new Vector3((-width / 2) - 1, 1, 0);
     line.SetPositions(linePositions);
   }
+
+
 
   public override Vector3[] GeneratePositions(int unitCount, Vector3 startPos, Vector3 endPos) {
     List<Vector3> positions = new List<Vector3>();

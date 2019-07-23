@@ -6,10 +6,14 @@ public class InputControl : MonoBehaviour {
   bool mouseInputInProgress = false;
   Vector3 mouseDownPos = Vector3.zero;
   public ClusterControl inputTarget;
-  Gizmo[] inputGizmos;
+  Selector[] inputSelectors;
+  public enum Formation {
+    Ranks, Vanguard, Mob
+  }
+
   void Start() {
-    inputGizmos = transform.GetComponentsInChildren<Gizmo>();
-    foreach (var gizmo in inputGizmos) gizmo.Init();
+    inputSelectors = transform.GetComponentsInChildren<Selector>();
+    foreach (var Selector in inputSelectors) Selector.Init();
   }
 
   // Update is called once per frame
@@ -45,5 +49,19 @@ public class InputControl : MonoBehaviour {
       }
       mouseInputInProgress = false;
     }
+  }
+
+  public Selector GetFormationSelector(Formation formationType) {
+    Selector selectedSelector = null;
+    foreach (Selector Selector in inputSelectors) {
+      if (Selector.formationType == formationType) {
+        selectedSelector = Selector;
+        break;
+      }
+    }
+    if (selectedSelector == null) {
+      Debug.Log("Can't find " + formationType + " selector");
+    }
+    return selectedSelector;
   }
 }

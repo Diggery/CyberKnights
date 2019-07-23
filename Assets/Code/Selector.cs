@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gizmo : MonoBehaviour {
+public class Selector : MonoBehaviour {
   InputControl inputControl;
+  public InputControl.Formation formationType = InputControl.Formation.Mob;
   protected bool flipped = false;
   public bool Flipped {
     get { return flipped; }
   }
-  public virtual Gizmo Init() {
+  public virtual Selector Init() {
     Setup();
     return this;
   }

@@ -5,23 +5,16 @@ using UnityEngine.AI;
 
 public class ClusterControl : MonoBehaviour {
   public string teamName = "Player";
+  public InputControl.Formation formationType = InputControl.Formation.Mob;
   GameManager gameManager;
   public int unitsInCluster = 50;
   List<UnitControl> units = new List<UnitControl>();
-  int perferedRankWidth = 6;
-  int MinMobSize = 3;
-  int perferedMobSize = 10;
-  int MaxMobSize = 16;
-  float rankOffset = 1.5f;
-  DrawCircle circle;
-  public Gizmo currentGizmo;
+  Selector currentSelector;
   Vector3 homePos;
   public Vector3 HomePos {
     get { return homePos; }
   }
-  enum Formation {
-    Ranks, Vanguard, Mob
-  }
+
   Transform marker;
   Transform line;
 
@@ -29,10 +22,8 @@ public class ClusterControl : MonoBehaviour {
     gameManager = GameManager.Instance;
     marker = transform.Find("ClusterMarker");
     line = transform.Find("ClusterMarker/Line");
-    if (gameObject.tag.Equals("Friend")) {
-      circle = new GameObject("CircleShape").AddComponent<DrawCircle>().Init();
-    }
     homePos = transform.position;
+
     StartCoroutine(CreateUnits());
   }
 
@@ -47,62 +38,32 @@ public class ClusterControl : MonoBehaviour {
   }
 
   public void PlaceFormation(Vector3 start, Vector3 end) {
-    DrawMobShape(start, end);
-    currentGizmo.Place(start, end);
+    currentSelector = gameManager.InputControl.GetFormationSelector(formationType);
+    currentSelector.Place(start, end);
   }
 
   public void Command(Vector3 start, Vector3 end) {
-    Vector3[] newPositions = currentGizmo.GeneratePositions(units.Count, start, end);
+    Vector3[] newPositions = currentSelector.GeneratePositions(units.Count, start, end);
     Vector3 centerPos = Vector3.Lerp(start, end, 0.5f);
 
     for (int i = 0; i < newPositions.Length; i++) {
       units[i].SetDestination(newPositions[i]);
     }
 
-    transform.position = currentGizmo.transform.position;
-    transform.rotation = currentGizmo.transform.rotation;
+    transform.position = currentSelector.transform.position;
+    transform.rotation = currentSelector.transform.rotation;
   }
   public void FlipFormation() {
-    currentGizmo.Flip();
-  }
-  public void FormMob(Vector3 startPos, Vector3 endPos) {
-    Debug.Log("Start Pos:" + startPos + ", " + endPos);
-    Vector3 offset = (startPos - endPos);
-    Vector3 center = Vector3.Lerp(startPos, endPos, 0.5f);
-    float size = Mathf.Clamp(offset.magnitude / 2.0f, MinMobSize, MaxMobSize);
-    if (size < rankOffset) {
-      size = perferedMobSize;
-    }
-    for (int i = 0; i < units.Count; i++) {
-      bool isValid = false;
-      Vector3 posOffset = Vector3.zero;
-      while (!isValid) {
-        posOffset = new Vector3(Random.Range(-size, size), 0, Random.Range(-size, size));
-        isValid = posOffset.magnitude < size;
-      }
-      units[i].SetDestination(center + posOffset);
-    }
-    transform.position = center;
-  }
-  public void DrawMobShape(Vector3 center, float size) {
-    circle.SetPosition(center, size, 0.2f);
-  }
-
-  public void DrawMobShape(Vector3 startPos, Vector3 endPos) {
-    Vector3 offset = (startPos - endPos);
-    Vector3 center = Vector3.Lerp(startPos, endPos, 0.5f);
-    float size = offset.magnitude / 2.0f;
-
-    circle.SetPosition(center, size, 0.2f);
+    currentSelector.Flip();
   }
 
   IEnumerator CreateUnits() {
     int unitNumber = 0;
-    for (int y = 0; y < Mathf.CeilToInt((float)unitsInCluster / perferedRankWidth); y++) {
-      for (int x = 0; x < perferedRankWidth; x++) {
+    for (int y = 0; y < Mathf.CeilToInt((float)unitsInCluster / 6); y++) {
+      for (int x = 0; x < 6; x++) {
         if (unitNumber >= unitsInCluster)
           break;
-        Vector3 offset = new Vector3(x * rankOffset, 0, y * rankOffset);
+        Vector3 offset = new Vector3(x * 1.5f, 0, y * 1.5f);
         GameObject newUnit = GameObject.Instantiate(gameManager.GetUnitPrefab("Warrior"), transform.position + offset, transform.rotation);
         UnitControl newUnitControl = newUnit.GetComponent<UnitControl>();
         newUnitControl.TeamName = teamName;
@@ -116,8 +77,7 @@ public class ClusterControl : MonoBehaviour {
 
       }
     }
-    yield return new WaitForSeconds(1);
-    FormMob(transform.position, transform.position + (Vector3.forward * 3));
+    yield return new WaitForSeconds(0.1f);
   }
 
   public Vector3 GetFlockingVector(UnitControl target) {
