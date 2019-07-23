@@ -8,7 +8,7 @@ public class InputControl : MonoBehaviour {
   public ClusterControl inputTarget;
   Selector[] inputSelectors;
   public enum Formation {
-    Ranks, Vanguard, Mob
+    Mob, Ranks, Vanguard, Line, Arc
   }
 
   void Start() {
