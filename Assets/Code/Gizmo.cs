@@ -23,4 +23,9 @@ public class Gizmo : MonoBehaviour {
   public virtual void Flip() {
     flipped = !flipped;
   }
+
+  public virtual Vector3[] GeneratePositions(int unitCount, Vector3 startPos, Vector3 endPos) {
+    List<Vector3> positions = new List<Vector3>();
+    return positions.ToArray();
+  }
 }
