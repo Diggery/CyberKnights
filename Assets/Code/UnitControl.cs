@@ -37,9 +37,9 @@ public class UnitControl : MonoBehaviour {
 
   CapsuleCollider collision;
 
-  UnitBrain unitBrain;
+  UnitBrain brain;
   public UnitBrain Brain { 
-    get{ return unitBrain; }
+    get{ return brain; }
   }
 
   Animator animator;
@@ -81,8 +81,8 @@ public class UnitControl : MonoBehaviour {
     navAgent.angularSpeed = rotationSpeed;
     navAgent.stoppingDistance = 0.35f;
 
-    unitBrain = gameObject.AddComponent<UnitBrain>();
-    unitBrain.Init();
+    brain = gameObject.AddComponent<UnitBrain>();
+    brain.Init();
     animator = gameObject.GetComponent<Animator>();
     rbody = gameObject.GetComponent<Rigidbody>();
     collision = gameObject.AddComponent<CapsuleCollider>();
@@ -118,12 +118,12 @@ public class UnitControl : MonoBehaviour {
   }
 
   public void UpdateBrain() {
-    unitBrain.UpdateBrain();
+    brain.UpdateBrain();
   }
 
   public void SetDestination(Vector3 pos) {
-    if (!unitBrain.State.Equals("Retreating"))
-      unitBrain.MoveTo(pos);
+    if (!brain.State.Equals("Retreating"))
+      brain.MoveTo(pos);
   }
 
   public void Push(Vector3 direction) {
@@ -142,11 +142,11 @@ public class UnitControl : MonoBehaviour {
   }
 
   void DamageTarget(string type) {
-    if (!unitBrain.CurrentTarget) {
+    if (!brain.CurrentTarget) {
       Debug.Log("No target to damage");
       return;
     }
-    unitBrain.CurrentTarget.TakeDamage(1, this, type);
+    brain.CurrentTarget.TakeDamage(1, this, type);
     attackTimer = AttackCooldown;
   }
 
@@ -156,12 +156,12 @@ public class UnitControl : MonoBehaviour {
       Die();
     }
 
-    if (type.Equals("Melee") && unitBrain.CurrentTarget != attacker) {
-      unitBrain.AttackTarget(attacker);
+    if (type.Equals("Melee") && brain.CurrentTarget != attacker) {
+      brain.AttackTarget(attacker);
     }
   }
-  
+
   void Die() {
-    unitBrain.State = "Retreating";
+    brain.State = "Retreating";
   }
 }

@@ -35,7 +35,6 @@ public class UnitStateMoving : UnitState {
     Debug.Log("Contact!");
     if (isActive && other.transform.tag.Equals(brain.EnemyTag)) {
       brain.AttackTarget(other.gameObject.GetComponent<UnitControl>());
-
     }
   }
 }
