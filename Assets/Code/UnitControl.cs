@@ -38,6 +38,10 @@ public class UnitControl : MonoBehaviour {
   CapsuleCollider collision;
 
   UnitBrain unitBrain;
+  public UnitBrain Brain { 
+    get{ return unitBrain; }
+  }
+
   Animator animator;
 
   float navRadius = 0.25f;
@@ -67,6 +71,7 @@ public class UnitControl : MonoBehaviour {
   Vector3 lastPosition;
   Vector3 velocityDir;
   float velocity;
+
 
   private void Start() {
 
@@ -118,8 +123,7 @@ public class UnitControl : MonoBehaviour {
 
   public void SetDestination(Vector3 pos) {
     if (!unitBrain.State.Equals("Retreating"))
-      unitBrain.State = "Moving";
-    navAgent.SetDestination(pos);
+      unitBrain.MoveTo(pos);
   }
 
   public void Push(Vector3 direction) {
@@ -156,7 +160,7 @@ public class UnitControl : MonoBehaviour {
       unitBrain.AttackTarget(attacker);
     }
   }
-
+  
   void Die() {
     unitBrain.State = "Retreating";
   }

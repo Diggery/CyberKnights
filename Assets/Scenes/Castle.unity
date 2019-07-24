@@ -2650,7 +2650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamName: Player
-  formationType: 2
+  formationType: 1
   unitsInCluster: 32
 --- !u!4 &2104974813
 Transform:

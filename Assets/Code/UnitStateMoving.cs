@@ -20,8 +20,11 @@ public class UnitStateMoving : UnitState {
     if (navAgent.hasPath && navAgent.remainingDistance < 1) {
       brain.State = "Idle";
     }
+
+
     UnitControl newTarget = brain.ScanForTargets();
     if (newTarget) brain.AttackTarget(newTarget);
+
   }
 
   public override void StateExit() {
@@ -29,8 +32,10 @@ public class UnitStateMoving : UnitState {
   }
 
   private void OnCollisionEnter(Collision other) {
+    Debug.Log("Contact!");
     if (isActive && other.transform.tag.Equals(brain.EnemyTag)) {
       brain.AttackTarget(other.gameObject.GetComponent<UnitControl>());
+
     }
   }
 }

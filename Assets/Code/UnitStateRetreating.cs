@@ -16,16 +16,13 @@ public class UnitStateRetreating : UnitState {
     gameObject.layer = gameObject.tag.Equals("Friend") ?
       LayerMask.NameToLayer("FriendRetreating") :
       LayerMask.NameToLayer("EnemyRetreating");
-
     navAgent.radius = 0.1f;
-
   }
 
   public override void StateUpdate() {
     base.StateUpdate();
     if (!retreating && !unitControl.InAttackState) {
-      unitControl.SetDestination(brain.ClusterHome);
-
+      brain.Retreat();
       retreating = true;
     }
   }
@@ -33,7 +30,6 @@ public class UnitStateRetreating : UnitState {
   public override void StateExit() {
     base.StateExit();
     navAgent.radius = unitControl.NavRadius;
-
+    retreating = false;
   }
-
 }

@@ -4,12 +4,16 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class ClusterControl : MonoBehaviour {
-  public string teamName = "Player";
-  public InputControl.Formation formationType = InputControl.Formation.Mob;
   GameManager gameManager;
+  public string teamName = "Player";
+
+  public InputControl.Formation formationType = InputControl.Formation.Mob;
+  Selector currentSelector;
+
   public int unitsInCluster = 50;
   List<UnitControl> units = new List<UnitControl>();
-  Selector currentSelector;
+  public List<UnitControl> Units { get { return units; } }
+
   Vector3 homePos;
   public Vector3 HomePos {
     get { return homePos; }
@@ -28,6 +32,7 @@ public class ClusterControl : MonoBehaviour {
   }
 
   int unitTicker = 0;
+
   private void Update() {
     unitTicker = (unitTicker + 1) % units.Count;
     units[unitTicker].UpdateBrain();
@@ -89,5 +94,14 @@ public class ClusterControl : MonoBehaviour {
       flockVector += offset;
     }
     return flockVector.normalized;
+  }
+
+  public void AttackCluster(ClusterControl targetCluster) {
+
+    for (int i = 0; i < units.Count; i++) {
+      if (units[i].Brain.State.Equals("Idle"))
+        units[i].Brain.AttackTarget(targetCluster.Units[i % targetCluster.Units.Count], true);
+    }
+
   }
 }

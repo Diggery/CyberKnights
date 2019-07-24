@@ -9,6 +9,10 @@ public class UnitBrain : MonoBehaviour {
   NavMeshAgent navAgent;
   UnitControl currentTarget;
 
+  bool Disciplined { get; set; }
+  bool HoldTheLine { get; set; }
+  bool WorksTogether { get; set; }
+
   string friendlyTag = "Friend";
   public string FriendlyTag {
     get { return friendlyTag; }
@@ -27,7 +31,7 @@ public class UnitBrain : MonoBehaviour {
   public float DistanceToTarget {
     get {
       if (!currentTarget) return -1;
-      return (currentTarget.transform.position  - transform.position).sqrMagnitude;
+      return (currentTarget.transform.position - transform.position).sqrMagnitude;
     }
   }
   float visualRange = 15.0f;
@@ -82,6 +86,9 @@ public class UnitBrain : MonoBehaviour {
     AddState(gameObject.AddComponent<UnitStateChasing>());
     AddState(gameObject.AddComponent<UnitStateRetreating>());
 
+    HoldTheLine = true;
+    WorksTogether = true;
+
     State = "Idle";
   }
 
@@ -102,6 +109,11 @@ public class UnitBrain : MonoBehaviour {
   }
 
   public UnitControl ScanForTargets(UnitControl excludeThisGuy) {
+    if ((Disciplined || HoldTheLine) && (State.Equals("Moving") || State.Equals("Chasing"))) return null;
+    if (HoldTheLine && State.Equals("Idle")) return null;
+    Debug.Log(State.Equals("Idle"));
+    Debug.Log(" not opting out: " + State);
+
     GameObject[] possibleTargets = GameObject.FindGameObjectsWithTag(enemyTag);
     LayerMask terrainMask = LayerMask.GetMask("Terrain");
     float closestDistance = Mathf.Infinity;
@@ -144,12 +156,23 @@ public class UnitBrain : MonoBehaviour {
     }
   }
 
-  public void AttackTarget(UnitControl target) {
-    Debug.Log(gameObject.name + " should attack " + target.name);
+  public void MoveTo(Vector3 movePos) {
+    State = "Moving";
+    navAgent.SetDestination(movePos);
+  }
+
+  public void Retreat() {
+    navAgent.SetDestination(ClusterHome);
+  }
+
+  public void AttackTarget(UnitControl target, bool forced = false) {
+
+    if (!forced && WorksTogether) unitControl.Cluster.AttackCluster(target.Cluster);
+
     if (!CanAttack) {
       return;
     }
-    
+
     if (target == CurrentTarget) {
       if (State == "Chasing" || State == "Attacking") {
         return;
@@ -158,7 +181,6 @@ public class UnitBrain : MonoBehaviour {
 
     CurrentTarget = target;
     float distance = DistanceToTarget;
-
     if (distance < AttackRange) {
       State = "Attacking";
     } else {
