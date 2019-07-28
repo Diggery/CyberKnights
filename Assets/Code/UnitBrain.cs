@@ -47,6 +47,8 @@ public class UnitBrain : MonoBehaviour {
   public Vector3 ClusterHome {
     get { return unitControl.Cluster.HomePos; }
   }
+  public Vector3 ClusterPos { get; set; }
+
   public bool CanAttack {
     get {
       return !State.Equals("Retreating");
@@ -86,9 +88,6 @@ public class UnitBrain : MonoBehaviour {
     AddState(gameObject.AddComponent<UnitStateChasing>());
     AddState(gameObject.AddComponent<UnitStateRetreating>());
 
-    HoldTheLine = true;
-    WorksTogether = true;
-
     State = "Idle";
   }
 
@@ -98,9 +97,6 @@ public class UnitBrain : MonoBehaviour {
   }
 
   public void UpdateBrain() {
-    if (CurrentTarget)
-      Debug.DrawLine(transform.position, CurrentTarget.transform.position, Color.red, 1.0f);
-
     currentState.StateUpdate();
   }
 
@@ -111,8 +107,6 @@ public class UnitBrain : MonoBehaviour {
   public UnitControl ScanForTargets(UnitControl excludeThisGuy) {
     if ((Disciplined || HoldTheLine) && (State.Equals("Moving") || State.Equals("Chasing"))) return null;
     if (HoldTheLine && State.Equals("Idle")) return null;
-    Debug.Log(State.Equals("Idle"));
-    Debug.Log(" not opting out: " + State);
 
     GameObject[] possibleTargets = GameObject.FindGameObjectsWithTag(enemyTag);
     LayerMask terrainMask = LayerMask.GetMask("Terrain");
@@ -163,6 +157,15 @@ public class UnitBrain : MonoBehaviour {
 
   public void Retreat() {
     navAgent.SetDestination(ClusterHome);
+  }
+
+  public void Attacked(UnitControl attacker, string type) {
+    if (type.Equals("Melee") && CurrentTarget != attacker) {
+      AttackTarget(attacker);
+    }
+    if (Disciplined && Vector3.Distance(transform.position, ClusterPos) > VisualRange) {
+        MoveTo(ClusterPos);
+    }
   }
 
   public void AttackTarget(UnitControl target, bool forced = false) {

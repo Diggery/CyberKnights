@@ -151,13 +151,10 @@ public class UnitControl : MonoBehaviour {
   }
 
   public void TakeDamage(float amount, UnitControl attacker, string type) {
+    brain.Attacked(attacker, type);
     hitPoints -= amount;
     if (hitPoints < 0) {
       Die();
-    }
-
-    if (type.Equals("Melee") && brain.CurrentTarget != attacker) {
-      brain.AttackTarget(attacker);
     }
   }
 

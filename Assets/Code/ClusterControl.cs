@@ -48,16 +48,19 @@ public class ClusterControl : MonoBehaviour {
   }
 
   public void Command(Vector3 start, Vector3 end) {
+    currentSelector.PlacementComplete(start, end);
     Vector3[] newPositions = currentSelector.GeneratePositions(units.Count, start, end);
     Vector3 centerPos = Vector3.Lerp(start, end, 0.5f);
 
     for (int i = 0; i < newPositions.Length; i++) {
-      units[i].SetDestination(newPositions[i]);
+      units[i].Brain.ClusterPos = newPositions[i];
+      units[i].Brain.MoveTo(newPositions[i]);
     }
 
     transform.position = currentSelector.transform.position;
     transform.rotation = currentSelector.transform.rotation;
   }
+
   public void FlipFormation() {
     currentSelector.Flip();
   }

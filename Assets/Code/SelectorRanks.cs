@@ -18,8 +18,11 @@ public class SelectorRanks : Selector {
   void Update() {
   }
   public override void Place(Vector3 start, Vector3 end) {
+    gameObject.SetActive(true);
+
     base.Place(start, end);
 
+    float width = Vector3.Distance(start, end);
     Vector3 StartPos = flipped ? end : start;
     Vector3 endPos = flipped ? start : end;
     Vector3 centerPos = Vector3.Lerp(StartPos, endPos, 0.5f);
@@ -36,7 +39,6 @@ public class SelectorRanks : Selector {
 
     transform.position = centerPos;
     transform.rotation = Quaternion.LookRotation(forwardDir, Vector3.up);
-    float width = Vector3.Distance(StartPos, endPos);
 
     linePositions[0] = new Vector3((width / 2) + 1, 1, 0);
     linePositions[1] = new Vector3(width / 2, 0, 0);
@@ -47,9 +49,13 @@ public class SelectorRanks : Selector {
     linePositions[6] = new Vector3((-width / 2) - 1, 1, 0);
     line.SetPositions(linePositions);
   }
-
-
-
+  public override void PlacementComplete(Vector3 startPos, Vector3 endPos) {
+    float width = Vector3.Distance(startPos, endPos);
+    if (width < MinRankWidth * rankOffset) {
+      gameObject.SetActive(false);
+    }
+  }
+  
   public override Vector3[] GeneratePositions(int unitCount, Vector3 startPos, Vector3 endPos) {
     List<Vector3> positions = new List<Vector3>();
     Vector3 movePos = Vector3.Lerp(startPos, endPos, 0.5f);

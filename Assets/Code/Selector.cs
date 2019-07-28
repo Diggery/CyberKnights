@@ -9,6 +9,7 @@ public class Selector : MonoBehaviour {
   public bool Flipped {
     get { return flipped; }
   }
+
   public virtual Selector Init() {
     Setup();
     return this;
@@ -19,6 +20,10 @@ public class Selector : MonoBehaviour {
   }
 
   public virtual void Place(Vector3 start, Vector3 end) {
+  }
+
+  public virtual void PlacementComplete(Vector3 startPos, Vector3 endPos) {
+
   }
 
   public virtual void Flip() {
