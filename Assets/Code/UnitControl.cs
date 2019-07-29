@@ -28,7 +28,7 @@ public class UnitControl : MonoBehaviour {
     get { return chaseSpeed; }
   }
 
-  float rotationSpeed = 180.0f;
+  float rotationSpeed = 45.0f;
   public float RotationSpeed {
     get { return rotationSpeed; }
   }
@@ -151,6 +151,9 @@ public class UnitControl : MonoBehaviour {
     switch (type) {
       case "MeleeAttack":
         DamageTarget("Melee");
+        break;
+      case "MissileAttack":
+        DamageTarget("Missile");
         break;
       default:
         Debug.Log("Can't handle event type " + type);

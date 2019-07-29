@@ -34,10 +34,12 @@ public class UnitStateAttacking : UnitState {
       return;
     }
     animator.SetFloat("AttackSpeed", attackSpeed - (Random.value * 0.25f));
-
     animator.SetBool("InAttackRange", brain.InMeleeRange);
 
-    if (brain.InMeleeRange) {
+    bool inRange = brain.InMeleeRange || (unitControl.hasMissileWeapon && brain.InMissileRange);
+    animator.SetBool("UseMissileAttack", !brain.InMeleeRange);
+
+    if (inRange) {
       if (unitControl.ReadyToAttack) {
         Vector3 directionToEnemy = (brain.CurrentTarget.transform.position - transform.position).normalized;
         Quaternion rotationToEnemy = Quaternion.LookRotation(directionToEnemy, Vector3.up);

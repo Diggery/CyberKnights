@@ -12,6 +12,7 @@ public class UnitBrain : MonoBehaviour {
   bool Disciplined { get; set; }
   bool HoldTheLine { get; set; }
   bool WorksTogether { get; set; }
+  bool StrikesFromRange { get; set; }
 
   string friendlyTag = "Friend";
   public string FriendlyTag {
@@ -43,9 +44,9 @@ public class UnitBrain : MonoBehaviour {
     get { return DistanceToTarget < visualRange; }
   }
   public bool InMeleeRange {
-    get { 
-      return DistanceToTarget < meleeRange; 
-      }
+    get {
+      return DistanceToTarget < meleeRange;
+    }
   }
   public bool InMissileRange {
     get { return DistanceToTarget < missileRange; }
@@ -58,7 +59,13 @@ public class UnitBrain : MonoBehaviour {
 
   public bool CanAttack {
     get {
-      return !State.Equals("Retreating");
+      if (unitControl.IsDead)
+        return false;
+
+      if (State.Equals("Retreating"))
+        return false;
+
+      return true;
     }
   }
 
@@ -187,11 +194,6 @@ public class UnitBrain : MonoBehaviour {
     }
 
     CurrentTarget = target;
-    float distance = DistanceToTarget;
-    if (distance < meleeRange) {
-      State = "Attacking";
-    } else {
-      State = "Chasing";
-    }
+    State = "Attacking";
   }
 }

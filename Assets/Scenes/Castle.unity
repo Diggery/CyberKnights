@@ -2654,10 +2654,8 @@ MonoBehaviour:
   teamName: Player
   formationType: 1
   clusterMakeup:
-  - type: Warrior
-    amount: 5
   - type: Archer
-    amount: 5
+    amount: 1
 --- !u!4 &2104974813
 Transform:
   m_ObjectHideFlags: 0
