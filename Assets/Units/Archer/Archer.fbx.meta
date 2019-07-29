@@ -30,6 +30,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths:
     - Archer:Archer_Skel/Archer:Hips_Skel/Archer:Torso_Skel/Archer:LeftShoulder_Skel/Archer:LeftUpperArm_Skel/Archer:LeftLowerArm_Skel/Archer:LeftHand_Skel
+    - Archer:Archer_Skel/Archer:Hips_Skel/Archer:Torso_Skel/Archer:LeftShoulder_Skel/Archer:LeftUpperArm_Skel/Archer:LeftLowerArm_Skel/Archer:Launch_Point
     extraUserProperties: []
     clipAnimations: []
     isReadable: 0

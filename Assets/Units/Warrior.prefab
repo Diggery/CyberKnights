@@ -120,15 +120,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2277214586008411890}
-  m_LocalRotation: {x: -0, y: -0.9725893, z: -0, w: -0.23252971}
-  m_LocalPosition: {x: 5.343, y: 0, z: 1.828}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8331680004269840147}
   - {fileID: 2476872051457746770}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -206.892, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &5942842721754346006
 Animator:
   serializedVersion: 3
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visualRange: 15
   meleeRange: 2
-  hasMissileWeapon: 0
+  missilePrefab: none
   missileRange: 30
   hitPoints: 5
 --- !u!1 &2563696209521505572

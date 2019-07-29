@@ -17,16 +17,16 @@ public class SelectorRanks : Selector {
   }
   void Update() {
   }
-  public override void Place(Vector3 start, Vector3 end) {
+  public override void Place(Vector3 start, Vector3 end, bool useMinSize = false) {
     gameObject.SetActive(true);
 
     base.Place(start, end);
-
-    float width = Vector3.Distance(start, end);
-    Vector3 StartPos = flipped ? end : start;
+    float minSize = (useMinSize ? MinRankWidth : 1 ) * rankOffset;
+    float width = Mathf.Max(Vector3.Distance(start, end), minSize);
+    Vector3 startPos = flipped ? end : start;
     Vector3 endPos = flipped ? start : end;
-    Vector3 centerPos = Vector3.Lerp(StartPos, endPos, 0.5f);
-    Vector3 offset = (StartPos - endPos);
+    Vector3 centerPos = Vector3.Lerp(startPos, endPos, 0.5f);
+    Vector3 offset = (startPos - endPos);
     Vector3 forwardDir = Vector3.Cross(offset.normalized, Vector3.up);
 
     if (offset.magnitude < 0.1f) {
@@ -47,15 +47,16 @@ public class SelectorRanks : Selector {
     linePositions[4] = new Vector3(-0.5f, 0, 0);
     linePositions[5] = new Vector3(-width / 2, 0, 0);
     linePositions[6] = new Vector3((-width / 2) - 1, 1, 0);
+
     line.SetPositions(linePositions);
   }
   public override void PlacementComplete(Vector3 startPos, Vector3 endPos) {
-    float width = Vector3.Distance(startPos, endPos);
-    if (width < MinRankWidth * rankOffset) {
-      gameObject.SetActive(false);
-    }
+    Place(startPos, endPos, true);
+    // if (width < MinRankWidth * rankOffset) {
+    //   gameObject.SetActive(false);
+    // }
   }
-  
+
   public override Vector3[] GeneratePositions(int unitCount, Vector3 startPos, Vector3 endPos) {
     List<Vector3> positions = new List<Vector3>();
     Vector3 movePos = Vector3.Lerp(startPos, endPos, 0.5f);

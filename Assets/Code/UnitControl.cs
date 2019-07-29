@@ -27,8 +27,7 @@ public class UnitControl : MonoBehaviour {
   public float ChaseSpeed {
     get { return chaseSpeed; }
   }
-
-  float rotationSpeed = 45.0f;
+  float rotationSpeed = 270.0f;
   public float RotationSpeed {
     get { return rotationSpeed; }
   }
@@ -40,7 +39,8 @@ public class UnitControl : MonoBehaviour {
     get { return missilePrefab != "none"; }
   }
   public string missilePrefab = "none";
-  public float missileRange = 30.0f;
+  Transform launchPoint;
+  public Vector2 missileRange = new Vector2(5.0f, 30.0f);
 
   public float hitPoints = 5;
   public float HitPoints {
@@ -95,7 +95,6 @@ public class UnitControl : MonoBehaviour {
     navAgent.angularSpeed = rotationSpeed;
     navAgent.stoppingDistance = 0.35f;
 
-
     animator = gameObject.GetComponent<Animator>();
     rbody = gameObject.AddComponent<Rigidbody>();
     rbody.mass = 100;
@@ -117,6 +116,9 @@ public class UnitControl : MonoBehaviour {
     }
 
     lastPosition = transform.position;
+
+    foreach (Transform child in transform)
+      if (child.name.Contains("Launch_Point")) launchPoint = child;
 
     brain = gameObject.AddComponent<UnitBrain>();
     brain.Init();
@@ -176,9 +178,13 @@ public class UnitControl : MonoBehaviour {
   void LaunchMissile() {
     GameObject missile = GameObject.Instantiate(
       GameManager.Instance.GetPrefab(missilePrefab),
-      transform.position,
-      transform.rotation
+      launchPoint.position,
+      launchPoint.rotation
     );
+    missile.GetComponent<Missile>().Init(this);
+    Vector3 force = Utils.BallisticVel(missile.transform.position, brain.CurrentTarget.transform.position);
+    Rigidbody missileRB = missile.GetComponent<Rigidbody>();
+    missileRB.AddForce(force, ForceMode.VelocityChange);
   }
 
   public void TakeDamage(float amount, UnitControl attacker, string type) {

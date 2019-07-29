@@ -19,7 +19,7 @@ public class Selector : MonoBehaviour {
 
   }
 
-  public virtual void Place(Vector3 start, Vector3 end) {
+  public virtual void Place(Vector3 start, Vector3 end, bool useMinSize = false) {
   }
 
   public virtual void PlacementComplete(Vector3 startPos, Vector3 endPos) {

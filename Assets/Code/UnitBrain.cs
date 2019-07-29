@@ -38,18 +38,19 @@ public class UnitBrain : MonoBehaviour {
 
   float visualRange;
   float meleeRange;
-  float missileRange;
+  Vector2 missileRange;
 
   public bool InVisualRange {
     get { return DistanceToTarget < visualRange; }
   }
   public bool InMeleeRange {
-    get {
-      return DistanceToTarget < meleeRange;
-    }
+    get { return DistanceToTarget < meleeRange; }
   }
   public bool InMissileRange {
-    get { return DistanceToTarget < missileRange; }
+    get {
+      if (!unitControl.HasMissileWeapon) return false;
+      return DistanceToTarget > missileRange.x && DistanceToTarget < missileRange.y; 
+      }
   }
 
   public Vector3 ClusterHome {
@@ -92,7 +93,8 @@ public class UnitBrain : MonoBehaviour {
 
     visualRange = unitControl.visualRange * unitControl.visualRange;
     meleeRange = unitControl.meleeRange * unitControl.meleeRange;
-    missileRange = unitControl.missileRange * unitControl.missileRange;
+    missileRange.x = unitControl.missileRange.x * unitControl.missileRange.x;
+    missileRange.y = unitControl.missileRange.y * unitControl.missileRange.y;
 
     friendlyTag = gameObject.tag.Equals("Friend") ? "Friend" : "Enemy";
     enemyTag = gameObject.tag.Equals("Friend") ? "Enemy" : "Friend";
@@ -173,8 +175,9 @@ public class UnitBrain : MonoBehaviour {
   public void Attacked(UnitControl attacker, string type) {
     if (type.Equals("Melee") && CurrentTarget != attacker) {
       AttackTarget(attacker);
-    }
-    if (Disciplined && Vector3.Distance(transform.position, ClusterPos) > visualRange) {
+    } else if (type.Equals("Missile")) {
+      AttackTarget(attacker);
+    } else if (Disciplined && Vector3.Distance(transform.position, ClusterPos) > visualRange) {
       MoveTo(ClusterPos);
     }
   }

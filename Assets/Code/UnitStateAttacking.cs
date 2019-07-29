@@ -34,10 +34,10 @@ public class UnitStateAttacking : UnitState {
       return;
     }
     animator.SetFloat("AttackSpeed", attackSpeed - (Random.value * 0.25f));
-    animator.SetBool("InAttackRange", brain.InMeleeRange);
+    animator.SetBool("InMeleeRange", brain.InMeleeRange);
+    animator.SetBool("InMissileRange", brain.InMissileRange);
 
     bool inRange = brain.InMeleeRange || (unitControl.HasMissileWeapon && brain.InMissileRange);
-    animator.SetBool("UseMissileAttack", !brain.InMeleeRange);
 
     if (inRange) {
       if (unitControl.ReadyToAttack) {

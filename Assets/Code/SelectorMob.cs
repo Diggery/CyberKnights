@@ -20,7 +20,7 @@ public class SelectorMob : Selector {
 
   void Update() {
   }
-  public override void Place(Vector3 start, Vector3 end) {
+  public override void Place(Vector3 start, Vector3 end, bool useMinSize = false) {
 
     base.Place(start, end);
     Vector3 offset = (start - end);

@@ -134,14 +134,14 @@ ModelImporter:
       events:
       - time: 0.4022663
         functionName: AnimEvent
-        data: MissleAttack
+        data: MissileAttack
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.6572238
         functionName: AnimEvent
-        data: MissleAttack
+        data: MissileAttack
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0

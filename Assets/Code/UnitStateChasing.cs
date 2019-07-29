@@ -9,7 +9,6 @@ public class UnitStateChasing : UnitState {
   public override void StateInit() {
     base.StateInit();
     stateName = "Chasing";
-
   }
 
   public override void StateEnter() {
@@ -48,7 +47,7 @@ public class UnitStateChasing : UnitState {
     }
     navAgent.velocity = Vector3.zero;
 
-    if (brain.InMeleeRange) {
+    if (brain.InMeleeRange || brain.InMissileRange) {
       animator.SetTrigger("Attack");
       brain.State = "Attacking";
     } else {
