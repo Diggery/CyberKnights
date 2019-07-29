@@ -1,6 +1,6 @@
 //Maya ASCII 2018 scene
 //Name: Archer_Moving.ma
-//Last modified: Sun, Jul 28, 2019 07:26:35 PM
+//Last modified: Sun, Jul 28, 2019 10:15:45 PM
 //Codeset: UTF-8
 file -rdi 1 -ns "Archer" -rfn "ArcherRN" -op "v=0;" -typ "mayaAscii" "/Users/briancollins/Unity/CyberKnights/ArtSource/Archer/Archer.ma";
 file -r -ns "Archer" -dr 1 -rfn "ArcherRN" -op "v=0;" -typ "mayaAscii" "/Users/briancollins/Unity/CyberKnights/ArtSource/Archer/Archer.ma";
