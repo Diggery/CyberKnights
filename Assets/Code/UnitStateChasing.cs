@@ -48,8 +48,10 @@ public class UnitStateChasing : UnitState {
     }
     navAgent.velocity = Vector3.zero;
 
-    float distanceToTarget = (brain.CurrentTarget.transform.position - transform.position).sqrMagnitude;
-    if (distanceToTarget > brain.AttackRange) {
+    if (brain.InMeleeRange) {
+      animator.SetTrigger("Attack");
+      brain.State = "Attacking";
+    } else {
       Vector3 directionToEnemy = (brain.CurrentTarget.transform.position - transform.position).normalized;
       rbody.AddForce(directionToEnemy * unitControl.ChaseSpeed * 1000, ForceMode.Force);
       Quaternion rotationToEnemy = Quaternion.LookRotation(directionToEnemy, Vector3.up);
@@ -57,10 +59,6 @@ public class UnitStateChasing : UnitState {
         transform.rotation,
         rotationToEnemy,
         unitControl.RotationSpeed);
-    } else {
-      Debug.Log(distanceToTarget + " is greater than " + brain.AttackRange);
-      animator.SetTrigger("Attack");
-      brain.State = "Attacking";
     }
   }
 

@@ -30,20 +30,27 @@ public class UnitBrain : MonoBehaviour {
 
   public float DistanceToTarget {
     get {
-      if (!currentTarget) return -1;
+      if (!currentTarget) return Mathf.Infinity;
       return (currentTarget.transform.position - transform.position).sqrMagnitude;
     }
   }
-  float visualRange = 15.0f;
-  public float VisualRange {
-    get { return visualRange; }
-    set { visualRange = value; }
+
+  float visualRange;
+  float meleeRange;
+  float missileRange;
+
+  public bool InVisualRange {
+    get { return DistanceToTarget < visualRange; }
   }
-  float attackRange = 2.0f;
-  public float AttackRange {
-    get { return attackRange; }
-    set { attackRange = value; }
+  public bool InMeleeRange {
+    get { 
+      return DistanceToTarget < meleeRange; 
+      }
   }
+  public bool InMissileRange {
+    get { return DistanceToTarget < missileRange; }
+  }
+
   public Vector3 ClusterHome {
     get { return unitControl.Cluster.HomePos; }
   }
@@ -73,11 +80,12 @@ public class UnitBrain : MonoBehaviour {
   }
 
   public void Init() {
-    visualRange *= visualRange;  // power of 2 for square distance
-    attackRange *= attackRange;  // power of 2 for square distance
-
     unitControl = GetComponent<UnitControl>();
     navAgent = GetComponent<NavMeshAgent>();
+
+    visualRange = unitControl.visualRange * unitControl.visualRange;
+    meleeRange = unitControl.meleeRange * unitControl.meleeRange;
+    missileRange = unitControl.missileRange * unitControl.missileRange;
 
     friendlyTag = gameObject.tag.Equals("Friend") ? "Friend" : "Enemy";
     enemyTag = gameObject.tag.Equals("Friend") ? "Enemy" : "Friend";
@@ -136,10 +144,6 @@ public class UnitBrain : MonoBehaviour {
       if (!Physics.Raycast(ray, targetDistance, terrainMask)) {
         closestTarget = targetControl;
         closestDistance = targetDistance;
-        Debug.Log("Spotted " + target.name);
-      } else {
-        Debug.Log("Missed " + target.name);
-
       }
     }
 
@@ -163,8 +167,8 @@ public class UnitBrain : MonoBehaviour {
     if (type.Equals("Melee") && CurrentTarget != attacker) {
       AttackTarget(attacker);
     }
-    if (Disciplined && Vector3.Distance(transform.position, ClusterPos) > VisualRange) {
-        MoveTo(ClusterPos);
+    if (Disciplined && Vector3.Distance(transform.position, ClusterPos) > visualRange) {
+      MoveTo(ClusterPos);
     }
   }
 
@@ -184,7 +188,7 @@ public class UnitBrain : MonoBehaviour {
 
     CurrentTarget = target;
     float distance = DistanceToTarget;
-    if (distance < AttackRange) {
+    if (distance < meleeRange) {
       State = "Attacking";
     } else {
       State = "Chasing";

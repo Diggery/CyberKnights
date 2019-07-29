@@ -32,14 +32,25 @@ public class UnitControl : MonoBehaviour {
   public float RotationSpeed {
     get { return rotationSpeed; }
   }
-  float hitPoints = 5;
+
+  public float visualRange = 15.0f;
+
+  public float meleeRange = 2.0f;
+  public bool hasMissileWeapon = false;
+  public float missileRange = 30.0f;
+
+  public float hitPoints = 5;
+  public float HitPoints {
+    get { return hitPoints; }
+  }
+
   bool isDead;
 
   CapsuleCollider collision;
 
   UnitBrain brain;
-  public UnitBrain Brain { 
-    get{ return brain; }
+  public UnitBrain Brain {
+    get { return brain; }
   }
 
   Animator animator;
@@ -81,10 +92,13 @@ public class UnitControl : MonoBehaviour {
     navAgent.angularSpeed = rotationSpeed;
     navAgent.stoppingDistance = 0.35f;
 
-    brain = gameObject.AddComponent<UnitBrain>();
-    brain.Init();
+
     animator = gameObject.GetComponent<Animator>();
-    rbody = gameObject.GetComponent<Rigidbody>();
+    rbody = gameObject.AddComponent<Rigidbody>();
+    rbody.mass = 100;
+    rbody.drag = 10;
+    rbody.constraints = RigidbodyConstraints.FreezeRotation;
+
     collision = gameObject.AddComponent<CapsuleCollider>();
     collision.radius = 0.35f;
     collision.height = 1.8f;
@@ -100,6 +114,9 @@ public class UnitControl : MonoBehaviour {
     }
 
     lastPosition = transform.position;
+
+    brain = gameObject.AddComponent<UnitBrain>();
+    brain.Init();
   }
 
   private void Update() {

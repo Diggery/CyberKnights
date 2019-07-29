@@ -15,7 +15,6 @@ public class UnitStateAttacking : UnitState {
 
   public override void StateEnter() {
     base.StateEnter();
-    Debug.Log("Entering Attacking");
     navAgent.isStopped = true;
     navAgent.ResetPath();
     animator.SetTrigger("Attack");
@@ -36,12 +35,9 @@ public class UnitStateAttacking : UnitState {
     }
     animator.SetFloat("AttackSpeed", attackSpeed - (Random.value * 0.25f));
 
-    float distance = brain.DistanceToTarget;
+    animator.SetBool("InAttackRange", brain.InMeleeRange);
 
-    bool inAttackRange = distance < brain.AttackRange;
-    animator.SetBool("InAttackRange", inAttackRange);
-
-    if (inAttackRange) {
+    if (brain.InMeleeRange) {
       if (unitControl.ReadyToAttack) {
         Vector3 directionToEnemy = (brain.CurrentTarget.transform.position - transform.position).normalized;
         Quaternion rotationToEnemy = Quaternion.LookRotation(directionToEnemy, Vector3.up);
