@@ -10,7 +10,10 @@ public class ClusterControl : MonoBehaviour {
   public InputControl.Formation formationType = InputControl.Formation.Mob;
   Selector currentSelector;
 
-  public int unitsInCluster = 50;
+  public int UnitsInCluster {
+    get { return units.Count; }
+  }
+
   List<UnitControl> units = new List<UnitControl>();
   public List<UnitControl> Units { get { return units; } }
 
@@ -21,6 +24,18 @@ public class ClusterControl : MonoBehaviour {
 
   Transform marker;
   Transform line;
+
+  [System.Serializable]
+  public class ClusterSegment {
+    public ClusterSegment(string type, int amount) {
+      this.type = type;
+      this.amount = amount;
+    }
+    public string type;
+    public int amount;
+  }
+
+  public ClusterSegment[] clusterMakeup;
 
   private void Start() {
     gameManager = GameManager.Instance;
@@ -48,38 +63,53 @@ public class ClusterControl : MonoBehaviour {
   }
 
   public void Command(Vector3 start, Vector3 end) {
+    currentSelector.PlacementComplete(start, end);
     Vector3[] newPositions = currentSelector.GeneratePositions(units.Count, start, end);
     Vector3 centerPos = Vector3.Lerp(start, end, 0.5f);
 
     for (int i = 0; i < newPositions.Length; i++) {
-      units[i].SetDestination(newPositions[i]);
+      units[i].Brain.ClusterPos = newPositions[i];
+      units[i].Brain.MoveTo(newPositions[i]);
     }
 
     transform.position = currentSelector.transform.position;
     transform.rotation = currentSelector.transform.rotation;
   }
+
   public void FlipFormation() {
     currentSelector.Flip();
   }
 
   IEnumerator CreateUnits() {
     int unitNumber = 0;
-    for (int y = 0; y < Mathf.CeilToInt((float)unitsInCluster / 6); y++) {
-      for (int x = 0; x < 6; x++) {
-        if (unitNumber >= unitsInCluster)
-          break;
+
+    bool allDone = false;
+    int currentSegment = 0;
+    int segmentCounter = 0;
+    for (int y = 0; y < 8; y++) {
+      if (allDone) break;
+      for (int x = 0; x < 8; x++) {
+        if (segmentCounter == clusterMakeup[currentSegment].amount) {
+          currentSegment++;
+          if (currentSegment == clusterMakeup.Length) {
+            allDone = true;
+            break;
+          }
+          segmentCounter = 0;
+        }
+        segmentCounter++;
+
+        string unitType = clusterMakeup[currentSegment].type;
         Vector3 offset = new Vector3(x * 1.5f, 0, y * 1.5f);
-        GameObject newUnit = GameObject.Instantiate(gameManager.GetUnitPrefab("Warrior"), transform.position + offset, transform.rotation);
+        GameObject newUnit = GameObject.Instantiate(gameManager.GetUnitPrefab(unitType), transform.position + offset, transform.rotation);
         UnitControl newUnitControl = newUnit.GetComponent<UnitControl>();
         newUnitControl.TeamName = teamName;
         newUnitControl.Cluster = this;
-        newUnit.name = gameObject.tag + "-Warrior-" + unitNumber;
+        newUnit.name = gameObject.tag + "-" + unitType + "-" + unitNumber;
         newUnit.tag = gameObject.tag;
         newUnit.layer = LayerMask.NameToLayer(gameObject.tag);
         units.Add(newUnitControl);
-        unitNumber++;
         yield return new WaitForEndOfFrame();
-
       }
     }
     yield return new WaitForSeconds(0.1f);
@@ -102,6 +132,5 @@ public class ClusterControl : MonoBehaviour {
       if (units[i].Brain.State.Equals("Idle"))
         units[i].Brain.AttackTarget(targetCluster.Units[i % targetCluster.Units.Count], true);
     }
-
   }
 }

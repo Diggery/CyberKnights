@@ -422,7 +422,6 @@ GameObject:
   - component: {fileID: 1089492243148820799}
   - component: {fileID: 7031425983659473989}
   - component: {fileID: 8696060737280985407}
-  - component: {fileID: 7501750273907038687}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Untagged
@@ -477,22 +476,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185a61bf24b6881469d3cad16052f846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &7501750273907038687
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4126984686192501548}
-  serializedVersion: 2
-  m_Mass: 50
-  m_Drag: 5
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
+  visualRange: 20
+  meleeRange: 2
+  hasMissileWeapon: 0
+  missileRange: 30
+  hitPoints: 5
 --- !u!1 &4612455058292079466
 GameObject:
   m_ObjectHideFlags: 0

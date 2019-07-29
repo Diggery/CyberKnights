@@ -30,23 +30,32 @@ public class UnitBrain : MonoBehaviour {
 
   public float DistanceToTarget {
     get {
-      if (!currentTarget) return -1;
+      if (!currentTarget) return Mathf.Infinity;
       return (currentTarget.transform.position - transform.position).sqrMagnitude;
     }
   }
-  float visualRange = 15.0f;
-  public float VisualRange {
-    get { return visualRange; }
-    set { visualRange = value; }
+
+  float visualRange;
+  float meleeRange;
+  float missileRange;
+
+  public bool InVisualRange {
+    get { return DistanceToTarget < visualRange; }
   }
-  float attackRange = 2.0f;
-  public float AttackRange {
-    get { return attackRange; }
-    set { attackRange = value; }
+  public bool InMeleeRange {
+    get { 
+      return DistanceToTarget < meleeRange; 
+      }
   }
+  public bool InMissileRange {
+    get { return DistanceToTarget < missileRange; }
+  }
+
   public Vector3 ClusterHome {
     get { return unitControl.Cluster.HomePos; }
   }
+  public Vector3 ClusterPos { get; set; }
+
   public bool CanAttack {
     get {
       return !State.Equals("Retreating");
@@ -71,11 +80,12 @@ public class UnitBrain : MonoBehaviour {
   }
 
   public void Init() {
-    visualRange *= visualRange;  // power of 2 for square distance
-    attackRange *= attackRange;  // power of 2 for square distance
-
     unitControl = GetComponent<UnitControl>();
     navAgent = GetComponent<NavMeshAgent>();
+
+    visualRange = unitControl.visualRange * unitControl.visualRange;
+    meleeRange = unitControl.meleeRange * unitControl.meleeRange;
+    missileRange = unitControl.missileRange * unitControl.missileRange;
 
     friendlyTag = gameObject.tag.Equals("Friend") ? "Friend" : "Enemy";
     enemyTag = gameObject.tag.Equals("Friend") ? "Enemy" : "Friend";
@@ -86,9 +96,6 @@ public class UnitBrain : MonoBehaviour {
     AddState(gameObject.AddComponent<UnitStateChasing>());
     AddState(gameObject.AddComponent<UnitStateRetreating>());
 
-    HoldTheLine = true;
-    WorksTogether = true;
-
     State = "Idle";
   }
 
@@ -98,9 +105,6 @@ public class UnitBrain : MonoBehaviour {
   }
 
   public void UpdateBrain() {
-    if (CurrentTarget)
-      Debug.DrawLine(transform.position, CurrentTarget.transform.position, Color.red, 1.0f);
-
     currentState.StateUpdate();
   }
 
@@ -111,8 +115,6 @@ public class UnitBrain : MonoBehaviour {
   public UnitControl ScanForTargets(UnitControl excludeThisGuy) {
     if ((Disciplined || HoldTheLine) && (State.Equals("Moving") || State.Equals("Chasing"))) return null;
     if (HoldTheLine && State.Equals("Idle")) return null;
-    Debug.Log(State.Equals("Idle"));
-    Debug.Log(" not opting out: " + State);
 
     GameObject[] possibleTargets = GameObject.FindGameObjectsWithTag(enemyTag);
     LayerMask terrainMask = LayerMask.GetMask("Terrain");
@@ -142,10 +144,6 @@ public class UnitBrain : MonoBehaviour {
       if (!Physics.Raycast(ray, targetDistance, terrainMask)) {
         closestTarget = targetControl;
         closestDistance = targetDistance;
-        Debug.Log("Spotted " + target.name);
-      } else {
-        Debug.Log("Missed " + target.name);
-
       }
     }
 
@@ -165,6 +163,15 @@ public class UnitBrain : MonoBehaviour {
     navAgent.SetDestination(ClusterHome);
   }
 
+  public void Attacked(UnitControl attacker, string type) {
+    if (type.Equals("Melee") && CurrentTarget != attacker) {
+      AttackTarget(attacker);
+    }
+    if (Disciplined && Vector3.Distance(transform.position, ClusterPos) > visualRange) {
+      MoveTo(ClusterPos);
+    }
+  }
+
   public void AttackTarget(UnitControl target, bool forced = false) {
 
     if (!forced && WorksTogether) unitControl.Cluster.AttackCluster(target.Cluster);
@@ -181,7 +188,7 @@ public class UnitBrain : MonoBehaviour {
 
     CurrentTarget = target;
     float distance = DistanceToTarget;
-    if (distance < AttackRange) {
+    if (distance < meleeRange) {
       State = "Attacking";
     } else {
       State = "Chasing";
