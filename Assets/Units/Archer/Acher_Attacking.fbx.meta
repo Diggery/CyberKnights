@@ -184,7 +184,7 @@ ModelImporter:
       takeName: AttackIdle01
       internalID: -6012143202992775711
       firstFrame: 100
-      lastFrame: 130
+      lastFrame: 115
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -209,8 +209,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Attack01
-      takeName: Attack01
+      name: MissleAttack01_01
+      takeName: MissleAttack01_01
       internalID: -6934330906441383792
       firstFrame: 115
       lastFrame: 130
