@@ -36,7 +36,10 @@ public class UnitControl : MonoBehaviour {
   public float visualRange = 15.0f;
 
   public float meleeRange = 2.0f;
-  public bool hasMissileWeapon = false;
+  public bool HasMissileWeapon {
+    get { return missilePrefab != "none"; }
+  }
+  public string missilePrefab = "none";
   public float missileRange = 30.0f;
 
   public float hitPoints = 5;
@@ -153,7 +156,7 @@ public class UnitControl : MonoBehaviour {
         DamageTarget("Melee");
         break;
       case "MissileAttack":
-        DamageTarget("Missile");
+        LaunchMissile();
         break;
       default:
         Debug.Log("Can't handle event type " + type);
@@ -168,6 +171,14 @@ public class UnitControl : MonoBehaviour {
     }
     brain.CurrentTarget.TakeDamage(1, this, type);
     attackTimer = AttackCooldown;
+  }
+
+  void LaunchMissile() {
+    GameObject missile = GameObject.Instantiate(
+      GameManager.Instance.GetPrefab(missilePrefab),
+      transform.position,
+      transform.rotation
+    );
   }
 
   public void TakeDamage(float amount, UnitControl attacker, string type) {
