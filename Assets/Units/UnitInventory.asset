@@ -19,3 +19,5 @@ MonoBehaviour:
   - name: Archer
     prefab: {fileID: 4126984686192501548, guid: f3495f315dc784ce686a8cd893bbbbf3,
       type: 3}
+  - name: Spearbot
+    prefab: {fileID: 301212294255376253, guid: 77825578f47224896aa217b9335f84d5, type: 3}
