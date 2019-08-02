@@ -1,6 +1,6 @@
 //Maya ASCII 2018 scene
 //Name: Spearbot_Movement.ma
-//Last modified: Fri, Aug 02, 2019 03:47:59 PM
+//Last modified: Fri, Aug 02, 2019 03:50:25 PM
 //Codeset: UTF-8
 file -rdi 1 -ns "Spearbot" -rfn "SpearbotRN" -op "v=0;" -typ "mayaAscii" "/Users/briancollins/Unity/CyberKnights/ArtSource/Spearbot/Spearbot.ma";
 file -r -ns "Spearbot" -dr 1 -rfn "SpearbotRN" -op "v=0;" -typ "mayaAscii" "/Users/briancollins/Unity/CyberKnights/ArtSource/Spearbot/Spearbot.ma";
@@ -80,7 +80,7 @@ createNode camera -s -n "sideShape" -p "side";
 	setAttr ".o" yes;
 	setAttr ".ai_translator" -type "string" "orthographic";
 createNode fosterParent -n "SpearbotRNfosterParent1";
-	rename -uid "7E3D76CA-F145-B636-3C4D-75BCC4B3CBBF";
+	rename -uid "7CB81137-A24F-FB37-65B0-5DA2CB06FDA4";
 createNode parentConstraint -n "SpearBase_Control_parentConstraint1" -p "SpearbotRNfosterParent1";
 	rename -uid "E1FD7E97-0A4F-F151-29C4-A899D02D0C90";
 	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "RightHand_ControlW0" -dv 1 -min 0 
@@ -1554,7 +1554,7 @@ createNode script -n "uiConfigurationScriptNode";
 	setAttr ".st" 3;
 createNode script -n "sceneConfigurationScriptNode";
 	rename -uid "AF21B37B-8D40-99CD-69C7-9AA5546BE545";
-	setAttr ".b" -type "string" "playbackOptions -min 39 -max 52 -ast 0 -aet 200 ";
+	setAttr ".b" -type "string" "playbackOptions -min 10 -max 52 -ast 0 -aet 200 ";
 	setAttr ".st" 6;
 createNode gameFbxExporter -n "gameExporterPreset1";
 	rename -uid "7735FE08-5142-39F0-D95F-3AB744617FCC";

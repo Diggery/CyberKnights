@@ -2922,7 +2922,7 @@ MonoBehaviour:
   teamName: Player
   formationType: 1
   clusterMakeup:
-  - type: Archer
+  - type: Spearbot
     amount: 20
 --- !u!4 &2104974813
 Transform:
