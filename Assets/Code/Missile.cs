@@ -7,19 +7,21 @@ public class Missile : MonoBehaviour {
   UnitControl m_owner;
   public float damage = 1;
 
-  Rigidbody rigidbody;
-
+  Rigidbody rb;
+  bool hitSomething = false;
   public void Init(UnitControl owner) {
-    rigidbody = GetComponent<Rigidbody>();
+    rb = GetComponent<Rigidbody>();
     m_owner = owner;
   }
 
   private void Update() {
-      transform.forward =
-    Vector3.Slerp(transform.forward, rigidbody.velocity.normalized, Time.deltaTime * 5);
+    if (hitSomething) return;
+
+    transform.forward = Vector3.Slerp(transform.forward, rb.velocity.normalized, Time.deltaTime * 8);
   }
 
   private void OnCollisionEnter(Collision other) {
+    hitSomething = true;
     UnitControl control = other.gameObject.GetComponent<UnitControl>();
     if (control) {
       control.TakeDamage(damage, m_owner, "Missile");
