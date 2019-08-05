@@ -98,12 +98,13 @@ public class UnitBrain : MonoBehaviour {
   }
 
   public void Init() {
+
     unitControl = GetComponent<UnitControl>();
     navAgent = GetComponent<NavMeshAgent>();
 
     visualRange = unitControl.visualRange * unitControl.visualRange;
     meleeRange = unitControl.meleeRange * unitControl.meleeRange;
-    if (ReachOut) meleeRange *= 2;
+    if (ReachOut) meleeRange *= 3;
     missileRange.x = unitControl.missileRange.x * unitControl.missileRange.x;
     missileRange.y = unitControl.missileRange.y * unitControl.missileRange.y;
     chargeRange = unitControl.chargeRange * unitControl.chargeRange;
@@ -116,6 +117,8 @@ public class UnitBrain : MonoBehaviour {
     AddState(gameObject.AddComponent<UnitStateAttacking>());
     AddState(gameObject.AddComponent<UnitStateChasing>());
     AddState(gameObject.AddComponent<UnitStateRetreating>());
+
+
 
     State = "Idle";
   }
