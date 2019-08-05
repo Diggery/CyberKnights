@@ -1,6 +1,6 @@
 //Maya ASCII 2018 scene
 //Name: Spearbot_Attacks.ma
-//Last modified: Fri, Aug 02, 2019 04:38:44 PM
+//Last modified: Fri, Aug 02, 2019 04:48:51 PM
 //Codeset: UTF-8
 file -rdi 1 -ns "Spearbot" -rfn "SpearbotRN" -op "v=0;" -typ "mayaAscii" "/Users/briancollins/Unity/CyberKnights/ArtSource/Spearbot/Spearbot.ma";
 file -r -ns "Spearbot" -dr 1 -rfn "SpearbotRN" -op "v=0;" -typ "mayaAscii" "/Users/briancollins/Unity/CyberKnights/ArtSource/Spearbot/Spearbot.ma";
@@ -79,7 +79,7 @@ createNode camera -s -n "sideShape" -p "side";
 	setAttr ".o" yes;
 	setAttr ".ai_translator" -type "string" "orthographic";
 createNode fosterParent -n "SpearbotRNfosterParent1";
-	rename -uid "DE55CEF4-E842-629B-47BD-DC89BC64A3C9";
+	rename -uid "AEE58121-9A46-535E-CC55-7890067DA75C";
 createNode parentConstraint -n "SpearBase_Control_parentConstraint1" -p "SpearbotRNfosterParent1";
 	rename -uid "E1FD7E97-0A4F-F151-29C4-A899D02D0C90";
 	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "RightHand_ControlW0" -dv 1 -min 0 
