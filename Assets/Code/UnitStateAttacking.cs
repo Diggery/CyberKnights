@@ -41,6 +41,8 @@ public class UnitStateAttacking : UnitState {
     bool inRange = brain.InMeleeRange || (unitControl.HasMissileWeapon && brain.InMissileRange);
 
     if (inRange) {
+      animator.SetBool("UseAltAttackPose", brain.GetAttackPose());
+
       if (unitControl.ReadyToAttack) {
         Vector3 directionToEnemy = (brain.CurrentTarget.transform.position - transform.position).normalized;
         Quaternion rotationToEnemy = Quaternion.LookRotation(directionToEnemy, Vector3.up);

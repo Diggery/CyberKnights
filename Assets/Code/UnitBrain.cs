@@ -103,6 +103,7 @@ public class UnitBrain : MonoBehaviour {
 
     visualRange = unitControl.visualRange * unitControl.visualRange;
     meleeRange = unitControl.meleeRange * unitControl.meleeRange;
+    if (ReachOut) meleeRange *= 2;
     missileRange.x = unitControl.missileRange.x * unitControl.missileRange.x;
     missileRange.y = unitControl.missileRange.y * unitControl.missileRange.y;
     chargeRange = unitControl.chargeRange * unitControl.chargeRange;
@@ -191,6 +192,11 @@ public class UnitBrain : MonoBehaviour {
     } else if (Disciplined && Vector3.Distance(transform.position, ClusterPos) > visualRange) {
       MoveTo(ClusterPos);
     }
+  }
+
+  public bool GetAttackPose() {
+    if (!ReachOut)  return Random.value < 0.5f;
+    return DistanceToTarget > meleeRange / 2;
   }
 
   public void AttackTarget(UnitControl target, bool forced = false) {
