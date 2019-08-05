@@ -13,7 +13,7 @@ public class UnitStateChasing : UnitState {
 
   public override void StateEnter() {
     base.StateEnter();
-   // animator.SetBool("InAttackMode", true);
+    animator.SetBool("InChaseMode", true);
 
   }
 
@@ -34,7 +34,7 @@ public class UnitStateChasing : UnitState {
 
   public override void StateExit() {
     base.StateExit();
-  // animator.SetBool("InAttackMode", false);
+    animator.SetBool("InChaseMode", false);
 
   }
 
@@ -45,10 +45,13 @@ public class UnitStateChasing : UnitState {
       brain.State = "Idle";
       return;
     }
+
     navAgent.velocity = Vector3.zero;
 
+    if (brain.InAttackState) return;
+
     if (brain.InMeleeRange || brain.InMissileRange) {
-      animator.SetTrigger("Attack");
+      animator.SetTrigger("ChargeAttack");
       brain.State = "Attacking";
     } else {
       Vector3 directionToEnemy = (brain.CurrentTarget.transform.position - transform.position).normalized;
@@ -63,6 +66,7 @@ public class UnitStateChasing : UnitState {
 
   protected override void CollidedWithEnemy(UnitControl enemy) {
     if (isActive && enemy.transform.tag.Equals(brain.EnemyTag)) {
+      animator.SetTrigger("ChargeAttack");
       brain.AttackTarget(enemy.gameObject.GetComponent<UnitControl>());
     }
   }

@@ -17,7 +17,6 @@ public class UnitStateAttacking : UnitState {
     base.StateEnter();
     navAgent.isStopped = true;
     navAgent.ResetPath();
-    animator.SetTrigger("Attack");
     animator.SetBool("InAttackMode", true);
 
     rbody.constraints = RigidbodyConstraints.FreezeAll;
@@ -29,10 +28,12 @@ public class UnitStateAttacking : UnitState {
       brain.State = "Idle";
       return;
     }
+
     if (!CanSeeEnemy(brain.CurrentTarget)) {
       brain.State = "Idle";
       return;
     }
+
     animator.SetFloat("AttackSpeed", attackSpeed - (Random.value * 0.25f));
     animator.SetBool("InMeleeRange", brain.InMeleeRange);
     animator.SetBool("InMissileRange", brain.InMissileRange);
@@ -40,6 +41,8 @@ public class UnitStateAttacking : UnitState {
     bool inRange = brain.InMeleeRange || (unitControl.HasMissileWeapon && brain.InMissileRange);
 
     if (inRange) {
+      animator.SetBool("UseAltAttackPose", brain.GetAttackPose());
+
       if (unitControl.ReadyToAttack) {
         Vector3 directionToEnemy = (brain.CurrentTarget.transform.position - transform.position).normalized;
         Quaternion rotationToEnemy = Quaternion.LookRotation(directionToEnemy, Vector3.up);
@@ -55,12 +58,10 @@ public class UnitStateAttacking : UnitState {
 
     UnitControl betterTarget = brain.ScanForTargets();
     if (betterTarget && betterTarget != brain.CurrentTarget) brain.AttackTarget(betterTarget);
-
   }
 
   public override void StateExit() {
     base.StateExit();
-    Debug.Log("Done Attacking");
     animator.SetBool("InAttackMode", false);
     rbody.constraints = RigidbodyConstraints.FreezeRotation;
   }
