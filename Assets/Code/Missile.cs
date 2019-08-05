@@ -7,6 +7,8 @@ public class Missile : MonoBehaviour {
   UnitControl m_owner;
   public float damage = 1;
 
+  float deathTimer = 3;
+
   Rigidbody rb;
   bool hitSomething = false;
   public void Init(UnitControl owner) {
@@ -15,7 +17,11 @@ public class Missile : MonoBehaviour {
   }
 
   private void Update() {
-    if (hitSomething) return;
+    if (hitSomething) {
+      deathTimer -= Time.deltaTime;
+      if (deathTimer < 0) Destroy(gameObject);
+      return;
+    }
 
     transform.forward = Vector3.Slerp(transform.forward, rb.velocity.normalized, Time.deltaTime * 8);
   }

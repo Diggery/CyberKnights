@@ -109,6 +109,7 @@ public class ClusterControl : MonoBehaviour {
         newUnit.tag = gameObject.tag;
         newUnit.layer = LayerMask.NameToLayer(gameObject.tag);
         units.Add(newUnitControl);
+        unitNumber++;
         yield return new WaitForEndOfFrame();
       }
     }

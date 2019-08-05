@@ -21,7 +21,7 @@ public class UnitStateRetreating : UnitState {
 
   public override void StateUpdate() {
     base.StateUpdate();
-    if (!retreating && !unitControl.InAttackState) {
+    if (!retreating && !brain.InAttackState) {
       brain.Retreat();
       retreating = true;
     }

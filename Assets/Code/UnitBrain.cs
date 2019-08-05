@@ -13,6 +13,7 @@ public class UnitBrain : MonoBehaviour {
   bool HoldTheLine { get; set; }
   bool WorksTogether { get; set; }
   bool StrikesFromRange { get; set; }
+  bool ReachOut { get; set; }
 
   string friendlyTag = "Friend";
   public string FriendlyTag {
@@ -36,8 +37,13 @@ public class UnitBrain : MonoBehaviour {
     }
   }
 
+  public bool InAttackState {
+    get; set;
+  }
+
   float visualRange;
   float meleeRange;
+  float chargeRange;
   Vector2 missileRange;
 
   public bool InVisualRange {
@@ -49,8 +55,12 @@ public class UnitBrain : MonoBehaviour {
   public bool InMissileRange {
     get {
       if (!unitControl.HasMissileWeapon) return false;
-      return DistanceToTarget > missileRange.x && DistanceToTarget < missileRange.y; 
-      }
+      return DistanceToTarget > missileRange.x && DistanceToTarget < missileRange.y;
+    }
+  }
+
+  public bool InChargeRange {
+    get { return DistanceToTarget < chargeRange; }
   }
 
   public Vector3 ClusterHome {
@@ -95,6 +105,7 @@ public class UnitBrain : MonoBehaviour {
     meleeRange = unitControl.meleeRange * unitControl.meleeRange;
     missileRange.x = unitControl.missileRange.x * unitControl.missileRange.x;
     missileRange.y = unitControl.missileRange.y * unitControl.missileRange.y;
+    chargeRange = unitControl.chargeRange * unitControl.chargeRange;
 
     friendlyTag = gameObject.tag.Equals("Friend") ? "Friend" : "Enemy";
     enemyTag = gameObject.tag.Equals("Friend") ? "Enemy" : "Friend";
@@ -184,11 +195,11 @@ public class UnitBrain : MonoBehaviour {
 
   public void AttackTarget(UnitControl target, bool forced = false) {
 
+    if (target.gameObject.tag.Equals(gameObject.tag)) return;
+
     if (!forced && WorksTogether) unitControl.Cluster.AttackCluster(target.Cluster);
 
-    if (!CanAttack) {
-      return;
-    }
+    if (!CanAttack) return;
 
     if (target == CurrentTarget) {
       if (State == "Chasing" || State == "Attacking") {
@@ -197,6 +208,10 @@ public class UnitBrain : MonoBehaviour {
     }
 
     CurrentTarget = target;
-    State = "Attacking";
+    if (InMissileRange || InMeleeRange) {
+      State = "Attacking";
+    } else {
+      MoveTo(CurrentTarget.transform.position);
+    }
   }
 }

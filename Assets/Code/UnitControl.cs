@@ -23,6 +23,7 @@ public class UnitControl : MonoBehaviour {
   public float MoveSpeed {
     get { return moveSpeed; }
   }
+  public float chargeRange = 10.0f;
   float chaseSpeed = 3.0f;
   public float ChaseSpeed {
     get { return chaseSpeed; }
@@ -72,9 +73,6 @@ public class UnitControl : MonoBehaviour {
   }
   public bool ReadyToAttack {
     get { return attackTimer < 0; }
-  }
-  public bool InAttackState {
-    get; set;
   }
 
   float targetPopularity = 0;

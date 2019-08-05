@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class UnitStateMoving : UnitState {
 
-
   public override void StateInit() {
     base.StateInit();
     stateName = "Moving";
@@ -21,6 +20,9 @@ public class UnitStateMoving : UnitState {
       brain.State = "Idle";
     }
 
+    if (brain.CurrentTarget && brain.InChargeRange) {
+      brain.State = "Chasing";
+    }
 
     UnitControl newTarget = brain.ScanForTargets();
     if (newTarget) brain.AttackTarget(newTarget);
