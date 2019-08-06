@@ -5,7 +5,8 @@ using UnityEngine;
 public class InputControl : MonoBehaviour {
   bool mouseInputInProgress = false;
   Vector3 mouseDownPos = Vector3.zero;
-  public ClusterControl inputTarget;
+  List<ClusterControl> clusters = new List<ClusterControl>();
+  ClusterControl selectedCluster;
   Selector[] inputSelectors;
   public enum Formation {
     Mob, Ranks, Vanguard, Line, Arc
@@ -32,10 +33,10 @@ public class InputControl : MonoBehaviour {
       Ray ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
       RaycastHit hit;
       if (Physics.Raycast(ray, out hit)) {
-        inputTarget.PlaceFormation(mouseDownPos, hit.point);
+        selectedCluster.PlaceFormation(mouseDownPos, hit.point);
       }
       if (Input.GetMouseButtonDown(1)) {
-        inputTarget.FlipFormation();
+        selectedCluster.FlipFormation();
       }
     }
 
@@ -45,7 +46,7 @@ public class InputControl : MonoBehaviour {
       RaycastHit hit;
       if (mouseInputInProgress && Physics.Raycast(ray, out hit)) {
         mouseUpPos = hit.point;
-        inputTarget.Command(mouseDownPos, mouseUpPos);
+        selectedCluster.Command(mouseDownPos, mouseUpPos);
       }
       mouseInputInProgress = false;
     }
