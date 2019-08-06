@@ -9,7 +9,7 @@ public class ClusterControl : MonoBehaviour {
 
   public InputControl.Formation formationType = InputControl.Formation.Mob;
   Selector currentSelector;
-
+  UICluster uiCluster;
   public int UnitsInCluster {
     get { return units.Count; }
   }
@@ -44,6 +44,10 @@ public class ClusterControl : MonoBehaviour {
     homePos = transform.position;
 
     StartCoroutine(CreateUnits());
+    if (gameObject.tag.Equals("Friend")) {
+      gameManager.InputControl.AddCluster(this);
+      uiCluster = transform.Find("ClusterUI").GetComponent<UICluster>();
+    }
   }
 
   int unitTicker = 0;
@@ -55,6 +59,10 @@ public class ClusterControl : MonoBehaviour {
     Vector3 forward = transform.position - Camera.main.transform.position;
     forward.y = 0;
     line.rotation = Quaternion.LookRotation(forward);
+  }
+
+  public void Select(bool setting) {
+    uiCluster.IsSelected = setting;
   }
 
   public void PlaceFormation(Vector3 start, Vector3 end) {
