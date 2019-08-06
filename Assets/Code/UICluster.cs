@@ -10,10 +10,13 @@ public class UICluster : MonoBehaviour {
   ClusterControl clusterControl;
   Camera mainCamera;
 
-  public Interpolator.LerpColor selectColor;
+  public Interpolator.LerpColor selectColorIn;
+  public Interpolator.LerpColor selectColorOut;
   public Interpolator.LerpVector selectType;
   Image uiBackground;
   Image unitType;
+
+  Material lineMat;
 
   bool isSelected = false;
   public bool IsSelected {
@@ -21,12 +24,14 @@ public class UICluster : MonoBehaviour {
       return isSelected;
     }
     set {
+      if (value == isSelected)
+        return;
       if (value) {
         inputControl.ClusterSelected(clusterControl);
-        Interpolator.Start(selectColor);
+        Interpolator.Start(selectColorIn);
         Interpolator.Start(selectType);
       } else {
-        Interpolator.Reverse(selectColor);
+        Interpolator.Start(selectColorOut);
         Interpolator.Reverse(selectType);
       }
       isSelected = value;
@@ -41,8 +46,14 @@ public class UICluster : MonoBehaviour {
     uiBackground.gameObject.AddComponent<InputRelay>().Init(gameObject);
     unitType = transform.Find("Background/Type").GetComponent<Image>();
 
-    selectColor.onTickVector += OnSelectColor;
+    selectColorIn.onTickVector += OnSelectColorIn;
+    selectColorOut.onTickVector += OnSelectColorOut;
     selectType.onTickVector += OnSelectType;
+  }
+
+  public void AddLine(Renderer marker, Renderer line) {
+    lineMat = marker.material;
+    line.material = lineMat;
   }
 
   void Update() {
@@ -58,8 +69,14 @@ public class UICluster : MonoBehaviour {
   }
 
 
-  void OnSelectColor(Vector4 result) {
+  void OnSelectColorIn(Vector4 result) {
     uiBackground.color = result;
+        lineMat.color = result;
+
+  }
+    void OnSelectColorOut(Vector4 result) {
+    uiBackground.color = result;
+    lineMat.color = result;
   }
   void OnSelectType(Vector4 result) {
     unitType.rectTransform.anchoredPosition = result;

@@ -47,6 +47,7 @@ public class ClusterControl : MonoBehaviour {
     if (gameObject.tag.Equals("Friend")) {
       gameManager.InputControl.AddCluster(this);
       uiCluster = transform.Find("ClusterUI").GetComponent<UICluster>();
+      uiCluster.AddLine(marker.GetComponent<Renderer>(), line.GetComponent<Renderer>());
     }
   }
 

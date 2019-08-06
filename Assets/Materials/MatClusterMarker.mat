@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MatClusterMarker
-  m_Shader: {fileID: 4800000, guid: 58a057baf0f0a44f88f9866ef0368c05, type: 3}
+  m_Shader: {fileID: 4800000, guid: 03e04ff9ff3764bf4b94939d6cdaf392, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
