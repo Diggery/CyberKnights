@@ -118,8 +118,6 @@ public class UnitBrain : MonoBehaviour {
     AddState(gameObject.AddComponent<UnitStateChasing>());
     AddState(gameObject.AddComponent<UnitStateRetreating>());
 
-
-
     State = "Idle";
   }
 
