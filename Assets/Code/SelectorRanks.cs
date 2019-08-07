@@ -5,9 +5,9 @@ using UnityEngine;
 public class SelectorRanks : Selector {
   LineRenderer line;
   Vector3[] linePositions;
-  int MinRankWidth = 4;
-  int perferedRankWidth = 6;
-  int MaxRankWidth = 16;
+  int minRankWidth = 4;
+  int maxRankWidth = 16;
+
   float rankOffset = 1.5f;
   protected override void Setup() {
     formationType = InputControl.Formation.Ranks;
@@ -17,11 +17,11 @@ public class SelectorRanks : Selector {
   }
   void Update() {
   }
-  public override void Place(Vector3 start, Vector3 end, bool useMinSize = false) {
+  public override void Place(Vector3 start, Vector3 end, int lastSelectorSize, bool useMinSize = false) {
     gameObject.SetActive(true);
 
-    base.Place(start, end);
-    float minSize = (useMinSize ? MinRankWidth : 1 ) * rankOffset;
+    base.Place(start, end, lastSelectorSize);
+    float minSize = (useMinSize ? minRankWidth : 1) * rankOffset;
     float width = Mathf.Max(Vector3.Distance(start, end), minSize);
     Vector3 startPos = flipped ? end : start;
     Vector3 endPos = flipped ? start : end;
@@ -30,10 +30,11 @@ public class SelectorRanks : Selector {
     Vector3 forwardDir = Vector3.Cross(offset.normalized, Vector3.up);
 
     if (offset.magnitude < 0.1f) {
+      width = lastSelectorSize;
       if ((centerPos - transform.position).magnitude < 0.1f) {
         forwardDir = transform.forward;
       } else {
-        forwardDir = (centerPos - transform.position).normalized;
+        forwardDir = (centerPos - inputControl.GetClusterCenter()).normalized;
       }
     }
 
@@ -50,24 +51,23 @@ public class SelectorRanks : Selector {
 
     line.SetPositions(linePositions);
   }
-  public override void PlacementComplete(Vector3 startPos, Vector3 endPos) {
-    Place(startPos, endPos, true);
-    // if (width < MinRankWidth * rankOffset) {
-    //   gameObject.SetActive(false);
-    // }
+  public override void PlacementComplete(Vector3 startPos, Vector3 endPos, int lastSelectorSize) {
+    Place(startPos, endPos, lastSelectorSize, true);
   }
 
-  public override Vector3[] GeneratePositions(int unitCount, Vector3 startPos, Vector3 endPos) {
+  public override ClusterPositions GeneratePositions(int unitCount, Vector3 startPos, Vector3 endPos, int lastRankWidth) {
     List<Vector3> positions = new List<Vector3>();
     Vector3 movePos = Vector3.Lerp(startPos, endPos, 0.5f);
     Vector3 offset = (startPos - endPos);
     float formationWidth = offset.magnitude;
 
-    int rankWidth = Mathf.Clamp(Mathf.CeilToInt(
-          formationWidth / (float)rankOffset), MinRankWidth, MaxRankWidth
-        );
+    int rankWidth = Mathf.Clamp(
+        Mathf.CeilToInt(formationWidth / (float)rankOffset),
+        minRankWidth,
+        maxRankWidth
+      );
     if (formationWidth < rankOffset) {
-      rankWidth = perferedRankWidth;
+      rankWidth = lastRankWidth;
     }
 
     int unitNumber = 0;
@@ -89,6 +89,7 @@ public class SelectorRanks : Selector {
         positions.Add(unitMovePos);
       }
     }
-    return positions.ToArray();
+    ClusterPositions clusterPositions = new ClusterPositions(rankWidth, positions.ToArray());
+    return clusterPositions;
   }
 }

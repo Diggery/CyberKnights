@@ -18,16 +18,14 @@ public class UICluster : MonoBehaviour {
 
   Material lineMat;
 
-  bool isSelected = false;
+  bool isSelected = true;
   public bool IsSelected {
     get {
       return isSelected;
     }
     set {
-      if (value == isSelected)
-        return;
+      if (value == isSelected) return;
       if (value) {
-        inputControl.ClusterSelected(clusterControl);
         Interpolator.Start(selectColorIn);
         Interpolator.Start(selectType);
       } else {
@@ -49,6 +47,8 @@ public class UICluster : MonoBehaviour {
     selectColorIn.onTickVector += OnSelectColorIn;
     selectColorOut.onTickVector += OnSelectColorOut;
     selectType.onTickVector += OnSelectType;
+
+    IsSelected = false;
   }
 
   public void AddLine(Renderer marker, Renderer line) {
@@ -57,24 +57,29 @@ public class UICluster : MonoBehaviour {
   }
 
   void Update() {
-    Vector3 forward = transform.position - Camera.main.transform.position;
+    Vector3 forward = transform.position - mainCamera.transform.position;
     forward.y = 0;
     Quaternion rotation = Quaternion.LookRotation(forward);
     transform.rotation = rotation;
   }
 
   public void OnPointerClick(PointerEventData eventData) {
-    IsSelected = true;
-    inputControl.ClusterSelected(clusterControl);
+    if (IsSelected) {
+      inputControl.ClusterDeselected(clusterControl);
+      IsSelected = false;
+    } else {
+      inputControl.ClusterSelected(clusterControl);
+      IsSelected = true;
+    }
   }
 
 
   void OnSelectColorIn(Vector4 result) {
     uiBackground.color = result;
-        lineMat.color = result;
+    lineMat.color = result;
 
   }
-    void OnSelectColorOut(Vector4 result) {
+  void OnSelectColorOut(Vector4 result) {
     uiBackground.color = result;
     lineMat.color = result;
   }

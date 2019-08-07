@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class InputControl : MonoBehaviour {
+
+  Camera mainCamera;
   bool mouseInputInProgress = false;
   Vector3 mouseDownPos = Vector3.zero;
   List<ClusterControl> clusters = new List<ClusterControl>();
@@ -14,8 +16,10 @@ public class InputControl : MonoBehaviour {
   }
 
   void Start() {
+    mainCamera = Camera.main;
     inputSelectors = transform.GetComponentsInChildren<Selector>();
     foreach (var Selector in inputSelectors) Selector.Init();
+
   }
 
   // Update is called once per frame
@@ -27,7 +31,7 @@ public class InputControl : MonoBehaviour {
       EventSystem.current.RaycastAll(eventData, results);
       if (results.Count == 0) {
         mouseDownPos = Input.mousePosition;
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(mouseDownPos.x, mouseDownPos.y, 0.0f));
+        Ray ray = mainCamera.ScreenPointToRay(new Vector3(mouseDownPos.x, mouseDownPos.y, 0.0f));
         RaycastHit hit;
         mouseInputInProgress = Physics.Raycast(ray, out hit);
         if (mouseInputInProgress) {
@@ -36,8 +40,8 @@ public class InputControl : MonoBehaviour {
       }
     }
 
-    if (mouseInputInProgress) {
-      Ray ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
+    if (mouseInputInProgress && selectedCluster) {
+      Ray ray = mainCamera.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
       RaycastHit hit;
       if (Physics.Raycast(ray, out hit)) {
         selectedCluster.PlaceFormation(mouseDownPos, hit.point);
@@ -48,10 +52,10 @@ public class InputControl : MonoBehaviour {
     }
 
     if (Input.GetMouseButtonUp(0)) {
-      Ray ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
+      Ray ray = mainCamera.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
       Vector3 mouseUpPos = Vector3.zero;
       RaycastHit hit;
-      if (mouseInputInProgress && Physics.Raycast(ray, out hit)) {
+      if (mouseInputInProgress && selectedCluster && Physics.Raycast(ray, out hit)) {
         mouseUpPos = hit.point;
         selectedCluster.Command(mouseDownPos, mouseUpPos);
       }
@@ -85,5 +89,12 @@ public class InputControl : MonoBehaviour {
     }
     selectedCluster = selected;
     Debug.Log("Cluster Selected");
+  }
+  public void ClusterDeselected(ClusterControl deselected) {
+    selectedCluster = null;
+  }
+
+  public Vector3 GetClusterCenter() {
+    return selectedCluster.GetAveragePosition();
   }
 }

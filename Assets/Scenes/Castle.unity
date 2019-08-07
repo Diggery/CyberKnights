@@ -557,7 +557,7 @@ MonoBehaviour:
     startValue: {r: 1, g: 0, b: 0, a: 1}
     endValue: {r: 1, g: 1, b: 1, a: 1}
   selectColorOut:
-    duration: 1
+    duration: 0.25
     curve:
       serializedVersion: 2
       m_Curve:
@@ -849,7 +849,7 @@ MonoBehaviour:
     startValue: {r: 1, g: 0, b: 0, a: 1}
     endValue: {r: 1, g: 1, b: 1, a: 1}
   selectColorOut:
-    duration: 1
+    duration: 0.25
     curve:
       serializedVersion: 2
       m_Curve:

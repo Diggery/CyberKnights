@@ -5,10 +5,13 @@ using UnityEngine.AI;
 
 public class ClusterControl : MonoBehaviour {
   GameManager gameManager;
+  Camera mainCamera;
+
   public string teamName = "Player";
 
   public InputControl.Formation formationType = InputControl.Formation.Mob;
   Selector currentSelector;
+  int lastSelectorSize = 0;
   UICluster uiCluster;
   public int UnitsInCluster {
     get { return units.Count; }
@@ -42,6 +45,7 @@ public class ClusterControl : MonoBehaviour {
     marker = transform.Find("ClusterMarker");
     line = transform.Find("ClusterMarker/Line");
     homePos = transform.position;
+    mainCamera = Camera.main;
 
     StartCoroutine(CreateUnits());
     if (gameObject.tag.Equals("Friend")) {
@@ -57,7 +61,7 @@ public class ClusterControl : MonoBehaviour {
     unitTicker = (unitTicker + 1) % units.Count;
     units[unitTicker].UpdateBrain();
 
-    Vector3 forward = transform.position - Camera.main.transform.position;
+    Vector3 forward = transform.position - mainCamera.transform.position;
     forward.y = 0;
     line.rotation = Quaternion.LookRotation(forward);
   }
@@ -68,17 +72,18 @@ public class ClusterControl : MonoBehaviour {
 
   public void PlaceFormation(Vector3 start, Vector3 end) {
     currentSelector = gameManager.InputControl.GetFormationSelector(formationType);
-    currentSelector.Place(start, end);
+    currentSelector.Place(start, end, lastSelectorSize);
   }
 
   public void Command(Vector3 start, Vector3 end) {
-    currentSelector.PlacementComplete(start, end);
-    Vector3[] newPositions = currentSelector.GeneratePositions(units.Count, start, end);
+    currentSelector.PlacementComplete(start, end, lastSelectorSize);
+    Selector.ClusterPositions clusterPositions = currentSelector.GeneratePositions(units.Count, start, end, lastSelectorSize);
+    lastSelectorSize = clusterPositions.selectorSize;
     Vector3 centerPos = Vector3.Lerp(start, end, 0.5f);
 
-    for (int i = 0; i < newPositions.Length; i++) {
-      units[i].Brain.ClusterPos = newPositions[i];
-      units[i].Brain.MoveTo(newPositions[i]);
+    for (int i = 0; i < clusterPositions.positions.Length; i++) {
+      units[i].Brain.ClusterPos = clusterPositions.positions[i];
+      units[i].Brain.MoveTo(clusterPositions.positions[i]);
     }
 
     transform.position = currentSelector.transform.position;
@@ -134,6 +139,15 @@ public class ClusterControl : MonoBehaviour {
       flockVector += offset;
     }
     return flockVector.normalized;
+  }
+
+  public Vector3 GetAveragePosition() {
+    Vector3 averagePos = Vector3.zero;
+    foreach (var unit in units) {
+      averagePos += unit.transform.position;
+    }
+    averagePos /= units.Count;
+    return averagePos;
   }
 
   public void AttackCluster(ClusterControl targetCluster) {
