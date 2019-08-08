@@ -1,22 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class SelectorRanks : Selector {
   LineRenderer line;
   Vector3[] linePositions;
   int minRankWidth = 4;
   int maxRankWidth = 16;
-
   float rankOffset = 1.5f;
+
   protected override void Setup() {
     formationType = InputControl.Formation.Ranks;
 
     line = transform.Find("line").GetComponent<LineRenderer>();
     linePositions = new Vector3[7];
   }
+
+
   void Update() {
   }
+
   public override void Place(Vector3 start, Vector3 end, int lastSelectorSize, bool useMinSize = false) {
     gameObject.SetActive(true);
 

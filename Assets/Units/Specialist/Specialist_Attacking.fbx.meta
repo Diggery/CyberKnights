@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: d464c653211254b098b40a5bc026c26b
+guid: f69b8ba481a614779b30e595ede0739a
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
   - first:
-      74: 8719270340185663548
-    second: Idle_to_AttackIde01
+      74: -4786926618629506178
+    second: Idle_to_AttackIdle01
   - first:
       74: -5536640657188189249
     second: AttackIdle01
@@ -16,8 +16,8 @@ ModelImporter:
       74: 3248468965983859245
     second: Attack01_02
   - first:
-      74: -5915767917574140892
-    second: Idle_to_AttackIde02
+      74: 3424392441088073647
+    second: Idle_to_AttackIdle02
   - first:
       74: -1331046711865374143
     second: AttackIdle02
@@ -59,11 +59,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Idle_to_AttackIde01
-      takeName: Idle_to_AttackIde01
-      internalID: 8719270340185663548
+      name: Idle_to_AttackIdle01
+      takeName: Idle_to_AttackIdle01
+      internalID: -4786926618629506178
       firstFrame: 10
-      lastFrame: 25
+      lastFrame: 24
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -91,8 +91,8 @@ ModelImporter:
       name: AttackIdle01
       takeName: AttackIdle01
       internalID: -5536640657188189249
-      firstFrame: 25
-      lastFrame: 40
+      firstFrame: 24
+      lastFrame: 34
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -120,8 +120,8 @@ ModelImporter:
       name: Attack01_01
       takeName: Attack01_01
       internalID: 520468183555608074
-      firstFrame: 40
-      lastFrame: 60
+      firstFrame: 165
+      lastFrame: 230
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -149,8 +149,8 @@ ModelImporter:
       name: Attack01_02
       takeName: Attack01_02
       internalID: 3248468965983859245
-      firstFrame: 80
-      lastFrame: 100
+      firstFrame: 34
+      lastFrame: 58
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -175,11 +175,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Idle_to_AttackIde02
-      takeName: Idle_to_AttackIde02
-      internalID: -5915767917574140892
-      firstFrame: 120
-      lastFrame: 135
+      name: Idle_to_AttackIdle02
+      takeName: Idle_to_AttackIdle02
+      internalID: 3424392441088073647
+      firstFrame: 84
+      lastFrame: 100
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -207,8 +207,8 @@ ModelImporter:
       name: AttackIdle02
       takeName: AttackIdle02
       internalID: -1331046711865374143
-      firstFrame: 135
-      lastFrame: 150
+      firstFrame: 100
+      lastFrame: 116
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -236,8 +236,8 @@ ModelImporter:
       name: Attack02_01
       takeName: Attack02_01
       internalID: -3393989299853696899
-      firstFrame: 150
-      lastFrame: 170
+      firstFrame: 116
+      lastFrame: 140
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -265,8 +265,8 @@ ModelImporter:
       name: Attack02_02
       takeName: Attack02_02
       internalID: 6910015804669201011
-      firstFrame: 180
-      lastFrame: 200
+      firstFrame: 140
+      lastFrame: 164
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -294,8 +294,8 @@ ModelImporter:
       name: Dead
       takeName: Dead
       internalID: 8273325049105940540
-      firstFrame: 250
-      lastFrame: 260
+      firstFrame: 200
+      lastFrame: 210
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -374,7 +374,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 6138357e9f611427b87ae1d099dab1df,
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 617ec9d83e04c4aa38a8d4f061c1c981,
     type: 3}
   animationType: 2
   humanoidOversampling: 1

@@ -21,3 +21,6 @@ MonoBehaviour:
       type: 3}
   - name: Spearbot
     prefab: {fileID: 301212294255376253, guid: 77825578f47224896aa217b9335f84d5, type: 3}
+  - name: Specialist
+    prefab: {fileID: 7019400548681127067, guid: cbf608886756e4ba786d72e3e8002015,
+      type: 3}

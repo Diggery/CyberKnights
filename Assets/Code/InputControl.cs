@@ -29,7 +29,7 @@ public class InputControl : MonoBehaviour {
       eventData.position = Input.mousePosition;
       List<RaycastResult> results = new List<RaycastResult>();
       EventSystem.current.RaycastAll(eventData, results);
-      if (results.Count == 0) {
+      if (results[0].gameObject.tag.Equals("Terrain")) {
         mouseDownPos = Input.mousePosition;
         Ray ray = mainCamera.ScreenPointToRay(new Vector3(mouseDownPos.x, mouseDownPos.y, 0.0f));
         RaycastHit hit;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class InputRelay : MonoBehaviour, IPointerClickHandler {
+public class InputRelay : MonoBehaviour, IPointerClickHandler, IDragHandler {
 
     GameObject inputTarget;
     public InputRelay Init(GameObject target) {
@@ -12,7 +12,9 @@ public class InputRelay : MonoBehaviour, IPointerClickHandler {
     }
 
     public void OnPointerClick(PointerEventData eventData) {
-      inputTarget.SendMessage("OnPointerClick", eventData);
+      inputTarget.SendMessage("OnPointerClick", eventData, SendMessageOptions.DontRequireReceiver);
     }
-
+    public void OnDrag(PointerEventData eventData) {
+      inputTarget.SendMessage("OnDrag", eventData, SendMessageOptions.DontRequireReceiver);
+    }
 }
