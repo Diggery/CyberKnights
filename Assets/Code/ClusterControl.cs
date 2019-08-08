@@ -58,6 +58,8 @@ public class ClusterControl : MonoBehaviour {
   int unitTicker = 0;
 
   private void Update() {
+    if (units.Count == 0) return;
+    
     unitTicker = (unitTicker + 1) % units.Count;
     units[unitTicker].UpdateBrain();
 
@@ -155,6 +157,13 @@ public class ClusterControl : MonoBehaviour {
     for (int i = 0; i < units.Count; i++) {
       if (units[i].Brain.State.Equals("Idle"))
         units[i].Brain.AttackTarget(targetCluster.Units[i % targetCluster.Units.Count], true);
+    }
+  }
+
+  public void RemoveUnit(UnitControl unit) {
+    units.Remove(unit);
+    if (units.Count == 0) {
+      Debug.Log(gameObject.name + " is empty");
     }
   }
 }

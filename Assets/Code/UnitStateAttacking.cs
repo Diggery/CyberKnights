@@ -24,7 +24,7 @@ public class UnitStateAttacking : UnitState {
 
   public override void StateUpdate() {
     base.StateUpdate();
-    if (!brain.CurrentTarget) {
+    if (!brain.CurrentTarget || brain.CurrentTarget.IsDead) {
       brain.State = "Idle";
       return;
     }
@@ -42,9 +42,10 @@ public class UnitStateAttacking : UnitState {
 
     if (inRange) {
       animator.SetBool("UseAltAttackPose", brain.GetAttackPose());
-
       if (unitControl.ReadyToAttack) {
         Vector3 directionToEnemy = (brain.CurrentTarget.transform.position - transform.position).normalized;
+              navAgent.Move(directionToEnemy * 0.05f);
+
         Quaternion rotationToEnemy = Quaternion.LookRotation(directionToEnemy, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(
           transform.rotation,

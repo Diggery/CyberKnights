@@ -14,10 +14,10 @@ public class UnitControl : MonoBehaviour {
   Vector3 anchorPos;
   NavMeshAgent navAgent;
   Rigidbody rbody;
-  ClusterControl clusterManager;
+  ClusterControl clusterControl;
   public ClusterControl Cluster {
-    get { return clusterManager; }
-    set { clusterManager = value; }
+    get { return clusterControl; }
+    set { clusterControl = value; }
   }
   float moveSpeed = 1.5f;
   public float MoveSpeed {
@@ -123,6 +123,7 @@ public class UnitControl : MonoBehaviour {
   }
 
   private void Update() {
+    if (IsDead) return;
 
     velocityDir = transform.position - lastPosition;
     velocity = Mathf.Lerp(velocity, velocityDir.magnitude / Time.deltaTime, Time.deltaTime * 5);
@@ -138,21 +139,18 @@ public class UnitControl : MonoBehaviour {
   }
 
   public void UpdateBrain() {
+    if (IsDead) return;
+
     brain.UpdateBrain();
   }
 
-  public void SetDestination(Vector3 pos) {
-    if (!brain.State.Equals("Retreating"))
-      brain.MoveTo(pos);
-  }
-
-  public void Push(Vector3 direction) {
-    rbody.AddForce(-direction, ForceMode.Impulse);
-  }
 
   public void AnimEvent(string type) {
     switch (type) {
       case "MeleeAttack":
+        DamageTarget("Melee");
+        break;
+      case "ChargeAttack":
         DamageTarget("Melee");
         break;
       case "MissileAttack":
@@ -186,6 +184,8 @@ public class UnitControl : MonoBehaviour {
   }
 
   public void TakeDamage(float amount, UnitControl attacker, string type) {
+    if (IsDead) return;
+
     brain.Attacked(attacker, type);
     hitPoints -= amount;
     if (hitPoints < 0) {
@@ -194,6 +194,13 @@ public class UnitControl : MonoBehaviour {
   }
 
   void Die() {
-    brain.State = "Retreating";
+    brain.State = "Idle";
+
+    isDead = true;
+    Destroy(navAgent);
+    Destroy(rbody);
+    collision.enabled = false;
+    clusterControl.RemoveUnit(this);
+    animator.SetTrigger("Dead");
   }
 }

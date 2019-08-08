@@ -12,6 +12,8 @@ public class UnitStateIdle : UnitState {
 
   public override void StateEnter() {
     base.StateEnter();
+
+
   }
 
   public override void StateUpdate() {
@@ -20,6 +22,10 @@ public class UnitStateIdle : UnitState {
     UnitControl target = brain.ScanForTargets();
     if (target) {
       brain.AttackTarget(target);
+    }
+
+    if (brain.HasClusterPos && (transform.position - brain.ClusterPos).sqrMagnitude > 1.0f) {
+      brain.MoveTo(brain.ClusterPos);
     }
   }
 

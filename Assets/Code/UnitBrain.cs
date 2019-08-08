@@ -66,7 +66,16 @@ public class UnitBrain : MonoBehaviour {
   public Vector3 ClusterHome {
     get { return unitControl.Cluster.HomePos; }
   }
-  public Vector3 ClusterPos { get; set; }
+
+  public bool HasClusterPos { get; set; }
+  Vector3 clusterPos;
+  public Vector3 ClusterPos {
+    get { return clusterPos; }
+    set {
+      clusterPos = value;
+      HasClusterPos = true;
+    }
+  }
 
   public bool CanAttack {
     get {
@@ -196,11 +205,12 @@ public class UnitBrain : MonoBehaviour {
   }
 
   public bool GetAttackPose() {
-    if (!ReachOut)  return Random.value < 0.5f;
+    if (!ReachOut) return Random.value < 0.5f;
     return DistanceToTarget > meleeRange / 2;
   }
 
   public void AttackTarget(UnitControl target, bool forced = false) {
+    if (unitControl.IsDead) return;
 
     if (target.gameObject.tag.Equals(gameObject.tag)) return;
 
