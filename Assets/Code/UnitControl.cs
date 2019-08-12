@@ -72,7 +72,6 @@ public class UnitControl : MonoBehaviour {
     get { return attackTimer < 0; }
   }
 
-
   float armorLevel = 100;
   public float maxArmorLevel = 100;
 
