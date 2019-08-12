@@ -71,7 +71,8 @@ MonoBehaviour:
   meleeRange: 2
   missilePrefab: none
   missileRange: {x: 5, y: 30}
-  hitPoints: 50
+  maxArmorLevel: 100
+  maxEnergyLevel: 10
 --- !u!1 &2563696209521505572
 GameObject:
   m_ObjectHideFlags: 0

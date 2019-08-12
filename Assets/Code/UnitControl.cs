@@ -44,11 +44,7 @@ public class UnitControl : MonoBehaviour {
   public string missilePrefab = "none";
   public Vector2 missileRange = new Vector2(5.0f, 30.0f);
 
-  float hitPoints = 100;
-  public float maxHitPoints = 100;
-  public float HitPoints {
-    get { return hitPoints; }
-  }
+
 
   CapsuleCollider collision;
   Transform attach_Center;
@@ -66,25 +62,26 @@ public class UnitControl : MonoBehaviour {
     get { return navRadius; }
   }
   float attackTimer = 0;
-  float attackCooldown = 1;
+  Vector2 attackCooldown = new Vector2(1, 10);
   float AttackCooldown {
     get {
-      float variance = Random.value * (attackCooldown * 0.5f);
-      return attackCooldown - variance;
+      return Mathf.Lerp(attackCooldown.x, attackCooldown.y, 1 - (EnergyStatus * 2));
     }
   }
   public bool ReadyToAttack {
     get { return attackTimer < 0; }
   }
 
-  float targetPopularity = 0;
+
+  float armorLevel = 100;
+  public float maxArmorLevel = 100;
 
   public enum DamageState { Normal, Malfunctioning, Destroyed }
-  DamageState damageStatus = DamageState.Normal;
+  DamageState m_damageStatus = DamageState.Normal;
   public DamageState DamageStatus {
-    get { return damageStatus; }
+    get { return m_damageStatus; }
     set {
-      if (value == damageStatus) return;
+      if (value == m_damageStatus) return;
 
       switch (value) {
         case DamageState.Normal:
@@ -92,7 +89,7 @@ public class UnitControl : MonoBehaviour {
 
         case DamageState.Malfunctioning:
           Transform smoke = attach_Center.Find("LightSmoke");
-          if (!smoke) Instantiate( gameManager.GetPrefab("LightSmoke"), attach_Center );
+          if (!smoke) Instantiate(gameManager.GetPrefab("LightSmoke"), attach_Center);
           break;
 
         case DamageState.Destroyed:
@@ -105,12 +102,19 @@ public class UnitControl : MonoBehaviour {
           animator.SetTrigger("Dead");
           break;
       }
-      damageStatus = value;
+      m_damageStatus = value;
     }
   }
 
   public bool IsDestroyed {
     get { return DamageStatus == DamageState.Destroyed; }
+  }
+
+  float energyLevel = 10;
+  public float maxEnergyLevel = 100;
+
+  public float EnergyStatus {
+    get { return energyLevel / maxEnergyLevel; }
   }
 
   Vector3 lastPosition;
@@ -119,7 +123,8 @@ public class UnitControl : MonoBehaviour {
 
 
   private void Start() {
-    hitPoints = maxHitPoints;
+    armorLevel = maxArmorLevel;
+    energyLevel = maxEnergyLevel;
 
     gameManager = GameManager.Instance;
 
@@ -186,10 +191,10 @@ public class UnitControl : MonoBehaviour {
   public void AnimEvent(string type) {
     switch (type) {
       case "MeleeAttack":
-        DamageTarget("Melee");
+        DeliverDamage("Melee");
         break;
       case "ChargeAttack":
-        DamageTarget("Melee");
+        DeliverDamage("Melee");
         break;
       case "MissileAttack":
         LaunchMissile();
@@ -200,12 +205,13 @@ public class UnitControl : MonoBehaviour {
     }
   }
 
-  void DamageTarget(string type) {
+  void DeliverDamage(string type) {
     if (!brain.CurrentTarget) {
       Debug.Log("No target to damage");
       return;
     }
     brain.CurrentTarget.TakeDamage(1, this, type);
+    UseEnergy(1);
     attackTimer = AttackCooldown;
   }
 
@@ -225,17 +231,26 @@ public class UnitControl : MonoBehaviour {
     if (IsDestroyed) return;
 
     brain.Attacked(attacker, type);
-    hitPoints -= amount;
+    armorLevel -= amount;
     GameObject effect = Instantiate(gameManager.GetPrefab("SparkBurst"), attach_Center.position, attach_Center.rotation);
 
-    if (hitPoints < hitPoints / maxHitPoints) {
+    if (armorLevel / maxArmorLevel < 0.25f) {
       DamageStatus = DamageState.Malfunctioning;
     }
 
-    if (hitPoints < 0) {
+    if (armorLevel < 0) {
       DamageStatus = DamageState.Destroyed;
     }
   }
 
+  public void UseEnergy(float amount) {
+    if (IsDestroyed) return;
+
+    energyLevel -= amount;
+
+    if (armorLevel / maxArmorLevel < 0.5f) {
+
+    }
+  }
 
 }
