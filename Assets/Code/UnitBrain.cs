@@ -50,7 +50,10 @@ public class UnitBrain : MonoBehaviour {
     get { return DistanceToTarget < visualRange; }
   }
   public bool InMeleeRange {
-    get { return DistanceToTarget < meleeRange; }
+    get { 
+      float bonus = InAttackState ? 1 : 0;
+      return DistanceToTarget < (meleeRange + bonus); 
+      }
   }
   public bool InMissileRange {
     get {
@@ -77,9 +80,10 @@ public class UnitBrain : MonoBehaviour {
     }
   }
 
+  bool useAltAttackPose = false; 
   public bool CanAttack {
     get {
-      if (unitControl.IsDead)
+      if (unitControl.IsDestroyed)
         return false;
 
       if (State.Equals("Retreating"))
@@ -121,6 +125,8 @@ public class UnitBrain : MonoBehaviour {
     friendlyTag = gameObject.tag.Equals("Friend") ? "Friend" : "Enemy";
     enemyTag = gameObject.tag.Equals("Friend") ? "Enemy" : "Friend";
 
+    useAltAttackPose =  Random.value < 0.5f; 
+
     AddState(gameObject.AddComponent<UnitStateIdle>());
     AddState(gameObject.AddComponent<UnitStateMoving>());
     AddState(gameObject.AddComponent<UnitStateAttacking>());
@@ -157,7 +163,7 @@ public class UnitBrain : MonoBehaviour {
       if (target.name.Contains(unitControl.TeamName)) continue;
 
       UnitControl targetControl = target.GetComponent<UnitControl>();
-      if (!targetControl || targetControl.IsDead) continue;
+      if (!targetControl || targetControl.IsDestroyed) continue;
 
       if (excludeThisGuy && excludeThisGuy.Equals(targetControl)) continue;
 
@@ -205,12 +211,12 @@ public class UnitBrain : MonoBehaviour {
   }
 
   public bool GetAttackPose() {
-    if (!ReachOut) return Random.value < 0.5f;
+    if (!ReachOut) return useAltAttackPose;
     return DistanceToTarget > meleeRange / 2;
   }
 
   public void AttackTarget(UnitControl target, bool forced = false) {
-    if (unitControl.IsDead) return;
+    if (unitControl.IsDestroyed) return;
 
     if (target.gameObject.tag.Equals(gameObject.tag)) return;
 

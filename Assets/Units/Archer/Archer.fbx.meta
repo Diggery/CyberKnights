@@ -1,9 +1,14 @@
 fileFormatVersion: 2
 guid: a68fa9eb2b15f426a86a95fa48c4ec57
 ModelImporter:
-  serializedVersion: 25
+  serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Archer_MatArcher
+    second: {fileID: 2100000, guid: 3746d05213580410e8c36dffa8ce3226, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -31,6 +36,7 @@ ModelImporter:
     extraExposedTransformPaths:
     - Archer:Archer_Skel/Archer:Hips_Skel/Archer:Torso_Skel/Archer:LeftShoulder_Skel/Archer:LeftUpperArm_Skel/Archer:LeftLowerArm_Skel/Archer:LeftHand_Skel
     - Archer:Archer_Skel/Archer:Hips_Skel/Archer:Torso_Skel/Archer:LeftShoulder_Skel/Archer:LeftUpperArm_Skel/Archer:LeftLowerArm_Skel/Archer:Launch_Point
+    - Archer:Archer_Skel/Archer:Hips_Skel/Archer:Torso_Skel/Archer:Attach_Center
     extraUserProperties: []
     clipAnimations: []
     isReadable: 0
@@ -40,6 +46,7 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1

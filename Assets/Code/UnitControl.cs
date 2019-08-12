@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class UnitControl : MonoBehaviour {
+  GameManager gameManager;
+
   string teamName;
 
   public string TeamName {
@@ -40,17 +42,17 @@ public class UnitControl : MonoBehaviour {
     get { return missilePrefab != "none"; }
   }
   public string missilePrefab = "none";
-  Transform launchPoint;
   public Vector2 missileRange = new Vector2(5.0f, 30.0f);
 
-  public float hitPoints = 5;
+  float hitPoints = 100;
+  public float maxHitPoints = 100;
   public float HitPoints {
     get { return hitPoints; }
   }
 
-  bool isDead;
-
   CapsuleCollider collision;
+  Transform attach_Center;
+  Transform attach_LaunchPoint;
 
   UnitBrain brain;
   public UnitBrain Brain {
@@ -76,8 +78,39 @@ public class UnitControl : MonoBehaviour {
   }
 
   float targetPopularity = 0;
-  public bool IsDead {
-    get { return isDead; }
+
+  public enum DamageState { Normal, Malfunctioning, Destroyed }
+  DamageState damageStatus = DamageState.Normal;
+  public DamageState DamageStatus {
+    get { return damageStatus; }
+    set {
+      if (value == damageStatus) return;
+
+      switch (value) {
+        case DamageState.Normal:
+          break;
+
+        case DamageState.Malfunctioning:
+          Transform smoke = attach_Center.Find("LightSmoke");
+          if (!smoke) Instantiate( gameManager.GetPrefab("LightSmoke"), attach_Center );
+          break;
+
+        case DamageState.Destroyed:
+          Debug.Log(gameObject.name + " is getting destroyed");
+          brain.State = "Idle";
+          Destroy(navAgent);
+          Destroy(rbody);
+          collision.enabled = false;
+          clusterControl.RemoveUnit(this);
+          animator.SetTrigger("Dead");
+          break;
+      }
+      damageStatus = value;
+    }
+  }
+
+  public bool IsDestroyed {
+    get { return DamageStatus == DamageState.Destroyed; }
   }
 
   Vector3 lastPosition;
@@ -86,6 +119,9 @@ public class UnitControl : MonoBehaviour {
 
 
   private void Start() {
+    hitPoints = maxHitPoints;
+
+    gameManager = GameManager.Instance;
 
     navAgent = gameObject.AddComponent<NavMeshAgent>();
     navAgent.radius = navRadius;
@@ -115,15 +151,17 @@ public class UnitControl : MonoBehaviour {
 
     lastPosition = transform.position;
 
-    foreach (Transform child in transform)
-      if (child.name.Contains("Launch_Point")) launchPoint = child;
+    foreach (Transform child in transform) {
+      if (child.name.Contains("Launch_Point")) attach_LaunchPoint = child;
+      if (child.name.Contains("Attach_Center")) attach_Center = child;
+    }
 
     brain = gameObject.AddComponent<UnitBrain>();
     brain.Init();
   }
 
   private void Update() {
-    if (IsDead) return;
+    if (IsDestroyed) return;
 
     velocityDir = transform.position - lastPosition;
     velocity = Mathf.Lerp(velocity, velocityDir.magnitude / Time.deltaTime, Time.deltaTime * 5);
@@ -139,7 +177,7 @@ public class UnitControl : MonoBehaviour {
   }
 
   public void UpdateBrain() {
-    if (IsDead) return;
+    if (IsDestroyed) return;
 
     brain.UpdateBrain();
   }
@@ -174,8 +212,8 @@ public class UnitControl : MonoBehaviour {
   void LaunchMissile() {
     GameObject missile = GameObject.Instantiate(
       GameManager.Instance.GetPrefab(missilePrefab),
-      launchPoint.position,
-      launchPoint.rotation
+      attach_LaunchPoint.position,
+      attach_LaunchPoint.rotation
     );
     missile.GetComponent<Missile>().Init(this);
     Vector3 force = Utils.BallisticVel(missile.transform.position, brain.CurrentTarget.transform.position);
@@ -184,23 +222,20 @@ public class UnitControl : MonoBehaviour {
   }
 
   public void TakeDamage(float amount, UnitControl attacker, string type) {
-    if (IsDead) return;
+    if (IsDestroyed) return;
 
     brain.Attacked(attacker, type);
     hitPoints -= amount;
+    GameObject effect = Instantiate(gameManager.GetPrefab("SparkBurst"), attach_Center.position, attach_Center.rotation);
+
+    if (hitPoints < hitPoints / maxHitPoints) {
+      DamageStatus = DamageState.Malfunctioning;
+    }
+
     if (hitPoints < 0) {
-      Die();
+      DamageStatus = DamageState.Destroyed;
     }
   }
 
-  void Die() {
-    brain.State = "Idle";
 
-    isDead = true;
-    Destroy(navAgent);
-    Destroy(rbody);
-    collision.enabled = false;
-    clusterControl.RemoveUnit(this);
-    animator.SetTrigger("Dead");
-  }
 }

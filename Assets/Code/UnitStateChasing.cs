@@ -41,7 +41,7 @@ public class UnitStateChasing : UnitState {
   private void Update() {
     if (!isActive) return;
 
-    if (!brain.CurrentTarget || brain.CurrentTarget.IsDead) {
+    if (!brain.CurrentTarget || brain.CurrentTarget.IsDestroyed) {
       brain.State = "Idle";
       return;
     }

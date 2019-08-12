@@ -22,3 +22,14 @@ MonoBehaviour:
   - name: Arrow
     prefab: {fileID: 8631785246239690179, guid: fe6eef5a2ec6609428bbda7ab4cab1c2,
       type: 3}
+  - name: DarkSmoke
+    prefab: {fileID: 6100287458728205108, guid: dcfa96b85b7523647878ad02c6a01312,
+      type: 3}
+  - name: IdleSparks
+    prefab: {fileID: 176947482335095612, guid: 9171c95ec54ae89438686a8699c197f5, type: 3}
+  - name: LightSmoke
+    prefab: {fileID: 6234685523435024696, guid: 03e181641656f3741bd08b543bd31c5a,
+      type: 3}
+  - name: SparkBurst
+    prefab: {fileID: 1064674423691139871, guid: 0571608568da6c24f852288c5a0fc364,
+      type: 3}

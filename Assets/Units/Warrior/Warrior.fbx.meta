@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: f341ec117c2e24fa5a21310ba5833377
 ModelImporter:
-  serializedVersion: 25
+  serializedVersion: 26
   internalIDToNameTable: []
   externalObjects:
   - first:
@@ -33,7 +33,8 @@ ModelImporter:
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
-    extraExposedTransformPaths: []
+    extraExposedTransformPaths:
+    - Warrior:Warrior_Skel/Warrior:Hips_Skel/Warrior:Torso_Skel/Warrior:Attach_Center
     extraUserProperties: []
     clipAnimations: []
     isReadable: 0
@@ -43,6 +44,7 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
