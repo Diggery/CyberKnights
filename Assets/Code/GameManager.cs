@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
-
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 
   CameraControl cameraControl;
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour {
   void Awake() {
     CreateInstance();
     inputControl = gameObject.GetComponent<InputControl>();
-
+    SceneManager.LoadScene("InGameUI", LoadSceneMode.Additive);
   }
   void Start() {
   }

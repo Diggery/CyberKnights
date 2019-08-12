@@ -173,4 +173,12 @@ public class ClusterControl : MonoBehaviour {
       Debug.Log(gameObject.name + " is empty");
     }
   }
+
+  public void Release(string filter) {
+        foreach (var unit in units) {
+          if (unit.EnergyStatus < 0.25f) {
+            unit.Retreat();
+          }
+        }
+  }
 }

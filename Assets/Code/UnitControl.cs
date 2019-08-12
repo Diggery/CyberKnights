@@ -242,6 +242,10 @@ public class UnitControl : MonoBehaviour {
     }
   }
 
+  public void Retreat() {
+    brain.State = "Retreating"; 
+  }
+
   public void UseEnergy(float amount) {
     if (IsDestroyed) return;
 

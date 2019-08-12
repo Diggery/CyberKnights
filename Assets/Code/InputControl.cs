@@ -10,6 +10,7 @@ public class InputControl : MonoBehaviour {
   Vector3 mouseDownPos = Vector3.zero;
   List<ClusterControl> clusters = new List<ClusterControl>();
   ClusterControl selectedCluster;
+  public InGameUI IngameUI { get; set; }
   public enum Formation {
     Mob, Ranks, Vanguard, Line, Arc
   }
@@ -53,6 +54,14 @@ public class InputControl : MonoBehaviour {
       }
       mouseInputInProgress = false;
     }
+
+    if (Input.GetButtonDown("Action")) selectedCluster.Release("Tired");
+    if (Input.GetKeyDown(KeyCode.Alpha1)) IngameUI.ButtonPressed("1");
+    if (Input.GetKeyDown(KeyCode.Alpha2)) IngameUI.ButtonPressed("2");
+    if (Input.GetKeyDown(KeyCode.Alpha3)) IngameUI.ButtonPressed("3");
+    if (Input.GetKeyDown(KeyCode.Alpha4)) IngameUI.ButtonPressed("4");
+    if (Input.GetKeyDown(KeyCode.Q)) IngameUI.ButtonPressed("Q");
+    if (Input.GetKeyDown(KeyCode.E)) IngameUI.ButtonPressed("E");
   }
 
   public bool GetTerrainIntersection(out Vector3 mapPos) {
@@ -78,6 +87,7 @@ public class InputControl : MonoBehaviour {
     selectedCluster = selected;
     Debug.Log("Cluster Selected");
   }
+
   public void ClusterDeselected(ClusterControl deselected) {
     selectedCluster = null;
   }
