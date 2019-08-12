@@ -4,27 +4,34 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class SelectorRanks : Selector {
+
   LineRenderer line;
   Vector3[] linePositions;
   int minRankWidth = 4;
   int maxRankWidth = 16;
   float rankOffset = 1.5f;
 
+  Transform moveHandle;
+  Vector3 moveOffset;
+
   protected override void Setup() {
     formationType = InputControl.Formation.Ranks;
 
     line = transform.Find("line").GetComponent<LineRenderer>();
     linePositions = new Vector3[7];
-  }
 
+    moveHandle = transform.Find("Move");
+    moveHandle.gameObject.AddComponent<InputRelay>().Init(gameObject);
+
+  }
 
   void Update() {
   }
 
-  public override void Place(Vector3 start, Vector3 end, int lastSelectorSize, bool useMinSize = false) {
+  public override void Place(Vector3 start, Vector3 end, bool useMinSize = false) {
     gameObject.SetActive(true);
 
-    base.Place(start, end, lastSelectorSize);
+    base.Place(start, end);
     float minSize = (useMinSize ? minRankWidth : 1) * rankOffset;
     float width = Mathf.Max(Vector3.Distance(start, end), minSize);
     Vector3 startPos = flipped ? end : start;
@@ -38,12 +45,9 @@ public class SelectorRanks : Selector {
       if ((centerPos - transform.position).magnitude < 0.1f) {
         forwardDir = transform.forward;
       } else {
-        forwardDir = (centerPos - inputControl.GetClusterCenter()).normalized;
+        forwardDir = (centerPos - cluster.GetAveragePosition()).normalized;
       }
     }
-
-    transform.position = centerPos;
-    transform.rotation = Quaternion.LookRotation(forwardDir, Vector3.up);
 
     linePositions[0] = new Vector3((width / 2) + 1, 1, 0);
     linePositions[1] = new Vector3(width / 2, 0, 0);
@@ -53,13 +57,17 @@ public class SelectorRanks : Selector {
     linePositions[5] = new Vector3(-width / 2, 0, 0);
     linePositions[6] = new Vector3((-width / 2) - 1, 1, 0);
 
+    moveHandle.localPosition = new Vector3(0, 1, 0);
+
     line.SetPositions(linePositions);
-  }
-  public override void PlacementComplete(Vector3 startPos, Vector3 endPos, int lastSelectorSize) {
-    Place(startPos, endPos, lastSelectorSize, true);
+    SetPose(centerPos, Quaternion.LookRotation(forwardDir, Vector3.up));
   }
 
-  public override ClusterPositions GeneratePositions(int unitCount, Vector3 startPos, Vector3 endPos, int lastRankWidth) {
+  public override void PlacementComplete(Vector3 startPos, Vector3 endPos) {
+    Place(startPos, endPos, true);
+  }
+
+  public override Vector3[] GeneratePositions(int unitCount, Vector3 startPos, Vector3 endPos) {
     List<Vector3> positions = new List<Vector3>();
     Vector3 movePos = Vector3.Lerp(startPos, endPos, 0.5f);
     Vector3 offset = (startPos - endPos);
@@ -71,7 +79,8 @@ public class SelectorRanks : Selector {
         maxRankWidth
       );
     if (formationWidth < rankOffset) {
-      rankWidth = lastRankWidth;
+      Debug.Log("Formation too small");
+      rankWidth = Mathf.CeilToInt(lastSelectorSize);
     }
 
     int unitNumber = 0;
@@ -93,7 +102,29 @@ public class SelectorRanks : Selector {
         positions.Add(unitMovePos);
       }
     }
-    ClusterPositions clusterPositions = new ClusterPositions(rankWidth, positions.ToArray());
-    return clusterPositions;
+    lastSelectorSize = formationWidth;
+    return positions.ToArray();
+  }
+
+  public void OnPointerDown(PointerEventData eventData) {
+    Vector3 mapPos;
+    if (inputControl.GetTerrainIntersection(out mapPos)) {
+      moveOffset = mapPos - cluster.transform.position;
+    }
+  }
+
+  public void OnDrag(PointerEventData eventData) {
+    if (eventData.pointerPress == moveHandle.gameObject) {
+      Vector3 mapPos;
+      if (inputControl.GetTerrainIntersection(out mapPos)) {
+        SetPose(mapPos - moveOffset);
+      }
+    }
+  }
+
+  public void OnPointerUp(PointerEventData eventData) {
+    Vector3 start = new Vector3((lastSelectorSize / 2), 0, 0);
+    Vector3 end = new Vector3((-lastSelectorSize / 2), 0, 0);
+    cluster.Command(transform.TransformPoint(start), transform.TransformPoint(end));
   }
 }

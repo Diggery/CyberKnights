@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: PrefabInventory
   m_EditorClassIdentifier: 
   prefabs:
+  - name: Selector_Ranks
+    prefab: {fileID: 8553606889030695674, guid: 9c733c2cabf7dbf41859eae269657b63,
+      type: 3}
+  - name: Selector_Mob
+    prefab: {fileID: 8463796192874119872, guid: c6e8fb70da2213548b6b801bf543169c,
+      type: 3}
   - name: Arrow
     prefab: {fileID: 8631785246239690179, guid: fe6eef5a2ec6609428bbda7ab4cab1c2,
       type: 3}

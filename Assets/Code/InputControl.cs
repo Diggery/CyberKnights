@@ -10,16 +10,12 @@ public class InputControl : MonoBehaviour {
   Vector3 mouseDownPos = Vector3.zero;
   List<ClusterControl> clusters = new List<ClusterControl>();
   ClusterControl selectedCluster;
-  Selector[] inputSelectors;
   public enum Formation {
     Mob, Ranks, Vanguard, Line, Arc
   }
 
   void Start() {
     mainCamera = Camera.main;
-    inputSelectors = transform.GetComponentsInChildren<Selector>();
-    foreach (var Selector in inputSelectors) Selector.Init();
-
   }
 
   // Update is called once per frame
@@ -31,20 +27,19 @@ public class InputControl : MonoBehaviour {
       EventSystem.current.RaycastAll(eventData, results);
       if (results[0].gameObject.tag.Equals("Terrain")) {
         mouseDownPos = Input.mousePosition;
-        Ray ray = mainCamera.ScreenPointToRay(new Vector3(mouseDownPos.x, mouseDownPos.y, 0.0f));
-        RaycastHit hit;
-        mouseInputInProgress = Physics.Raycast(ray, out hit);
+        Vector3 mapPos;
+        mouseInputInProgress = GetTerrainIntersection(out mapPos);
         if (mouseInputInProgress) {
-          mouseDownPos = hit.point;
+          mouseDownPos = mapPos;
         }
       }
     }
 
     if (mouseInputInProgress && selectedCluster) {
-      Ray ray = mainCamera.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
-      RaycastHit hit;
-      if (Physics.Raycast(ray, out hit)) {
-        selectedCluster.PlaceFormation(mouseDownPos, hit.point);
+
+      Vector3 mapPos;
+      if (GetTerrainIntersection(out mapPos)) {
+        selectedCluster.PlaceFormation(mouseDownPos, mapPos);
       }
       if (Input.GetMouseButtonDown(1)) {
         selectedCluster.FlipFormation();
@@ -52,29 +47,22 @@ public class InputControl : MonoBehaviour {
     }
 
     if (Input.GetMouseButtonUp(0)) {
-      Ray ray = mainCamera.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
-      Vector3 mouseUpPos = Vector3.zero;
-      RaycastHit hit;
-      if (mouseInputInProgress && selectedCluster && Physics.Raycast(ray, out hit)) {
-        mouseUpPos = hit.point;
-        selectedCluster.Command(mouseDownPos, mouseUpPos);
+      Vector3 mapPos;
+      if (mouseInputInProgress && selectedCluster && GetTerrainIntersection(out mapPos)) {
+        selectedCluster.Command(mouseDownPos, mapPos);
       }
       mouseInputInProgress = false;
     }
   }
 
-  public Selector GetFormationSelector(Formation formationType) {
-    Selector selectedSelector = null;
-    foreach (Selector Selector in inputSelectors) {
-      if (Selector.formationType == formationType) {
-        selectedSelector = Selector;
-        break;
-      }
-    }
-    if (selectedSelector == null) {
-      Debug.Log("Can't find " + formationType + " selector");
-    }
-    return selectedSelector;
+  public bool GetTerrainIntersection(out Vector3 mapPos) {
+    Ray ray = mainCamera.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
+    RaycastHit hit;
+    LayerMask terrainMask = LayerMask.GetMask("Terrain");
+    bool didHit = Physics.Raycast(ray, out hit, 1000, terrainMask);
+    mapPos = didHit ? hit.point : Vector3.zero;
+
+    return didHit;
   }
 
   public void AddCluster(ClusterControl newCluster) {
@@ -92,9 +80,5 @@ public class InputControl : MonoBehaviour {
   }
   public void ClusterDeselected(ClusterControl deselected) {
     selectedCluster = null;
-  }
-
-  public Vector3 GetClusterCenter() {
-    return selectedCluster.GetAveragePosition();
   }
 }

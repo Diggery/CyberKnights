@@ -19,9 +19,9 @@ public class SelectorMob : Selector {
 
   void Update() {
   }
-  public override void Place(Vector3 start, Vector3 end, int lastSelectorSize, bool useMinSize = false) {
+  public override void Place(Vector3 start, Vector3 end, bool useMinSize = false) {
 
-    base.Place(start, end, lastSelectorSize);
+    base.Place(start, end);
     Vector3 offset = (start - end);
     Vector3 center = Vector3.Lerp(start, end, 0.5f);
     float size = offset.magnitude / 2.0f;
@@ -30,7 +30,7 @@ public class SelectorMob : Selector {
 
   }
 
-  public override ClusterPositions GeneratePositions(int unitCount, Vector3 startPos, Vector3 endPos, int lastSelectorSize) {
+  public override Vector3[] GeneratePositions(int unitCount, Vector3 startPos, Vector3 endPos) {
     List<Vector3> positions = new List<Vector3>();
 
     Vector3 offset = (startPos - endPos);
@@ -49,9 +49,8 @@ public class SelectorMob : Selector {
       positions.Add(center + posOffset);
     }
     transform.position = center;
-    ClusterPositions clusterPositions = new ClusterPositions(Mathf.CeilToInt(mobRadius), positions.ToArray());
-
-    return clusterPositions;
+    lastSelectorSize = Mathf.RoundToInt(mobRadius);
+    return positions.ToArray();
   }
 
 

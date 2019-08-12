@@ -11,7 +11,6 @@ public class ClusterControl : MonoBehaviour {
 
   public InputControl.Formation formationType = InputControl.Formation.Mob;
   Selector currentSelector;
-  int lastSelectorSize = 0;
   UICluster uiCluster;
   public int UnitsInCluster {
     get { return units.Count; }
@@ -59,7 +58,7 @@ public class ClusterControl : MonoBehaviour {
 
   private void Update() {
     if (units.Count == 0) return;
-    
+
     unitTicker = (unitTicker + 1) % units.Count;
     units[unitTicker].UpdateBrain();
 
@@ -68,28 +67,37 @@ public class ClusterControl : MonoBehaviour {
     line.rotation = Quaternion.LookRotation(forward);
   }
 
+  Selector CreateSelector(InputControl.Formation formationType) {
+    GameObject selectorObj = Instantiate(
+      gameManager.GetPrefab("Selector_" + formationType.ToString()),
+      transform.position,
+      transform.rotation,
+      transform
+    );
+
+    return selectorObj.GetComponent<Selector>().Init(this);
+  }
+
   public void Select(bool setting) {
     uiCluster.IsSelected = setting;
   }
 
   public void PlaceFormation(Vector3 start, Vector3 end) {
-    currentSelector = gameManager.InputControl.GetFormationSelector(formationType);
-    currentSelector.Place(start, end, lastSelectorSize);
+    if (!currentSelector) {
+      currentSelector = CreateSelector(formationType);
+    }
+    currentSelector.Place(start, end);
   }
 
   public void Command(Vector3 start, Vector3 end) {
-    currentSelector.PlacementComplete(start, end, lastSelectorSize);
-    Selector.ClusterPositions clusterPositions = currentSelector.GeneratePositions(units.Count, start, end, lastSelectorSize);
-    lastSelectorSize = clusterPositions.selectorSize;
+    currentSelector.PlacementComplete(start, end);
+    Vector3[] clusterPositions = currentSelector.GeneratePositions(units.Count, start, end);
     Vector3 centerPos = Vector3.Lerp(start, end, 0.5f);
 
-    for (int i = 0; i < clusterPositions.positions.Length; i++) {
-      units[i].Brain.ClusterPos = clusterPositions.positions[i];
-      units[i].Brain.MoveTo(clusterPositions.positions[i]);
+    for (int i = 0; i < clusterPositions.Length; i++) {
+      units[i].Brain.ClusterPos = clusterPositions[i];
+      units[i].Brain.MoveTo(clusterPositions[i]);
     }
-
-    transform.position = currentSelector.transform.position;
-    transform.rotation = currentSelector.transform.rotation;
   }
 
   public void FlipFormation() {
@@ -153,7 +161,6 @@ public class ClusterControl : MonoBehaviour {
   }
 
   public void AttackCluster(ClusterControl targetCluster) {
-
     for (int i = 0; i < units.Count; i++) {
       if (units[i].Brain.State.Equals("Idle"))
         units[i].Brain.AttackTarget(targetCluster.Units[i % targetCluster.Units.Count], true);
