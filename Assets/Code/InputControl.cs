@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class InputControl : MonoBehaviour {
 
   Camera mainCamera;
+  public CameraControl CameraControl { get; set; }
   bool mouseInputInProgress = false;
   Vector3 mouseDownPos = Vector3.zero;
   List<ClusterControl> clusters = new List<ClusterControl>();
@@ -17,6 +18,7 @@ public class InputControl : MonoBehaviour {
 
   void Start() {
     mainCamera = Camera.main;
+    CameraControl = mainCamera.transform.root.GetComponent<CameraControl>();
   }
 
   // Update is called once per frame
@@ -56,12 +58,20 @@ public class InputControl : MonoBehaviour {
     }
 
     if (Input.GetButtonDown("Action")) selectedCluster.Release("Tired");
-    if (Input.GetKeyDown(KeyCode.Alpha1)) IngameUI.ButtonPressed("1");
-    if (Input.GetKeyDown(KeyCode.Alpha2)) IngameUI.ButtonPressed("2");
-    if (Input.GetKeyDown(KeyCode.Alpha3)) IngameUI.ButtonPressed("3");
-    if (Input.GetKeyDown(KeyCode.Alpha4)) IngameUI.ButtonPressed("4");
-    if (Input.GetKeyDown(KeyCode.Q)) IngameUI.ButtonPressed("Q");
-    if (Input.GetKeyDown(KeyCode.E)) IngameUI.ButtonPressed("E");
+
+    if (Input.GetKeyDown(KeyCode.Alpha1)) IngameUI.KeyPressed("1");
+    if (Input.GetKeyDown(KeyCode.Alpha2)) IngameUI.KeyPressed("2");
+    if (Input.GetKeyDown(KeyCode.Alpha3)) IngameUI.KeyPressed("3");
+    if (Input.GetKeyDown(KeyCode.Alpha4)) IngameUI.KeyPressed("4");
+    
+    if (Input.GetKey(KeyCode.Q)) CameraControl.Rotate(1);
+    if (Input.GetKey(KeyCode.E)) CameraControl.Rotate(-1);
+
+    if (Input.GetKey(KeyCode.W)) CameraControl.Move(Vector3.forward);
+    if (Input.GetKey(KeyCode.A)) CameraControl.Move(Vector3.left);
+    if (Input.GetKey(KeyCode.S)) CameraControl.Move(Vector3.back);
+    if (Input.GetKey(KeyCode.D)) CameraControl.Move(Vector3.right);
+
   }
 
   public bool GetTerrainIntersection(out Vector3 mapPos) {
