@@ -58,6 +58,9 @@ public class UIClusterLayout : MonoBehaviour {
     foreach (Transform child in selectedClusterLayout.transform) {
       GameObject.Destroy(child.gameObject);
     }
+    foreach (Transform child in selectedUnitTypes.transform) {
+      GameObject.Destroy(child.gameObject);
+    }
   }
 
   public void AddCluster(ClusterControl cluster) {
