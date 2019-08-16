@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class ClusterControl : MonoBehaviour {
   GameManager gameManager;
@@ -18,6 +19,7 @@ public class ClusterControl : MonoBehaviour {
 
   List<UnitControl> units = new List<UnitControl>();
   public List<UnitControl> Units { get { return units; } }
+  public int Count { get { return units.Count; } }
 
   Vector3 homePos;
   public Vector3 HomePos {
@@ -38,6 +40,10 @@ public class ClusterControl : MonoBehaviour {
   }
 
   public ClusterSegment[] clusterMakeup;
+
+  [System.Serializable]
+  public class UnitLostEvent : UnityEvent<UnitControl> {}
+  public UnitLostEvent unitLost = new UnitLostEvent();
 
   private void Start() {
     gameManager = GameManager.Instance;
@@ -128,6 +134,7 @@ public class ClusterControl : MonoBehaviour {
         GameObject newUnit = GameObject.Instantiate(gameManager.GetUnitPrefab(unitType), transform.position + offset, transform.rotation);
         UnitControl newUnitControl = newUnit.GetComponent<UnitControl>();
         newUnitControl.TeamName = teamName;
+        newUnitControl.UnitType = unitType;
         newUnitControl.Cluster = this;
         newUnit.name = gameObject.tag + "-" + unitType + "-" + unitNumber;
         newUnit.tag = gameObject.tag;
@@ -169,16 +176,18 @@ public class ClusterControl : MonoBehaviour {
 
   public void RemoveUnit(UnitControl unit) {
     units.Remove(unit);
+    unitLost.Invoke(unit);
     if (units.Count == 0) {
+      gameManager.InputControl.ClusterDeselected(this);
       Debug.Log(gameObject.name + " is empty");
     }
   }
 
   public void Release(string filter) {
-        foreach (var unit in units) {
-          if (unit.EnergyStatus < 0.25f) {
-            unit.Retreat();
-          }
-        }
+    foreach (var unit in units) {
+      if (unit.EnergyStatus < 0.25f) {
+        unit.Retreat();
+      }
+    }
   }
 }

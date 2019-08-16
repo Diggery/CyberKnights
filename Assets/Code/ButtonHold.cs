@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-public class HoldButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
+public class ButtonHold : MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
 
   bool isButtonDown = false;
   public UnityEvent OnButtonDown;
 
-  public HoldButton Init(UnityAction callback) {
+  public ButtonHold Init(UnityAction callback) {
     OnButtonDown = new UnityEvent();
     OnButtonDown.AddListener(callback);
     return this;

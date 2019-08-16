@@ -11,7 +11,7 @@ public class InputControl : MonoBehaviour {
   Vector3 mouseDownPos = Vector3.zero;
   List<ClusterControl> clusters = new List<ClusterControl>();
   ClusterControl selectedCluster;
-  public InGameUI IngameUI { get; set; }
+  public UIInGame IngameUI { get; set; }
   public enum Formation {
     Mob, Ranks, Vanguard, Line, Arc
   }
@@ -63,7 +63,7 @@ public class InputControl : MonoBehaviour {
     if (Input.GetKeyDown(KeyCode.Alpha2)) IngameUI.KeyPressed("2");
     if (Input.GetKeyDown(KeyCode.Alpha3)) IngameUI.KeyPressed("3");
     if (Input.GetKeyDown(KeyCode.Alpha4)) IngameUI.KeyPressed("4");
-    
+
     if (Input.GetKey(KeyCode.Q)) CameraControl.Rotate(1);
     if (Input.GetKey(KeyCode.E)) CameraControl.Rotate(-1);
 
@@ -94,11 +94,16 @@ public class InputControl : MonoBehaviour {
     if (!clusters.Contains(selected)) {
       clusters.Add(selected);
     }
+    IngameUI.SelectCluster(selected);
     selectedCluster = selected;
     Debug.Log("Cluster Selected");
   }
 
   public void ClusterDeselected(ClusterControl deselected) {
+    if (!selectedCluster || selectedCluster != deselected)
+      return;
+      
     selectedCluster = null;
+    IngameUI.DeSelectCluster(deselected);
   }
 }

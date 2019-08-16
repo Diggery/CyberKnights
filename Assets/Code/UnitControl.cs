@@ -6,12 +6,8 @@ using UnityEngine.AI;
 public class UnitControl : MonoBehaviour {
   GameManager gameManager;
 
-  string teamName;
-
-  public string TeamName {
-    get { return teamName; }
-    set { teamName = value; }
-  }
+  public string TeamName { get; set; }
+  public string UnitType { get; set; }
 
   Vector3 anchorPos;
   NavMeshAgent navAgent;
@@ -21,6 +17,7 @@ public class UnitControl : MonoBehaviour {
     get { return clusterControl; }
     set { clusterControl = value; }
   }
+
   float moveSpeed = 1.5f;
   public float MoveSpeed {
     get { return moveSpeed; }
@@ -43,8 +40,6 @@ public class UnitControl : MonoBehaviour {
   }
   public string missilePrefab = "none";
   public Vector2 missileRange = new Vector2(5.0f, 30.0f);
-
-
 
   CapsuleCollider collision;
   Transform attach_Center;
@@ -243,7 +238,7 @@ public class UnitControl : MonoBehaviour {
   }
 
   public void Retreat() {
-    brain.State = "Retreating"; 
+    brain.State = "Retreating";
   }
 
   public void UseEnergy(float amount) {

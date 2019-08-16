@@ -4,67 +4,89 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIClusterLayout : MonoBehaviour {
+  ClusterControl selectedCluster;
 
-  RectTransform layoutContainer;
-  GridLayoutGroup gridLayout;
+  RectTransform selectedClusterLayout;
+  GridLayoutGroup selectedClusterGrid;
+
+  public RectTransform clusterMarkerPrefab;
   public RectTransform unitMarkerPrefab;
-  List<RectTransform> unitMarkers = new List<RectTransform>();
-  public int testUnitNumber = 48;
-  int unitNumber = 48;
+  public RectTransform unitTypePrefab;
+  public Color[] unitTypeColors;
+
+  List<UIClusterMarker> clusterMarkers = new List<UIClusterMarker>();
+
   void Start() {
-    layoutContainer = GetComponent<RectTransform>();
-    gridLayout = GetComponent<GridLayoutGroup>();
+    selectedClusterLayout = transform.Find("ClusterLayout").GetComponent<RectTransform>();
+    selectedClusterGrid = selectedClusterLayout.gameObject.GetComponent<GridLayoutGroup>();
   }
 
-  void Update() {
-    if (unitNumber != testUnitNumber) {
-      unitNumber = Mathf.Clamp(testUnitNumber, 1, 64);
-      BuildLayout();
-    }
-  }
-
-  // public void BuildLayout() {
-  //   int layoutWidth = Mathf.CeilToInt(Mathf.Sqrt(unitNumber));
-  //   int layoutHeight = Mathf.CeilToInt(unitNumber / layoutWidth);
-  //   int lastRow = unitNumber % layoutWidth;
-  //       float spacing = 1;
-
-  //   float cellSize = Mathf.Clamp( layoutContainer.sizeDelta.x / (layoutWidth), 1, 30 );
-  //   unitMarkers.Clear();
-  //   foreach (Transform child in transform) GameObject.Destroy(child.gameObject);
-  //   Debug.Log("Layout size is " + layoutWidth + " by " + layoutHeight + " last row contains " + lastRow);
-  //   for (int y = 0; y < layoutHeight; y++) {
-  //     for (int x = 0; x < layoutWidth; x++) {
-  //       RectTransform newUnitMarker = Instantiate(unitMarkerPrefab, transform);
-
-  //       newUnitMarker.anchoredPosition = new Vector2(
-  //         x * (cellSize),
-  //         y * -(cellSize)
-  //       );
-  //       newUnitMarker.sizeDelta = new Vector2(cellSize, cellSize);
-  //       newUnitMarker.gameObject.SetActive(true);
-  //       unitMarkers.Add(newUnitMarker);
-  //     }
-  //   }
-  // }
-
-  public void BuildLayout() {
-    int layoutWidth = Mathf.CeilToInt(Mathf.Sqrt(unitNumber));
+  public void BuildLayout(ClusterControl cluster) {
+    int layoutWidth = Mathf.CeilToInt(Mathf.Sqrt(cluster.Count));
     float cellSize = Mathf.Clamp(
-      (layoutContainer.sizeDelta.x - gridLayout.padding.left - gridLayout.padding.right) / layoutWidth,
+      (selectedClusterLayout.sizeDelta.x - selectedClusterGrid.padding.left - selectedClusterGrid.padding.right) / layoutWidth,
       1, 30
     );
 
-    gridLayout.constraintCount = layoutWidth;
-    gridLayout.cellSize = new Vector2(cellSize, cellSize);
-    unitMarkers.Clear();
-    foreach (Transform child in transform) {
+    selectedClusterGrid.constraintCount = layoutWidth;
+    selectedClusterGrid.cellSize = new Vector2(cellSize, cellSize);
+
+    ClearLayout();
+
+    int typeCount = 0;
+    string lastType = cluster.Units[typeCount].UnitType;
+    for (int i = 0; i < cluster.Count; i++) {
+      RectTransform newUnitMarker = Instantiate(unitMarkerPrefab, selectedClusterLayout.transform);
+      Image marker = newUnitMarker.GetComponent<Image>();
+
+      if (!cluster.Units[i].UnitType.Equals(lastType)) {
+        lastType = cluster.Units[i].UnitType;
+        Debug.Log("adding " + cluster.Units[i].UnitType);
+        typeCount++;
+      }
+      marker.color = unitTypeColors[typeCount % unitTypeColors.Length];
+
+    }
+  }
+
+  void ClearLayout() {
+    foreach (Transform child in selectedClusterLayout.transform) {
       GameObject.Destroy(child.gameObject);
     }
-    for (int i = 0; i < unitNumber; i++) {
-      RectTransform newUnitMarker = Instantiate(unitMarkerPrefab, transform);
-      newUnitMarker.gameObject.SetActive(true);
-      unitMarkers.Add(newUnitMarker);
+  }
+
+  public void AddCluster(ClusterControl cluster) {
+    RectTransform newUnitMarker = Instantiate(unitMarkerPrefab, selectedClusterLayout.transform);
+    UIClusterMarker marker = newUnitMarker.GetComponent<UIClusterMarker>();
+    marker.control = cluster;
+    clusterMarkers.Add(marker);
+  }
+
+  public void SelectCluster(ClusterControl cluster) {
+    if (selectedCluster) selectedCluster.unitLost.RemoveAllListeners();
+    selectedCluster = cluster;
+    BuildLayout(selectedCluster);
+
+    cluster.unitLost.AddListener(OnSelectedClusterChange);
+  }
+
+  public void DeSelectCluster(ClusterControl cluster) {
+
+    selectedCluster.unitLost.RemoveAllListeners();
+    selectedCluster = null;
+    ClearLayout();
+  }
+
+  public void RemoveCluster(ClusterControl cluster) {
+    foreach (var item in clusterMarkers) {
+      if (item.control == cluster) {
+        clusterMarkers.Remove(item);
+        break;
+      }
     }
+  }
+
+  public void OnSelectedClusterChange(UnitControl unitLost) {
+    BuildLayout(selectedCluster);
   }
 }

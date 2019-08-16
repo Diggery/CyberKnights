@@ -152,8 +152,8 @@ MonoBehaviour:
   meleeRange: 1
   missilePrefab: Arrow
   missileRange: {x: 5, y: 30}
-  maxArmorLevel: 100
-  maxEnergyLevel: 10
+  maxArmorLevel: 10
+  maxEnergyLevel: 20
 --- !u!1 &4937295575869507418
 GameObject:
   m_ObjectHideFlags: 0

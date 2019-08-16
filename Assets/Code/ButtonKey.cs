@@ -18,7 +18,7 @@ public class ButtonKey : MonoBehaviour {
 
   void Update() {
     if (Input.GetKeyDown(key)) {
-      image.color = button.colors.pressedColor;
+      image.color = idleColor * button.colors.pressedColor;
     }
     if (Input.GetKeyUp(key)) {
       image.color = idleColor;
