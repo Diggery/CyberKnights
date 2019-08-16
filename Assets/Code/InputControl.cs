@@ -72,6 +72,11 @@ public class InputControl : MonoBehaviour {
     if (Input.GetKey(KeyCode.S)) CameraControl.Move(Vector3.back);
     if (Input.GetKey(KeyCode.D)) CameraControl.Move(Vector3.right);
 
+    float scrollAmount = Input.GetAxis("Mouse ScrollWheel");
+    if (scrollAmount != 0) {
+      CameraControl.Zoom(scrollAmount);
+    }
+
   }
 
   public bool GetTerrainIntersection(out Vector3 mapPos) {
