@@ -7,17 +7,19 @@ public class UIClusterLayout : MonoBehaviour {
   ClusterControl selectedCluster;
 
   RectTransform selectedClusterLayout;
+  RectTransform selectedUnitTypes;
   GridLayoutGroup selectedClusterGrid;
 
   public RectTransform clusterMarkerPrefab;
   public RectTransform unitMarkerPrefab;
-  public RectTransform unitTypePrefab;
-  public Color[] unitTypeColors;
+  public RectTransform typeMarkerPrefab;
+  public Color[] typeMarkerColors;
 
   List<UIClusterMarker> clusterMarkers = new List<UIClusterMarker>();
 
   void Start() {
     selectedClusterLayout = transform.Find("ClusterLayout").GetComponent<RectTransform>();
+    selectedUnitTypes = transform.Find("UnitTypes").GetComponent<RectTransform>();
     selectedClusterGrid = selectedClusterLayout.gameObject.GetComponent<GridLayoutGroup>();
   }
 
@@ -35,16 +37,19 @@ public class UIClusterLayout : MonoBehaviour {
 
     int typeCount = 0;
     string lastType = cluster.Units[typeCount].UnitType;
+    RectTransform newTypeMarker = Instantiate(typeMarkerPrefab, selectedUnitTypes.transform);
+
     for (int i = 0; i < cluster.Count; i++) {
       RectTransform newUnitMarker = Instantiate(unitMarkerPrefab, selectedClusterLayout.transform);
       Image marker = newUnitMarker.GetComponent<Image>();
 
       if (!cluster.Units[i].UnitType.Equals(lastType)) {
         lastType = cluster.Units[i].UnitType;
-        Debug.Log("adding " + cluster.Units[i].UnitType);
+        newTypeMarker = Instantiate(typeMarkerPrefab, selectedUnitTypes.transform);
+
         typeCount++;
       }
-      marker.color = unitTypeColors[typeCount % unitTypeColors.Length];
+      marker.color = typeMarkerColors[typeCount % typeMarkerColors.Length];
 
     }
   }

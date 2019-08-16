@@ -886,19 +886,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a4c6d4d0a8de4a6c815f8b4d8613534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clusterMarkerPrefab: {fileID: 0}
+  clusterMarkerPrefab: {fileID: 3018320560852143963, guid: be14ecf5ad459fa41970f36cea84fcee,
+    type: 3}
   unitMarkerPrefab: {fileID: 8967865459125242364, guid: a5f2a33ae348e475ab06b828ea900d7d,
     type: 3}
-  unitTypePrefab: {fileID: 0}
-  unitTypeColors:
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 1, g: 0.489296, b: 0, a: 1}
-  - {r: 1, g: 0.90574455, b: 0, a: 1}
-  - {r: 0, g: 0.53735733, b: 1, a: 1}
-  - {r: 1, g: 0, b: 0.97207546, a: 1}
-  - {r: 0.0326643, g: 0, b: 1, a: 1}
-  - {r: 0, g: 1, b: 0.009654045, a: 1}
-  - {r: 0.22830486, g: 0, b: 1, a: 1}
+  typeMarkerPrefab: {fileID: 1751228551322923234, guid: 800a7c249cde06742a38aa68122b1d3f,
+    type: 3}
+  typeMarkerColors:
+  - {r: 0.9776187, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0.018016815, a: 1}
+  - {r: 1, g: 0, b: 0.95441294, a: 1}
+  - {r: 0, g: 0.104230404, b: 1, a: 1}
 --- !u!1 &795401869
 GameObject:
   m_ObjectHideFlags: 0
