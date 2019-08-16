@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class KeyButton : MonoBehaviour {
+public class ButtonKey : MonoBehaviour {
   Image image;
   Button button;
   KeyCode key;
   Color idleColor;
-  public KeyButton Init(KeyCode keyToPress) {
+  public ButtonKey Init(KeyCode keyToPress) {
     key = keyToPress;
     button = GetComponent<Button>();
     image = GetComponent<Image>();
