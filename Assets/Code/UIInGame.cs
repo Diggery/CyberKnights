@@ -16,7 +16,7 @@ public class UIInGame : MonoBehaviour {
   void Start() {
     inputControl = GameManager.Instance.InputControl;
 
-    Transform clusterLayoutObj = transform.Find("ClusterControls/SelectedCluster");
+    Transform clusterLayoutObj = transform.Find("ClusterControls");
     clusterLayout = clusterLayoutObj.GetComponent<UIClusterLayout>();
 
     Transform keyControls = transform.Find("ClusterControls/KeyControls");
