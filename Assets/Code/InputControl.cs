@@ -90,25 +90,44 @@ public class InputControl : MonoBehaviour {
   }
 
   public void AddCluster(ClusterControl newCluster) {
+    if (!newCluster.tag.Equals("Friend")) return;
+
     clusters.Add(newCluster);
+    IngameUI.AddCluster(newCluster);
   }
-  public void ClusterSelected(ClusterControl selected) {
+
+  public void RemoveCluster(ClusterControl deadCluster) {
+    if (!deadCluster.tag.Equals("Friend")) return;
+
+    DeselectCluster(deadCluster);
+    clusters.Remove(deadCluster);
+    IngameUI.RemoveCluster(deadCluster);
+  }
+
+  public void SelectCluster(ClusterControl selected) {
+    if (!selected.tag.Equals("Friend")) return;
+
     foreach (ClusterControl cluster in clusters) {
       if (cluster != selected) cluster.Select(false);
     }
+
     if (!clusters.Contains(selected)) {
       clusters.Add(selected);
     }
+
     IngameUI.SelectCluster(selected);
     selectedCluster = selected;
-    Debug.Log("Cluster Selected");
+    selected.Select(true);
   }
 
-  public void ClusterDeselected(ClusterControl deselected) {
+  public void DeselectCluster(ClusterControl deselected) {
+    if (!deselected.tag.Equals("Friend")) return;
+
     if (!selectedCluster || selectedCluster != deselected)
       return;
-      
+
     selectedCluster = null;
     IngameUI.DeSelectCluster(deselected);
+    deselected.Select(false);
   }
 }

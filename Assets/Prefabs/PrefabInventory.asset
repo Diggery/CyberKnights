@@ -33,3 +33,12 @@ MonoBehaviour:
   - name: SparkBurst
     prefab: {fileID: 1064674423691139871, guid: 0571608568da6c24f852288c5a0fc364,
       type: 3}
+  - name: UI_ClusterMarker
+    prefab: {fileID: 4361096259695636542, guid: be14ecf5ad459fa41970f36cea84fcee,
+      type: 3}
+  - name: UI_TypeMarker
+    prefab: {fileID: 1751228551322923237, guid: 800a7c249cde06742a38aa68122b1d3f,
+      type: 3}
+  - name: UI_UnitMarker
+    prefab: {fileID: 8967865459125242363, guid: a5f2a33ae348e475ab06b828ea900d7d,
+      type: 3}

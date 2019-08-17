@@ -4,23 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIClusterLayout : MonoBehaviour {
+  GameManager gameManager;
   ClusterControl selectedCluster;
 
   RectTransform selectedClusterLayout;
   RectTransform selectedUnitTypes;
   GridLayoutGroup selectedClusterGrid;
 
-  public RectTransform clusterMarkerPrefab;
-  public RectTransform unitMarkerPrefab;
-  public RectTransform typeMarkerPrefab;
   public Color[] typeMarkerColors;
 
-  List<UIClusterMarker> clusterMarkers = new List<UIClusterMarker>();
-
   void Start() {
+    gameManager = GameManager.Instance;
     selectedClusterLayout = transform.Find("ClusterLayout").GetComponent<RectTransform>();
     selectedUnitTypes = transform.Find("UnitTypes").GetComponent<RectTransform>();
     selectedClusterGrid = selectedClusterLayout.gameObject.GetComponent<GridLayoutGroup>();
+
   }
 
   public void BuildLayout(ClusterControl cluster) {
@@ -37,20 +35,19 @@ public class UIClusterLayout : MonoBehaviour {
 
     int typeCount = 0;
     string lastType = cluster.Units[typeCount].UnitType;
-    RectTransform newTypeMarker = Instantiate(typeMarkerPrefab, selectedUnitTypes.transform);
+    GameObject typeMarkerPrefab = gameManager.GetPrefab("UI_TypeMarker");
+    Instantiate(typeMarkerPrefab, selectedUnitTypes.transform);
 
     for (int i = 0; i < cluster.Count; i++) {
-      RectTransform newUnitMarker = Instantiate(unitMarkerPrefab, selectedClusterLayout.transform);
+      GameObject newUnitMarker = Instantiate(gameManager.GetPrefab("UI_UnitMarker"), selectedClusterLayout.transform);
       Image marker = newUnitMarker.GetComponent<Image>();
 
       if (!cluster.Units[i].UnitType.Equals(lastType)) {
+        Instantiate(typeMarkerPrefab, selectedUnitTypes.transform);
         lastType = cluster.Units[i].UnitType;
-        newTypeMarker = Instantiate(typeMarkerPrefab, selectedUnitTypes.transform);
-
         typeCount++;
       }
       marker.color = typeMarkerColors[typeCount % typeMarkerColors.Length];
-
     }
   }
 
@@ -63,12 +60,7 @@ public class UIClusterLayout : MonoBehaviour {
     }
   }
 
-  public void AddCluster(ClusterControl cluster) {
-    RectTransform newUnitMarker = Instantiate(unitMarkerPrefab, selectedClusterLayout.transform);
-    UIClusterMarker marker = newUnitMarker.GetComponent<UIClusterMarker>();
-    marker.control = cluster;
-    clusterMarkers.Add(marker);
-  }
+
 
   public void SelectCluster(ClusterControl cluster) {
     if (selectedCluster) selectedCluster.unitLost.RemoveAllListeners();
@@ -83,15 +75,6 @@ public class UIClusterLayout : MonoBehaviour {
     selectedCluster.unitLost.RemoveAllListeners();
     selectedCluster = null;
     ClearLayout();
-  }
-
-  public void RemoveCluster(ClusterControl cluster) {
-    foreach (var item in clusterMarkers) {
-      if (item.control == cluster) {
-        clusterMarkers.Remove(item);
-        break;
-      }
-    }
   }
 
   public void OnSelectedClusterChange(UnitControl unitLost) {

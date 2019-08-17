@@ -8,11 +8,13 @@ public class ClusterControl : MonoBehaviour {
   GameManager gameManager;
   Camera mainCamera;
 
+  bool clusterReady = false;
+
   public string teamName = "Player";
 
   public InputControl.Formation formationType = InputControl.Formation.Mob;
   Selector currentSelector;
-  UICluster uiCluster;
+  public UICluster UI { get; set; }
   public int UnitsInCluster {
     get { return units.Count; }
   }
@@ -42,7 +44,7 @@ public class ClusterControl : MonoBehaviour {
   public ClusterSegment[] clusterMakeup;
 
   [System.Serializable]
-  public class UnitLostEvent : UnityEvent<UnitControl> {}
+  public class UnitLostEvent : UnityEvent<UnitControl> { }
   public UnitLostEvent unitLost = new UnitLostEvent();
 
   private void Start() {
@@ -54,9 +56,8 @@ public class ClusterControl : MonoBehaviour {
 
     StartCoroutine(CreateUnits());
     if (gameObject.tag.Equals("Friend")) {
-      gameManager.InputControl.AddCluster(this);
-      uiCluster = transform.Find("ClusterUI").GetComponent<UICluster>();
-      uiCluster.AddLine(marker.GetComponent<Renderer>(), line.GetComponent<Renderer>());
+      UI = transform.Find("ClusterUI").GetComponent<UICluster>();
+      UI.AddLine(marker.GetComponent<Renderer>(), line.GetComponent<Renderer>());
     }
   }
 
@@ -85,7 +86,9 @@ public class ClusterControl : MonoBehaviour {
   }
 
   public void Select(bool setting) {
-    uiCluster.IsSelected = setting;
+    if (!clusterReady) return;
+    if (!UI) Debug.Log(gameObject.name + " has no ClusterUI");
+    UI.IsSelected = setting;
   }
 
   public void PlaceFormation(Vector3 start, Vector3 end) {
@@ -145,6 +148,8 @@ public class ClusterControl : MonoBehaviour {
       }
     }
     yield return new WaitForSeconds(0.1f);
+    gameManager.InputControl.AddCluster(this);
+    clusterReady = true;
   }
 
   public Vector3 GetFlockingVector(UnitControl target) {
@@ -178,8 +183,7 @@ public class ClusterControl : MonoBehaviour {
     units.Remove(unit);
     unitLost.Invoke(unit);
     if (units.Count == 0) {
-      gameManager.InputControl.ClusterDeselected(this);
-      Debug.Log(gameObject.name + " is empty");
+      gameManager.InputControl.RemoveCluster(this);
     }
   }
 

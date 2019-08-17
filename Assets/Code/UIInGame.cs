@@ -11,10 +11,15 @@ public class UIInGame : MonoBehaviour {
   Button buttonRotateLeft;
   Button buttonRotateRight;
 
+  RectTransform clusterDisplay;
+  List<UIClusterMarker> clusterMarkers = new List<UIClusterMarker>();
+
   UIClusterLayout clusterLayout;
 
   void Start() {
     inputControl = GameManager.Instance.InputControl;
+
+    clusterDisplay = transform.Find("ClusterDisplay").GetComponent<RectTransform>();
 
     Transform clusterLayoutObj = transform.Find("ClusterControls");
     clusterLayout = clusterLayoutObj.GetComponent<UIClusterLayout>();
@@ -80,7 +85,11 @@ public class UIInGame : MonoBehaviour {
   }
 
   public void AddCluster(ClusterControl cluster) {
-    clusterLayout.AddCluster(cluster);
+    GameObject clusterMarkerPrefab = GameManager.Instance.GetPrefab("UI_ClusterMarker");
+    GameObject newClusterMarker = Instantiate(clusterMarkerPrefab, clusterDisplay.transform);
+    UIClusterMarker marker = newClusterMarker.GetComponent<UIClusterMarker>();
+    clusterMarkers.Add(marker);
+    marker.control = cluster;
   }
 
   public void SelectCluster(ClusterControl cluster) {
@@ -90,6 +99,11 @@ public class UIInGame : MonoBehaviour {
     clusterLayout.DeSelectCluster(cluster);
   }
   public void RemoveCluster(ClusterControl cluster) {
-    clusterLayout.RemoveCluster(cluster);
+    foreach (var item in clusterMarkers) {
+      if (item.control == cluster) {
+        clusterMarkers.Remove(item);
+        break;
+      }
+    }
   }
 }

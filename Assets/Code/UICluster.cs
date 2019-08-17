@@ -24,6 +24,7 @@ public class UICluster : MonoBehaviour {
       return isSelected;
     }
     set {
+      Debug.Log("Selecting " + gameObject.name + " ui: " + value);
       if (value == isSelected) return;
       if (value) {
         Interpolator.Start(selectColorIn);
@@ -65,14 +66,11 @@ public class UICluster : MonoBehaviour {
 
   public void OnPointerClick(PointerEventData eventData) {
     if (IsSelected) {
-      inputControl.ClusterDeselected(clusterControl);
-      IsSelected = false;
+      inputControl.DeselectCluster(clusterControl);
     } else {
-      inputControl.ClusterSelected(clusterControl);
-      IsSelected = true;
+      inputControl.SelectCluster(clusterControl);
     }
   }
-
 
   void OnSelectColorIn(Vector4 result) {
     uiBackground.color = result;
