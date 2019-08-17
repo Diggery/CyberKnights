@@ -51,13 +51,13 @@ public class SelectorRanks : Selector {
 
     linePositions[0] = new Vector3((width / 2) + 1, 1, 0);
     linePositions[1] = new Vector3(width / 2, 0, 0);
-    linePositions[2] = new Vector3(0.5f, 0, 0);
-    linePositions[3] = new Vector3(0, -0.5f, 0);
-    linePositions[4] = new Vector3(-0.5f, 0, 0);
+    linePositions[2] = new Vector3(0.25f, 0, 0);
+    linePositions[3] = new Vector3(0, -0.25f, 0);
+    linePositions[4] = new Vector3(-0.25f, 0, 0);
     linePositions[5] = new Vector3(-width / 2, 0, 0);
     linePositions[6] = new Vector3((-width / 2) - 1, 1, 0);
 
-    moveHandle.localPosition = new Vector3(0, 1, 0);
+    moveHandle.localPosition = new Vector3(0, 1, 2);
 
     line.SetPositions(linePositions);
     SetPose(centerPos, Quaternion.LookRotation(forwardDir, Vector3.up));

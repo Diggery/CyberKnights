@@ -24,7 +24,6 @@ public class UICluster : MonoBehaviour {
       return isSelected;
     }
     set {
-      Debug.Log("Selecting " + gameObject.name + " ui: " + value);
       if (value == isSelected) return;
       if (value) {
         Interpolator.Start(selectColorIn);

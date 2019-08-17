@@ -226,6 +226,7 @@ public class UnitControl : MonoBehaviour {
 
     brain.Attacked(attacker, type);
     armorLevel -= amount;
+    if (!attach_Center) Debug.Log(gameObject.name + " has no attach center");
     GameObject effect = Instantiate(gameManager.GetPrefab("SparkBurst"), attach_Center.position, attach_Center.rotation);
 
     if (armorLevel / maxArmorLevel < 0.25f) {

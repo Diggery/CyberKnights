@@ -29,6 +29,9 @@ public class Missile : MonoBehaviour {
   private void OnCollisionEnter(Collision other) {
     hitSomething = true;
     UnitControl control = other.gameObject.GetComponent<UnitControl>();
+    if (!m_owner) {
+      Debug.Log(gameObject.name + " has no owner");
+    }
     if (control) {
       control.TakeDamage(damage, m_owner, "Missile");
     }
