@@ -8,23 +8,29 @@ public class UIClusterLayout : MonoBehaviour {
   ClusterControl selectedCluster;
 
   RectTransform selectedClusterLayout;
-  RectTransform selectedUnitTypes;
   RectTransform unitMarkerPool;
   int poolCount = 0;
 
   GridLayoutGroup selectedClusterGrid;
 
+  List<UIUnitTypeMarker> unitTypeEntries = new List<UIUnitTypeMarker>();
   public Color[] typeMarkerColors;
 
   void Start() {
     gameManager = GameManager.Instance;
     selectedClusterLayout = transform.Find("ClusterLayout").GetComponent<RectTransform>();
-    selectedUnitTypes = transform.Find("UnitTypes").GetComponent<RectTransform>();
+
+    Transform unitTypeList = transform.Find("UnitTypes");
+    for (int i = 0; i < unitTypeList.childCount; i++) {
+      unitTypeEntries.Add(unitTypeList.GetChild(i).GetComponent<UIUnitTypeMarker>());
+    }
     selectedClusterGrid = selectedClusterLayout.gameObject.GetComponent<GridLayoutGroup>();
 
     unitMarkerPool = Instantiate(selectedClusterLayout, transform);
     unitMarkerPool.name = "UnitMarkerPool";
     unitMarkerPool.gameObject.SetActive(false);
+
+    ClearLayout();
   }
 
   void FillHoldingArea(int amount) {
@@ -49,23 +55,34 @@ public class UIClusterLayout : MonoBehaviour {
 
     int typeCount = 0;
     string lastType = cluster.Units[typeCount].UnitType;
-    GameObject typeMarkerPrefab = gameManager.GetPrefab("UI_TypeMarker");
-    Instantiate(typeMarkerPrefab, selectedUnitTypes);
 
     if (poolCount < cluster.Count)
       FillHoldingArea(cluster.Count - poolCount);
 
+    Material markerMaterial = null;
     for (int i = 0; i < cluster.Count; i++) {
       Transform unitMarker = unitMarkerPool.GetChild(0);
       unitMarker.SetParent(selectedClusterLayout);
+
       Image marker = unitMarker.GetComponent<Image>();
+      if (!markerMaterial) {
+        markerMaterial = marker.material;
+        Image image = unitTypeEntries[typeCount].GetComponent<Image>();
+        image.material = markerMaterial;
+      }
 
       if (!cluster.Units[i].UnitType.Equals(lastType)) {
-        Instantiate(typeMarkerPrefab, selectedUnitTypes);
-        lastType = cluster.Units[i].UnitType;
         typeCount++;
+        markerMaterial = Instantiate(markerMaterial);
+        lastType = cluster.Units[i].UnitType;
+        Image image = unitTypeEntries[typeCount].GetComponent<Image>();
+        image.material = markerMaterial;
       }
-      marker.color = typeMarkerColors[typeCount % typeMarkerColors.Length];
+
+      unitTypeEntries[typeCount].AddCount();
+
+      markerMaterial.SetColor("_Color1", typeMarkerColors[i % typeMarkerColors.Length]);
+      marker.material = markerMaterial;
     }
   }
 
@@ -75,8 +92,8 @@ public class UIClusterLayout : MonoBehaviour {
       selectedClusterLayout.GetChild(i).SetParent(unitMarkerPool);
     }
 
-    foreach (Transform child in selectedUnitTypes) {
-      GameObject.Destroy(child.gameObject);
+    foreach (UIUnitTypeMarker unitTypeMarker in unitTypeEntries) {
+      unitTypeMarker.Hide();
     }
   }
 
