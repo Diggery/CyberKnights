@@ -2,31 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIClusterLayout : MonoBehaviour {
   GameManager gameManager;
   ClusterControl selectedCluster;
 
-  RectTransform selectedClusterLayout;
+  Image clusterIcon;
+  TextMeshProUGUI clusterTitle;
+  RectTransform clusterLayout;
   RectTransform unitMarkerPool;
   int poolCount = 0;
 
-  GridLayoutGroup selectedClusterGrid;
+  GridLayoutGroup clusterGrid;
 
   List<UIUnitTypeMarker> unitTypeEntries = new List<UIUnitTypeMarker>();
   public Color[] typeMarkerColors;
 
   void Start() {
     gameManager = GameManager.Instance;
-    selectedClusterLayout = transform.Find("ClusterLayout").GetComponent<RectTransform>();
+
+    clusterIcon =  transform.Find("ClusterTitle").GetComponent<Image>();
+    clusterTitle =  transform.Find("ClusterTitle/Label").GetComponent<TextMeshProUGUI>();
+
+    clusterLayout = transform.Find("ClusterLayout").GetComponent<RectTransform>();
 
     Transform unitTypeList = transform.Find("UnitTypes");
     for (int i = 0; i < unitTypeList.childCount; i++) {
       unitTypeEntries.Add(unitTypeList.GetChild(i).GetComponent<UIUnitTypeMarker>());
     }
-    selectedClusterGrid = selectedClusterLayout.gameObject.GetComponent<GridLayoutGroup>();
+    clusterGrid = clusterLayout.gameObject.GetComponent<GridLayoutGroup>();
 
-    unitMarkerPool = Instantiate(selectedClusterLayout, transform);
+    unitMarkerPool = Instantiate(clusterLayout, transform);
     unitMarkerPool.name = "UnitMarkerPool";
     unitMarkerPool.gameObject.SetActive(false);
 
@@ -43,14 +50,17 @@ public class UIClusterLayout : MonoBehaviour {
   }
 
   public void BuildLayout(ClusterControl cluster) {
+
+    clusterTitle.text = cluster.name;
+
     int layoutWidth = Mathf.CeilToInt(Mathf.Sqrt(cluster.Count));
     float cellSize = Mathf.Clamp(
-      (selectedClusterLayout.sizeDelta.x - selectedClusterGrid.padding.left - selectedClusterGrid.padding.right) / layoutWidth,
+      (clusterLayout.sizeDelta.x - clusterGrid.padding.left - clusterGrid.padding.right) / layoutWidth,
       1, 27.5f
     );
 
-    selectedClusterGrid.constraintCount = layoutWidth;
-    selectedClusterGrid.cellSize = new Vector2(cellSize, cellSize);
+    clusterGrid.constraintCount = layoutWidth;
+    clusterGrid.cellSize = new Vector2(cellSize, cellSize);
 
     ClearLayout();
 
@@ -62,7 +72,7 @@ public class UIClusterLayout : MonoBehaviour {
 
     for (int i = 0; i < cluster.Count; i++) {
       Transform unitMarker = unitMarkerPool.GetChild(0);
-      unitMarker.SetParent(selectedClusterLayout);
+      unitMarker.SetParent(clusterLayout);
 
       Image unitMarkerImage = unitMarker.GetComponent<Image>();
 
@@ -78,8 +88,8 @@ public class UIClusterLayout : MonoBehaviour {
 
   void ClearLayout() {
 
-    for (int i = selectedClusterLayout.childCount - 1; i >= 0; i--) {
-      selectedClusterLayout.GetChild(i).SetParent(unitMarkerPool);
+    for (int i = clusterLayout.childCount - 1; i >= 0; i--) {
+      clusterLayout.GetChild(i).SetParent(unitMarkerPool);
     }
 
     foreach (UIUnitTypeMarker unitTypeMarker in unitTypeEntries) {
