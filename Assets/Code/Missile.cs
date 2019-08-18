@@ -7,13 +7,17 @@ public class Missile : MonoBehaviour {
   UnitControl m_owner;
   public float damage = 1;
 
+  float startTimer = 0.1f;
   float deathTimer = 3;
 
   Rigidbody rb;
+  BoxCollider missileCollider;
   bool hitSomething = false;
   public void Init(UnitControl owner) {
     rb = GetComponent<Rigidbody>();
+    missileCollider = GetComponent<BoxCollider>();
     m_owner = owner;
+    gameObject.name = owner.name + "'s arrow";
   }
 
   private void Update() {
@@ -24,10 +28,16 @@ public class Missile : MonoBehaviour {
     }
 
     transform.forward = Vector3.Slerp(transform.forward, rb.velocity.normalized, Time.deltaTime * 8);
+    if (!missileCollider.enabled) {
+      startTimer -= Time.deltaTime;
+      if (startTimer < 0)
+        missileCollider.enabled = true;
+    }
   }
 
   private void OnCollisionEnter(Collision other) {
     hitSomething = true;
+    if (other.gameObject.Equals(m_owner.gameObject)) Debug.Log(gameObject.name + " hit " + other.gameObject.name);
     UnitControl control = other.gameObject.GetComponent<UnitControl>();
     if (!m_owner) {
       Debug.Log(gameObject.name + " has no owner");

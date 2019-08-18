@@ -34,10 +34,11 @@ public class UIClusterLayout : MonoBehaviour {
   }
 
   void FillHoldingArea(int amount) {
-    poolCount += amount;
     Debug.Log("Adding more unit markers");
     for (int i = 0; i < amount; i++) {
+      poolCount++;
       GameObject newUnitMarker = Instantiate(gameManager.GetPrefab("UI_UnitMarker"), unitMarkerPool);
+      newUnitMarker.name = "unitMarker " + poolCount;
     }
   }
 
@@ -45,7 +46,7 @@ public class UIClusterLayout : MonoBehaviour {
     int layoutWidth = Mathf.CeilToInt(Mathf.Sqrt(cluster.Count));
     float cellSize = Mathf.Clamp(
       (selectedClusterLayout.sizeDelta.x - selectedClusterGrid.padding.left - selectedClusterGrid.padding.right) / layoutWidth,
-      1, 30
+      1, 27.5f
     );
 
     selectedClusterGrid.constraintCount = layoutWidth;
@@ -59,30 +60,19 @@ public class UIClusterLayout : MonoBehaviour {
     if (poolCount < cluster.Count)
       FillHoldingArea(cluster.Count - poolCount);
 
-    Material markerMaterial = null;
     for (int i = 0; i < cluster.Count; i++) {
       Transform unitMarker = unitMarkerPool.GetChild(0);
       unitMarker.SetParent(selectedClusterLayout);
 
-      Image marker = unitMarker.GetComponent<Image>();
-      if (!markerMaterial) {
-        markerMaterial = marker.material;
-        Image image = unitTypeEntries[typeCount].GetComponent<Image>();
-        image.material = markerMaterial;
-      }
+      Image unitMarkerImage = unitMarker.GetComponent<Image>();
 
       if (!cluster.Units[i].UnitType.Equals(lastType)) {
         typeCount++;
-        markerMaterial = Instantiate(markerMaterial);
         lastType = cluster.Units[i].UnitType;
-        Image image = unitTypeEntries[typeCount].GetComponent<Image>();
-        image.material = markerMaterial;
       }
 
       unitTypeEntries[typeCount].AddCount();
-
-      markerMaterial.SetColor("_Color1", typeMarkerColors[i % typeMarkerColors.Length]);
-      marker.material = markerMaterial;
+      unitMarkerImage.material = unitTypeEntries[typeCount].TypeMaterial;
     }
   }
 

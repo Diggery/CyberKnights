@@ -203,7 +203,7 @@ public class UnitBrain : MonoBehaviour {
   public void Attacked(UnitControl attacker, string type) {
     if (type.Equals("Melee") && CurrentTarget != attacker) {
       AttackTarget(attacker);
-    } else if (type.Equals("Missile")) {
+    } else if (type.Equals("Missile") && !CurrentTarget) {
       AttackTarget(attacker);
     } else if (Disciplined && Vector3.Distance(transform.position, ClusterPos) > visualRange) {
       MoveTo(ClusterPos);

@@ -3169,11 +3169,11 @@ MonoBehaviour:
   - type: Specialist
     amount: 10
   - type: Archer
-    amount: 5
+    amount: 34
   - type: Spearbot
     amount: 10
   - type: Specialist
-    amount: 8
+    amount: 10
   unitLost:
     m_PersistentCalls:
       m_Calls: []

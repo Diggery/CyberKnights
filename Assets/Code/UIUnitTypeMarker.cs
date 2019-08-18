@@ -7,8 +7,14 @@ using TMPro;
 public class UIUnitTypeMarker : MonoBehaviour {
   int count;
   TextMeshProUGUI label;
+  public Material TypeMaterial { get; set;}
+  public Color typeColor;
   void Start() {
     label = transform.Find("Label").GetComponent<TextMeshProUGUI>();
+
+    Image image = GetComponent<Image>();
+    TypeMaterial = image.material = Instantiate(image.material);
+    image.material.SetColor("_Color1", typeColor);
   }
 
   public void AddCount() {

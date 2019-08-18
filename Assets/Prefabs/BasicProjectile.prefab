@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6233175302727529324}
   - component: {fileID: 5208382309081970678}
   - component: {fileID: 4102324685398123122}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4767,8 +4767,8 @@ GameObject:
   - component: {fileID: 1471904788002686522}
   - component: {fileID: 3386159180393634083}
   - component: {fileID: -6150180172644778704}
-  m_Layer: 0
-  m_Name: Arrow
+  m_Layer: 13
+  m_Name: BasicProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4844,7 +4844,7 @@ BoxCollider:
   m_GameObject: {fileID: 8631785246239690179}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.03, y: 0.03, z: 0.75}
   m_Center: {x: 0, y: 0, z: 0}
