@@ -73,15 +73,14 @@ public class SelectorRanks : Selector {
     Vector3 offset = (startPos - endPos);
     float formationWidth = offset.magnitude;
 
+    if (formationWidth < rankOffset)
+      formationWidth = lastSelectorSize;
+
     int rankWidth = Mathf.Clamp(
         Mathf.CeilToInt(formationWidth / (float)rankOffset),
         minRankWidth,
         maxRankWidth
       );
-    if (formationWidth < rankOffset) {
-      Debug.Log("Formation too small");
-      rankWidth = Mathf.CeilToInt(lastSelectorSize);
-    }
 
     int unitNumber = 0;
     for (int y = 0; y < Mathf.CeilToInt((float)unitCount / rankWidth); y++) {
