@@ -9,6 +9,9 @@ public class UIClusterLayout : MonoBehaviour {
 
   RectTransform selectedClusterLayout;
   RectTransform selectedUnitTypes;
+  RectTransform unitMarkerPool;
+  int poolCount = 0;
+
   GridLayoutGroup selectedClusterGrid;
 
   public Color[] typeMarkerColors;
@@ -19,6 +22,17 @@ public class UIClusterLayout : MonoBehaviour {
     selectedUnitTypes = transform.Find("UnitTypes").GetComponent<RectTransform>();
     selectedClusterGrid = selectedClusterLayout.gameObject.GetComponent<GridLayoutGroup>();
 
+    unitMarkerPool = Instantiate(selectedClusterLayout, transform);
+    unitMarkerPool.name = "UnitMarkerPool";
+    unitMarkerPool.gameObject.SetActive(false);
+  }
+
+  void FillHoldingArea(int amount) {
+    poolCount += amount;
+    Debug.Log("Adding more unit markers");
+    for (int i = 0; i < amount; i++) {
+      GameObject newUnitMarker = Instantiate(gameManager.GetPrefab("UI_UnitMarker"), unitMarkerPool);
+    }
   }
 
   public void BuildLayout(ClusterControl cluster) {
@@ -36,14 +50,18 @@ public class UIClusterLayout : MonoBehaviour {
     int typeCount = 0;
     string lastType = cluster.Units[typeCount].UnitType;
     GameObject typeMarkerPrefab = gameManager.GetPrefab("UI_TypeMarker");
-    Instantiate(typeMarkerPrefab, selectedUnitTypes.transform);
+    Instantiate(typeMarkerPrefab, selectedUnitTypes);
+
+    if (poolCount < cluster.Count)
+      FillHoldingArea(cluster.Count - poolCount);
 
     for (int i = 0; i < cluster.Count; i++) {
-      GameObject newUnitMarker = Instantiate(gameManager.GetPrefab("UI_UnitMarker"), selectedClusterLayout.transform);
-      Image marker = newUnitMarker.GetComponent<Image>();
+      Transform unitMarker = unitMarkerPool.GetChild(0);
+      unitMarker.SetParent(selectedClusterLayout);
+      Image marker = unitMarker.GetComponent<Image>();
 
       if (!cluster.Units[i].UnitType.Equals(lastType)) {
-        Instantiate(typeMarkerPrefab, selectedUnitTypes.transform);
+        Instantiate(typeMarkerPrefab, selectedUnitTypes);
         lastType = cluster.Units[i].UnitType;
         typeCount++;
       }
@@ -52,10 +70,12 @@ public class UIClusterLayout : MonoBehaviour {
   }
 
   void ClearLayout() {
-    foreach (Transform child in selectedClusterLayout.transform) {
-      GameObject.Destroy(child.gameObject);
+
+    for (int i = selectedClusterLayout.childCount - 1; i >= 0; i--) {
+      selectedClusterLayout.GetChild(i).SetParent(unitMarkerPool);
     }
-    foreach (Transform child in selectedUnitTypes.transform) {
+
+    foreach (Transform child in selectedUnitTypes) {
       GameObject.Destroy(child.gameObject);
     }
   }
