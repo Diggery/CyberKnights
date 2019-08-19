@@ -55,6 +55,7 @@ public class Selector : MonoBehaviour {
   }
 
   public virtual void PlacementComplete(Vector3 startPos, Vector3 endPos) {
+    flipped = false;
   }
 
   public virtual void Flip() {
@@ -77,7 +78,7 @@ public class Selector : MonoBehaviour {
     if (eventData.pointerPress == moveHandle.gameObject) {
       if (shouldRotate) {
         Vector2 moveDelta = eventData.delta;
-        SetPose(cluster.transform.rotation * Quaternion.AngleAxis(moveDelta.x, cluster.transform.up));
+        SetPose(cluster.transform.rotation * Quaternion.AngleAxis(-moveDelta.x, cluster.transform.up));
       } else {
         Vector3 mapPos;
         if (inputControl.GetTerrainIntersection(out mapPos)) {
@@ -92,7 +93,6 @@ public class Selector : MonoBehaviour {
     Vector3 end = new Vector3((-lastSelectorSize / 2), 0, 0);
     cluster.Command(transform.TransformPoint(start), transform.TransformPoint(end));
   }
-
 
   public void onEnterCtrlMode() {
     if (disableRotate) return;

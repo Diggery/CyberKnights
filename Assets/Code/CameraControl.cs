@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour {
 
   float cameraMoveSpeed = 0.5f;
+  float cameraScrollSpeed = 2.5f;
   float cameraRotateSpeed = 1.5f;
   float cameraDrift = 8;
 
@@ -36,6 +37,10 @@ public class CameraControl : MonoBehaviour {
 
   public void Move(Vector3 direction) {
     goalPos += (transform.TransformDirection(direction) * cameraMoveSpeed);
+  }
+
+  public void Scroll(Vector3 amount) {
+    goalPos += amount * cameraScrollSpeed;
   }
 
   public void Rotate(float direction) {

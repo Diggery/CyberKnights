@@ -60,6 +60,7 @@ public class SelectorRanks : Selector {
 
   public override void PlacementComplete(Vector3 startPos, Vector3 endPos) {
     Place(startPos, endPos, true);
+    base.PlacementComplete(startPos, endPos);
   }
 
   public override Vector3[] GeneratePositions(int unitCount, Vector3 startPos, Vector3 endPos) {
