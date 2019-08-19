@@ -160,11 +160,6 @@ MonoBehaviour:
   clusterMakeup:
   - type: Specialist
     amount: 10
-  unitLost:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: ClusterControl+UnitLostEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
 --- !u!4 &125199763
 Transform:
   m_ObjectHideFlags: 0
@@ -1432,11 +1427,6 @@ MonoBehaviour:
   clusterMakeup:
   - type: Warrior
     amount: 20
-  unitLost:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: ClusterControl+UnitLostEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
 --- !u!4 &590166669
 Transform:
   m_ObjectHideFlags: 0
@@ -3174,11 +3164,6 @@ MonoBehaviour:
     amount: 10
   - type: Specialist
     amount: 10
-  unitLost:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: ClusterControl+UnitLostEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
 --- !u!4 &2104974813
 Transform:
   m_ObjectHideFlags: 0

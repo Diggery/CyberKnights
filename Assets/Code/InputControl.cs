@@ -7,8 +7,12 @@ public class InputControl : MonoBehaviour {
 
   Camera mainCamera;
   public CameraControl CameraControl { get; set; }
-  bool mouseInputInProgress = false;
-  Vector3 mouseDownPos = Vector3.zero;
+  bool mouseLeftInProgress = false;
+  Vector3 mouseLeftDownPos = Vector3.zero;
+
+  bool mouseRightInProgress = false;
+  Vector3 mouseRightDownPos = Vector3.zero;
+
   List<ClusterControl> clusters = new List<ClusterControl>();
   ClusterControl selectedCluster;
   public UIInGame IngameUI { get; set; }
@@ -16,33 +20,45 @@ public class InputControl : MonoBehaviour {
     Mob, Ranks, Vanguard, Line, Arc
   }
 
+  public delegate void OnEnterCtrlMode();
+  public OnEnterCtrlMode onEnterCtrlMode;
+  public delegate void OnExitCtrlMode();
+  public OnExitCtrlMode onExitCtrlMode;
+  public delegate void OnEnterAltMode();
+  public OnEnterAltMode onEnterAltMode;
+  public delegate void OnExitAltMode();
+  public OnExitAltMode onExitAltMode;
+
   void Start() {
     mainCamera = Camera.main;
     CameraControl = mainCamera.transform.root.GetComponent<CameraControl>();
+
   }
 
   // Update is called once per frame
   void Update() {
+
+    //handle left mouse button
     if (Input.GetMouseButtonDown(0)) {
       PointerEventData eventData = new PointerEventData(EventSystem.current);
       eventData.position = Input.mousePosition;
       List<RaycastResult> results = new List<RaycastResult>();
       EventSystem.current.RaycastAll(eventData, results);
       if (results[0].gameObject.tag.Equals("Terrain")) {
-        mouseDownPos = Input.mousePosition;
+        mouseLeftDownPos = Input.mousePosition;
         Vector3 mapPos;
-        mouseInputInProgress = GetTerrainIntersection(out mapPos);
-        if (mouseInputInProgress) {
-          mouseDownPos = mapPos;
+        mouseLeftInProgress = GetTerrainIntersection(out mapPos);
+        if (mouseLeftInProgress) {
+          mouseLeftDownPos = mapPos;
         }
       }
     }
 
-    if (mouseInputInProgress && selectedCluster) {
+    if (mouseLeftInProgress && selectedCluster) {
 
       Vector3 mapPos;
       if (GetTerrainIntersection(out mapPos)) {
-        selectedCluster.PlaceFormation(mouseDownPos, mapPos);
+        selectedCluster.PlaceFormation(mouseLeftDownPos, mapPos);
       }
       if (Input.GetMouseButtonDown(1)) {
         selectedCluster.FlipFormation();
@@ -51,10 +67,31 @@ public class InputControl : MonoBehaviour {
 
     if (Input.GetMouseButtonUp(0)) {
       Vector3 mapPos;
-      if (mouseInputInProgress && selectedCluster && GetTerrainIntersection(out mapPos)) {
-        selectedCluster.Command(mouseDownPos, mapPos);
+      if (mouseLeftInProgress && selectedCluster && GetTerrainIntersection(out mapPos)) {
+        selectedCluster.Command(mouseLeftDownPos, mapPos);
       }
-      mouseInputInProgress = false;
+      mouseLeftInProgress = false;
+    }
+
+    //handle Right mouse button
+    if (Input.GetMouseButtonDown(1)) {
+      Vector3 mapPos;
+      mouseRightInProgress = GetTerrainIntersection(out mapPos);
+      if (mouseRightInProgress) {
+        mouseRightDownPos = mapPos;
+      }
+    }
+
+    if (mouseRightInProgress) {
+      Vector3 mapPos;
+      if (GetTerrainIntersection(out mapPos)) {
+        CameraControl.Scroll(mouseRightDownPos - mapPos);
+        mouseRightDownPos = mapPos;
+      }
+    }
+
+    if (Input.GetMouseButtonUp(1)) {
+      mouseRightInProgress = false;
     }
 
     if (Input.GetButtonDown("Action")) selectedCluster.Release("Tired");
@@ -77,6 +114,10 @@ public class InputControl : MonoBehaviour {
       CameraControl.Zoom(scrollAmount);
     }
 
+    if (Input.GetKeyDown(KeyCode.LeftControl)) onEnterCtrlMode.Invoke();
+    if (Input.GetKeyUp(KeyCode.LeftControl)) onExitCtrlMode.Invoke();
+    if (Input.GetKeyDown(KeyCode.LeftAlt)) onEnterAltMode.Invoke();
+    if (Input.GetKeyUp(KeyCode.LeftAlt)) onExitAltMode.Invoke();
   }
 
   public bool GetTerrainIntersection(out Vector3 mapPos) {

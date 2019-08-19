@@ -183,6 +183,8 @@ public class UnitControl : MonoBehaviour {
 
 
   public void AnimEvent(string type) {
+    if (IsDestroyed) return;
+
     switch (type) {
       case "MeleeAttack":
         DeliverDamage("Melee");
@@ -200,6 +202,8 @@ public class UnitControl : MonoBehaviour {
   }
 
   void DeliverDamage(string type) {
+    if (IsDestroyed) return;
+
     if (!brain.CurrentTarget) {
       Debug.Log("No target to damage");
       return;
