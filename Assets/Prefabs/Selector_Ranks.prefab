@@ -137,7 +137,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4578b80d67699f4590b9e756170949e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  formationType: 2
+  formationType: 1
+  moveTexture: {fileID: 0}
+  rotateTexture: {fileID: 0}
+  disableRotate: 0
 --- !u!1 &8553606890080120312
 GameObject:
   m_ObjectHideFlags: 0

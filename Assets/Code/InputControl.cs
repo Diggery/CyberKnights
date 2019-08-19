@@ -16,9 +16,19 @@ public class InputControl : MonoBehaviour {
     Mob, Ranks, Vanguard, Line, Arc
   }
 
+    public delegate void OnEnterCtrlMode();
+    public OnEnterCtrlMode onEnterCtrlMode;
+    public delegate void OnExitCtrlMode();
+    public OnExitCtrlMode onExitCtrlMode;
+    public delegate void OnEnterAltMode();
+    public OnEnterAltMode onEnterAltMode;
+    public delegate void OnExitAltMode();
+    public OnExitAltMode onExitAltMode;
+
   void Start() {
     mainCamera = Camera.main;
     CameraControl = mainCamera.transform.root.GetComponent<CameraControl>();
+
   }
 
   // Update is called once per frame
@@ -77,6 +87,10 @@ public class InputControl : MonoBehaviour {
       CameraControl.Zoom(scrollAmount);
     }
 
+    if (Input.GetKeyDown(KeyCode.LeftControl)) onEnterCtrlMode.Invoke();
+    if (Input.GetKeyUp(KeyCode.LeftControl)) onExitCtrlMode.Invoke();
+    if (Input.GetKeyDown(KeyCode.LeftAlt)) onEnterAltMode.Invoke();
+    if (Input.GetKeyUp(KeyCode.LeftAlt)) onExitAltMode.Invoke();
   }
 
   public bool GetTerrainIntersection(out Vector3 mapPos) {

@@ -43,7 +43,6 @@ public class ClusterControl : MonoBehaviour {
 
   public ClusterSegment[] clusterMakeup;
 
-  [System.Serializable]
   public class UnitLostEvent : UnityEvent<UnitControl> { }
   public UnitLostEvent unitLost = new UnitLostEvent();
 

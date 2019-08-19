@@ -11,17 +11,12 @@ public class SelectorRanks : Selector {
   int maxRankWidth = 16;
   float rankOffset = 1.5f;
 
-  Transform moveHandle;
-  Vector3 moveOffset;
 
   protected override void Setup() {
     formationType = InputControl.Formation.Ranks;
 
     line = transform.Find("line").GetComponent<LineRenderer>();
     linePositions = new Vector3[7];
-
-    moveHandle = transform.Find("Move");
-    moveHandle.gameObject.AddComponent<InputRelay>().Init(gameObject);
 
   }
 
@@ -103,27 +98,5 @@ public class SelectorRanks : Selector {
     }
     lastSelectorSize = formationWidth;
     return positions.ToArray();
-  }
-
-  public void OnPointerDown(PointerEventData eventData) {
-    Vector3 mapPos;
-    if (inputControl.GetTerrainIntersection(out mapPos)) {
-      moveOffset = mapPos - cluster.transform.position;
-    }
-  }
-
-  public void OnDrag(PointerEventData eventData) {
-    if (eventData.pointerPress == moveHandle.gameObject) {
-      Vector3 mapPos;
-      if (inputControl.GetTerrainIntersection(out mapPos)) {
-        SetPose(mapPos - moveOffset);
-      }
-    }
-  }
-
-  public void OnPointerUp(PointerEventData eventData) {
-    Vector3 start = new Vector3((lastSelectorSize / 2), 0, 0);
-    Vector3 end = new Vector3((-lastSelectorSize / 2), 0, 0);
-    cluster.Command(transform.TransformPoint(start), transform.TransformPoint(end));
   }
 }
