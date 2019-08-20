@@ -36,21 +36,21 @@ public class UnitFactory : MonoBehaviour {
         if (fields[0].Equals("Name")) continue;
 
         UnitStatistic stats = new UnitStatistic();
-        stats.unitName = fields[0];
-        stats.unitType = fields[1];
-        stats.unitVariant = fields[2];
-        stats.armor = float.Parse(fields[3]);
-        stats.energy = float.Parse(fields[4]);
-        stats.visualRange = float.Parse(fields[5]);
-        stats.meleeRange = float.Parse(fields[6]);
-        stats.chargeRange = float.Parse(fields[7]);
-        string[] missileRangeParts = fields[8].Split('/');
+        stats.unitName = fields[0].Trim(' ');
+        stats.unitType = fields[1].Trim(' ');
+        stats.unitVariant = fields[2].Trim(' ');
+        stats.armor = float.Parse(fields[3].Trim(' '));
+        stats.energy = float.Parse(fields[4].Trim(' '));
+        stats.visualRange = float.Parse(fields[5].Trim(' '));
+        stats.meleeRange = float.Parse(fields[6].Trim(' '));
+        stats.chargeRange = float.Parse(fields[7].Trim(' '));
+        string[] missileRangeParts = fields[8].Trim(' ').Split('/');
         stats.missileRange = new Vector2(float.Parse(missileRangeParts[0]), float.Parse(missileRangeParts[1]));
-        stats.missileType = fields[9];
-        stats.disciplined = bool.Parse(fields[10]);
-        stats.holdTheLine = bool.Parse(fields[11]);
-        stats.worksTogether = bool.Parse(fields[12]);
-        stats.reachOut = bool.Parse(fields[13]);
+        stats.missileType = fields[9].Trim(' ');
+        stats.disciplined = bool.Parse(fields[10].Trim(' '));
+        stats.holdTheLine = bool.Parse(fields[11].Trim(' '));
+        stats.worksTogether = bool.Parse(fields[12].Trim(' '));
+        stats.reachOut = bool.Parse(fields[13].Trim(' '));
         unitStats.Add(stats.unitName, stats);
       }
     }
