@@ -9,6 +9,7 @@ public class UnitInventory : ScriptableObject {
   public class UnitEntry {
     public string name;
     public GameObject prefab;
+    public Material[] variants;
   }
 
   public List<UnitEntry> units = new List<UnitEntry>();
@@ -22,5 +23,20 @@ public class UnitInventory : ScriptableObject {
       }
     }
     return unitPrefab;
+  }
+
+  public Material GetUnitVariant(string unitName, string variantName) {
+    Material mat = null;
+    foreach (UnitEntry entry in units) {
+      if (entry.name.Equals(unitName)) {
+        foreach (Material material in entry.variants) {
+          if (material.name.Contains(variantName)) {
+            mat = material;
+            break;
+          }
+        }
+      }
+    }
+    return mat;
   }
 }

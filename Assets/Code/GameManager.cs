@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using System;
 using UnityEngine.SceneManagement;
+
 public class GameManager : MonoBehaviour {
 
   CameraControl cameraControl;
@@ -19,6 +17,7 @@ public class GameManager : MonoBehaviour {
 
 
   public UnitInventory unitInventory;
+  public UnitFactory UnitFactory { get; set; }
   public PrefabInventory prefabInventory;
 
   static GameManager instance;
@@ -26,6 +25,8 @@ public class GameManager : MonoBehaviour {
   public static GameManager Instance {
     get { return instance; }
   }
+
+
 
   private void CreateInstance() {
     if (instance == null) {
@@ -37,13 +38,12 @@ public class GameManager : MonoBehaviour {
   void Awake() {
     CreateInstance();
     inputControl = gameObject.GetComponent<InputControl>();
+    UnitFactory = gameObject.AddComponent<UnitFactory>();
     SceneManager.LoadScene("InGameUI", LoadSceneMode.Additive);
   }
-  void Start() {
-  }
 
-  public GameObject GetUnitPrefab(string name) {
-    return unitInventory.GetUnitPrefab(name);
+  void Start() {
+
   }
 
   public GameObject GetPrefab(string name) {

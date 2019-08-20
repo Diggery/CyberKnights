@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MatWarrior
+  m_Name: MatSpearbot-Vanguard
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION _METALLICGLOSSMAP _NORMALMAP
   m_LightmapFlags: 1
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 3f891bfdbe0744a068c5b0f285026c32, type: 3}
+        m_Texture: {fileID: 2800000, guid: 18df9939ab42940138ffcd201ccdc02b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -36,19 +36,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: 8e3e1ac077d9640aeae108c7e599c8cf, type: 3}
+        m_Texture: {fileID: 2800000, guid: bf7cf521c1fb04d299d9d82400b4df12, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 710c5af23229d4b499c371ef68d2e2b6, type: 3}
+        m_Texture: {fileID: 2800000, guid: c578ba0472714ad4fb002ae6fa6bae87, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: dfc6dc9e1651a444889aff8b610b9ed1, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3e737ef0a0972455cbc7a23f1279fbc8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: fba6adbb925f14a048398253ddeb11d8, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6909375a66b52495aaf35aec156afef6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
@@ -74,4 +74,4 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 13.76636, g: 13.76636, b: 13.76636, a: 1}
+    - _EmissionColor: {r: 17.33884, g: 11.310258, b: 0, a: 1}

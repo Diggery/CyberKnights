@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class UnitBrain : MonoBehaviour {
-  public bool showDebug = false;
   UnitControl unitControl;
   NavMeshAgent navAgent;
   UnitControl currentTarget;
@@ -12,7 +11,6 @@ public class UnitBrain : MonoBehaviour {
   bool Disciplined { get; set; }
   bool HoldTheLine { get; set; }
   bool WorksTogether { get; set; }
-  bool StrikesFromRange { get; set; }
   bool ReachOut { get; set; }
 
   string friendlyTag = "Friend";
@@ -50,10 +48,10 @@ public class UnitBrain : MonoBehaviour {
     get { return DistanceToTarget < visualRange; }
   }
   public bool InMeleeRange {
-    get { 
+    get {
       float bonus = InAttackState ? 1 : 0;
-      return DistanceToTarget < (meleeRange + bonus); 
-      }
+      return DistanceToTarget < (meleeRange + bonus);
+    }
   }
   public bool InMissileRange {
     get {
@@ -80,7 +78,7 @@ public class UnitBrain : MonoBehaviour {
     }
   }
 
-  bool useAltAttackPose = false; 
+  bool useAltAttackPose = false;
   public bool CanAttack {
     get {
       if (unitControl.IsDestroyed)
@@ -110,7 +108,12 @@ public class UnitBrain : MonoBehaviour {
     }
   }
 
-  public void Init() {
+  public void Init(UnitFactory.UnitStatistic newStats) {
+
+    Disciplined = newStats.disciplined;
+    HoldTheLine = newStats.holdTheLine;
+    WorksTogether = newStats.worksTogether;
+    ReachOut = newStats.reachOut;
 
     unitControl = GetComponent<UnitControl>();
     navAgent = GetComponent<NavMeshAgent>();
@@ -125,7 +128,7 @@ public class UnitBrain : MonoBehaviour {
     friendlyTag = gameObject.tag.Equals("Friend") ? "Friend" : "Enemy";
     enemyTag = gameObject.tag.Equals("Friend") ? "Enemy" : "Friend";
 
-    useAltAttackPose =  Random.value < 0.5f; 
+    useAltAttackPose = Random.value < 0.5f;
 
     AddState(gameObject.AddComponent<UnitStateIdle>());
     AddState(gameObject.AddComponent<UnitStateMoving>());

@@ -116,9 +116,18 @@ public class UnitControl : MonoBehaviour {
   float velocity;
 
 
-  private void Start() {
+  public void Init(UnitFactory.UnitStatistic newStats) {
+    maxArmorLevel = newStats.armor;
+    maxEnergyLevel = newStats.energy;
+
     armorLevel = maxArmorLevel;
     energyLevel = maxEnergyLevel;
+
+    visualRange = newStats.visualRange;
+    meleeRange = newStats.meleeRange;
+    missileRange = newStats.missileRange;
+    chargeRange = newStats.chargeRange;
+    missilePrefab = newStats.missileType;
 
     gameManager = GameManager.Instance;
 
@@ -141,13 +150,6 @@ public class UnitControl : MonoBehaviour {
 
     animator.SetFloat("CycleOffset", Random.value);
 
-    if (TeamName.Equals("Enemy")) {
-      Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>();
-      foreach (var item in renderers) {
-        item.material.color = Color.red;
-      }
-    }
-
     lastPosition = transform.position;
 
     foreach (Transform child in transform) {
@@ -156,8 +158,10 @@ public class UnitControl : MonoBehaviour {
     }
 
     brain = gameObject.AddComponent<UnitBrain>();
-    brain.Init();
+    brain.Init(newStats);
+
   }
+
 
   private void Update() {
     if (IsDestroyed) return;

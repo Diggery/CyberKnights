@@ -16,11 +16,23 @@ MonoBehaviour:
   - name: Warrior
     prefab: {fileID: 2277214586008411890, guid: e7b2622025d8a254cae1da76a6e71262,
       type: 3}
+    variants:
+    - {fileID: 2100000, guid: 920ee16275594415d82c9ffee27f6db5, type: 2}
+    - {fileID: 2100000, guid: a0b9d1e0915c21a46b30cf9e5ec627fd, type: 2}
   - name: Archer
     prefab: {fileID: 4126984686192501548, guid: f3495f315dc784ce686a8cd893bbbbf3,
       type: 3}
+    variants:
+    - {fileID: 2100000, guid: 3746d05213580410e8c36dffa8ce3226, type: 2}
+    - {fileID: 2100000, guid: f92f9e3418b01464288ad9c94c77b18d, type: 2}
   - name: Spearbot
     prefab: {fileID: 301212294255376253, guid: 77825578f47224896aa217b9335f84d5, type: 3}
+    variants:
+    - {fileID: 2100000, guid: b8b809d4149584c8d90ccff361b2d453, type: 2}
+    - {fileID: 2100000, guid: e49667b9588a136458cb2654999d8efa, type: 2}
   - name: Specialist
     prefab: {fileID: 7019400548681127067, guid: cbf608886756e4ba786d72e3e8002015,
       type: 3}
+    variants:
+    - {fileID: 2100000, guid: 845a3439ac1d144b5aa07eaf880babc0, type: 2}
+    - {fileID: 2100000, guid: a3a95e694c8b7b9479eda017e1e99a80, type: 2}

@@ -113,6 +113,8 @@ public class ClusterControl : MonoBehaviour {
   }
 
   IEnumerator CreateUnits() {
+    yield return new WaitForSeconds(1f);
+
     int unitNumber = 0;
 
     bool allDone = false;
@@ -133,7 +135,7 @@ public class ClusterControl : MonoBehaviour {
 
         string unitType = clusterMakeup[currentSegment].type;
         Vector3 offset = new Vector3(x * 1.5f, 0, y * 1.5f);
-        GameObject newUnit = GameObject.Instantiate(gameManager.GetUnitPrefab(unitType), transform.position + offset, transform.rotation);
+        GameObject newUnit = gameManager.UnitFactory.CreateUnit(unitType, transform.position + offset, transform.rotation);
         UnitControl newUnitControl = newUnit.GetComponent<UnitControl>();
         newUnitControl.TeamName = teamName;
         newUnitControl.UnitType = unitType;
