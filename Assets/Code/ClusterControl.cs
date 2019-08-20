@@ -46,18 +46,24 @@ public class ClusterControl : MonoBehaviour {
   public class UnitLostEvent : UnityEvent<UnitControl> { }
   public UnitLostEvent unitLost = new UnitLostEvent();
 
-  private void Start() {
+  void Start() {
+    Invoke("Init", 1);
+  }
+  public void Init() {
     gameManager = GameManager.Instance;
     marker = transform.Find("ClusterMarker");
     line = transform.Find("ClusterMarker/Line");
     homePos = transform.position;
     mainCamera = Camera.main;
 
-    StartCoroutine(CreateUnits());
+    //StartCoroutine(CreateUnits());
     if (gameObject.tag.Equals("Friend")) {
       UI = transform.Find("ClusterUI").GetComponent<UICluster>();
       UI.AddLine(marker.GetComponent<Renderer>(), line.GetComponent<Renderer>());
     }
+    gameManager.GetFacility().SubmitOrder(new Facility.UnitOrder(this, "Royal Guard", 10));
+    gameManager.InputControl.AddCluster(this);
+    clusterReady = true;
   }
 
   int unitTicker = 0;
@@ -137,20 +143,25 @@ public class ClusterControl : MonoBehaviour {
         Vector3 offset = new Vector3(x * 1.5f, 0, y * 1.5f);
         GameObject newUnit = gameManager.UnitFactory.CreateUnit(unitType, transform.position + offset, transform.rotation);
         UnitControl newUnitControl = newUnit.GetComponent<UnitControl>();
+        AddUnit(newUnitControl);
+
         newUnitControl.TeamName = teamName;
         newUnitControl.UnitType = unitType;
         newUnitControl.Cluster = this;
         newUnit.name = gameObject.tag + "-" + unitType + "-" + unitNumber;
         newUnit.tag = gameObject.tag;
         newUnit.layer = LayerMask.NameToLayer(gameObject.tag);
-        units.Add(newUnitControl);
+
         unitNumber++;
         yield return new WaitForEndOfFrame();
       }
     }
     yield return new WaitForSeconds(0.1f);
-    gameManager.InputControl.AddCluster(this);
-    clusterReady = true;
+
+  }
+
+  public void AddUnit(UnitControl newUnit) {
+    units.Add(newUnit);
   }
 
   public Vector3 GetFlockingVector(UnitControl target) {

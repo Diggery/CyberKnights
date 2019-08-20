@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour {
     get { return instance; }
   }
 
-
+  public Facility facility;
 
   private void CreateInstance() {
     if (instance == null) {
@@ -48,6 +48,10 @@ public class GameManager : MonoBehaviour {
 
   public GameObject GetPrefab(string name) {
     return prefabInventory.GetPrefab(name);
+  }
+
+  public Facility GetFacility() {
+    return facility;
   }
 }
 
