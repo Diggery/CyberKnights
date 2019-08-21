@@ -26,8 +26,6 @@ public class GameManager : MonoBehaviour {
     get { return instance; }
   }
 
-  public Facility facility;
-
   private void CreateInstance() {
     if (instance == null) {
       instance = this;
@@ -50,8 +48,27 @@ public class GameManager : MonoBehaviour {
     return prefabInventory.GetPrefab(name);
   }
 
-  public Facility GetFacility() {
-    return facility;
+  GameObject GetClosestObject(string tag, Vector3 pos) {
+    GameObject[] allObjects = GameObject.FindGameObjectsWithTag(tag);
+    GameObject closestObject = null;
+    float closestDistance = Mathf.Infinity;
+    foreach (GameObject item in allObjects) {
+      float dist = (item.transform.position - pos).sqrMagnitude;
+      if (dist < closestDistance) {
+        closestObject = item;
+      }
+    }
+    return closestObject;
+  }
+
+  public Facility GetClosestFacility(Vector3 pos) {
+    GameObject facility = GetClosestObject("Facility", pos);
+    return facility.GetComponent<Facility>();
+  }
+
+  public Recycler GetClosestRecycler(Vector3 pos) {
+    GameObject recycler = GetClosestObject("Recycler", pos);
+    return recycler.GetComponent<Recycler>();
   }
 }
 

@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class UICluster : MonoBehaviour {
 
+  bool isReady = false;
   InputControl inputControl;
   ClusterControl clusterControl;
   Camera mainCamera;
@@ -36,7 +37,7 @@ public class UICluster : MonoBehaviour {
     }
   }
 
-  void Start() {
+  public UICluster Init() {
     inputControl = GameManager.Instance.InputControl;
     clusterControl = transform.GetComponentInParent<ClusterControl>();
     mainCamera = Camera.main;
@@ -49,6 +50,8 @@ public class UICluster : MonoBehaviour {
     selectType.onTickVector += OnSelectType;
 
     IsSelected = false;
+    isReady = true;
+    return this;
   }
 
   public void AddLine(Renderer marker, Renderer line) {
@@ -57,6 +60,7 @@ public class UICluster : MonoBehaviour {
   }
 
   void Update() {
+    if (!isReady) return;
     Vector3 forward = transform.position - mainCamera.transform.position;
     forward.y = 0;
     Quaternion rotation = Quaternion.LookRotation(forward);

@@ -58,10 +58,11 @@ public class ClusterControl : MonoBehaviour {
 
     //StartCoroutine(CreateUnits());
     if (gameObject.tag.Equals("Friend")) {
-      UI = transform.Find("ClusterUI").GetComponent<UICluster>();
+      UI = transform.Find("ClusterUI").GetComponent<UICluster>().Init();
+      
       UI.AddLine(marker.GetComponent<Renderer>(), line.GetComponent<Renderer>());
     }
-    gameManager.GetFacility().SubmitOrder(new Facility.UnitOrder(this, "Royal Guard", 10));
+    gameManager.GetClosestFacility(transform.position).SubmitOrder(new Facility.UnitOrder(this, "Royal Guard", 10));
     gameManager.InputControl.AddCluster(this);
     clusterReady = true;
   }
@@ -200,6 +201,7 @@ public class ClusterControl : MonoBehaviour {
   }
 
   public void Release(string filter) {
+    Debug.Log("Releaseing " + filter);
     foreach (var unit in units) {
       if (unit.EnergyStatus < 0.25f) {
         unit.Retreat();

@@ -15,6 +15,9 @@ public class InputControl : MonoBehaviour {
 
   List<ClusterControl> clusters = new List<ClusterControl>();
   ClusterControl selectedCluster;
+  public ClusterControl SelectedCluster {
+    get { return selectedCluster; }
+  }
   public UIInGame IngameUI { get; set; }
   public enum Formation {
     Mob, Ranks, Vanguard, Line, Arc
@@ -94,7 +97,7 @@ public class InputControl : MonoBehaviour {
       mouseRightInProgress = false;
     }
 
-    if (Input.GetButtonDown("Action")) selectedCluster.Release("Tired");
+  //  if (Input.GetButtonDown("Action")) selectedCluster.Release("Tired");
 
     if (Input.GetKeyDown(KeyCode.Alpha1)) IngameUI.KeyPressed("1");
     if (Input.GetKeyDown(KeyCode.Alpha2)) IngameUI.KeyPressed("2");
