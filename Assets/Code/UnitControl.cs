@@ -60,7 +60,7 @@ public class UnitControl : MonoBehaviour {
   Vector2 attackCooldown = new Vector2(1, 10);
   float AttackCooldown {
     get {
-      return Mathf.Lerp(attackCooldown.x, attackCooldown.y, 1 - (EnergyStatus * 2));
+      return Mathf.Lerp(attackCooldown.x, attackCooldown.y, EnergyLevel / 10);
     }
   }
   public bool ReadyToAttack {
@@ -104,11 +104,11 @@ public class UnitControl : MonoBehaviour {
     get { return DamageStatus == DamageState.Destroyed; }
   }
 
-  float energyLevel = 10;
+  float energyLevel = 100;
   public float maxEnergyLevel = 100;
 
-  public float EnergyStatus {
-    get { return energyLevel / maxEnergyLevel; }
+  public float EnergyLevel {
+    get { return energyLevel; }
   }
 
   Vector3 lastPosition;
@@ -176,6 +176,10 @@ public class UnitControl : MonoBehaviour {
 
     if (attackTimer >= 0) {
       attackTimer -= Time.deltaTime;
+    }
+
+    if (energyLevel < maxEnergyLevel && brain.State.Equals("Idle")) {
+      GainEnergy(Time.deltaTime);
     }
   }
 
@@ -252,12 +256,16 @@ public class UnitControl : MonoBehaviour {
 
   public void UseEnergy(float amount) {
     if (IsDestroyed) return;
-
     energyLevel -= amount;
-
-    if (armorLevel / maxArmorLevel < 0.5f) {
+    if (energyLevel < 10f) {
 
     }
   }
+  public void GainEnergy(float amount) {
+    if (IsDestroyed) return;
+    energyLevel += amount;
+    if (energyLevel > 10f) {
 
+    }
+  }
 }

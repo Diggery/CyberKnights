@@ -50,8 +50,10 @@ public class UIClusterLayout : MonoBehaviour {
   }
 
   public void BuildLayout(ClusterControl cluster) {
+    ClearLayout();
 
     clusterTitle.text = cluster.name;
+    if (cluster.Count < 1) return;
 
     int layoutWidth = Mathf.CeilToInt(Mathf.Sqrt(cluster.Count));
     float cellSize = Mathf.Clamp(
@@ -62,7 +64,6 @@ public class UIClusterLayout : MonoBehaviour {
     clusterGrid.constraintCount = layoutWidth;
     clusterGrid.cellSize = new Vector2(cellSize, cellSize);
 
-    ClearLayout();
 
     int typeCount = 0;
     string lastType = cluster.Units[typeCount].UnitType;

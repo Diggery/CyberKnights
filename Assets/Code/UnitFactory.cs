@@ -52,11 +52,16 @@ public class UnitFactory : MonoBehaviour {
         stats.worksTogether = bool.Parse(fields[12].Trim(' '));
         stats.reachOut = bool.Parse(fields[13].Trim(' '));
         unitStats.Add(stats.unitName, stats);
+        Debug.Log("Adding " + stats.unitName);
       }
     }
   }
 
   public GameObject CreateUnit(string unitName, Vector3 pos, Quaternion rot) {
+    if (!unitStats.ContainsKey(unitName)) {
+      Debug.Log("There is no entry for " + unitName);
+      return null;
+    }
     UnitStatistic stats = unitStats[unitName];
     GameObject prefab = gameManager.unitInventory.GetUnitPrefab(stats.unitType);
     GameObject newUnit = GameObject.Instantiate(prefab, pos, rot);

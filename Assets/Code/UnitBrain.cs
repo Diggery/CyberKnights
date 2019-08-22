@@ -153,7 +153,10 @@ public class UnitBrain : MonoBehaviour {
   }
 
   public UnitControl ScanForTargets(UnitControl excludeThisGuy) {
-    if ((Disciplined || HoldTheLine) && (State.Equals("Moving") || State.Equals("Chasing"))) return null;
+    if ((Disciplined || HoldTheLine) && 
+      (State.Equals("Moving") && (navAgent.remainingDistance * navAgent.remainingDistance) < visualRange))
+      return null;
+
     if (HoldTheLine && State.Equals("Idle")) return null;
 
     GameObject[] possibleTargets = GameObject.FindGameObjectsWithTag(enemyTag);

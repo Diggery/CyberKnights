@@ -48,26 +48,34 @@ public class GameManager : MonoBehaviour {
     return prefabInventory.GetPrefab(name);
   }
 
-  GameObject GetClosestObject(string tag, Vector3 pos) {
+  GameObject GetClosestObject(string tag, Vector3 pos, string filter = "") {
     GameObject[] allObjects = GameObject.FindGameObjectsWithTag(tag);
     GameObject closestObject = null;
     float closestDistance = Mathf.Infinity;
     foreach (GameObject item in allObjects) {
       float dist = (item.transform.position - pos).sqrMagnitude;
-      if (dist < closestDistance) {
+      bool isClosest = dist < closestDistance;
+      bool matchesFilter = string.IsNullOrEmpty(filter) ? true : item.name.Contains(filter);
+      if (isClosest && matchesFilter) {
         closestObject = item;
       }
     }
     return closestObject;
   }
 
-  public Facility GetClosestFacility(Vector3 pos) {
-    GameObject facility = GetClosestObject("Facility", pos);
+  public Facility GetClosestFacility(Vector3 pos, string filter = "") {
+    GameObject facility = GetClosestObject("Facility", pos, filter);
+    if (!facility) {
+      Debug.Log("No facility close to " + pos + " of type " + filter);
+    }
     return facility.GetComponent<Facility>();
   }
 
-  public Recycler GetClosestRecycler(Vector3 pos) {
-    GameObject recycler = GetClosestObject("Recycler", pos);
+  public Recycler GetClosestRecycler(Vector3 pos, string filter = "") {
+    GameObject recycler = GetClosestObject("Recycler", pos, filter);
+    if (!recycler) {
+      Debug.Log("No recycler close to " + pos + " of type " + filter);
+    }
     return recycler.GetComponent<Recycler>();
   }
 }
