@@ -5,7 +5,7 @@ using UnityEngine;
 public class Missile : MonoBehaviour {
 
   UnitControl m_owner;
-  public float damage = 1;
+  float damage = 1;
 
   float startTimer = 0.1f;
   float deathTimer = 3;

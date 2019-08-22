@@ -98,6 +98,8 @@ public class UnitBrain : MonoBehaviour {
       return currentState.StateName;
     }
     set {
+      if (value.Equals(currentState)) return;
+
       if (states.ContainsKey(value)) {
         if (currentState) currentState.StateExit();
         currentState = states[value];
@@ -153,9 +155,9 @@ public class UnitBrain : MonoBehaviour {
   }
 
   public UnitControl ScanForTargets(UnitControl excludeThisGuy) {
-    if ((Disciplined || HoldTheLine) && 
-      (State.Equals("Moving") && (navAgent.remainingDistance * navAgent.remainingDistance) < visualRange))
-      return null;
+    // if ((Disciplined || HoldTheLine) && 
+    //   (State.Equals("Moving") && (navAgent.remainingDistance * navAgent.remainingDistance) < visualRange))
+    //   return null;
 
     if (HoldTheLine && State.Equals("Idle")) return null;
 

@@ -181,11 +181,18 @@ public class UnitControl : MonoBehaviour {
     if (energyLevel < maxEnergyLevel && brain.State.Equals("Idle")) {
       GainEnergy(Time.deltaTime);
     }
+
+
+
   }
 
   public void UpdateBrain() {
     if (IsDestroyed) return;
 
+    if (brain.InMeleeRange || brain.InMissileRange) {
+      brain.State = "Attacking";
+    }
+    
     brain.UpdateBrain();
   }
 
@@ -235,7 +242,7 @@ public class UnitControl : MonoBehaviour {
 
   public void TakeDamage(float amount, UnitControl attacker, string type) {
     if (IsDestroyed) return;
-
+    Debug.Log("Taking " + amount + " damage");
     brain.Attacked(attacker, type);
     armorLevel -= amount;
     if (!attach_Center) Debug.Log(gameObject.name + " has no attach center");

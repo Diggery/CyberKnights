@@ -18,7 +18,7 @@ public class Facility : MonoBehaviour {
 
   Transform spawnPoint;
   public bool isReady = false;
-  public float coolDown = 0.5f;
+  float coolDown = 0.5f;
   float coolDownTimer = 3;
   List<UnitOrder> orders = new List<UnitOrder>();
 
