@@ -61,7 +61,8 @@ public class UIInGame : MonoBehaviour {
   }
 
   void Button1Pressed() {
-
+    ClusterControl selectedCluster = inputControl.SelectedCluster;
+    selectedCluster.Release("hello");
   }
 
   void Button2Pressed() {

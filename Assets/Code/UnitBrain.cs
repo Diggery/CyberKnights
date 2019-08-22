@@ -199,8 +199,10 @@ public class UnitBrain : MonoBehaviour {
     navAgent.SetDestination(movePos);
   }
 
-  public void Retreat() {
-    navAgent.SetDestination(ClusterHome);
+  public void GoToRecycler() {
+    Vector3 pos = GameManager.Instance.GetClosestFacility(transform.position).transform.position;
+
+    navAgent.SetDestination(pos);
   }
 
   public void Attacked(UnitControl attacker, string type) {

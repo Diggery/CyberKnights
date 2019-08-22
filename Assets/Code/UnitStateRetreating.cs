@@ -22,7 +22,7 @@ public class UnitStateRetreating : UnitState {
   public override void StateUpdate() {
     base.StateUpdate();
     if (!retreating && !brain.InAttackState) {
-      brain.Retreat();
+      brain.GoToRecycler();
       retreating = true;
     }
   }
