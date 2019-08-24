@@ -10,8 +10,6 @@ public class ClusterControl : MonoBehaviour {
 
   bool clusterReady = false;
 
-  public string teamName = "Player";
-
   public InputControl.Formation formationType = InputControl.Formation.Mob;
   Selector currentSelector;
   public UICluster UI { get; set; }
@@ -148,11 +146,10 @@ public class ClusterControl : MonoBehaviour {
         UnitControl newUnitControl = newUnit.GetComponent<UnitControl>();
         AddUnit(newUnitControl);
 
-        newUnitControl.TeamName = teamName;
+        newUnitControl.TeamName = gameManager.tag;
         newUnitControl.UnitType = unitType;
         newUnitControl.Cluster = this;
         newUnit.name = gameObject.tag + "-" + unitType + "-" + unitNumber;
-        newUnit.tag = gameObject.tag;
         newUnit.layer = LayerMask.NameToLayer(gameObject.tag);
 
         unitNumber++;

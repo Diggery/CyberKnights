@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class UnitBrain : MonoBehaviour {
+
+  public bool showDebug = false;
   UnitControl unitControl;
   NavMeshAgent navAgent;
   UnitControl currentTarget;
@@ -92,22 +94,29 @@ public class UnitBrain : MonoBehaviour {
   }
 
   Dictionary<string, UnitState> states = new Dictionary<string, UnitState>();
-  UnitState currentState;
+  public UnitState CurrentState { get; set; }
   public string State {
     get {
-      return currentState.StateName;
+      return CurrentState.StateName;
     }
     set {
-      if (value.Equals(currentState)) return;
+      if (value.Equals(CurrentState)) return;
 
       if (states.ContainsKey(value)) {
-        if (currentState) currentState.StateExit();
-        currentState = states[value];
-        currentState.StateEnter();
+        if (CurrentState) CurrentState.StateExit();
+        CurrentState = states[value];
+        CurrentState.StateEnter();
       } else {
         Debug.Log("There is no state called " + value);
       }
     }
+  }
+
+  public void SetTags(string tag) {
+    Debug.Log("Setting tag to " + tag);
+    gameObject.tag = tag;
+    friendlyTag = tag.Equals("Friend") ? "Friend" : "Enemy";
+    enemyTag = tag.Equals("Friend") ? "Enemy" : "Friend";
   }
 
   public void Init(UnitFactory.UnitStatistic newStats) {
@@ -127,9 +136,6 @@ public class UnitBrain : MonoBehaviour {
     missileRange.y = unitControl.missileRange.y * unitControl.missileRange.y;
     chargeRange = unitControl.chargeRange * unitControl.chargeRange;
 
-    friendlyTag = gameObject.tag.Equals("Friend") ? "Friend" : "Enemy";
-    enemyTag = gameObject.tag.Equals("Friend") ? "Enemy" : "Friend";
-
     useAltAttackPose = Random.value < 0.5f;
 
     AddState(gameObject.AddComponent<UnitStateIdle>());
@@ -147,19 +153,18 @@ public class UnitBrain : MonoBehaviour {
   }
 
   public void UpdateBrain() {
-    currentState.StateUpdate();
+    if (CurrentTarget && CurrentTarget.IsDestroyed)
+      CurrentTarget = null;
+
+    CurrentState.StateUpdate();
   }
 
   public UnitControl ScanForTargets() {
-    return ScanForTargets(null);
-  }
-
-  public UnitControl ScanForTargets(UnitControl excludeThisGuy) {
     // if ((Disciplined || HoldTheLine) && 
     //   (State.Equals("Moving") && (navAgent.remainingDistance * navAgent.remainingDistance) < visualRange))
     //   return null;
 
-    if (HoldTheLine && State.Equals("Idle")) return null;
+    //if (HoldTheLine && State.Equals("Idle")) return null;
 
     GameObject[] possibleTargets = GameObject.FindGameObjectsWithTag(enemyTag);
     LayerMask terrainMask = LayerMask.GetMask("Terrain");
@@ -168,16 +173,22 @@ public class UnitBrain : MonoBehaviour {
 
     foreach (GameObject target in possibleTargets) {
 
-      if (target.name.Contains(unitControl.TeamName)) continue;
-
+      if (target.name.Contains(unitControl.TeamName)) {
+        if (showDebug) Debug.Log("targets name contains team name");
+        continue;
+      }
       UnitControl targetControl = target.GetComponent<UnitControl>();
-      if (!targetControl || targetControl.IsDestroyed) continue;
-
-      if (excludeThisGuy && excludeThisGuy.Equals(targetControl)) continue;
+      if (!targetControl || targetControl.IsDestroyed) {
+        if (showDebug) Debug.Log("targets has no control, or is destyroyed");
+        continue;
+      }
 
       float targetDistance = (target.transform.position - transform.position).sqrMagnitude;
 
-      if (targetDistance > visualRange) continue;
+      if (targetDistance > visualRange) {
+        if (showDebug) Debug.Log("targets is outside of visual range");
+        continue;
+      }
 
       if (closestTarget && closestDistance < targetDistance) continue;
 
@@ -189,6 +200,8 @@ public class UnitBrain : MonoBehaviour {
       if (!Physics.Raycast(ray, targetDistance, terrainMask)) {
         closestTarget = targetControl;
         closestDistance = targetDistance;
+      } else {
+        if (showDebug) Debug.Log("targets is blocked by terrain");
       }
     }
 

@@ -38,11 +38,10 @@ public class Facility : MonoBehaviour {
     GameObject newUnit = gameManager.UnitFactory.CreateUnit(order.unitType, spawnPoint.position, spawnPoint.rotation);
     UnitControl newUnitControl = newUnit.GetComponent<UnitControl>();
     order.owner.AddUnit(newUnitControl);
-    newUnitControl.TeamName = order.owner.teamName;
+    newUnitControl.TeamName = order.owner.tag;
     newUnitControl.UnitType = order.unitType;
     newUnitControl.Cluster = order.owner;
     newUnit.name = order.owner.tag + "-" + order.unitType;
-    newUnit.tag = order.owner.tag;
     newUnit.layer = LayerMask.NameToLayer(order.owner.tag);
     newUnit.GetComponent<UnitBrain>().MoveTo(order.owner.transform.position);
     order.amount--;

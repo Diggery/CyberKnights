@@ -9,6 +9,8 @@ public class UnitStateChasing : UnitState {
   public override void StateInit() {
     base.StateInit();
     stateName = "Chasing";
+    MoveToNearbyTargets = true;
+
   }
 
   public override void StateEnter() {
@@ -19,7 +21,7 @@ public class UnitStateChasing : UnitState {
 
   public override void StateUpdate() {
     base.StateUpdate();
-    if (!brain.CurrentTarget) {
+    if (!brain.CurrentTarget || brain.CurrentTarget.IsDestroyed) {
       brain.State = "Idle";
       return;
     }
@@ -27,6 +29,12 @@ public class UnitStateChasing : UnitState {
       brain.State = "Idle";
       return;
     }
+
+    if (brain.InMeleeRange || brain.InMissileRange) {
+      animator.SetTrigger("ChargeAttack");
+      brain.State = "Attacking";
+    }
+
     float distance = brain.DistanceToTarget;
     UnitControl betterTarget = brain.ScanForTargets();
     if (betterTarget && betterTarget != brain.CurrentTarget) brain.AttackTarget(betterTarget);
@@ -36,32 +44,6 @@ public class UnitStateChasing : UnitState {
     base.StateExit();
     animator.SetBool("InChaseMode", false);
 
-  }
-
-  private void Update() {
-    if (!isActive) return;
-
-    if (!brain.CurrentTarget || brain.CurrentTarget.IsDestroyed) {
-      brain.State = "Idle";
-      return;
-    }
-
-    navAgent.velocity = Vector3.zero;
-
-    if (brain.InAttackState) return;
-
-    if (brain.InMeleeRange || brain.InMissileRange) {
-      animator.SetTrigger("ChargeAttack");
-      brain.State = "Attacking";
-    } else {
-      Vector3 directionToEnemy = (brain.CurrentTarget.transform.position - transform.position).normalized;
-      rbody.AddForce(directionToEnemy * unitControl.ChaseSpeed * 1000, ForceMode.Force);
-      Quaternion rotationToEnemy = Quaternion.LookRotation(directionToEnemy, Vector3.up);
-      transform.rotation = Quaternion.RotateTowards(
-        transform.rotation,
-        rotationToEnemy,
-        unitControl.RotationSpeed);
-    }
   }
 
   protected override void CollidedWithEnemy(UnitControl enemy) {

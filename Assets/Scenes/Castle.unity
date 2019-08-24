@@ -142,7 +142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &125199762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,7 +155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: defe3ee269543f7428dc9addfdd80c69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamName: Player
   formationType: 1
   clusterMakeup:
   - type: Royal Archer
@@ -1422,7 +1421,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: defe3ee269543f7428dc9addfdd80c69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamName: Enemy
   formationType: 1
   clusterMakeup:
   - type: Vanguard Berzerker
@@ -1713,7 +1711,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isReady: 1
-  coolDown: 1
 --- !u!4 &812015648 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 8e781a767001941d9a6597ea7885bc5f,
@@ -3412,7 +3409,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: defe3ee269543f7428dc9addfdd80c69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamName: Player
   formationType: 1
   clusterMakeup:
   - type: Royal Soldier
@@ -3462,7 +3458,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isReady: 1
-  coolDown: 1
 --- !u!1 &6216190078136093395 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3228883587444132407, guid: 6a807d944bc41f540b5c4b024d416e82,

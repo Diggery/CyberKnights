@@ -6,7 +6,14 @@ using UnityEngine.AI;
 public class UnitControl : MonoBehaviour {
   GameManager gameManager;
 
-  public string TeamName { get; set; }
+  string teamName = "";
+  public string TeamName { 
+    get{ return teamName;}
+    set{ 
+      teamName = value;
+      brain.SetTags(TeamName);
+    } 
+  }
   public string UnitType { get; set; }
 
   Vector3 anchorPos;
@@ -159,12 +166,12 @@ public class UnitControl : MonoBehaviour {
 
     brain = gameObject.AddComponent<UnitBrain>();
     brain.Init(newStats);
-
   }
 
 
   private void Update() {
     if (IsDestroyed) return;
+
 
     velocityDir = transform.position - lastPosition;
     velocity = Mathf.Lerp(velocity, velocityDir.magnitude / Time.deltaTime, Time.deltaTime * 5);
@@ -182,8 +189,20 @@ public class UnitControl : MonoBehaviour {
       GainEnergy(Time.deltaTime);
     }
 
+    if (brain.CurrentState.TurnTowardsTarget || brain.CurrentState.MoveToNearbyTargets) {
+      Vector3 directionToEnemy = (brain.CurrentTarget.transform.position - transform.position).normalized;
+      if (brain.CurrentState.MoveToNearbyTargets) {
+        rbody.AddForce(directionToEnemy * ChaseSpeed * 1000, ForceMode.Force);
+      }
 
-
+      if (brain.CurrentState.TurnTowardsTarget) {
+        Quaternion rotationToEnemy = Quaternion.LookRotation(directionToEnemy, Vector3.up);
+        transform.rotation = Quaternion.RotateTowards(
+          transform.rotation,
+          rotationToEnemy,
+          RotationSpeed);
+      }
+    }
   }
 
   public void UpdateBrain() {
@@ -192,7 +211,7 @@ public class UnitControl : MonoBehaviour {
     if (brain.InMeleeRange || brain.InMissileRange) {
       brain.State = "Attacking";
     }
-    
+
     brain.UpdateBrain();
   }
 
@@ -229,6 +248,9 @@ public class UnitControl : MonoBehaviour {
   }
 
   void LaunchMissile() {
+    if (!brain.CurrentTarget)
+      return;
+
     GameObject missile = GameObject.Instantiate(
       GameManager.Instance.GetPrefab(missilePrefab),
       attach_LaunchPoint.position,
@@ -242,7 +264,6 @@ public class UnitControl : MonoBehaviour {
 
   public void TakeDamage(float amount, UnitControl attacker, string type) {
     if (IsDestroyed) return;
-    Debug.Log("Taking " + amount + " damage");
     brain.Attacked(attacker, type);
     armorLevel -= amount;
     if (!attach_Center) Debug.Log(gameObject.name + " has no attach center");

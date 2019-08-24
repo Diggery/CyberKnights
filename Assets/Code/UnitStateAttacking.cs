@@ -11,6 +11,8 @@ public class UnitStateAttacking : UnitState {
   public override void StateInit() {
     base.StateInit();
     stateName = "Attacking";
+    AttackNearbyTargets = true;
+    TurnTowardsTarget = true;
   }
 
   public override void StateEnter() {
@@ -44,7 +46,6 @@ public class UnitStateAttacking : UnitState {
       animator.SetBool("UseAltAttackPose", brain.GetAttackPose());
       if (unitControl.ReadyToAttack) {
         Vector3 directionToEnemy = (brain.CurrentTarget.transform.position - transform.position).normalized;
-       // navAgent.Move(directionToEnemy * 0.05f);
 
         Quaternion rotationToEnemy = Quaternion.LookRotation(directionToEnemy, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(
