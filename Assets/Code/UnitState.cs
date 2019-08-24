@@ -23,6 +23,11 @@ public class UnitState : MonoBehaviour {
     get { return stateName; }
   }
 
+  public bool AttackNearbyTargets { get; set; }
+  public bool TurnTowardsTarget { get; set; }
+
+  public bool MoveToNearbyTargets { get; set; }
+
   public virtual void StateInit() {
     unitControl = GetComponent<UnitControl>();
     animator = GetComponent<Animator>();
