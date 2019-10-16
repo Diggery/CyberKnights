@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour {
 
   float cameraMoveSpeed = 0.5f;
-  float cameraScrollSpeed = 2.5f;
+  float cameraScrollSpeed = 5.0f;
   float cameraRotateSpeed = 1.5f;
   float cameraDrift = 8;
 
@@ -17,7 +17,7 @@ public class CameraControl : MonoBehaviour {
   Vector3 zoomGoal = Vector3.zero;
   float zoomAmount = 10;
   Vector2 zoomRange = new Vector2(10, 100);
-  float zoomSpeed = 5;
+  float zoomSpeed = 15;
 
   void Start() {
     goalPos = transform.position;

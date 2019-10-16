@@ -7,12 +7,12 @@ public class UnitControl : MonoBehaviour {
   GameManager gameManager;
 
   string teamName = "";
-  public string TeamName { 
-    get{ return teamName;}
-    set{ 
+  public string TeamName {
+    get { return teamName; }
+    set {
       teamName = value;
       brain.SetTags(TeamName);
-    } 
+    }
   }
   public string UnitType { get; set; }
 
@@ -34,7 +34,7 @@ public class UnitControl : MonoBehaviour {
   public float ChaseSpeed {
     get { return chaseSpeed; }
   }
-  float rotationSpeed = 270.0f;
+  float rotationSpeed = 90.0f;
   public float RotationSpeed {
     get { return rotationSpeed; }
   }
@@ -118,6 +118,8 @@ public class UnitControl : MonoBehaviour {
     get { return energyLevel; }
   }
 
+  public float missleAccuracy = 0.9f;
+
   Vector3 lastPosition;
   Vector3 velocityDir;
   float velocity;
@@ -200,7 +202,7 @@ public class UnitControl : MonoBehaviour {
         transform.rotation = Quaternion.RotateTowards(
           transform.rotation,
           rotationToEnemy,
-          RotationSpeed);
+          RotationSpeed * Time.deltaTime);
       }
     }
   }
@@ -257,7 +259,14 @@ public class UnitControl : MonoBehaviour {
       attach_LaunchPoint.rotation
     );
     missile.GetComponent<Missile>().Init(this);
-    Vector3 force = Utils.BallisticVel(missile.transform.position, brain.CurrentTarget.transform.position);
+
+    Vector3 offset = new Vector3(Random.value - 0.5f, 0, Random.value - 0.5f) * 2;
+
+    Vector3 force = Utils.BallisticVel(
+      missile.transform.position,
+      brain.CurrentTarget.transform.position + offset
+    );
+
     Rigidbody missileRB = missile.GetComponent<Rigidbody>();
     missileRB.AddForce(force, ForceMode.VelocityChange);
   }

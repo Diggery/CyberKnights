@@ -113,7 +113,6 @@ public class UnitBrain : MonoBehaviour {
   }
 
   public void SetTags(string tag) {
-    Debug.Log("Setting tag to " + tag);
     gameObject.tag = tag;
     friendlyTag = tag.Equals("Friend") ? "Friend" : "Enemy";
     enemyTag = tag.Equals("Friend") ? "Enemy" : "Friend";

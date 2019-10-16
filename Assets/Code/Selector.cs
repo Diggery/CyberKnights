@@ -8,6 +8,8 @@ public class Selector : MonoBehaviour {
   public InputControl.Formation formationType = InputControl.Formation.Mob;
   protected ClusterControl cluster;
 
+  protected Transform startMarker;
+  protected Transform endMarker;
   protected Transform moveHandle;
   protected Material moveMaterial;
   protected Vector3 moveOffset;
@@ -16,6 +18,8 @@ public class Selector : MonoBehaviour {
 
   protected bool flipped = false;
   protected float lastSelectorSize = 1;
+
+
 
   public bool Flipped {
     get { return flipped; }
@@ -27,6 +31,11 @@ public class Selector : MonoBehaviour {
 
     inputControl.onEnterCtrlMode += onEnterCtrlMode;
     inputControl.onExitCtrlMode += onExitCtrlMode;
+
+    startMarker = new GameObject("Start").transform;
+    startMarker.SetParent(transform);
+    endMarker = new GameObject("End").transform;
+    endMarker.SetParent(transform);
 
     moveHandle = transform.Find("Move");
     moveHandle.gameObject.AddComponent<InputRelay>().Init(gameObject);
@@ -52,7 +61,10 @@ public class Selector : MonoBehaviour {
   }
 
   public virtual void Place(Vector3 start, Vector3 end, bool useMinSize = false) {
+    startMarker.position = start;
+    endMarker.position = end;
   }
+
 
   public virtual void PlacementComplete(Vector3 startPos, Vector3 endPos) {
     flipped = false;
@@ -62,6 +74,9 @@ public class Selector : MonoBehaviour {
     flipped = !flipped;
   }
 
+  public virtual Vector3[] GeneratePositions(int unitCount) {
+    return GeneratePositions(unitCount, startMarker.position,  endMarker.position);
+  }
   public virtual Vector3[] GeneratePositions(int unitCount, Vector3 startPos, Vector3 endPos) {
     List<Vector3> positions = new List<Vector3>();
     return positions.ToArray();

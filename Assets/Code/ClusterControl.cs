@@ -41,8 +41,8 @@ public class ClusterControl : MonoBehaviour {
 
   public ClusterSegment[] clusterMakeup;
 
-  public class UnitLostEvent : UnityEvent<UnitControl> { }
-  public UnitLostEvent unitLost = new UnitLostEvent();
+  public class UnitChangeEvent : UnityEvent<UnitControl> { }
+  public UnitChangeEvent unitLost = new UnitChangeEvent();
 
   void Start() {
     Invoke("Init", 1);
@@ -59,7 +59,7 @@ public class ClusterControl : MonoBehaviour {
       UI = transform.Find("ClusterUI").GetComponent<UICluster>().Init();
       UI.AddLine(marker.GetComponent<Renderer>(), line.GetComponent<Renderer>());
     }
-    foreach(ClusterSegment segment in clusterMakeup) {
+    foreach (ClusterSegment segment in clusterMakeup) {
       Facility facility = gameManager.GetClosestFacility(transform.position, gameObject.tag);
       facility.SubmitOrder(new Facility.UnitOrder(this, segment.type, segment.amount));
     }
@@ -104,10 +104,20 @@ public class ClusterControl : MonoBehaviour {
     currentSelector.Place(start, end);
   }
 
+  public void Reform() {
+    if (!currentSelector) return;
+
+    Vector3[] clusterPositions = currentSelector.GeneratePositions(units.Count);
+
+    for (int i = 0; i < clusterPositions.Length; i++) {
+      units[i].Brain.ClusterPos = clusterPositions[i];
+      units[i].Brain.MoveTo(clusterPositions[i]);
+    }
+  }
+
   public void Command(Vector3 start, Vector3 end) {
     currentSelector.PlacementComplete(start, end);
     Vector3[] clusterPositions = currentSelector.GeneratePositions(units.Count, start, end);
-    Vector3 centerPos = Vector3.Lerp(start, end, 0.5f);
 
     for (int i = 0; i < clusterPositions.Length; i++) {
       units[i].Brain.ClusterPos = clusterPositions[i];
@@ -162,6 +172,8 @@ public class ClusterControl : MonoBehaviour {
 
   public void AddUnit(UnitControl newUnit) {
     units.Add(newUnit);
+
+    Reform();
   }
 
   public Vector3 GetFlockingVector(UnitControl target) {
