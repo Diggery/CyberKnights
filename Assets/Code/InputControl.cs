@@ -91,7 +91,7 @@ public class InputControl : MonoBehaviour {
     if (mouseRightInProgress) {
       Vector3 mapPos;
       if (GetTerrainIntersection(out mapPos)) {
-        CameraControl.Scroll(mouseRightDownPos - mapPos);
+        CameraControl.ScrollMap(mouseRightDownPos - mapPos);
         mouseRightDownPos = mapPos;
       }
     }
@@ -117,7 +117,7 @@ public class InputControl : MonoBehaviour {
 
     float scrollAmount = Input.GetAxis("Mouse ScrollWheel");
     if (scrollAmount != 0) {
-      CameraControl.Zoom(scrollAmount);
+      CameraControl.Scroll(scrollAmount);
     }
 
     if (Input.GetKeyDown(KeyCode.LeftControl)) onEnterCtrlMode.Invoke();

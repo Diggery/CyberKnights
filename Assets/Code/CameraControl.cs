@@ -39,15 +39,16 @@ public class CameraControl : MonoBehaviour, ControlTarget {
     goalPos += (transform.TransformDirection(direction) * cameraMoveSpeed);
   }
 
-  public void Scroll(Vector3 amount) {
-    goalPos += amount * cameraScrollSpeed;
-  }
 
   public void Rotate(int direction) {
     goalRot = goalRot * Quaternion.AngleAxis(direction * cameraRotateSpeed, Vector3.up);
   }
 
-  public void Zoom(float amount) {
+  public void ScrollMap(Vector3 amount) {
+    goalPos += amount * cameraScrollSpeed;
+  }
+
+  public void Scroll(float amount) {
     zoomAmount = Mathf.Clamp(zoomAmount + (-amount * zoomSpeed), zoomRange.x, zoomRange.y);
     zoomGoal = zoomOffset * zoomAmount;
   }
