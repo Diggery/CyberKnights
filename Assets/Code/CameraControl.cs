@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraControl : MonoBehaviour {
+public class CameraControl : MonoBehaviour, ControlTarget {
 
   float cameraMoveSpeed = 0.5f;
   float cameraScrollSpeed = 5.0f;
@@ -43,7 +43,7 @@ public class CameraControl : MonoBehaviour {
     goalPos += amount * cameraScrollSpeed;
   }
 
-  public void Rotate(float direction) {
+  public void Rotate(int direction) {
     goalRot = goalRot * Quaternion.AngleAxis(direction * cameraRotateSpeed, Vector3.up);
   }
 
