@@ -8,7 +8,8 @@ public class InputControl : MonoBehaviour {
   Camera mainCamera;
   public CameraControl CameraControl { get; set; }
 
-  public ControlTarget controlTarget;
+  public IControlTarget ControlTarget { get; set; }
+
 
   bool mouseLeftInProgress = false;
   Vector3 mouseLeftDownPos = Vector3.zero;
@@ -17,10 +18,8 @@ public class InputControl : MonoBehaviour {
   Vector3 mouseRightDownPos = Vector3.zero;
 
   List<ClusterControl> clusters = new List<ClusterControl>();
-  ClusterControl selectedCluster;
-  public ClusterControl SelectedCluster {
-    get { return selectedCluster; }
-  }
+
+  public ClusterControl SelectedCluster { get; private set; }
   public UIInGame IngameUI { get; set; }
   public enum Formation {
     Mob, Ranks, Vanguard, Line, Arc
@@ -38,7 +37,7 @@ public class InputControl : MonoBehaviour {
   void Start() {
     mainCamera = Camera.main;
     CameraControl = mainCamera.transform.root.GetComponent<CameraControl>();
-    if (controlTarget != null) controlTarget = CameraControl;
+    if (ControlTarget == null) ControlTarget = CameraControl;
   }
 
   // Update is called once per frame
@@ -50,7 +49,7 @@ public class InputControl : MonoBehaviour {
       eventData.position = Input.mousePosition;
       List<RaycastResult> results = new List<RaycastResult>();
       EventSystem.current.RaycastAll(eventData, results);
-      if (results[0].gameObject.tag.Equals("Terrain")) {
+      if (results.Count > 0 && results[0].gameObject.tag.Equals("Terrain")) {
         mouseLeftDownPos = Input.mousePosition;
         Vector3 mapPos;
         mouseLeftInProgress = GetTerrainIntersection(out mapPos);
@@ -60,21 +59,21 @@ public class InputControl : MonoBehaviour {
       }
     }
 
-    if (mouseLeftInProgress && selectedCluster) {
+    if (mouseLeftInProgress && SelectedCluster) {
 
       Vector3 mapPos;
       if (GetTerrainIntersection(out mapPos)) {
-        selectedCluster.PlaceFormation(mouseLeftDownPos, mapPos);
+        SelectedCluster.PlaceFormation(mouseLeftDownPos, mapPos);
       }
       if (Input.GetMouseButtonDown(1)) {
-        selectedCluster.FlipFormation();
+        SelectedCluster.FlipFormation();
       }
     }
 
     if (Input.GetMouseButtonUp(0)) {
       Vector3 mapPos;
-      if (mouseLeftInProgress && selectedCluster && GetTerrainIntersection(out mapPos)) {
-        selectedCluster.Command(mouseLeftDownPos, mapPos);
+      if (mouseLeftInProgress && SelectedCluster && GetTerrainIntersection(out mapPos)) {
+        SelectedCluster.Command(mouseLeftDownPos, mapPos);
       }
       mouseLeftInProgress = false;
     }
@@ -100,20 +99,42 @@ public class InputControl : MonoBehaviour {
       mouseRightInProgress = false;
     }
 
-  //  if (Input.GetButtonDown("Action")) selectedCluster.Release("Tired");
+    //  if (Input.GetButtonDown("Action")) selectedCluster.Release("Tired");
 
     if (Input.GetKeyDown(KeyCode.Alpha1)) IngameUI.KeyPressed("1");
     if (Input.GetKeyDown(KeyCode.Alpha2)) IngameUI.KeyPressed("2");
     if (Input.GetKeyDown(KeyCode.Alpha3)) IngameUI.KeyPressed("3");
     if (Input.GetKeyDown(KeyCode.Alpha4)) IngameUI.KeyPressed("4");
 
-    if (Input.GetKey(KeyCode.Q)) controlTarget.Rotate(1);
-    if (Input.GetKey(KeyCode.E)) controlTarget.Rotate(-1);
+    Vector3 moveDirection = Vector3.zero;
+    int rotateDirection = 0;
 
-    if (Input.GetKey(KeyCode.W)) controlTarget.Move(Vector3.forward);
-    if (Input.GetKey(KeyCode.A)) controlTarget.Move(Vector3.left);
-    if (Input.GetKey(KeyCode.S)) controlTarget.Move(Vector3.back);
-    if (Input.GetKey(KeyCode.D)) controlTarget.Move(Vector3.right);
+
+    //if (Input.GetKeyDown(KeyCode.Q)) rotateLeft = KeyState.Pressed;
+    if (Input.GetKey(KeyCode.Q)) rotateDirection = 1;
+    //if (Input.GetKeyUp(KeyCode.Q)) rotateLeft = KeyState.Released;
+
+    //if (Input.GetKeyDown(KeyCode.E)) rotateRight = KeyState.Pressed;
+    if (Input.GetKey(KeyCode.E)) rotateDirection = -1;
+    //if (Input.GetKeyUp(KeyCode.E)) rotateRight = KeyState.Released;
+
+    //if (Input.GetKeyDown(KeyCode.W)) moveForward = KeyState.Pressed;
+    if (Input.GetKey(KeyCode.W)) moveDirection += Vector3.forward;
+    //if (Input.GetKeyUp(KeyCode.W)) moveForward = KeyState.Released;
+
+    //if (Input.GetKeyDown(KeyCode.A)) moveLeft = KeyState.Pressed;
+    if (Input.GetKey(KeyCode.A)) moveDirection += Vector3.left;
+    //if (Input.GetKeyUp(KeyCode.A)) moveLeft = KeyState.Released;
+
+    //if (Input.GetKeyDown(KeyCode.S)) moveBack = KeyState.Pressed;
+    if (Input.GetKey(KeyCode.S)) moveDirection += Vector3.back;
+    //if (Input.GetKeyUp(KeyCode.S)) moveBack = KeyState.Released;
+
+    //if (Input.GetKeyDown(KeyCode.D)) moveRight = KeyState.Pressed;
+    if (Input.GetKey(KeyCode.D)) moveDirection += Vector3.right;
+    //if (Input.GetKeyUp(KeyCode.D)) moveRight = KeyState.Released;
+
+    ControlTarget.Move(moveDirection);
 
     float scrollAmount = Input.GetAxis("Mouse ScrollWheel");
     if (scrollAmount != 0) {
@@ -163,17 +184,17 @@ public class InputControl : MonoBehaviour {
     }
 
     IngameUI.SelectCluster(selected);
-    selectedCluster = selected;
+    SelectedCluster = selected;
     selected.Select(true);
   }
 
   public void DeselectCluster(ClusterControl deselected) {
     if (!deselected.tag.Equals("Friend")) return;
 
-    if (!selectedCluster || selectedCluster != deselected)
+    if (!SelectedCluster || SelectedCluster != deselected)
       return;
 
-    selectedCluster = null;
+    SelectedCluster = null;
     IngameUI.DeSelectCluster(deselected);
     deselected.Select(false);
   }
