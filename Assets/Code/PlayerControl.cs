@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerControl : MonoBehaviour, IControlTarget {
 
   GameManager gameManager;
   Animator animator;
+
+  Vector3 moveDirection = Vector3.zero;
+  Vector3 moveGoal = Vector3.zero;
 
   bool isMoving = false;
   bool IsMoving {
@@ -23,7 +27,9 @@ public class PlayerControl : MonoBehaviour, IControlTarget {
   }
 
   void Update() {
-
+    moveDirection = Vector3.Lerp(moveDirection, moveGoal, Time.deltaTime * 5);
+    animator.SetFloat("ForwardMove", moveDirection.z);
+    animator.SetFloat("SideMove", moveDirection.x);
   }
 
 
@@ -33,8 +39,7 @@ public class PlayerControl : MonoBehaviour, IControlTarget {
       return;
     }
     IsMoving = true;
-    animator.SetFloat("ForwardMove", direction.z);
-    animator.SetFloat("SideMove", direction.x);
+    moveGoal = direction;
   }
 
 
