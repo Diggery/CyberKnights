@@ -1,0 +1,519 @@
+fileFormatVersion: 2
+guid: 1412cacfeda4a409eb6965187cb3a5c2
+ModelImporter:
+  serializedVersion: 19300
+  internalIDToNameTable:
+  - first:
+      74: -4235307873134632701
+    second: Idle_RightStance
+  - first:
+      74: -7453248263583898070
+    second: Idle_RightToLeft
+  - first:
+      74: -6625444436657677586
+    second: Idle_LeftStance
+  - first:
+      74: -4234841663004825367
+    second: Idle_LeftToRight
+  externalObjects: {}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Inbetween bone
+      rotation in copied configuration does not match rotation in animation file:\n\t'Knight:RightShoulder_Skel'
+      : rotation error = 17.744473 deg\n"
+    animationImportErrors: 
+    animationImportWarnings: "\nClip 'Idle_RightStance' has import animation warnings
+      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'Knight:RightShoulder_Skel' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Idle_RightToLeft' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'Knight:RightShoulder_Skel'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Idle_LeftStance' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'Knight:RightShoulder_Skel'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Idle_LeftToRight' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'Knight:RightShoulder_Skel'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle_RightStance
+      takeName: Idle_RightStance
+      internalID: 0
+      firstFrame: 21
+      lastFrame: 140
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 20.880001
+    - serializedVersion: 16
+      name: Idle_RightToLeft
+      takeName: Idle_RightToLeft
+      internalID: 0
+      firstFrame: 141
+      lastFrame: 150
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle_LeftStance
+      takeName: Idle_LeftStance
+      internalID: 0
+      firstFrame: 151
+      lastFrame: 270
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle_LeftToRight
+      takeName: Idle_LeftToRight
+      internalID: 0
+      firstFrame: 271
+      lastFrame: 280
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: Knight:Hips_Skel
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight:LeftUpperLeg_Skel
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight:RightUpperLeg_Skel
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight:LeftLowerLeg_Skel
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight:RightLowerLeg_Skel
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight:LeftFoot_Skel
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight:RightFoot_Skel
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight:Torso_Skel
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight:Head_Skel
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight:LeftShoulder_Skel
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight:RightUpperArm_Skel
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight:LeftLowerArm_Skel
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight:RightLowerArm_Skel
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight:LeftHand_Skel
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight:RightHand_Skel
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Knight(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:Knight_Geo
+      parentName: Knight(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:RightArm
+      parentName: Knight:Knight_Geo
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:LeftArm
+      parentName: Knight:Knight_Geo
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:RightLeg
+      parentName: Knight:Knight_Geo
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:Torso
+      parentName: Knight:Knight_Geo
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:LeftLeg
+      parentName: Knight:Knight_Geo
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:Knight_Skel
+      parentName: Knight(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:IKMarkers
+      parentName: Knight:Knight_Skel
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:IKMarker_LeftFoot
+      parentName: Knight:IKMarkers
+      position: {x: -0.20896053, y: 0.069079034, z: -0.03423918}
+      rotation: {x: 8.326673e-17, y: -2.4980018e-16, z: 8.326673e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:IKMarker_LeftKnee
+      parentName: Knight:IKMarkers
+      position: {x: -0.20896053, y: 0.7378194, z: 0.86552}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:IKMarker_RightFoot
+      parentName: Knight:IKMarkers
+      position: {x: 0.20896098, y: 0.069079, z: -0.0342392}
+      rotation: {x: 1, y: -0.000000009046772, z: -0.00000001184063, w: 1.7615747e-16}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:IKMarker_RightKnee
+      parentName: Knight:IKMarkers
+      position: {x: 0.20896098, y: 0.73781896, z: 0.86552}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:MoveControl
+      parentName: Knight:Knight_Skel
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:Hips_Skel
+      parentName: Knight:MoveControl
+      position: {x: -0, y: 1.161475, z: 0.0018148473}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:RightUpperLeg_Skel
+      parentName: Knight:Hips_Skel
+      position: {x: 0.20896098, y: -0.0000049319015, z: -0.021053547}
+      rotation: {x: 0.5448097, y: -0.4507576, z: 0.5448097, w: -0.4507576}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:RightLowerLeg_Skel
+      parentName: Knight:RightUpperLeg_Skel
+      position: {x: 0.43317074, y: -0.0099122245, z: -7.105427e-17}
+      rotation: {x: 0.98711944, y: 0.1599852, z: 0.000000001685718, w: 0.000000010400993}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:RightFoot_Skel
+      parentName: Knight:RightLowerLeg_Skel
+      position: {x: 0.6768711, y: -0.01626326, z: -3.4272243e-10}
+      rotation: {x: 0.46567768, y: 0.5321131, z: -0.46567765, w: 0.5321131}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:Torso_Skel
+      parentName: Knight:Hips_Skel
+      position: {x: -0, y: 0.22543041, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:Attach_Center
+      parentName: Knight:Torso_Skel
+      position: {x: -0.00007272897, y: 0.17412668, z: 0.15799104}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:RightShoulder_Skel
+      parentName: Knight:Torso_Skel
+      position: {x: 0.32402998, y: 0.21249466, z: 0.0000000025604725}
+      rotation: {x: 1, y: -0, z: 0, w: -6.123234e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:RightUpperArm_Skel
+      parentName: Knight:RightShoulder_Skel
+      position: {x: 0.11684, y: 0, z: 0}
+      rotation: {x: 0.50217694, y: -0.4727335, z: -0.5216893, w: 0.5021769}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:RightLowerArm_Skel
+      parentName: Knight:RightUpperArm_Skel
+      position: {x: -1.4210854e-16, y: 0.017381249, z: -0.35305998}
+      rotation: {x: -0.025419759, y: -0.0037798288, z: 0.00069788104, w: 0.9996695}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:RightHand_Skel
+      parentName: Knight:RightLowerArm_Skel
+      position: {x: 7.105427e-17, y: 0.011575822, z: -0.3249733}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:LeftShoulder_Skel
+      parentName: Knight:Torso_Skel
+      position: {x: -0.3240303, y: 0.21249591, z: -5.551115e-19}
+      rotation: {x: -0.000000031621806, y: 0.028306996, z: -0.574986, w: 0.8176735}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:LeftUpperArm_Skel
+      parentName: Knight:LeftShoulder_Skel
+      position: {x: -0.11684017, y: 0, z: 2.7755575e-19}
+      rotation: {x: 0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:LeftLowerArm_Skel
+      parentName: Knight:LeftUpperArm_Skel
+      position: {x: 7.105427e-17, y: -0.017381296, z: 0.3530587}
+      rotation: {x: -0.023145942, y: -0.15475456, z: 0.028569747, w: 0.98726857}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:LeftHand_Skel
+      parentName: Knight:LeftLowerArm_Skel
+      position: {x: -0, y: -0.011576761, z: 0.3249752}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:Head_Skel
+      parentName: Knight:Torso_Skel
+      position: {x: -0, y: 0.3713141, z: 0.08520745}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:LeftUpperLeg_Skel
+      parentName: Knight:Hips_Skel
+      position: {x: -0.20896053, y: 1.4210854e-16, z: -0.0210535}
+      rotation: {x: 0.4507576, y: 0.5448097, z: 0.4507576, w: 0.5448097}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:LeftLowerLeg_Skel
+      parentName: Knight:LeftUpperLeg_Skel
+      position: {x: -0.43317524, y: 0.009911328, z: 2.6479884e-17}
+      rotation: {x: 0.98711944, y: 0.1599852, z: 9.7962686e-18, w: 6.044363e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:LeftFoot_Skel
+      parentName: Knight:LeftLowerLeg_Skel
+      position: {x: -0.6768714, y: 0.01626321, z: 1.4832736e-17}
+      rotation: {x: 0.46567768, y: 0.5321131, z: -0.46567768, w: 0.5321131}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 84fd362643fb541adb0e1eadfdda9306,
+    type: 3}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

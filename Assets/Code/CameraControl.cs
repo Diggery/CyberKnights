@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraControl : MonoBehaviour {
+public class CameraControl : MonoBehaviour, ControlTarget {
 
   float cameraMoveSpeed = 0.5f;
   float cameraScrollSpeed = 5.0f;
@@ -39,15 +39,16 @@ public class CameraControl : MonoBehaviour {
     goalPos += (transform.TransformDirection(direction) * cameraMoveSpeed);
   }
 
-  public void Scroll(Vector3 amount) {
-    goalPos += amount * cameraScrollSpeed;
-  }
 
-  public void Rotate(float direction) {
+  public void Rotate(int direction) {
     goalRot = goalRot * Quaternion.AngleAxis(direction * cameraRotateSpeed, Vector3.up);
   }
 
-  public void Zoom(float amount) {
+  public void ScrollMap(Vector3 amount) {
+    goalPos += amount * cameraScrollSpeed;
+  }
+
+  public void Scroll(float amount) {
     zoomAmount = Mathf.Clamp(zoomAmount + (-amount * zoomSpeed), zoomRange.x, zoomRange.y);
     zoomGoal = zoomOffset * zoomAmount;
   }
