@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class PlayerControl : MonoBehaviour, IControlTarget {
 
   GameManager gameManager;
+  CameraControl cameraControl;
   Animator animator;
 
   Vector3 moveDirection = Vector3.zero;
@@ -24,12 +25,17 @@ public class PlayerControl : MonoBehaviour, IControlTarget {
     animator = GetComponent<Animator>();
     gameManager = GameManager.Instance;
     gameManager.InputControl.ControlTarget = this;
+    cameraControl = gameManager.GameCamera;
+    cameraControl.UseMouseLook = true;
+    cameraControl.UseCollisionCheck = true;
   }
 
   void Update() {
     moveDirection = Vector3.Lerp(moveDirection, moveGoal, Time.deltaTime * 5);
     animator.SetFloat("ForwardMove", moveDirection.z);
     animator.SetFloat("SideMove", moveDirection.x);
+
+    cameraControl.SetPosition(transform.position + Vector3.up);
   }
 
 
@@ -42,14 +48,20 @@ public class PlayerControl : MonoBehaviour, IControlTarget {
     moveGoal = direction;
   }
 
-
-
-
   public void Rotate(float direction) {
-    throw new System.NotImplementedException();
+
   }
 
   public void Scroll(float amount) {
-    throw new System.NotImplementedException();
   }
+
+  public void PrimaryAction(ActionPhase phase) {
+    Debug.Log("Attack");
+  }
+
+  public void SecondaryAction(ActionPhase phase) {
+    Debug.Log("Defend");
+
+  }
+
 }

@@ -3,40 +3,28 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
-  CameraControl cameraControl;
-  public CameraControl CameraControl {
-    set { cameraControl = value; }
-    get { return cameraControl; }
-  }
+  public static GameManager Instance { get; private set; }
 
-  InputControl inputControl;
-  public InputControl InputControl {
-    set { inputControl = value; }
-    get { return inputControl; }
-  }
-
+  public CameraControl GameCamera { get; set; }
+  public InputControl InputControl { set; get; }
+  public UnitFactory UnitFactory { get; set; }
 
   public UnitInventory unitInventory;
-  public UnitFactory UnitFactory { get; set; }
   public PrefabInventory prefabInventory;
 
-  static GameManager instance;
-
-  public static GameManager Instance {
-    get { return instance; }
-  }
 
   private void CreateInstance() {
-    if (instance == null) {
-      instance = this;
+    if (Instance == null) {
+      Instance = this;
     } else {
       Destroy(this.gameObject);
     }
   }
   void Awake() {
     CreateInstance();
-    inputControl = gameObject.GetComponent<InputControl>();
+    InputControl = gameObject.GetComponent<InputControl>();
     UnitFactory = gameObject.AddComponent<UnitFactory>();
+    GameCamera = GameObject.Find("GameCamera").GetComponent<CameraControl>();
     SceneManager.LoadScene("InGameUI", LoadSceneMode.Additive);
   }
 

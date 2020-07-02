@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 021790409ea1a44aaa8d25887dc2d8d1
 ModelImporter:
-  serializedVersion: 19300
+  serializedVersion: 19301
   internalIDToNameTable:
   - first:
       74: 81971305457915856
@@ -26,12 +26,19 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
-    motionNodeName: 
-    rigImportErrors: "Copied Avatar Rig Configuration mis-match. Transform hierarchy
-      does not match:\n\tTransform 'Knight:MoveControl' not found in HumanDescription.\n"
-    rigImportWarnings: 
+    motionNodeName: Knight:Knight_Skel/Knight:MoveControl
+    rigImportErrors: 
+    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Inbetween bone
+      rotation in copied configuration does not match rotation in animation file:\n\t'Knight:RightShoulder_Skel'
+      : rotation error = 27.662909 deg\n"
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'Move_Walk_Forward' has import animation warnings
+      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'Knight:RightShoulder_Skel' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Move_Walk_Back' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'Knight:RightShoulder_Skel'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -172,6 +179,7 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1

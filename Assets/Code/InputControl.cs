@@ -9,7 +9,7 @@ public class InputControl : MonoBehaviour {
   public CameraControl CameraControl { get; set; }
 
   public IControlTarget ControlTarget { get; set; }
-
+  public bool UseMapControls { get; set; }
 
   bool mouseLeftInProgress = false;
   Vector3 mouseLeftDownPos = Vector3.zero;
@@ -45,57 +45,54 @@ public class InputControl : MonoBehaviour {
 
     //handle left mouse button
     if (Input.GetMouseButtonDown(0)) {
-      PointerEventData eventData = new PointerEventData(EventSystem.current);
-      eventData.position = Input.mousePosition;
-      List<RaycastResult> results = new List<RaycastResult>();
-      EventSystem.current.RaycastAll(eventData, results);
-      if (results.Count > 0 && results[0].gameObject.tag.Equals("Terrain")) {
-        mouseLeftDownPos = Input.mousePosition;
-        Vector3 mapPos;
-        mouseLeftInProgress = GetTerrainIntersection(out mapPos);
-        if (mouseLeftInProgress) {
-          mouseLeftDownPos = mapPos;
-        }
+      if (UseMapControls) {
+        PrimaryMapClickDown();
+      } else {
+        mouseLeftInProgress = true;
+        ControlTarget.PrimaryAction(ActionPhase.Start);
       }
     }
 
-    if (mouseLeftInProgress && SelectedCluster) {
-
-      Vector3 mapPos;
-      if (GetTerrainIntersection(out mapPos)) {
-        SelectedCluster.PlaceFormation(mouseLeftDownPos, mapPos);
-      }
-      if (Input.GetMouseButtonDown(1)) {
-        SelectedCluster.FlipFormation();
+    if (mouseLeftInProgress) {
+      if (UseMapControls) {
+        PrimaryMapClick();
+      } else {
+        ControlTarget.PrimaryAction(ActionPhase.On);
       }
     }
 
     if (Input.GetMouseButtonUp(0)) {
-      Vector3 mapPos;
-      if (mouseLeftInProgress && SelectedCluster && GetTerrainIntersection(out mapPos)) {
-        SelectedCluster.Command(mouseLeftDownPos, mapPos);
+      if (UseMapControls) {
+        PrimaryMapClickUp();
+      } else {
+        ControlTarget.PrimaryAction(ActionPhase.End);
       }
       mouseLeftInProgress = false;
     }
 
     //handle Right mouse button
     if (Input.GetMouseButtonDown(1)) {
-      Vector3 mapPos;
-      mouseRightInProgress = GetTerrainIntersection(out mapPos);
-      if (mouseRightInProgress) {
-        mouseRightDownPos = mapPos;
+      if (UseMapControls) {
+       SecondaryMapClickDown();
+      } else {
+        ControlTarget.SecondaryAction(ActionPhase.Start);
       }
     }
 
     if (mouseRightInProgress) {
-      Vector3 mapPos;
-      if (GetTerrainIntersection(out mapPos)) {
-        CameraControl.ScrollMap(mouseRightDownPos - mapPos);
-        mouseRightDownPos = mapPos;
+      if (UseMapControls) {
+        SecondaryMapClick();
+      } else {
+        ControlTarget.PrimaryAction(ActionPhase.On);
       }
     }
 
     if (Input.GetMouseButtonUp(1)) {
+      if (UseMapControls) {
+        SecondaryMapClickUp();
+      } else {
+        ControlTarget.PrimaryAction(ActionPhase.End);
+      }
       mouseRightInProgress = false;
     }
 
@@ -109,32 +106,16 @@ public class InputControl : MonoBehaviour {
     Vector3 moveDirection = Vector3.zero;
     int rotateDirection = 0;
 
+    if (Input.GetKey(KeyCode.Q)) rotateDirection += 1;
+    if (Input.GetKey(KeyCode.E)) rotateDirection += -1;
 
-    //if (Input.GetKeyDown(KeyCode.Q)) rotateLeft = KeyState.Pressed;
-    if (Input.GetKey(KeyCode.Q)) rotateDirection = 1;
-    //if (Input.GetKeyUp(KeyCode.Q)) rotateLeft = KeyState.Released;
-
-    //if (Input.GetKeyDown(KeyCode.E)) rotateRight = KeyState.Pressed;
-    if (Input.GetKey(KeyCode.E)) rotateDirection = -1;
-    //if (Input.GetKeyUp(KeyCode.E)) rotateRight = KeyState.Released;
-
-    //if (Input.GetKeyDown(KeyCode.W)) moveForward = KeyState.Pressed;
     if (Input.GetKey(KeyCode.W)) moveDirection += Vector3.forward;
-    //if (Input.GetKeyUp(KeyCode.W)) moveForward = KeyState.Released;
-
-    //if (Input.GetKeyDown(KeyCode.A)) moveLeft = KeyState.Pressed;
     if (Input.GetKey(KeyCode.A)) moveDirection += Vector3.left;
-    //if (Input.GetKeyUp(KeyCode.A)) moveLeft = KeyState.Released;
-
-    //if (Input.GetKeyDown(KeyCode.S)) moveBack = KeyState.Pressed;
     if (Input.GetKey(KeyCode.S)) moveDirection += Vector3.back;
-    //if (Input.GetKeyUp(KeyCode.S)) moveBack = KeyState.Released;
-
-    //if (Input.GetKeyDown(KeyCode.D)) moveRight = KeyState.Pressed;
     if (Input.GetKey(KeyCode.D)) moveDirection += Vector3.right;
-    //if (Input.GetKeyUp(KeyCode.D)) moveRight = KeyState.Released;
 
     ControlTarget.Move(moveDirection);
+    ControlTarget.Rotate(rotateDirection);
 
     float scrollAmount = Input.GetAxis("Mouse ScrollWheel");
     if (scrollAmount != 0) {
@@ -145,8 +126,62 @@ public class InputControl : MonoBehaviour {
     if (Input.GetKeyUp(KeyCode.LeftControl)) onExitCtrlMode.Invoke();
     if (Input.GetKeyDown(KeyCode.LeftAlt)) onEnterAltMode.Invoke();
     if (Input.GetKeyUp(KeyCode.LeftAlt)) onExitAltMode.Invoke();
+
+
+    CameraControl.MouseInputX(Input.GetAxis("Mouse X"));
+    CameraControl.MouseInputY(Input.GetAxis("Mouse Y"));
+
   }
 
+  void PrimaryMapClickDown() {
+    PointerEventData eventData = new PointerEventData(EventSystem.current);
+    eventData.position = Input.mousePosition;
+    List<RaycastResult> results = new List<RaycastResult>();
+    EventSystem.current.RaycastAll(eventData, results);
+    if (results.Count > 0 && results[0].gameObject.tag.Equals("Terrain")) {
+      mouseLeftDownPos = Input.mousePosition;
+      Vector3 mapPos;
+      mouseLeftInProgress = GetTerrainIntersection(out mapPos);
+      if (mouseLeftInProgress) {
+        mouseLeftDownPos = mapPos;
+      }
+    }
+  }
+  void SecondaryMapClickDown() {
+    Vector3 mapPos;
+    mouseRightInProgress = GetTerrainIntersection(out mapPos);
+    if (mouseRightInProgress) {
+      mouseRightDownPos = mapPos;
+    }
+  }
+
+  void PrimaryMapClick() {
+    if (!SelectedCluster) return;
+    Vector3 mapPos;
+    if (GetTerrainIntersection(out mapPos)) {
+      SelectedCluster.PlaceFormation(mouseLeftDownPos, mapPos);
+    }
+    if (Input.GetMouseButtonDown(1)) {
+      SelectedCluster.FlipFormation();
+    }
+  }
+  void SecondaryMapClick() {
+    Vector3 mapPos;
+    if (GetTerrainIntersection(out mapPos)) {
+      CameraControl.ScrollMap(mouseRightDownPos - mapPos);
+      mouseRightDownPos = mapPos;
+    }
+  }
+  void PrimaryMapClickUp() {
+    if (!SelectedCluster) return;
+
+    Vector3 mapPos;
+    if (mouseLeftInProgress && GetTerrainIntersection(out mapPos)) {
+      SelectedCluster.Command(mouseLeftDownPos, mapPos);
+    }
+  }
+  void SecondaryMapClickUp() {
+  }
   public bool GetTerrainIntersection(out Vector3 mapPos) {
     Ray ray = mainCamera.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
     RaycastHit hit;

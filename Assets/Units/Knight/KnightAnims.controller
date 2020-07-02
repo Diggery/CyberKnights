@@ -136,19 +136,19 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: SideMove
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsMoving
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -192,7 +192,7 @@ BlendTree:
     m_Motion: {fileID: -1141765570431662528, guid: 021790409ea1a44aaa8d25887dc2d8d1,
       type: 3}
     m_Threshold: 0.6666667
-    m_Position: {x: 1, y: 0}
+    m_Position: {x: -1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
@@ -201,7 +201,7 @@ BlendTree:
     m_Motion: {fileID: -3287400433779517844, guid: 021790409ea1a44aaa8d25887dc2d8d1,
       type: 3}
     m_Threshold: 1
-    m_Position: {x: -1, y: 0}
+    m_Position: {x: 1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
