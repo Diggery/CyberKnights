@@ -7,6 +7,14 @@ public class CameraControl : MonoBehaviour, IControlTarget {
   public bool UseMouseLook { get; set; }
   public bool UseCollisionCheck { get; set; }
 
+
+  public Quaternion Heading {
+    get {
+      return transform.rotation * Quaternion.AngleAxis(180, Vector3.up);
+    }
+  }
+
+
   float cameraMoveSpeed = 0.5f;
   float cameraScrollSpeed = 5.0f;
   float cameraRotateSpeed = 1.5f;
@@ -23,7 +31,7 @@ public class CameraControl : MonoBehaviour, IControlTarget {
   Transform cameraTransform;
   Transform cameraPitch;
   Vector3 zoomGoal = Vector3.zero;
-  float zoomAmount = 0.5f;
+  float zoomAmount = 0.25f;
   Vector3 zoomMin = new Vector3(0, 0, 10);
   Vector3 zoomMax = new Vector3(0, 0, 100);
 

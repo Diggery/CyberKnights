@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class PlayerControl : MonoBehaviour, IControlTarget {
 
+  public bool UseCameraLook { get; set; }
+
   GameManager gameManager;
   CameraControl cameraControl;
   Animator animator;
@@ -28,16 +30,31 @@ public class PlayerControl : MonoBehaviour, IControlTarget {
     cameraControl = gameManager.GameCamera;
     cameraControl.UseMouseLook = true;
     cameraControl.UseCollisionCheck = true;
+    UseCameraLook = true;
   }
 
   void Update() {
     moveDirection = Vector3.Lerp(moveDirection, moveGoal, Time.deltaTime * 5);
     animator.SetFloat("ForwardMove", moveDirection.z);
     animator.SetFloat("SideMove", moveDirection.x);
-
     cameraControl.SetPosition(transform.position + Vector3.up);
   }
 
+  void OnAnimatorMove() {
+    Quaternion cameraHeading = cameraControl.Heading;
+    transform.position += animator.deltaPosition;
+    transform.rotation *= animator.deltaRotation;
+
+    if (IsMoving)
+      transform.rotation = Quaternion.Lerp(transform.rotation, cameraHeading, Time.deltaTime * 2);
+  }
+
+  private void OnAnimatorIK(int layerIndex) {
+    if (UseCameraLook) {
+      animator.SetLookAtWeight(1f, 0.5f);
+      animator.SetLookAtPosition(animator.GetBoneTransform(HumanBodyBones.Head).position - cameraControl.transform.forward);
+    }
+  }
 
   public void Move(Vector3 direction) {
     if (direction.sqrMagnitude < 0.1f) {
