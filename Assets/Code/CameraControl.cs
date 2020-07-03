@@ -8,12 +8,16 @@ public class CameraControl : MonoBehaviour, IControlTarget {
   public bool UseCollisionCheck { get; set; }
 
 
-  public Quaternion Heading {
+  public Quaternion heading {
     get {
       return transform.rotation * Quaternion.AngleAxis(180, Vector3.up);
     }
   }
-
+  public Vector3 forward {
+    get {
+      return transform.forward;
+    }
+  }
 
   float cameraMoveSpeed = 0.5f;
   float cameraScrollSpeed = 5.0f;

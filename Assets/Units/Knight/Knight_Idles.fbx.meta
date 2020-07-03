@@ -15,6 +15,12 @@ ModelImporter:
   - first:
       74: -4234841663004825367
     second: Idle_LeftToRight
+  - first:
+      74: 4376480706959907642
+    second: Idle_TurnLeft
+  - first:
+      74: 8518150851769480633
+    second: Idle_TurnRight
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -43,6 +49,12 @@ ModelImporter:
       quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'Knight:RightShoulder_Skel'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
       'Idle_LeftToRight' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'Knight:RightShoulder_Skel'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Idle_TurnLeft' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'Knight:RightShoulder_Skel'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Idle_TurnRight' has import animation warnings that might lower retargeting
       quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'Knight:RightShoulder_Skel'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 
@@ -150,6 +162,64 @@ ModelImporter:
       internalID: 0
       firstFrame: 271
       lastFrame: 280
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle_TurnLeft
+      takeName: Idle_TurnLeft
+      internalID: 0
+      firstFrame: 290
+      lastFrame: 314
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle_TurnRight
+      takeName: Idle_TurnRight
+      internalID: 0
+      firstFrame: 314
+      lastFrame: 338
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

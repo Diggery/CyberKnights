@@ -76,8 +76,72 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
-      transformMask: []
-      maskType: 3
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Knight:Knight_Geo
+        weight: 0
+      - path: Knight:Knight_Geo/Knight:LeftArm
+        weight: 0
+      - path: Knight:Knight_Geo/Knight:LeftLeg
+        weight: 0
+      - path: Knight:Knight_Geo/Knight:RightArm
+        weight: 0
+      - path: Knight:Knight_Geo/Knight:RightLeg
+        weight: 0
+      - path: Knight:Knight_Geo/Knight:Torso
+        weight: 0
+      - path: Knight:Knight_Skel
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:IKMarkers
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:IKMarkers/Knight:IKMarker_LeftFoot
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:IKMarkers/Knight:IKMarker_LeftKnee
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:IKMarkers/Knight:IKMarker_RightFoot
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:IKMarkers/Knight:IKMarker_RightKnee
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:MoveControl
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:LeftUpperLeg_Skel
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:LeftUpperLeg_Skel/Knight:LeftLowerLeg_Skel
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:LeftUpperLeg_Skel/Knight:LeftLowerLeg_Skel/Knight:LeftFoot_Skel
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:RightUpperLeg_Skel
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:RightUpperLeg_Skel/Knight:RightLowerLeg_Skel
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:RightUpperLeg_Skel/Knight:RightLowerLeg_Skel/Knight:RightFoot_Skel
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:Attach_Center
+        weight: 0
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:Head_Skel
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:LeftShoulder_Skel
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:LeftShoulder_Skel/Knight:LeftUpperArm_Skel
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:LeftShoulder_Skel/Knight:LeftUpperArm_Skel/Knight:LeftLowerArm_Skel
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:LeftShoulder_Skel/Knight:LeftUpperArm_Skel/Knight:LeftLowerArm_Skel/Knight:LeftHand_Skel
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:RightShoulder_Skel
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:RightShoulder_Skel/Knight:RightUpperArm_Skel
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:RightShoulder_Skel/Knight:RightUpperArm_Skel/Knight:RightLowerArm_Skel
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:RightShoulder_Skel/Knight:RightUpperArm_Skel/Knight:RightLowerArm_Skel/Knight:RightHand_Skel
+        weight: 1
+      maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16

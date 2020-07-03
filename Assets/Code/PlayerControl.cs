@@ -41,12 +41,21 @@ public class PlayerControl : MonoBehaviour, IControlTarget {
   }
 
   void OnAnimatorMove() {
-    Quaternion cameraHeading = cameraControl.Heading;
+    Quaternion cameraHeading = cameraControl.heading;
     transform.position += animator.deltaPosition;
     transform.rotation *= animator.deltaRotation;
 
-    if (IsMoving)
+    if (IsMoving) {
       transform.rotation = Quaternion.Lerp(transform.rotation, cameraHeading, Time.deltaTime * 2);
+    } else {
+      if (Quaternion.Angle(cameraHeading, transform.rotation) > 70) {
+        // if (Vector3.Dot(cameraControl.forward, transform.forward) > 0) {
+        //   animator.SetTrigger("TurnLeft");
+        // } else {
+        //   animator.SetTrigger("TurnRight");
+        // }
+      }
+    }
   }
 
   private void OnAnimatorIK(int layerIndex) {
@@ -69,8 +78,7 @@ public class PlayerControl : MonoBehaviour, IControlTarget {
 
   }
 
-  public void Scroll(float amount) {
-  }
+  public void Scroll(float amount) { }
 
   public void PrimaryAction(ActionPhase phase) {
     Debug.Log("Attack");
