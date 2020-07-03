@@ -48,13 +48,11 @@ public class PlayerControl : MonoBehaviour, IControlTarget {
     if (IsMoving) {
       transform.rotation = Quaternion.Lerp(transform.rotation, cameraHeading, Time.deltaTime * 2);
     } else {
-      if (Quaternion.Angle(cameraHeading, transform.rotation) > 70) {
-        // if (Vector3.Dot(cameraControl.forward, transform.forward) > 0) {
-        //   animator.SetTrigger("TurnLeft");
-        // } else {
-        //   animator.SetTrigger("TurnRight");
-        // }
-      }
+      bool shouldTurn = Quaternion.Angle(cameraHeading, transform.rotation) > 70;
+      float direction = Vector3.Dot(cameraControl.forward, transform.right);
+        animator.SetBool("TurnLeft", shouldTurn && direction > 0);
+        animator.SetBool("TurnRight", shouldTurn && direction < 0);
+
     }
   }
 
