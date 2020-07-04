@@ -122,7 +122,7 @@ ModelImporter:
       - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel
         weight: 1
       - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:Attach_Center
-        weight: 0
+        weight: 1
       - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:Head_Skel
         weight: 1
       - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:LeftShoulder_Skel
@@ -141,8 +141,8 @@ ModelImporter:
         weight: 1
       - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:RightShoulder_Skel/Knight:RightUpperArm_Skel/Knight:RightLowerArm_Skel/Knight:RightHand_Skel
         weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
+      maskType: 1
+      maskSource: {fileID: 31900000, guid: 3e420ac1e37e17c4e9e041c32d82e6c0, type: 2}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: Move_Walk_Back

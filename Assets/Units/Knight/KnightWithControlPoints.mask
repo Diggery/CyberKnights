@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: KnightWithControlPoints
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Knight:Knight_Geo
+    m_Weight: 0
+  - m_Path: Knight:Knight_Geo/Knight:LeftArm
+    m_Weight: 0
+  - m_Path: Knight:Knight_Geo/Knight:LeftLeg
+    m_Weight: 0
+  - m_Path: Knight:Knight_Geo/Knight:RightArm
+    m_Weight: 0
+  - m_Path: Knight:Knight_Geo/Knight:RightLeg
+    m_Weight: 0
+  - m_Path: Knight:Knight_Geo/Knight:Torso
+    m_Weight: 0
+  - m_Path: Knight:Knight_Skel
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:IKMarkers
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:IKMarkers/Knight:IKMarker_LeftFoot
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:IKMarkers/Knight:IKMarker_LeftKnee
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:IKMarkers/Knight:IKMarker_RightFoot
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:IKMarkers/Knight:IKMarker_RightKnee
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:MoveControl
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:LeftUpperLeg_Skel
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:LeftUpperLeg_Skel/Knight:LeftLowerLeg_Skel
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:LeftUpperLeg_Skel/Knight:LeftLowerLeg_Skel/Knight:LeftFoot_Skel
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:RightUpperLeg_Skel
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:RightUpperLeg_Skel/Knight:RightLowerLeg_Skel
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:RightUpperLeg_Skel/Knight:RightLowerLeg_Skel/Knight:RightFoot_Skel
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:Attach_Center
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:Head_Skel
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:LeftShoulder_Skel
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:LeftShoulder_Skel/Knight:LeftUpperArm_Skel
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:LeftShoulder_Skel/Knight:LeftUpperArm_Skel/Knight:LeftLowerArm_Skel
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:LeftShoulder_Skel/Knight:LeftUpperArm_Skel/Knight:LeftLowerArm_Skel/Knight:LeftHand_Skel
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:RightShoulder_Skel
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:RightShoulder_Skel/Knight:RightUpperArm_Skel
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:RightShoulder_Skel/Knight:RightUpperArm_Skel/Knight:RightLowerArm_Skel
+    m_Weight: 1
+  - m_Path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:RightShoulder_Skel/Knight:RightUpperArm_Skel/Knight:RightLowerArm_Skel/Knight:RightHand_Skel
+    m_Weight: 1

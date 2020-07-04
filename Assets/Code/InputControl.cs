@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -42,6 +43,12 @@ public class InputControl : MonoBehaviour {
 
   // Update is called once per frame
   void Update() {
+
+    if (Input.GetKeyDown(KeyCode.Escape)) {
+      Cursor.visible = true;
+      Cursor.lockState = CursorLockMode.None;
+    }
+
 
     //handle left mouse button
     if (Input.GetMouseButtonDown(0)) {
@@ -106,8 +113,8 @@ public class InputControl : MonoBehaviour {
     Vector3 moveDirection = Vector3.zero;
     int rotateDirection = 0;
 
-    if (Input.GetKey(KeyCode.Q)) rotateDirection += 1;
-    if (Input.GetKey(KeyCode.E)) rotateDirection += -1;
+    if (Input.GetKey(KeyCode.Q)) rotateDirection += -1;
+    if (Input.GetKey(KeyCode.E)) rotateDirection += 1;
 
     if (Input.GetKey(KeyCode.W)) moveDirection += Vector3.forward;
     if (Input.GetKey(KeyCode.A)) moveDirection += Vector3.left;
@@ -127,10 +134,8 @@ public class InputControl : MonoBehaviour {
     if (Input.GetKeyDown(KeyCode.LeftAlt)) onEnterAltMode.Invoke();
     if (Input.GetKeyUp(KeyCode.LeftAlt)) onExitAltMode.Invoke();
 
-
     CameraControl.MouseInputX(Input.GetAxis("Mouse X"));
     CameraControl.MouseInputY(Input.GetAxis("Mouse Y"));
-
   }
 
   void PrimaryMapClickDown() {

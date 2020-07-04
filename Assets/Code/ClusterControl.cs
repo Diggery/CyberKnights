@@ -4,6 +4,24 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 
+
+[System.Serializable]
+public class ClusterDescription {
+  public ClusterDescription() {
+
+  }
+  [System.Serializable]
+  public class Segment {
+    public Segment(string type, int amount) {
+      this.type = type;
+      this.amount = amount;
+    }
+    public string type;
+    public int amount;
+  }
+  public Segment[] segments;
+}
+
 public class ClusterControl : MonoBehaviour {
   GameManager gameManager;
   Camera mainCamera;
@@ -29,17 +47,7 @@ public class ClusterControl : MonoBehaviour {
   Transform marker;
   Transform line;
 
-  [System.Serializable]
-  public class ClusterSegment {
-    public ClusterSegment(string type, int amount) {
-      this.type = type;
-      this.amount = amount;
-    }
-    public string type;
-    public int amount;
-  }
-
-  public ClusterSegment[] clusterMakeup;
+  public ClusterDescription clusterDescription;
 
   public class UnitChangeEvent : UnityEvent<UnitControl> { }
   public UnitChangeEvent unitLost = new UnitChangeEvent();
@@ -59,7 +67,7 @@ public class ClusterControl : MonoBehaviour {
       UI = transform.Find("ClusterUI").GetComponent<UICluster>().Init();
       UI.AddLine(marker.GetComponent<Renderer>(), line.GetComponent<Renderer>());
     }
-    foreach (ClusterSegment segment in clusterMakeup) {
+    foreach (ClusterDescription.Segment segment in clusterDescription.segments) {
       Facility facility = gameManager.GetClosestFacility(transform.position, gameObject.tag);
       facility.SubmitOrder(new Facility.UnitOrder(this, segment.type, segment.amount));
     }
@@ -140,9 +148,9 @@ public class ClusterControl : MonoBehaviour {
     for (int y = 0; y < 8; y++) {
       if (allDone) break;
       for (int x = 0; x < 8; x++) {
-        if (segmentCounter == clusterMakeup[currentSegment].amount) {
+        if (segmentCounter == clusterDescription.segments[currentSegment].amount) {
           currentSegment++;
-          if (currentSegment == clusterMakeup.Length) {
+          if (currentSegment == clusterDescription.segments.Length) {
             allDone = true;
             break;
           }
@@ -150,7 +158,7 @@ public class ClusterControl : MonoBehaviour {
         }
         segmentCounter++;
 
-        string unitType = clusterMakeup[currentSegment].type;
+        string unitType = clusterDescription.segments[currentSegment].type;
         Vector3 offset = new Vector3(x * 1.5f, 0, y * 1.5f);
         GameObject newUnit = gameManager.UnitFactory.CreateUnit(unitType, transform.position + offset, transform.rotation);
         UnitControl newUnitControl = newUnit.GetComponent<UnitControl>();

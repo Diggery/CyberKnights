@@ -7,7 +7,6 @@ public class CameraControl : MonoBehaviour, IControlTarget {
   public bool UseMouseLook { get; set; }
   public bool UseCollisionCheck { get; set; }
 
-
   public Quaternion heading {
     get {
       return transform.rotation * Quaternion.AngleAxis(180, Vector3.up);
@@ -66,11 +65,11 @@ public class CameraControl : MonoBehaviour, IControlTarget {
 
   public void Move(Vector3 direction) {
     if (direction.sqrMagnitude < 0.1f) return;
-    goalPos += (transform.TransformDirection(direction) * cameraMoveSpeed);
+    goalPos -= (transform.TransformDirection(direction) * cameraMoveSpeed);
   }
 
   public void Rotate(float direction) {
-    if (direction < Mathf.Epsilon) return;
+    if (Mathf.Abs(direction) < Mathf.Epsilon) return;
     goalHeading *= Quaternion.AngleAxis(direction * cameraRotateSpeed, Vector3.up);
   }
 
@@ -82,11 +81,9 @@ public class CameraControl : MonoBehaviour, IControlTarget {
     zoomAmount = Mathf.Clamp01(zoomAmount + (-amount * cameraZoomSpeed));
   }
   public void PrimaryAction(ActionPhase phase) {
-    throw new System.NotImplementedException();
   }
 
   public void SecondaryAction(ActionPhase phase) {
-    throw new System.NotImplementedException();
   }
 
   public void MouseInputX(float amount) {
