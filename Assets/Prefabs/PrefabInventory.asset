@@ -42,3 +42,6 @@ MonoBehaviour:
   - name: UI_UnitMarker
     prefab: {fileID: 8967865459125242363, guid: a5f2a33ae348e475ab06b828ea900d7d,
       type: 3}
+  - name: Cluster
+    prefab: {fileID: 7537463758601454003, guid: 04c2be64ab587a941a62d72ffb91e3c1,
+      type: 3}

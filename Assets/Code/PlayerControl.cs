@@ -7,6 +7,7 @@ public class PlayerControl : MonoBehaviour, IControlTarget {
 
   public bool UseCameraLook { get; set; }
 
+  public ClusterDescription clusterDescription;
 
   bool usePlayerControl = false;
   public bool UsePlayerControl {
@@ -55,6 +56,8 @@ public class PlayerControl : MonoBehaviour, IControlTarget {
 
     leftFootGoal = transform.Find("Knight:Knight_Skel/Knight:IKMarkers/Knight:IKMarker_LeftFoot");
     rightFootGoal = transform.Find("Knight:Knight_Skel/Knight:IKMarkers/Knight:IKMarker_RightFoot");
+
+    cluster = AddCluster(clusterDescription);
   }
 
   void Update() {
@@ -62,6 +65,8 @@ public class PlayerControl : MonoBehaviour, IControlTarget {
     animator.SetFloat("ForwardMove", moveDirection.z);
     animator.SetFloat("SideMove", moveDirection.x);
     cameraControl.SetPosition(transform.position + Vector3.up);
+
+    if (cluster) cluster.position = transform.position;
   }
 
   void OnAnimatorMove() {
@@ -139,8 +144,12 @@ public class PlayerControl : MonoBehaviour, IControlTarget {
   }
 
   ClusterControl AddCluster(ClusterDescription description) {
-    ClusterControl control = new ClusterControl();
-    return control;
+    GameObject clusterObj = Instantiate(gameManager.GetPrefab("Cluster"));
+    ClusterControl newCluster = clusterObj.GetComponent<ClusterControl>();
+    newCluster.clusterDescription = description;
+    newCluster.HideUI = true;
+    newCluster.KeepUpdated = true;
+    return newCluster;
   }
 
 }

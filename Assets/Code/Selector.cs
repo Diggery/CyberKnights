@@ -52,9 +52,11 @@ public class Selector : MonoBehaviour {
   protected void SetPose(Vector3 pos) {
     cluster.transform.position = pos;
   }
+
   protected void SetPose(Quaternion rot) {
     cluster.transform.rotation = rot;
   }
+
   protected void SetPose(Vector3 pos, Quaternion rot) {
     cluster.transform.position = pos;
     cluster.transform.rotation = rot;

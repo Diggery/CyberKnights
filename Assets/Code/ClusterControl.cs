@@ -25,19 +25,18 @@ public class ClusterDescription {
 public class ClusterControl : MonoBehaviour {
   GameManager gameManager;
   Camera mainCamera;
-
-  bool clusterReady = false;
-
+  public bool KeepUpdated { get; set; }
+  public bool HideUI { get; set; }
+  public UICluster UI { get; set; }
   public InputControl.Formation formationType = InputControl.Formation.Mob;
   Selector currentSelector;
-  public UICluster UI { get; set; }
-  public int UnitsInCluster {
-    get { return units.Count; }
-  }
+  bool clusterReady = false;
 
-  List<UnitControl> units = new List<UnitControl>();
-  public List<UnitControl> Units { get { return units; } }
-  public int Count { get { return units.Count; } }
+  public int UnitsInCluster {
+    get { return Units.Count; }
+  }
+    public List<UnitControl> Units { get; } = new List<UnitControl>();
+  public int Count { get { return Units.Count; } }
 
   Vector3 homePos;
   public Vector3 HomePos {
@@ -52,6 +51,19 @@ public class ClusterControl : MonoBehaviour {
   public class UnitChangeEvent : UnityEvent<UnitControl> { }
   public UnitChangeEvent unitLost = new UnitChangeEvent();
 
+  public Vector3 position {
+    get { return transform.position; }
+    set {
+      if (KeepUpdated && (transform.position - value).sqrMagnitude > 1.0f) {
+        transform.position = value;
+        Command(transform.position - Vector3.right, transform.position + Vector3.right);
+      }
+    }
+  }
+  public Quaternion rotation {
+    get; set; }
+
+
   void Start() {
     Invoke("Init", 1);
   }
@@ -63,12 +75,14 @@ public class ClusterControl : MonoBehaviour {
     mainCamera = Camera.main;
 
     //StartCoroutine(CreateUnits());
-    if (gameObject.tag.Equals("Friend")) {
+    if (!HideUI && gameObject.tag.Equals("Friend")) {
       UI = transform.Find("ClusterUI").GetComponent<UICluster>().Init();
       UI.AddLine(marker.GetComponent<Renderer>(), line.GetComponent<Renderer>());
     }
     foreach (ClusterDescription.Segment segment in clusterDescription.segments) {
       Facility facility = gameManager.GetClosestFacility(transform.position, gameObject.tag);
+      if (!facility) Debug.Log("Can't find facility");
+      Debug.Log("Sumbmitting order for " + segment.amount + "  " + segment.type);
       facility.SubmitOrder(new Facility.UnitOrder(this, segment.type, segment.amount));
     }
     gameManager.InputControl.AddCluster(this);
@@ -76,27 +90,27 @@ public class ClusterControl : MonoBehaviour {
   }
 
   int unitTicker = 0;
+  private ClusterDescription description;
 
   private void Update() {
-    if (units.Count == 0) return;
+    if (Units.Count == 0) return;
 
-    unitTicker = (unitTicker + 1) % units.Count;
-    units[unitTicker].UpdateBrain();
+    unitTicker = (unitTicker + 1) % Units.Count;
+    Units[unitTicker].UpdateBrain();
 
     Vector3 forward = transform.position - mainCamera.transform.position;
     forward.y = 0;
     line.rotation = Quaternion.LookRotation(forward);
   }
 
-  Selector CreateSelector(InputControl.Formation formationType) {
+  public void CreateSelector(InputControl.Formation formationType) {
     GameObject selectorObj = Instantiate(
       gameManager.GetPrefab("Selector_" + formationType.ToString()),
       transform.position,
       transform.rotation,
       transform
     );
-
-    return selectorObj.GetComponent<Selector>().Init(this);
+    currentSelector = selectorObj.GetComponent<Selector>().Init(this);
   }
 
   public void Select(bool setting) {
@@ -106,30 +120,30 @@ public class ClusterControl : MonoBehaviour {
   }
 
   public void PlaceFormation(Vector3 start, Vector3 end) {
-    if (!currentSelector) {
-      currentSelector = CreateSelector(formationType);
-    }
+    if (!currentSelector) CreateSelector(formationType);
     currentSelector.Place(start, end);
   }
 
   public void Reform() {
     if (!currentSelector) return;
 
-    Vector3[] clusterPositions = currentSelector.GeneratePositions(units.Count);
+    Vector3[] clusterPositions = currentSelector.GeneratePositions(Units.Count);
 
     for (int i = 0; i < clusterPositions.Length; i++) {
-      units[i].Brain.ClusterPos = clusterPositions[i];
-      units[i].Brain.MoveTo(clusterPositions[i]);
+      Units[i].Brain.ClusterPos = clusterPositions[i];
+      Units[i].Brain.MoveTo(clusterPositions[i]);
     }
   }
 
   public void Command(Vector3 start, Vector3 end) {
+    if (!currentSelector) CreateSelector(formationType);
+
     currentSelector.PlacementComplete(start, end);
-    Vector3[] clusterPositions = currentSelector.GeneratePositions(units.Count, start, end);
+    Vector3[] clusterPositions = currentSelector.GeneratePositions(Units.Count, start, end);
 
     for (int i = 0; i < clusterPositions.Length; i++) {
-      units[i].Brain.ClusterPos = clusterPositions[i];
-      units[i].Brain.MoveTo(clusterPositions[i]);
+      Units[i].Brain.ClusterPos = clusterPositions[i];
+      Units[i].Brain.MoveTo(clusterPositions[i]);
     }
   }
 
@@ -175,18 +189,16 @@ public class ClusterControl : MonoBehaviour {
       }
     }
     yield return new WaitForSeconds(0.1f);
-
   }
 
   public void AddUnit(UnitControl newUnit) {
-    units.Add(newUnit);
-
+    Units.Add(newUnit);
     Reform();
   }
 
   public Vector3 GetFlockingVector(UnitControl target) {
     Vector3 flockVector = Vector3.zero;
-    foreach (var unit in units) {
+    foreach (var unit in Units) {
       if (unit.Equals(target)) continue;
       Vector3 offset = unit.transform.position - target.transform.position;
       float sqrDist = offset.sqrMagnitude;
@@ -197,30 +209,30 @@ public class ClusterControl : MonoBehaviour {
 
   public Vector3 GetAveragePosition() {
     Vector3 averagePos = Vector3.zero;
-    foreach (var unit in units) {
+    foreach (var unit in Units) {
       averagePos += unit.transform.position;
     }
-    averagePos /= units.Count;
+    averagePos /= Units.Count;
     return averagePos;
   }
 
   public void AttackCluster(ClusterControl targetCluster) {
-    for (int i = 0; i < units.Count; i++) {
-      if (units[i].Brain.State.Equals("Idle"))
-        units[i].Brain.AttackTarget(targetCluster.Units[i % targetCluster.Units.Count], true);
+    for (int i = 0; i < Units.Count; i++) {
+      if (Units[i].Brain.State.Equals("Idle"))
+        Units[i].Brain.AttackTarget(targetCluster.Units[i % targetCluster.Units.Count], true);
     }
   }
 
   public void RemoveUnit(UnitControl unit) {
-    units.Remove(unit);
+    Units.Remove(unit);
     unitLost.Invoke(unit);
-    if (units.Count == 0) {
+    if (Units.Count == 0) {
       gameManager.InputControl.RemoveCluster(this);
     }
   }
 
   public void Release(string filter) {
-    foreach (var unit in units) {
+    foreach (var unit in Units) {
       if (unit.EnergyLevel < 10) {
         unit.Retreat();
       }

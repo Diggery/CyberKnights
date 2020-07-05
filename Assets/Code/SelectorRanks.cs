@@ -20,9 +20,6 @@ public class SelectorRanks : Selector {
 
   }
 
-  void Update() {
-  }
-
   public override void Place(Vector3 start, Vector3 end, bool useMinSize = false) {
     gameObject.SetActive(true);
 
