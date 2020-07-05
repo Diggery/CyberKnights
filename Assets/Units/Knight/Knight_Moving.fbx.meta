@@ -28,17 +28,9 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: Knight:Knight_Skel/Knight:MoveControl
     rigImportErrors: 
-    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Inbetween bone
-      rotation in copied configuration does not match rotation in animation file:\n\t'Knight:RightShoulder_Skel'
-      : rotation error = 27.662909 deg\n"
+    rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'Move_Walk_Forward' has import animation warnings
-      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
-      to improve retargeting quality.\n\t'Knight:RightShoulder_Skel' is inbetween
-      humanoid transforms and has rotation animation that will be discarded.\n\nClip
-      'Move_Walk_Back' has import animation warnings that might lower retargeting
-      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'Knight:RightShoulder_Skel'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
+    animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -80,17 +72,17 @@ ModelImporter:
       - path: 
         weight: 1
       - path: Knight:Knight_Geo
-        weight: 0
+        weight: 1
       - path: Knight:Knight_Geo/Knight:LeftArm
-        weight: 0
+        weight: 1
       - path: Knight:Knight_Geo/Knight:LeftLeg
-        weight: 0
+        weight: 1
       - path: Knight:Knight_Geo/Knight:RightArm
-        weight: 0
-      - path: Knight:Knight_Geo/Knight:RightLeg
-        weight: 0
+        weight: 1
+      - path: Knight:Knight_Geo/Knight:RightLeft
+        weight: 1
       - path: Knight:Knight_Geo/Knight:Torso
-        weight: 0
+        weight: 1
       - path: Knight:Knight_Skel
         weight: 1
       - path: Knight:Knight_Skel/Knight:IKMarkers
@@ -125,21 +117,25 @@ ModelImporter:
         weight: 1
       - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:Head_Skel
         weight: 1
-      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:LeftShoulder_Skel
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:LeftClav_Skel
         weight: 1
-      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:LeftShoulder_Skel/Knight:LeftUpperArm_Skel
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:LeftClav_Skel/Knight:LeftUpperArm_Skel
         weight: 1
-      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:LeftShoulder_Skel/Knight:LeftUpperArm_Skel/Knight:LeftLowerArm_Skel
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:LeftClav_Skel/Knight:LeftUpperArm_Skel/Knight:LeftLowerArm_Skel
         weight: 1
-      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:LeftShoulder_Skel/Knight:LeftUpperArm_Skel/Knight:LeftLowerArm_Skel/Knight:LeftHand_Skel
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:LeftClav_Skel/Knight:LeftUpperArm_Skel/Knight:LeftLowerArm_Skel/Knight:LeftHand_Skel
         weight: 1
-      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:RightShoulder_Skel
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:LeftClav_Skel/Knight:LeftUpperArm_Skel/Knight:LeftLowerArm_Skel/Knight:LeftHand_Skel/Knight:Attach_LeftHand
         weight: 1
-      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:RightShoulder_Skel/Knight:RightUpperArm_Skel
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:RightClav_Skel
         weight: 1
-      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:RightShoulder_Skel/Knight:RightUpperArm_Skel/Knight:RightLowerArm_Skel
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:RightClav_Skel/Knight:RightUpperArm_Skel
         weight: 1
-      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:RightShoulder_Skel/Knight:RightUpperArm_Skel/Knight:RightLowerArm_Skel/Knight:RightHand_Skel
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:RightClav_Skel/Knight:RightUpperArm_Skel/Knight:RightLowerArm_Skel
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:RightClav_Skel/Knight:RightUpperArm_Skel/Knight:RightLowerArm_Skel/Knight:RightHand_Skel
+        weight: 1
+      - path: Knight:Knight_Skel/Knight:MoveControl/Knight:Hips_Skel/Knight:Torso_Skel/Knight:RightClav_Skel/Knight:RightUpperArm_Skel/Knight:RightLowerArm_Skel/Knight:RightHand_Skel/Knight:Attach_RightHand
         weight: 1
       maskType: 1
       maskSource: {fileID: 31900000, guid: 3e420ac1e37e17c4e9e041c32d82e6c0, type: 2}
@@ -345,24 +341,8 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: Knight:LeftShoulder_Skel
-      humanName: LeftUpperArm
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
     - boneName: Knight:RightUpperArm_Skel
       humanName: RightUpperArm
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: Knight:LeftLowerArm_Skel
-      humanName: LeftLowerArm
       limit:
         min: {x: 0, y: 0, z: 0}
         max: {x: 0, y: 0, z: 0}
@@ -377,6 +357,38 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
+    - boneName: Knight:RightHand_Skel
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight:LeftUpperArm_Skel
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight:LeftLowerArm_Skel
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Knight:LeftClav_Skel
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
     - boneName: Knight:LeftHand_Skel
       humanName: LeftHand
       limit:
@@ -385,8 +397,8 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: Knight:RightHand_Skel
-      humanName: RightHand
+    - boneName: Knight:RightClav_Skel
+      humanName: RightShoulder
       limit:
         min: {x: 0, y: 0, z: 0}
         max: {x: 0, y: 0, z: 0}
@@ -404,27 +416,27 @@ ModelImporter:
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    - name: Knight:RightArm
-      parentName: Knight:Knight_Geo
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
     - name: Knight:LeftArm
       parentName: Knight:Knight_Geo
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    - name: Knight:RightLeg
+    - name: Knight:LeftLeg
+      parentName: Knight:Knight_Geo
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:RightArm
+      parentName: Knight:Knight_Geo
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:RightLeft
       parentName: Knight:Knight_Geo
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Knight:Torso
-      parentName: Knight:Knight_Geo
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Knight:LeftLeg
       parentName: Knight:Knight_Geo
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
@@ -443,7 +455,7 @@ ModelImporter:
       parentName: Knight:IKMarkers
       position: {x: -0.20896053, y: 0.069079034, z: -0.03423918}
       rotation: {x: 8.326673e-17, y: -2.4980018e-16, z: 8.326673e-17, w: 1}
-      scale: {x: 1, y: 1, z: 1}
+      scale: {x: 1, y: 1e-12, z: 1}
     - name: Knight:IKMarker_LeftKnee
       parentName: Knight:IKMarkers
       position: {x: -0.20896053, y: 0.7378194, z: 0.86552}
@@ -451,9 +463,9 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: Knight:IKMarker_RightFoot
       parentName: Knight:IKMarkers
-      position: {x: 0.20896098, y: 0.069079, z: -0.0342392}
-      rotation: {x: 1, y: -0.000000009046772, z: -0.00000001184063, w: 1.7615747e-16}
-      scale: {x: 1, y: 1, z: 1}
+      position: {x: 0.20896101, y: 0.069079, z: -0.0342392}
+      rotation: {x: 0.7603773, y: 9.353889e-10, z: 0.0000000017301, w: 0.6494817}
+      scale: {x: 1, y: 1e-12, z: 1}
     - name: Knight:IKMarker_RightKnee
       parentName: Knight:IKMarkers
       position: {x: 0.20896098, y: 0.73781896, z: 0.86552}
@@ -467,92 +479,102 @@ ModelImporter:
     - name: Knight:Hips_Skel
       parentName: Knight:MoveControl
       position: {x: -0, y: 1.161475, z: 0.0018148473}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Knight:RightUpperLeg_Skel
-      parentName: Knight:Hips_Skel
-      position: {x: 0.20896098, y: -0.0000049319015, z: -0.021053547}
-      rotation: {x: 0.5448097, y: -0.4507576, z: 0.5448097, w: -0.4507576}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Knight:RightLowerLeg_Skel
-      parentName: Knight:RightUpperLeg_Skel
-      position: {x: 0.43317074, y: -0.0099122245, z: -7.105427e-17}
-      rotation: {x: 0.98711944, y: 0.1599852, z: 0.000000001685718, w: 0.000000010400993}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Knight:RightFoot_Skel
-      parentName: Knight:RightLowerLeg_Skel
-      position: {x: 0.6768711, y: -0.01626326, z: -3.4272243e-10}
-      rotation: {x: 0.46567768, y: 0.5321131, z: -0.46567765, w: 0.5321131}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Knight:Torso_Skel
-      parentName: Knight:Hips_Skel
-      position: {x: -0, y: 0.22543041, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Knight:Attach_Center
-      parentName: Knight:Torso_Skel
-      position: {x: -0.00007272897, y: 0.17412668, z: 0.15799104}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Knight:RightShoulder_Skel
-      parentName: Knight:Torso_Skel
-      position: {x: 0.32402998, y: 0.21249466, z: 0.0000000025604725}
-      rotation: {x: 1, y: -0, z: 0, w: -6.123234e-17}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Knight:RightUpperArm_Skel
-      parentName: Knight:RightShoulder_Skel
-      position: {x: 0.11684, y: 0, z: 0}
-      rotation: {x: 0.50217694, y: -0.4727335, z: -0.5216893, w: 0.5021769}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Knight:RightLowerArm_Skel
-      parentName: Knight:RightUpperArm_Skel
-      position: {x: -1.4210854e-16, y: 0.017381249, z: -0.35305998}
-      rotation: {x: -0.025419759, y: -0.0037798288, z: 0.00069788104, w: 0.9996695}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Knight:RightHand_Skel
-      parentName: Knight:RightLowerArm_Skel
-      position: {x: 7.105427e-17, y: 0.011575822, z: -0.3249733}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Knight:LeftShoulder_Skel
-      parentName: Knight:Torso_Skel
-      position: {x: -0.3240303, y: 0.21249591, z: -5.551115e-19}
-      rotation: {x: -0.000000031621806, y: 0.028306996, z: -0.574986, w: 0.8176735}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Knight:LeftUpperArm_Skel
-      parentName: Knight:LeftShoulder_Skel
-      position: {x: -0.11684017, y: 0, z: 2.7755575e-19}
-      rotation: {x: 0.7071068, y: 0, z: -0, w: 0.7071068}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Knight:LeftLowerArm_Skel
-      parentName: Knight:LeftUpperArm_Skel
-      position: {x: 7.105427e-17, y: -0.017381296, z: 0.3530587}
-      rotation: {x: -0.023145942, y: -0.15475456, z: 0.028569747, w: 0.98726857}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Knight:LeftHand_Skel
-      parentName: Knight:LeftLowerArm_Skel
-      position: {x: -0, y: -0.011576761, z: 0.3249752}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Knight:Head_Skel
-      parentName: Knight:Torso_Skel
-      position: {x: -0, y: 0.3713141, z: 0.08520745}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
     - name: Knight:LeftUpperLeg_Skel
       parentName: Knight:Hips_Skel
-      position: {x: -0.20896053, y: 1.4210854e-16, z: -0.0210535}
-      rotation: {x: 0.4507576, y: 0.5448097, z: 0.4507576, w: 0.5448097}
+      position: {x: -0.20896098, y: 0.021053547, z: -0.0000049319015}
+      rotation: {x: 0.99442625, y: 0.00000026017997, z: 0.000000031203857, w: 0.105434455}
       scale: {x: 1, y: 1, z: 1}
     - name: Knight:LeftLowerLeg_Skel
       parentName: Knight:LeftUpperLeg_Skel
-      position: {x: -0.43317524, y: 0.009911328, z: 2.6479884e-17}
-      rotation: {x: 0.98711944, y: 0.1599852, z: 9.7962686e-18, w: 6.044363e-17}
+      position: {x: 3.5527136e-17, y: -8.171241e-16, z: 0.43328413}
+      rotation: {x: 0.18308775, y: 1.0331616e-30, z: 1.9523496e-32, w: 0.9830966}
       scale: {x: 1, y: 1, z: 1}
     - name: Knight:LeftFoot_Skel
       parentName: Knight:LeftLowerLeg_Skel
-      position: {x: -0.6768714, y: 0.01626321, z: 1.4832736e-17}
-      rotation: {x: 0.46567768, y: 0.5321131, z: -0.46567768, w: 0.5321131}
+      position: {x: -3.5527136e-17, y: -4.112266e-15, z: 0.6770664}
+      rotation: {x: -1.54321e-14, y: 0.00000003741228, z: 0.00000025936, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:RightUpperLeg_Skel
+      parentName: Knight:Hips_Skel
+      position: {x: 0.20896098, y: 0.021053547, z: -0.0000049319015}
+      rotation: {x: 0.99442625, y: -0.000000012812965, z: -0.0000000015366823, w: 0.105434455}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:RightLowerLeg_Skel
+      parentName: Knight:RightUpperLeg_Skel
+      position: {x: 2.1309648e-16, y: -7.128416e-17, z: 0.43328413}
+      rotation: {x: 0.18308775, y: -0.0000000035996184, z: -2.3506703e-23, w: 0.9830966}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:RightFoot_Skel
+      parentName: Knight:RightLowerLeg_Skel
+      position: {x: -0.000000004791968, y: -1.5783818e-16, z: 0.6770664}
+      rotation: {x: -6.1062266e-16, y: 8.271806e-24, z: -0.000000011736169, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:Torso_Skel
+      parentName: Knight:Hips_Skel
+      position: {x: -0, y: 5.0515146e-17, z: 0.22543041}
+      rotation: {x: 0.11254608, y: 0, z: -0, w: 0.9936465}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:Attach_Center
+      parentName: Knight:Torso_Skel
+      position: {x: -0.00007272897, y: -0.115043096, z: 0.20505208}
+      rotation: {x: 0.6230321, y: 0, z: -0, w: 0.7821963}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:Head_Skel
+      parentName: Knight:Torso_Skel
+      position: {x: -0, y: 0.024812857, z: 0.40904635}
+      rotation: {x: 0.6230321, y: 0, z: -0, w: 0.7821963}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:LeftClav_Skel
+      parentName: Knight:Torso_Skel
+      position: {x: -0.32402998, y: 0.04752699, z: 0.2071115}
+      rotation: {x: 0.4405502, y: 0.5530963, z: 0.4405502, w: 0.5530963}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:LeftUpperArm_Skel
+      parentName: Knight:LeftClav_Skel
+      position: {x: -8.9372954e-17, y: 0, z: -0.11684}
+      rotation: {x: 0.5121452, y: -0.4875524, z: 0.5121452, w: 0.4875524}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:LeftLowerArm_Skel
+      parentName: Knight:LeftUpperArm_Skel
+      position: {x: -2.842171e-16, y: -2.1316282e-16, z: 0.35348758}
+      rotation: {x: -0.22306597, y: -5.802428e-17, z: -1.2991945e-17, w: 0.9748034}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:LeftHand_Skel
+      parentName: Knight:LeftLowerArm_Skel
+      position: {x: -3.5527135e-16, y: -5.684342e-16, z: 0.3251794}
+      rotation: {x: 1.5696e-16, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:Attach_LeftHand
+      parentName: Knight:LeftHand_Skel
+      position: {x: 0.04, y: 0.0005467393, z: 0.100092255}
+      rotation: {x: 0.6230321, y: 0, z: -0, w: 0.7821963}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:RightClav_Skel
+      parentName: Knight:Torso_Skel
+      position: {x: 0.32402998, y: 0.04752699, z: 0.2071115}
+      rotation: {x: 0.4405502, y: 0.5530963, z: 0.4405502, w: 0.5530963}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:RightUpperArm_Skel
+      parentName: Knight:RightClav_Skel
+      position: {x: 2.5943691e-17, y: 0, z: 0.11684}
+      rotation: {x: 0.5121452, y: -0.4875524, z: 0.5121452, w: 0.4875524}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:RightLowerArm_Skel
+      parentName: Knight:RightUpperArm_Skel
+      position: {x: -2.842171e-16, y: -4.4408918e-17, z: 0.35348758}
+      rotation: {x: -0.22306597, y: 1.1207796e-16, z: 2.3708537e-32, w: 0.9748034}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:RightHand_Skel
+      parentName: Knight:RightLowerArm_Skel
+      position: {x: 7.105427e-17, y: -7.105427e-17, z: 0.3251794}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight:Attach_RightHand
+      parentName: Knight:RightHand_Skel
+      position: {x: -0.04, y: 0.00054673676, z: 0.100092255}
+      rotation: {x: 0.6230321, y: 0, z: -0, w: 0.7821963}
       scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5

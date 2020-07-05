@@ -1,6 +1,6 @@
 //Maya ASCII 2020 scene
 //Name: Knight_Moving.ma
-//Last modified: Thu, Jul 02, 2020 04:37:36 PM
+//Last modified: Sun, Jul 05, 2020 03:37:08 PM
 //Codeset: UTF-8
 file -rdi 1 -ns "Knight" -rfn "KnightRN" -op "v=0;" -typ "mayaAscii" "/Users/briancollins/Unity/CyberKnights/ArtSource/Knight/Knight.ma";
 file -r -ns "Knight" -dr 1 -rfn "KnightRN" -op "v=0;" -typ "mayaAscii" "/Users/briancollins/Unity/CyberKnights/ArtSource/Knight/Knight.ma";
@@ -14,7 +14,7 @@ fileInfo "product" "Maya 2020";
 fileInfo "version" "2020";
 fileInfo "cutIdentifier" "201911140446-42a737a01c";
 fileInfo "osv" "Mac OS X 10.15.5";
-fileInfo "UUID" "332A474A-484D-8325-CE09-5799A7431883";
+fileInfo "UUID" "1E5993C1-E949-BE06-5E61-FC82A993A95C";
 createNode transform -s -n "persp";
 	rename -uid "F53D788F-114B-AC62-77CE-D2BF8EA0011D";
 	setAttr ".v" no;
@@ -131,61 +131,28 @@ createNode pointLight -n "pointLightShape2" -p "pointLight2";
 	setAttr ".urs" no;
 	setAttr ".us" no;
 createNode lightLinker -s -n "lightLinker1";
-	rename -uid "5F2DD469-874B-AC70-BAF5-448B3913305E";
+	rename -uid "7CB0D1C7-134D-9C2C-85A7-B3B2A2C4372C";
 	setAttr -s 15 ".lnk";
 	setAttr -s 15 ".slnk";
 createNode shapeEditorManager -n "shapeEditorManager";
-	rename -uid "24B6DA3D-DD43-718E-2A3C-D0971D1F6D7B";
+	rename -uid "3C068106-E245-D244-2127-8EA182152D4D";
 createNode poseInterpolatorManager -n "poseInterpolatorManager";
-	rename -uid "63D19A34-E140-7ABD-F025-25B98E8E9086";
+	rename -uid "24FB1FF1-044F-34A9-2707-C1BE4208F1EB";
 createNode displayLayerManager -n "layerManager";
-	rename -uid "E01D1912-E341-EFD9-8273-DA9EA0C6C872";
+	rename -uid "1F4396C2-2044-F72A-6290-B4AB6CC6FBE6";
 	setAttr ".cdl" 1;
 	setAttr -s 2 ".dli[1]"  1;
 	setAttr -s 2 ".dli";
 createNode displayLayer -n "defaultLayer";
 	rename -uid "DC7E4CC6-7C47-D678-BA57-36AFACE9BE43";
 createNode renderLayerManager -n "renderLayerManager";
-	rename -uid "A71DCCBC-7848-7053-396D-30BB252180AC";
+	rename -uid "A49CFE73-E84D-801E-7586-D38AD5757083";
 createNode renderLayer -n "defaultRenderLayer";
 	rename -uid "0D8BDD29-7643-F7FD-EA37-2AA28E3F17F1";
 	setAttr ".g" yes;
 createNode reference -n "KnightRN";
 	rename -uid "AB345E8F-3A46-204F-C132-DA9A02C624FF";
 	setAttr -s 168 ".phl";
-	setAttr ".phl[167]" 0;
-	setAttr ".phl[168]" 0;
-	setAttr ".phl[169]" 0;
-	setAttr ".phl[170]" 0;
-	setAttr ".phl[171]" 0;
-	setAttr ".phl[172]" 0;
-	setAttr ".phl[173]" 0;
-	setAttr ".phl[174]" 0;
-	setAttr ".phl[175]" 0;
-	setAttr ".phl[176]" 0;
-	setAttr ".phl[177]" 0;
-	setAttr ".phl[178]" 0;
-	setAttr ".phl[179]" 0;
-	setAttr ".phl[180]" 0;
-	setAttr ".phl[181]" 0;
-	setAttr ".phl[182]" 0;
-	setAttr ".phl[183]" 0;
-	setAttr ".phl[184]" 0;
-	setAttr ".phl[185]" 0;
-	setAttr ".phl[186]" 0;
-	setAttr ".phl[187]" 0;
-	setAttr ".phl[188]" 0;
-	setAttr ".phl[189]" 0;
-	setAttr ".phl[190]" 0;
-	setAttr ".phl[191]" 0;
-	setAttr ".phl[192]" 0;
-	setAttr ".phl[193]" 0;
-	setAttr ".phl[194]" 0;
-	setAttr ".phl[195]" 0;
-	setAttr ".phl[196]" 0;
-	setAttr ".phl[197]" 0;
-	setAttr ".phl[198]" 0;
-	setAttr ".phl[199]" 0;
 	setAttr ".phl[200]" 0;
 	setAttr ".phl[201]" 0;
 	setAttr ".phl[202]" 0;
@@ -313,11 +280,45 @@ createNode reference -n "KnightRN";
 	setAttr ".phl[324]" 0;
 	setAttr ".phl[325]" 0;
 	setAttr ".phl[326]" 0;
+	setAttr ".phl[327]" 0;
+	setAttr ".phl[328]" 0;
+	setAttr ".phl[329]" 0;
+	setAttr ".phl[330]" 0;
+	setAttr ".phl[331]" 0;
+	setAttr ".phl[332]" 0;
+	setAttr ".phl[333]" 0;
+	setAttr ".phl[334]" 0;
+	setAttr ".phl[335]" 0;
+	setAttr ".phl[336]" 0;
+	setAttr ".phl[337]" 0;
+	setAttr ".phl[338]" 0;
+	setAttr ".phl[339]" 0;
+	setAttr ".phl[340]" 0;
+	setAttr ".phl[341]" 0;
+	setAttr ".phl[342]" 0;
+	setAttr ".phl[343]" 0;
+	setAttr ".phl[344]" 0;
+	setAttr ".phl[345]" 0;
+	setAttr ".phl[346]" 0;
+	setAttr ".phl[347]" 0;
+	setAttr ".phl[348]" 0;
+	setAttr ".phl[349]" 0;
+	setAttr ".phl[350]" 0;
+	setAttr ".phl[351]" 0;
+	setAttr ".phl[352]" 0;
+	setAttr ".phl[353]" 0;
+	setAttr ".phl[354]" 0;
+	setAttr ".phl[355]" 0;
+	setAttr ".phl[356]" 0;
 	setAttr ".ed" -type "dataReferenceEdits" 
 		"KnightRN"
-		"KnightRN" 9
+		"KnightRN" 14
 		2 "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftFootLock|Knight:LeftLockHandle" 
 		"translate" " -type \"double3\" 0 -6.66666666666666696 0"
+		2 "|Knight:Knight_Geo|Knight:RightLeg|Knight:RightLegShape" "visibility" 
+		" -k 0 1"
+		2 "|Knight:Knight_Geo|Knight:RightLeg|Knight:RightLegShape" "uvPivot" " -type \"double2\" 0.49999964609742165 0.26480722427368164"
+		
 		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftFootLock|Knight:LeftLockHandle.translateX" 
 		"KnightRN.placeHolderList[158]" ""
 		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftFootLock|Knight:LeftLockHandle.translateZ" 
@@ -334,28 +335,34 @@ createNode reference -n "KnightRN";
 		"KnightRN.placeHolderList[165]" ""
 		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftFootLock|Knight:LeftLockHandle.scaleZ" 
 		"KnightRN.placeHolderList[166]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:Head_Control.translateX" 
+		"KnightRN.placeHolderList[197]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:Head_Control.translateY" 
+		"KnightRN.placeHolderList[198]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:Head_Control.translateZ" 
+		"KnightRN.placeHolderList[199]" ""
 		"KnightRN" 252
-		2 "|Knight:Knight_Geo|Knight:RightArm|Knight:RightArmShape" "visibility" 
+		2 "|Knight:Knight_Geo|Knight:Torso|Knight:TorsoShape" "visibility" " -k 0 1"
+		
+		2 "|Knight:Knight_Geo|Knight:Torso|Knight:TorsoShape" "uvPivot" " -type \"double2\" 0.4965120330452919 0.42963898833841085"
+		
+		2 "|Knight:Knight_Geo|Knight:RightLeft|Knight:RightLeftShape" "visibility" 
 		" -k 0 1"
-		2 "|Knight:Knight_Geo|Knight:RightArm|Knight:RightArmShape" "uvPivot" " -type \"double2\" 1.01483821321744472 6.9456181526184082"
+		2 "|Knight:Knight_Geo|Knight:LeftLeg|Knight:LeftLegShape" "visibility" " -k 0 1"
+		
+		2 "|Knight:Knight_Geo|Knight:LeftLeg|Knight:LeftLegShape" "uvPivot" " -type \"double2\" 0.49999964609742165 0.26480722427368164"
 		
 		2 "|Knight:Knight_Geo|Knight:LeftArm|Knight:LeftArmShape" "visibility" " -k 0 1"
 		
 		2 "|Knight:Knight_Geo|Knight:LeftArm|Knight:LeftArmShape" "uvPivot" " -type \"double2\" 1.01483821321744472 6.9456181526184082"
 		
-		2 "|Knight:Knight_Geo|Knight:RightLeg|Knight:RightLegShape" "visibility" 
+		2 "|Knight:Knight_Geo|Knight:LeftArm|Knight:LeftArmShapeOrig" "visibility" 
 		" -k 0 1"
-		2 "|Knight:Knight_Geo|Knight:RightLeg|Knight:RightLegShape" "uvPivot" " -type \"double2\" 0.49999964609742165 0.26480722427368164"
+		2 "|Knight:Knight_Geo|Knight:RightArm|Knight:RightArmShape" "visibility" 
+		" -k 0 1"
+		2 "|Knight:Knight_Geo|Knight:RightArm|Knight:RightArmShape" "uvPivot" " -type \"double2\" 1.01483821321744472 6.9456181526184082"
 		
-		2 "|Knight:Knight_Geo|Knight:Torso|Knight:TorsoShape" "visibility" " -k 0 1"
-		
-		2 "|Knight:Knight_Geo|Knight:Torso|Knight:TorsoShape" "uvPivot" " -type \"double2\" 0.4965120330452919 0.42963898833841085"
-		
-		2 "|Knight:Knight_Geo|Knight:LeftLeg|Knight:LeftLegShape" "visibility" " -k 0 1"
-		
-		2 "|Knight:Knight_Geo|Knight:LeftLeg|Knight:LeftLegShape" "uvPivot" " -type \"double2\" 0.49999964609742165 0.26480722427368164"
-		
-		2 "|Knight:Knight_Control|Knight:Root_Control" "translate" " -type \"double3\" 0 0 200"
+		2 "|Knight:Knight_Control|Knight:Root_Control" "translate" " -type \"double3\" 0 0 0"
 		
 		2 "|Knight:Knight_Control|Knight:Root_Control" "translateX" " -av"
 		2 "|Knight:Knight_Control|Knight:Root_Control" "translateZ" " -av"
@@ -384,7 +391,7 @@ createNode reference -n "KnightRN";
 		2 "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control" 
 		"rotateZ" " -av"
 		2 "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:Head_Control" 
-		"rotate" " -type \"double3\" -15.17976122154529506 0 0"
+		"rotate" " -type \"double3\" -15.28279776931318423 0 0"
 		2 "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:Head_Control" 
 		"rotateX" " -av"
 		2 "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:Head_Control" 
@@ -481,7 +488,7 @@ createNode reference -n "KnightRN";
 		2 "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightFootLock|Knight:RightLockHandle" 
 		"translateY" " -av 0"
 		2 "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control" "translate" 
-		" -type \"double3\" 0 0 0"
+		" -type \"double3\" 0 0 -4.05042047352751311"
 		2 "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control" "translateX" 
 		" -av"
 		2 "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control" "translateY" 
@@ -504,343 +511,345 @@ createNode reference -n "KnightRN";
 		"translateZ" " -av"
 		2 "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftFootLock|Knight:LeftLockHandle" 
 		"translateY" " -av -10"
-		2 "|Knight:Knight_Skel|Knight:MoveControl|Knight:Hips_Skel|Knight:LeftUpperLeg_Skel" 
-		"rotate" " -type \"double3\" 0 0 29.78368337176877034"
-		2 "|Knight:Knight_Skel|Knight:MoveControl|Knight:Hips_Skel|Knight:LeftUpperLeg_Skel|Knight:LeftLowerLeg_Skel" 
-		"rotate" " -type \"double3\" 0 0 24.00655328651387777"
-		2 "|Knight:Knight_Skel|Knight:MoveControl|Knight:Hips_Skel|Knight:Torso_Skel|Knight:RightShoulder_Skel|Knight:RightUpperArm_Skel|Knight:RightLowerArm_Skel" 
-		"rotate" " -type \"double3\" -23.19461736679249242 0 0"
-		2 "|Knight:Knight_Skel|Knight:MoveControl|Knight:Hips_Skel|Knight:Torso_Skel|Knight:RightShoulder_Skel|Knight:RightUpperArm_Skel|Knight:RightLowerArm_Skel" 
+		2 "|Knight:Knight_Skel|Knight:MoveControl|Knight:Hips_Skel|Knight:Torso_Skel|Knight:Attach_Center" 
+		"rotateAxis" " -type \"double3\" 77.07578619912786166 0 0"
+		2 "|Knight:Knight_Skel|Knight:MoveControl|Knight:Hips_Skel|Knight:Torso_Skel|Knight:RightClav_Skel|Knight:RightUpperArm_Skel|Knight:RightLowerArm_Skel" 
+		"rotate" " -type \"double3\" -23.19461736679251729 0 0"
+		2 "|Knight:Knight_Skel|Knight:MoveControl|Knight:Hips_Skel|Knight:Torso_Skel|Knight:RightClav_Skel|Knight:RightUpperArm_Skel|Knight:RightLowerArm_Skel" 
 		"rotateX" " -av"
-		2 "|Knight:Knight_Skel|Knight:MoveControl|Knight:Hips_Skel|Knight:Torso_Skel|Knight:RightShoulder_Skel|Knight:RightUpperArm_Skel|Knight:RightLowerArm_Skel" 
+		2 "|Knight:Knight_Skel|Knight:MoveControl|Knight:Hips_Skel|Knight:Torso_Skel|Knight:RightClav_Skel|Knight:RightUpperArm_Skel|Knight:RightLowerArm_Skel" 
 		"rotateY" " -av"
-		2 "|Knight:Knight_Skel|Knight:MoveControl|Knight:Hips_Skel|Knight:Torso_Skel|Knight:RightShoulder_Skel|Knight:RightUpperArm_Skel|Knight:RightLowerArm_Skel" 
+		2 "|Knight:Knight_Skel|Knight:MoveControl|Knight:Hips_Skel|Knight:Torso_Skel|Knight:RightClav_Skel|Knight:RightUpperArm_Skel|Knight:RightLowerArm_Skel" 
 		"rotateZ" " -av"
+		2 "|Knight:Knight_Skel|Knight:MoveControl|Knight:Hips_Skel|Knight:Torso_Skel|Knight:RightClav_Skel|Knight:RightUpperArm_Skel|Knight:RightLowerArm_Skel|Knight:RightHand_Skel|Knight:Attach_RightHand" 
+		"rotateAxis" " -type \"double3\" 77.07578619912786166 0 0"
+		2 "|Knight:Knight_Skel|Knight:MoveControl|Knight:Hips_Skel|Knight:Torso_Skel|Knight:LeftClav_Skel|Knight:LeftUpperArm_Skel|Knight:LeftLowerArm_Skel|Knight:LeftHand_Skel|Knight:Attach_LeftHand" 
+		"rotateAxis" " -type \"double3\" 77.07578619912786166 0 0"
 		2 "|Knight:Knight_Skel|Knight:MoveControl|Knight:Hips_Skel|Knight:RightUpperLeg_Skel" 
-		"rotate" " -type \"double3\" -1.5300324886637366e-07 -3.0480080571870845e-07 59.4755061336194828"
+		"rotate" " -type \"double3\" -59.4755061336193549 -3.1740530184800912e-08 -1.3207456367236129e-06"
 		
 		2 "|Knight:Knight_Skel|Knight:MoveControl|Knight:Hips_Skel|Knight:RightUpperLeg_Skel|Knight:RightLowerLeg_Skel" 
-		"rotate" " -type \"double3\" 0 -1.4615035553116732e-06 69.35292224752123502"
+		"rotate" " -type \"double3\" 69.35292224752100765 1.2721078353943921e-06 -4.9084842338987278e-07"
+		
+		2 "|Knight:Knight_Skel|Knight:MoveControl|Knight:Hips_Skel|Knight:LeftUpperLeg_Skel" 
+		"rotate" " -type \"double3\" -27.2798933771533143 -1.2450780615001671e-07 3.1018887107754917e-05"
+		
+		2 "|Knight:Knight_Skel|Knight:MoveControl|Knight:Hips_Skel|Knight:LeftUpperLeg_Skel|Knight:LeftLowerLeg_Skel" 
+		"rotate" " -type \"double3\" 23.60350870341131113 0 0"
 		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control.translateX" 
-		"KnightRN.placeHolderList[167]" ""
+		"KnightRN.placeHolderList[200]" ""
 		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control.translateY" 
-		"KnightRN.placeHolderList[168]" ""
+		"KnightRN.placeHolderList[201]" ""
 		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control.translateZ" 
-		"KnightRN.placeHolderList[169]" ""
+		"KnightRN.placeHolderList[202]" ""
 		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control.rotateX" 
-		"KnightRN.placeHolderList[170]" ""
+		"KnightRN.placeHolderList[203]" ""
 		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control.rotateY" 
-		"KnightRN.placeHolderList[171]" ""
+		"KnightRN.placeHolderList[204]" ""
 		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control.rotateZ" 
-		"KnightRN.placeHolderList[172]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control.scaleX" "KnightRN.placeHolderList[173]" 
+		"KnightRN.placeHolderList[205]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control.scaleX" "KnightRN.placeHolderList[206]" 
 		""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control.scaleY" "KnightRN.placeHolderList[174]" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control.scaleY" "KnightRN.placeHolderList[207]" 
 		""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control.scaleZ" "KnightRN.placeHolderList[175]" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control.scaleZ" "KnightRN.placeHolderList[208]" 
 		""
 		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control.visibility" 
-		"KnightRN.placeHolderList[176]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control.translateX" 
-		"KnightRN.placeHolderList[177]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control.translateY" 
-		"KnightRN.placeHolderList[178]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control.translateZ" 
-		"KnightRN.placeHolderList[179]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control.rotateX" 
-		"KnightRN.placeHolderList[180]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control.rotateY" 
-		"KnightRN.placeHolderList[181]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control.rotateZ" 
-		"KnightRN.placeHolderList[182]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control.scaleX" 
-		"KnightRN.placeHolderList[183]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control.scaleY" 
-		"KnightRN.placeHolderList[184]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control.scaleZ" 
-		"KnightRN.placeHolderList[185]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control.visibility" 
-		"KnightRN.placeHolderList[186]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control.translateX" 
-		"KnightRN.placeHolderList[187]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control.translateY" 
-		"KnightRN.placeHolderList[188]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control.translateZ" 
-		"KnightRN.placeHolderList[189]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control.rotateX" 
-		"KnightRN.placeHolderList[190]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control.rotateY" 
-		"KnightRN.placeHolderList[191]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control.rotateZ" 
-		"KnightRN.placeHolderList[192]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control.scaleX" 
-		"KnightRN.placeHolderList[193]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control.scaleY" 
-		"KnightRN.placeHolderList[194]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control.scaleZ" 
-		"KnightRN.placeHolderList[195]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control.visibility" 
-		"KnightRN.placeHolderList[196]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:Head_Control.translateX" 
-		"KnightRN.placeHolderList[197]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:Head_Control.translateY" 
-		"KnightRN.placeHolderList[198]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:Head_Control.translateZ" 
-		"KnightRN.placeHolderList[199]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:Head_Control.rotateX" 
-		"KnightRN.placeHolderList[200]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:Head_Control.rotateY" 
-		"KnightRN.placeHolderList[201]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:Head_Control.rotateZ" 
-		"KnightRN.placeHolderList[202]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:Head_Control.scaleX" 
-		"KnightRN.placeHolderList[203]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:Head_Control.scaleY" 
-		"KnightRN.placeHolderList[204]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:Head_Control.scaleZ" 
-		"KnightRN.placeHolderList[205]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:Head_Control.visibility" 
-		"KnightRN.placeHolderList[206]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control.translateX" 
-		"KnightRN.placeHolderList[207]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control.translateY" 
-		"KnightRN.placeHolderList[208]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control.translateZ" 
 		"KnightRN.placeHolderList[209]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control.rotateX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control.translateX" 
 		"KnightRN.placeHolderList[210]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control.rotateY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control.translateY" 
 		"KnightRN.placeHolderList[211]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control.rotateZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control.translateZ" 
 		"KnightRN.placeHolderList[212]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control.scaleX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control.rotateX" 
 		"KnightRN.placeHolderList[213]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control.scaleY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control.rotateY" 
 		"KnightRN.placeHolderList[214]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control.scaleZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control.rotateZ" 
 		"KnightRN.placeHolderList[215]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control.visibility" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control.scaleX" 
 		"KnightRN.placeHolderList[216]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control.rotateX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control.scaleY" 
 		"KnightRN.placeHolderList[217]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control.translateX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control.scaleZ" 
 		"KnightRN.placeHolderList[218]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control.translateY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control.visibility" 
 		"KnightRN.placeHolderList[219]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control.translateZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control.translateX" 
 		"KnightRN.placeHolderList[220]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control.scaleX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control.translateY" 
 		"KnightRN.placeHolderList[221]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control.scaleY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control.translateZ" 
 		"KnightRN.placeHolderList[222]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control.scaleZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control.rotateX" 
 		"KnightRN.placeHolderList[223]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control.visibility" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control.rotateY" 
 		"KnightRN.placeHolderList[224]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control.translateX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control.rotateZ" 
 		"KnightRN.placeHolderList[225]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control.translateY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control.scaleX" 
 		"KnightRN.placeHolderList[226]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control.translateZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control.scaleY" 
 		"KnightRN.placeHolderList[227]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control.rotateX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control.scaleZ" 
 		"KnightRN.placeHolderList[228]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control.rotateY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control.visibility" 
 		"KnightRN.placeHolderList[229]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control.rotateZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:Head_Control.rotateX" 
 		"KnightRN.placeHolderList[230]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control.scaleX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:Head_Control.rotateY" 
 		"KnightRN.placeHolderList[231]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control.scaleY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:Head_Control.rotateZ" 
 		"KnightRN.placeHolderList[232]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control.scaleZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:Head_Control.scaleX" 
 		"KnightRN.placeHolderList[233]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control.visibility" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:Head_Control.scaleY" 
 		"KnightRN.placeHolderList[234]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control|Knight:Sword_Control.visibility" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:Head_Control.scaleZ" 
 		"KnightRN.placeHolderList[235]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control|Knight:Sword_Control.translateX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:Head_Control.visibility" 
 		"KnightRN.placeHolderList[236]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control|Knight:Sword_Control.translateY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control.translateX" 
 		"KnightRN.placeHolderList[237]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control|Knight:Sword_Control.translateZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control.translateY" 
 		"KnightRN.placeHolderList[238]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control|Knight:Sword_Control.rotateX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control.translateZ" 
 		"KnightRN.placeHolderList[239]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control|Knight:Sword_Control.rotateY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control.rotateX" 
 		"KnightRN.placeHolderList[240]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control|Knight:Sword_Control.rotateZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control.rotateY" 
 		"KnightRN.placeHolderList[241]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control|Knight:Sword_Control.scaleX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control.rotateZ" 
 		"KnightRN.placeHolderList[242]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control|Knight:Sword_Control.scaleY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control.scaleX" 
 		"KnightRN.placeHolderList[243]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control|Knight:Sword_Control.scaleZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control.scaleY" 
 		"KnightRN.placeHolderList[244]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control.translateX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control.scaleZ" 
 		"KnightRN.placeHolderList[245]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control.translateY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control.visibility" 
 		"KnightRN.placeHolderList[246]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control.translateZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control.rotateX" 
 		"KnightRN.placeHolderList[247]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control.rotateX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control.translateX" 
 		"KnightRN.placeHolderList[248]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control.rotateY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control.translateY" 
 		"KnightRN.placeHolderList[249]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control.rotateZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control.translateZ" 
 		"KnightRN.placeHolderList[250]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control.scaleX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control.scaleX" 
 		"KnightRN.placeHolderList[251]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control.scaleY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control.scaleY" 
 		"KnightRN.placeHolderList[252]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control.scaleZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control.scaleZ" 
 		"KnightRN.placeHolderList[253]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control.visibility" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control.visibility" 
 		"KnightRN.placeHolderList[254]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control.rotateX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control.translateX" 
 		"KnightRN.placeHolderList[255]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control.translateX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control.translateY" 
 		"KnightRN.placeHolderList[256]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control.translateY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control.translateZ" 
 		"KnightRN.placeHolderList[257]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control.translateZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control.rotateX" 
 		"KnightRN.placeHolderList[258]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control.scaleX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control.rotateY" 
 		"KnightRN.placeHolderList[259]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control.scaleY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control.rotateZ" 
 		"KnightRN.placeHolderList[260]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control.scaleZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control.scaleX" 
 		"KnightRN.placeHolderList[261]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control.visibility" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control.scaleY" 
 		"KnightRN.placeHolderList[262]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control.translateX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control.scaleZ" 
 		"KnightRN.placeHolderList[263]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control.translateY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control.visibility" 
 		"KnightRN.placeHolderList[264]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control.translateZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control|Knight:Sword_Control.visibility" 
 		"KnightRN.placeHolderList[265]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control.rotateX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control|Knight:Sword_Control.translateX" 
 		"KnightRN.placeHolderList[266]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control.rotateY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control|Knight:Sword_Control.translateY" 
 		"KnightRN.placeHolderList[267]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control.rotateZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control|Knight:Sword_Control.translateZ" 
 		"KnightRN.placeHolderList[268]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control.scaleX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control|Knight:Sword_Control.rotateX" 
 		"KnightRN.placeHolderList[269]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control.scaleY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control|Knight:Sword_Control.rotateY" 
 		"KnightRN.placeHolderList[270]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control.scaleZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control|Knight:Sword_Control.rotateZ" 
 		"KnightRN.placeHolderList[271]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control.visibility" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control|Knight:Sword_Control.scaleX" 
 		"KnightRN.placeHolderList[272]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control|Knight:Sword_Control.visibility" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control|Knight:Sword_Control.scaleY" 
 		"KnightRN.placeHolderList[273]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control|Knight:Sword_Control.translateX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:LeftUpperArm_Control|Knight:LeftLowerArm_Control|Knight:LeftHand_Control|Knight:Sword_Control.scaleZ" 
 		"KnightRN.placeHolderList[274]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control|Knight:Sword_Control.translateY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control.translateX" 
 		"KnightRN.placeHolderList[275]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control|Knight:Sword_Control.translateZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control.translateY" 
 		"KnightRN.placeHolderList[276]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control|Knight:Sword_Control.rotateX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control.translateZ" 
 		"KnightRN.placeHolderList[277]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control|Knight:Sword_Control.rotateY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control.rotateX" 
 		"KnightRN.placeHolderList[278]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control|Knight:Sword_Control.rotateZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control.rotateY" 
 		"KnightRN.placeHolderList[279]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control|Knight:Sword_Control.scaleX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control.rotateZ" 
 		"KnightRN.placeHolderList[280]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control|Knight:Sword_Control.scaleY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control.scaleX" 
 		"KnightRN.placeHolderList[281]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control|Knight:Sword_Control.scaleZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control.scaleY" 
 		"KnightRN.placeHolderList[282]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control.rotateX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control.scaleZ" 
 		"KnightRN.placeHolderList[283]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control.rotateY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control.visibility" 
 		"KnightRN.placeHolderList[284]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control.rotateZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control.rotateX" 
 		"KnightRN.placeHolderList[285]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control.translateX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control.translateX" 
 		"KnightRN.placeHolderList[286]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control.translateY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control.translateY" 
 		"KnightRN.placeHolderList[287]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control.translateZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control.translateZ" 
 		"KnightRN.placeHolderList[288]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control.visibility" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control.scaleX" 
 		"KnightRN.placeHolderList[289]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control.scaleX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control.scaleY" 
 		"KnightRN.placeHolderList[290]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control.scaleY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control.scaleZ" 
 		"KnightRN.placeHolderList[291]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control.scaleZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control.visibility" 
 		"KnightRN.placeHolderList[292]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightKnee_Control.translateX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control.translateX" 
 		"KnightRN.placeHolderList[293]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightKnee_Control.translateY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control.translateY" 
 		"KnightRN.placeHolderList[294]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightKnee_Control.translateZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control.translateZ" 
 		"KnightRN.placeHolderList[295]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightKnee_Control.rotateX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control.rotateX" 
 		"KnightRN.placeHolderList[296]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightKnee_Control.rotateY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control.rotateY" 
 		"KnightRN.placeHolderList[297]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightKnee_Control.rotateZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control.rotateZ" 
 		"KnightRN.placeHolderList[298]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightKnee_Control.scaleX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control.scaleX" 
 		"KnightRN.placeHolderList[299]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightKnee_Control.scaleY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control.scaleY" 
 		"KnightRN.placeHolderList[300]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightKnee_Control.scaleZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control.scaleZ" 
 		"KnightRN.placeHolderList[301]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightKnee_Control.visibility" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control.visibility" 
 		"KnightRN.placeHolderList[302]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightFootLock|Knight:RightLockHandle.translateY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control|Knight:Sword_Control.visibility" 
 		"KnightRN.placeHolderList[303]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightFootLock|Knight:RightLockHandle.visibility" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control|Knight:Sword_Control.translateX" 
 		"KnightRN.placeHolderList[304]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control.rotateX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control|Knight:Sword_Control.translateY" 
 		"KnightRN.placeHolderList[305]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control.rotateY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control|Knight:Sword_Control.translateZ" 
 		"KnightRN.placeHolderList[306]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control.rotateZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control|Knight:Sword_Control.rotateX" 
 		"KnightRN.placeHolderList[307]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control.translateX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control|Knight:Sword_Control.rotateY" 
 		"KnightRN.placeHolderList[308]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control.translateY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control|Knight:Sword_Control.rotateZ" 
 		"KnightRN.placeHolderList[309]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control.translateZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control|Knight:Sword_Control.scaleX" 
 		"KnightRN.placeHolderList[310]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control.visibility" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control|Knight:Sword_Control.scaleY" 
 		"KnightRN.placeHolderList[311]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control.scaleX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:Hips_Control|Knight:Torso_Control|Knight:RightUpperArm_Control|Knight:RightLowerArm_Control|Knight:RightHand_Control|Knight:Sword_Control.scaleZ" 
 		"KnightRN.placeHolderList[312]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control.scaleY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control.rotateX" 
 		"KnightRN.placeHolderList[313]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control.scaleZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control.rotateY" 
 		"KnightRN.placeHolderList[314]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftKnee_Control.translateX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control.rotateZ" 
 		"KnightRN.placeHolderList[315]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftKnee_Control.translateY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control.translateX" 
 		"KnightRN.placeHolderList[316]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftKnee_Control.translateZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control.translateY" 
 		"KnightRN.placeHolderList[317]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftKnee_Control.rotateX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control.translateZ" 
 		"KnightRN.placeHolderList[318]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftKnee_Control.rotateY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control.visibility" 
 		"KnightRN.placeHolderList[319]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftKnee_Control.rotateZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control.scaleX" 
 		"KnightRN.placeHolderList[320]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftKnee_Control.scaleX" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control.scaleY" 
 		"KnightRN.placeHolderList[321]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftKnee_Control.scaleY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control.scaleZ" 
 		"KnightRN.placeHolderList[322]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftKnee_Control.scaleZ" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightKnee_Control.translateX" 
 		"KnightRN.placeHolderList[323]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftKnee_Control.visibility" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightKnee_Control.translateY" 
 		"KnightRN.placeHolderList[324]" ""
-		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftFootLock|Knight:LeftLockHandle.translateY" 
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightKnee_Control.translateZ" 
 		"KnightRN.placeHolderList[325]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightKnee_Control.rotateX" 
+		"KnightRN.placeHolderList[326]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightKnee_Control.rotateY" 
+		"KnightRN.placeHolderList[327]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightKnee_Control.rotateZ" 
+		"KnightRN.placeHolderList[328]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightKnee_Control.scaleX" 
+		"KnightRN.placeHolderList[329]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightKnee_Control.scaleY" 
+		"KnightRN.placeHolderList[330]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightKnee_Control.scaleZ" 
+		"KnightRN.placeHolderList[331]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightKnee_Control.visibility" 
+		"KnightRN.placeHolderList[332]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightFootLock|Knight:RightLockHandle.translateY" 
+		"KnightRN.placeHolderList[333]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:RightFoot_Control|Knight:RightFootLock|Knight:RightLockHandle.visibility" 
+		"KnightRN.placeHolderList[334]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control.rotateX" 
+		"KnightRN.placeHolderList[335]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control.rotateY" 
+		"KnightRN.placeHolderList[336]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control.rotateZ" 
+		"KnightRN.placeHolderList[337]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control.translateX" 
+		"KnightRN.placeHolderList[338]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control.translateY" 
+		"KnightRN.placeHolderList[339]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control.translateZ" 
+		"KnightRN.placeHolderList[340]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control.visibility" 
+		"KnightRN.placeHolderList[341]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control.scaleX" 
+		"KnightRN.placeHolderList[342]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control.scaleY" 
+		"KnightRN.placeHolderList[343]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control.scaleZ" 
+		"KnightRN.placeHolderList[344]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftKnee_Control.translateX" 
+		"KnightRN.placeHolderList[345]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftKnee_Control.translateY" 
+		"KnightRN.placeHolderList[346]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftKnee_Control.translateZ" 
+		"KnightRN.placeHolderList[347]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftKnee_Control.rotateX" 
+		"KnightRN.placeHolderList[348]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftKnee_Control.rotateY" 
+		"KnightRN.placeHolderList[349]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftKnee_Control.rotateZ" 
+		"KnightRN.placeHolderList[350]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftKnee_Control.scaleX" 
+		"KnightRN.placeHolderList[351]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftKnee_Control.scaleY" 
+		"KnightRN.placeHolderList[352]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftKnee_Control.scaleZ" 
+		"KnightRN.placeHolderList[353]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftKnee_Control.visibility" 
+		"KnightRN.placeHolderList[354]" ""
+		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftFootLock|Knight:LeftLockHandle.translateY" 
+		"KnightRN.placeHolderList[355]" ""
 		5 4 "KnightRN" "|Knight:Knight_Control|Knight:Root_Control|Knight:LeftFoot_Control|Knight:LeftFootLock|Knight:LeftLockHandle.visibility" 
-		"KnightRN.placeHolderList[326]" "";
+		"KnightRN.placeHolderList[356]" "";
 	setAttr ".ptag" -type "string" "";
 lockNode -l 1 ;
 createNode script -n "uiConfigurationScriptNode";
@@ -849,17 +858,17 @@ createNode script -n "uiConfigurationScriptNode";
 		"// Maya Mel UI Configuration File.\n//\n//  This script is machine generated.  Edit at your own risk.\n//\n//\n\nglobal string $gMainPane;\nif (`paneLayout -exists $gMainPane`) {\n\n\tglobal int $gUseScenePanelConfig;\n\tint    $useSceneConfig = $gUseScenePanelConfig;\n\tint    $nodeEditorPanelVisible = stringArrayContains(\"nodeEditorPanel1\", `getPanel -vis`);\n\tint    $nodeEditorWorkspaceControlOpen = (`workspaceControl -exists nodeEditorPanel1Window` && `workspaceControl -q -visible nodeEditorPanel1Window`);\n\tint    $menusOkayInPanels = `optionVar -q allowMenusInPanels`;\n\tint    $nVisPanes = `paneLayout -q -nvp $gMainPane`;\n\tint    $nPanes = 0;\n\tstring $editorName;\n\tstring $panelName;\n\tstring $itemFilterName;\n\tstring $panelConfig;\n\n\t//\n\t//  get current state of the UI\n\t//\n\tsceneUIReplacement -update $gMainPane;\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Top View\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Top View\")) -mbv $menusOkayInPanels  $panelName;\n"
 		+ "\t\t$editorName = $panelName;\n        modelEditor -e \n            -docTag \"RADRENDER\" \n            -camera \"top\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 16384\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n"
 		+ "            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -controllers 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n"
-		+ "            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            -captureSequenceNumber -1\n            -width 493\n            -height 339\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n        modelEditor -e \n            -pluginObjects \"gpuCacheDisplayFilter\" 1 \n            $editorName;\n\t\tif (!$useSceneConfig) {\n"
+		+ "            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            -captureSequenceNumber -1\n            -width 592\n            -height 335\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n        modelEditor -e \n            -pluginObjects \"gpuCacheDisplayFilter\" 1 \n            $editorName;\n\t\tif (!$useSceneConfig) {\n"
 		+ "\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Side View\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Side View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -docTag \"RADRENDER\" \n            -camera \"side\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n"
 		+ "            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 16384\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n"
 		+ "            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -controllers 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            -captureSequenceNumber -1\n"
-		+ "            -width 493\n            -height 339\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n        modelEditor -e \n            -pluginObjects \"gpuCacheDisplayFilter\" 1 \n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Front View\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Front View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -docTag \"RADRENDER\" \n            -editorChanged \"CgAbBlastPanelOptChangeCallback\" \n            -camera \"front\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -holdOuts 1\n"
+		+ "            -width 591\n            -height 335\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n        modelEditor -e \n            -pluginObjects \"gpuCacheDisplayFilter\" 1 \n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Front View\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Front View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -docTag \"RADRENDER\" \n            -editorChanged \"CgAbBlastPanelOptChangeCallback\" \n            -camera \"front\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -holdOuts 1\n"
 		+ "            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 16384\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n"
 		+ "            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -controllers 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n"
-		+ "            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            -captureSequenceNumber -1\n            -width 493\n            -height 339\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n        modelEditor -e \n            -pluginObjects \"gpuCacheDisplayFilter\" 1 \n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Persp View\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Persp View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -docTag \"RADRENDER\" \n"
+		+ "            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            -captureSequenceNumber -1\n            -width 592\n            -height 335\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n        modelEditor -e \n            -pluginObjects \"gpuCacheDisplayFilter\" 1 \n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Persp View\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Persp View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -docTag \"RADRENDER\" \n"
 		+ "            -editorChanged \"CgAbBlastPanelOptChangeCallback\" \n            -camera \"persp\" \n            -useInteractiveMode 0\n            -displayLights \"all\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 1\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 16384\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n"
 		+ "            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -controllers 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 0\n            -cameras 1\n            -controlVertices 1\n"
-		+ "            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 0\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 1\n            -captureSequenceNumber -1\n            -width 1191\n            -height 722\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n        modelEditor -e \n            -pluginObjects \"gpuCacheDisplayFilter\" 1 \n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n"
+		+ "            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 0\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 1\n            -captureSequenceNumber -1\n            -width 1190\n            -height 714\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n        modelEditor -e \n            -pluginObjects \"gpuCacheDisplayFilter\" 1 \n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n"
 		+ "\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"outlinerPanel\" (localizedPanelLabel(\"ToggledOutliner\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\toutlinerPanel -edit -l (localizedPanelLabel(\"ToggledOutliner\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        outlinerEditor -e \n            -docTag \"isolOutln_fromSeln\" \n            -showShapes 0\n            -showAssignedMaterials 0\n            -showTimeEditor 1\n            -showReferenceNodes 1\n            -showReferenceMembers 1\n            -showAttributes 0\n            -showConnected 0\n            -showAnimCurvesOnly 0\n            -showMuteInfo 0\n            -organizeByLayer 1\n            -organizeByClip 1\n            -showAnimLayerWeight 1\n            -autoExpandLayers 1\n            -autoExpand 0\n            -showDagOnly 1\n            -showAssets 1\n            -showContainedOnly 1\n            -showPublishedAsConnected 0\n            -showParentContainers 0\n            -showContainerContents 1\n            -ignoreDagHierarchy 0\n"
 		+ "            -expandConnections 0\n            -showUpstreamCurves 1\n            -showUnitlessCurves 1\n            -showCompounds 1\n            -showLeafs 1\n            -showNumericAttrsOnly 0\n            -highlightActive 1\n            -autoSelectNewObjects 0\n            -doNotSelectNewObjects 0\n            -dropIsParent 1\n            -transmitFilters 0\n            -setFilter \"defaultSetFilter\" \n            -showSetMembers 1\n            -allowMultiSelection 1\n            -alwaysToggleSelect 0\n            -directSelect 0\n            -isSet 0\n            -isSetMember 0\n            -displayMode \"DAG\" \n            -expandObjects 0\n            -setsIgnoreFilters 1\n            -containersIgnoreFilters 0\n            -editAttrName 0\n            -showAttrValues 0\n            -highlightSecondary 0\n            -showUVAttrsOnly 0\n            -showTextureNodesOnly 0\n            -attrAlphaOrder \"default\" \n            -animLayerFilterOptions \"allAffecting\" \n            -sortOrder \"none\" \n            -longNames 0\n            -niceNames 1\n"
 		+ "            -showNamespace 1\n            -showPinIcons 0\n            -mapMotionTrails 0\n            -ignoreHiddenAttribute 0\n            -ignoreOutlinerColor 0\n            -renderFilterVisible 0\n            -renderFilterIndex 0\n            -selectionOrder \"chronological\" \n            -expandAttribute 0\n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"outlinerPanel\" (localizedPanelLabel(\"Outliner\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\toutlinerPanel -edit -l (localizedPanelLabel(\"Outliner\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        outlinerEditor -e \n            -docTag \"isolOutln_fromSeln\" \n            -showShapes 0\n            -showAssignedMaterials 0\n            -showTimeEditor 1\n            -showReferenceNodes 0\n            -showReferenceMembers 0\n            -showAttributes 0\n            -showConnected 0\n            -showAnimCurvesOnly 0\n            -showMuteInfo 0\n"
@@ -887,13 +896,13 @@ createNode script -n "uiConfigurationScriptNode";
 		+ "                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -controllers 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n                -cameras 1\n                -controlVertices 1\n                -hulls 1\n                -grid 1\n                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -particleInstancers 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -pluginShapes 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n"
 		+ "                -clipGhosts 1\n                -greasePencils 1\n                -shadows 0\n                -captureSequenceNumber -1\n                -width 0\n                -height 0\n                -sceneRenderFilter 0\n                -displayMode \"centerEye\" \n                -viewColor 0 0 0 1 \n                -useCustomBackground 1\n                $editorName;\n            stereoCameraView -e -viewSelected 0 $editorName;\n            stereoCameraView -e \n                -pluginObjects \"gpuCacheDisplayFilter\" 1 \n                $editorName; };\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\tif ($useSceneConfig) {\n        string $configName = `getPanel -cwl (localizedPanelLabel(\"Current Layout\"))`;\n        if (\"\" != $configName) {\n\t\t\tpanelConfiguration -edit -label (localizedPanelLabel(\"Current Layout\")) \n\t\t\t\t-userCreated false\n\t\t\t\t-defaultImage \"vacantCell.xP:/\"\n\t\t\t\t-image \"\"\n\t\t\t\t-sc false\n\t\t\t\t-configString \"global string $gMainPane; paneLayout -e -cn \\\"single\\\" -ps 1 100 100 $gMainPane;\"\n"
 		+ "\t\t\t\t-removeAllPanels\n\t\t\t\t-ap false\n\t\t\t\t\t(localizedPanelLabel(\"Persp View\")) \n\t\t\t\t\t\"modelPanel\"\n"
-		+ "\t\t\t\t\t\"$panelName = `modelPanel -unParent -l (localizedPanelLabel(\\\"Persp View\\\")) -mbv $menusOkayInPanels `;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -docTag \\\"RADRENDER\\\" \\n    -editorChanged \\\"CgAbBlastPanelOptChangeCallback\\\" \\n    -cam `findStartUpCamera persp` \\n    -useInteractiveMode 0\\n    -displayLights \\\"all\\\" \\n    -displayAppearance \\\"smoothShaded\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -holdOuts 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 0\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 1\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 16384\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -depthOfFieldPreview 1\\n    -maxConstantTransparency 1\\n    -rendererName \\\"vp2Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -controllers 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 0\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 1\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 0\\n    -deformers 1\\n    -dynamics 1\\n    -particleInstancers 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -greasePencils 1\\n    -shadows 1\\n    -captureSequenceNumber -1\\n    -width 1191\\n    -height 722\\n    -sceneRenderFilter 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName;\\nmodelEditor -e \\n    -pluginObjects \\\"gpuCacheDisplayFilter\\\" 1 \\n    $editorName\"\n"
-		+ "\t\t\t\t\t\"modelPanel -edit -l (localizedPanelLabel(\\\"Persp View\\\")) -mbv $menusOkayInPanels  $panelName;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -docTag \\\"RADRENDER\\\" \\n    -editorChanged \\\"CgAbBlastPanelOptChangeCallback\\\" \\n    -cam `findStartUpCamera persp` \\n    -useInteractiveMode 0\\n    -displayLights \\\"all\\\" \\n    -displayAppearance \\\"smoothShaded\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -holdOuts 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 0\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 1\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 16384\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -depthOfFieldPreview 1\\n    -maxConstantTransparency 1\\n    -rendererName \\\"vp2Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -controllers 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 0\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 1\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 0\\n    -deformers 1\\n    -dynamics 1\\n    -particleInstancers 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -greasePencils 1\\n    -shadows 1\\n    -captureSequenceNumber -1\\n    -width 1191\\n    -height 722\\n    -sceneRenderFilter 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName;\\nmodelEditor -e \\n    -pluginObjects \\\"gpuCacheDisplayFilter\\\" 1 \\n    $editorName\"\n"
+		+ "\t\t\t\t\t\"$panelName = `modelPanel -unParent -l (localizedPanelLabel(\\\"Persp View\\\")) -mbv $menusOkayInPanels `;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -docTag \\\"RADRENDER\\\" \\n    -editorChanged \\\"CgAbBlastPanelOptChangeCallback\\\" \\n    -cam `findStartUpCamera persp` \\n    -useInteractiveMode 0\\n    -displayLights \\\"all\\\" \\n    -displayAppearance \\\"smoothShaded\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -holdOuts 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 0\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 1\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 16384\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -depthOfFieldPreview 1\\n    -maxConstantTransparency 1\\n    -rendererName \\\"vp2Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -controllers 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 0\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 1\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 0\\n    -deformers 1\\n    -dynamics 1\\n    -particleInstancers 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -greasePencils 1\\n    -shadows 1\\n    -captureSequenceNumber -1\\n    -width 1190\\n    -height 714\\n    -sceneRenderFilter 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName;\\nmodelEditor -e \\n    -pluginObjects \\\"gpuCacheDisplayFilter\\\" 1 \\n    $editorName\"\n"
+		+ "\t\t\t\t\t\"modelPanel -edit -l (localizedPanelLabel(\\\"Persp View\\\")) -mbv $menusOkayInPanels  $panelName;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -docTag \\\"RADRENDER\\\" \\n    -editorChanged \\\"CgAbBlastPanelOptChangeCallback\\\" \\n    -cam `findStartUpCamera persp` \\n    -useInteractiveMode 0\\n    -displayLights \\\"all\\\" \\n    -displayAppearance \\\"smoothShaded\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -holdOuts 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 0\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 1\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 16384\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -depthOfFieldPreview 1\\n    -maxConstantTransparency 1\\n    -rendererName \\\"vp2Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -controllers 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 0\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 1\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 0\\n    -deformers 1\\n    -dynamics 1\\n    -particleInstancers 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -greasePencils 1\\n    -shadows 1\\n    -captureSequenceNumber -1\\n    -width 1190\\n    -height 714\\n    -sceneRenderFilter 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName;\\nmodelEditor -e \\n    -pluginObjects \\\"gpuCacheDisplayFilter\\\" 1 \\n    $editorName\"\n"
 		+ "\t\t\t\t$configName;\n\n            setNamedPanelLayout (localizedPanelLabel(\"Current Layout\"));\n        }\n\n        panelHistory -e -clear mainPanelHistory;\n        sceneUIReplacement -clear;\n\t}\n\n\ngrid -spacing 100 -size 500 -divisions 2 -displayAxes yes -displayGridLines yes -displayDivisionLines yes -displayPerspectiveLabels no -displayOrthographicLabels no -displayAxesBold yes -perspectiveLabelPosition axis -orthographicLabelPosition edge;\nviewManip -drawCompass 0 -compassAngle 0 -frontParameters \"\" -homeParameters \"\" -selectionLockParameters \"\";\n}\n");
 	setAttr ".st" 3;
 createNode script -n "sceneConfigurationScriptNode";
 	rename -uid "85C48568-A743-F9E4-7D0C-0E94A04CB151";
-	setAttr ".b" -type "string" "playbackOptions -min 0 -max 24 -ast -6 -aet 200 ";
+	setAttr ".b" -type "string" "playbackOptions -min 1 -max 120 -ast -6 -aet 200 ";
 	setAttr ".st" 6;
 createNode polyCube -n "polyCube1";
 	rename -uid "00A8ECE7-F747-88B3-ADC2-CDB4CAEE627E";
@@ -3806,8 +3815,8 @@ select -ne :time1;
 	setAttr -av -cb on ".ihi";
 	setAttr -av -k on ".nds";
 	setAttr -cb on ".bnm";
-	setAttr -k on ".o" 24;
-	setAttr -av -k on ".unw" 24;
+	setAttr -k on ".o" 0;
+	setAttr -av -k on ".unw";
 	setAttr -av -k on ".etw";
 	setAttr -av -k on ".tps";
 	setAttr -av -k on ".tms";
@@ -3874,7 +3883,6 @@ select -ne :initialShadingGroup;
 	setAttr -cb on ".fo";
 	setAttr -cb on ".epo";
 	setAttr -k on ".ro" yes;
-	setAttr -s 2 ".gn";
 select -ne :initialParticleSE;
 	setAttr ".ro" yes;
 select -ne :defaultRenderGlobals;
@@ -3970,166 +3978,163 @@ select -ne :hardwareRenderGlobals;
 	setAttr ".ctrs" 256;
 	setAttr ".btrs" 512;
 select -ne :ikSystem;
-connectAttr "Root_Control_translateX.o" "KnightRN.phl[167]";
-connectAttr "Root_Control_translateY.o" "KnightRN.phl[168]";
-connectAttr "Root_Control_translateZ.o" "KnightRN.phl[169]";
-connectAttr "Root_Control_rotateX.o" "KnightRN.phl[170]";
-connectAttr "Root_Control_rotateY.o" "KnightRN.phl[171]";
-connectAttr "Root_Control_rotateZ.o" "KnightRN.phl[172]";
-connectAttr "Root_Control_scaleX.o" "KnightRN.phl[173]";
-connectAttr "Root_Control_scaleY.o" "KnightRN.phl[174]";
-connectAttr "Root_Control_scaleZ.o" "KnightRN.phl[175]";
-connectAttr "Root_Control_visibility.o" "KnightRN.phl[176]";
-connectAttr "Hips_Control_translateX.o" "KnightRN.phl[177]";
-connectAttr "Hips_Control_translateY.o" "KnightRN.phl[178]";
-connectAttr "Hips_Control_translateZ.o" "KnightRN.phl[179]";
-connectAttr "Hips_Control_rotateX.o" "KnightRN.phl[180]";
-connectAttr "Hips_Control_rotateY.o" "KnightRN.phl[181]";
-connectAttr "Hips_Control_rotateZ.o" "KnightRN.phl[182]";
-connectAttr "Hips_Control_scaleX.o" "KnightRN.phl[183]";
-connectAttr "Hips_Control_scaleY.o" "KnightRN.phl[184]";
-connectAttr "Hips_Control_scaleZ.o" "KnightRN.phl[185]";
-connectAttr "Hips_Control_visibility.o" "KnightRN.phl[186]";
-connectAttr "Torso_Control_translateX.o" "KnightRN.phl[187]";
-connectAttr "Torso_Control_translateY.o" "KnightRN.phl[188]";
-connectAttr "Torso_Control_translateZ.o" "KnightRN.phl[189]";
-connectAttr "Torso_Control_rotateX.o" "KnightRN.phl[190]";
-connectAttr "Torso_Control_rotateY.o" "KnightRN.phl[191]";
-connectAttr "Torso_Control_rotateZ.o" "KnightRN.phl[192]";
-connectAttr "Torso_Control_scaleX.o" "KnightRN.phl[193]";
-connectAttr "Torso_Control_scaleY.o" "KnightRN.phl[194]";
-connectAttr "Torso_Control_scaleZ.o" "KnightRN.phl[195]";
-connectAttr "Torso_Control_visibility.o" "KnightRN.phl[196]";
-connectAttr "Head_Control_translateX.o" "KnightRN.phl[197]";
-connectAttr "Head_Control_translateY.o" "KnightRN.phl[198]";
-connectAttr "Head_Control_translateZ.o" "KnightRN.phl[199]";
-connectAttr "Head_Control_rotateX.o" "KnightRN.phl[200]";
-connectAttr "Head_Control_rotateY.o" "KnightRN.phl[201]";
-connectAttr "Head_Control_rotateZ.o" "KnightRN.phl[202]";
-connectAttr "Head_Control_scaleX.o" "KnightRN.phl[203]";
-connectAttr "Head_Control_scaleY.o" "KnightRN.phl[204]";
-connectAttr "Head_Control_scaleZ.o" "KnightRN.phl[205]";
-connectAttr "Head_Control_visibility.o" "KnightRN.phl[206]";
-connectAttr "LeftUpperArm_Control_translateX.o" "KnightRN.phl[207]";
-connectAttr "LeftUpperArm_Control_translateY.o" "KnightRN.phl[208]";
-connectAttr "LeftUpperArm_Control_translateZ.o" "KnightRN.phl[209]";
-connectAttr "LeftUpperArm_Control_rotateX.o" "KnightRN.phl[210]";
-connectAttr "LeftUpperArm_Control_rotateY.o" "KnightRN.phl[211]";
-connectAttr "LeftUpperArm_Control_rotateZ.o" "KnightRN.phl[212]";
-connectAttr "LeftUpperArm_Control_scaleX.o" "KnightRN.phl[213]";
-connectAttr "LeftUpperArm_Control_scaleY.o" "KnightRN.phl[214]";
-connectAttr "LeftUpperArm_Control_scaleZ.o" "KnightRN.phl[215]";
-connectAttr "LeftUpperArm_Control_visibility.o" "KnightRN.phl[216]";
-connectAttr "LeftLowerArm_Control_rotateX.o" "KnightRN.phl[217]";
-connectAttr "LeftLowerArm_Control_translateX.o" "KnightRN.phl[218]";
-connectAttr "LeftLowerArm_Control_translateY.o" "KnightRN.phl[219]";
-connectAttr "LeftLowerArm_Control_translateZ.o" "KnightRN.phl[220]";
-connectAttr "LeftLowerArm_Control_scaleX.o" "KnightRN.phl[221]";
-connectAttr "LeftLowerArm_Control_scaleY.o" "KnightRN.phl[222]";
-connectAttr "LeftLowerArm_Control_scaleZ.o" "KnightRN.phl[223]";
-connectAttr "LeftLowerArm_Control_visibility.o" "KnightRN.phl[224]";
-connectAttr "LeftHand_Control_translateX.o" "KnightRN.phl[225]";
-connectAttr "LeftHand_Control_translateY.o" "KnightRN.phl[226]";
-connectAttr "LeftHand_Control_translateZ.o" "KnightRN.phl[227]";
-connectAttr "LeftHand_Control_rotateX.o" "KnightRN.phl[228]";
-connectAttr "LeftHand_Control_rotateY.o" "KnightRN.phl[229]";
-connectAttr "LeftHand_Control_rotateZ.o" "KnightRN.phl[230]";
-connectAttr "LeftHand_Control_scaleX.o" "KnightRN.phl[231]";
-connectAttr "LeftHand_Control_scaleY.o" "KnightRN.phl[232]";
-connectAttr "LeftHand_Control_scaleZ.o" "KnightRN.phl[233]";
-connectAttr "LeftHand_Control_visibility.o" "KnightRN.phl[234]";
-connectAttr "Sword_Control_visibility1.o" "KnightRN.phl[235]";
-connectAttr "Sword_Control_translateX1.o" "KnightRN.phl[236]";
-connectAttr "Sword_Control_translateY1.o" "KnightRN.phl[237]";
-connectAttr "Sword_Control_translateZ1.o" "KnightRN.phl[238]";
-connectAttr "Sword_Control_rotateX1.o" "KnightRN.phl[239]";
-connectAttr "Sword_Control_rotateY1.o" "KnightRN.phl[240]";
-connectAttr "Sword_Control_rotateZ1.o" "KnightRN.phl[241]";
-connectAttr "Sword_Control_scaleX1.o" "KnightRN.phl[242]";
-connectAttr "Sword_Control_scaleY1.o" "KnightRN.phl[243]";
-connectAttr "Sword_Control_scaleZ1.o" "KnightRN.phl[244]";
-connectAttr "RightUpperArm_Control_translateX.o" "KnightRN.phl[245]";
-connectAttr "RightUpperArm_Control_translateY.o" "KnightRN.phl[246]";
-connectAttr "RightUpperArm_Control_translateZ.o" "KnightRN.phl[247]";
-connectAttr "RightUpperArm_Control_rotateX.o" "KnightRN.phl[248]";
-connectAttr "RightUpperArm_Control_rotateY.o" "KnightRN.phl[249]";
-connectAttr "RightUpperArm_Control_rotateZ.o" "KnightRN.phl[250]";
-connectAttr "RightUpperArm_Control_scaleX.o" "KnightRN.phl[251]";
-connectAttr "RightUpperArm_Control_scaleY.o" "KnightRN.phl[252]";
-connectAttr "RightUpperArm_Control_scaleZ.o" "KnightRN.phl[253]";
-connectAttr "RightUpperArm_Control_visibility.o" "KnightRN.phl[254]";
-connectAttr "RightLowerArm_Control_rotateX.o" "KnightRN.phl[255]";
-connectAttr "RightLowerArm_Control_translateX.o" "KnightRN.phl[256]";
-connectAttr "RightLowerArm_Control_translateY.o" "KnightRN.phl[257]";
-connectAttr "RightLowerArm_Control_translateZ.o" "KnightRN.phl[258]";
-connectAttr "RightLowerArm_Control_scaleX.o" "KnightRN.phl[259]";
-connectAttr "RightLowerArm_Control_scaleY.o" "KnightRN.phl[260]";
-connectAttr "RightLowerArm_Control_scaleZ.o" "KnightRN.phl[261]";
-connectAttr "RightLowerArm_Control_visibility.o" "KnightRN.phl[262]";
-connectAttr "RightHand_Control_translateX.o" "KnightRN.phl[263]";
-connectAttr "RightHand_Control_translateY.o" "KnightRN.phl[264]";
-connectAttr "RightHand_Control_translateZ.o" "KnightRN.phl[265]";
-connectAttr "RightHand_Control_rotateX.o" "KnightRN.phl[266]";
-connectAttr "RightHand_Control_rotateY.o" "KnightRN.phl[267]";
-connectAttr "RightHand_Control_rotateZ.o" "KnightRN.phl[268]";
-connectAttr "RightHand_Control_scaleX.o" "KnightRN.phl[269]";
-connectAttr "RightHand_Control_scaleY.o" "KnightRN.phl[270]";
-connectAttr "RightHand_Control_scaleZ.o" "KnightRN.phl[271]";
-connectAttr "RightHand_Control_visibility.o" "KnightRN.phl[272]";
-connectAttr "Sword_Control_visibility.o" "KnightRN.phl[273]";
-connectAttr "Sword_Control_translateX.o" "KnightRN.phl[274]";
-connectAttr "Sword_Control_translateY.o" "KnightRN.phl[275]";
-connectAttr "Sword_Control_translateZ.o" "KnightRN.phl[276]";
-connectAttr "Sword_Control_rotateX.o" "KnightRN.phl[277]";
-connectAttr "Sword_Control_rotateY.o" "KnightRN.phl[278]";
-connectAttr "Sword_Control_rotateZ.o" "KnightRN.phl[279]";
-connectAttr "Sword_Control_scaleX.o" "KnightRN.phl[280]";
-connectAttr "Sword_Control_scaleY.o" "KnightRN.phl[281]";
-connectAttr "Sword_Control_scaleZ.o" "KnightRN.phl[282]";
-connectAttr "RightFoot_Control_rotateX.o" "KnightRN.phl[283]";
-connectAttr "RightFoot_Control_rotateY.o" "KnightRN.phl[284]";
-connectAttr "RightFoot_Control_rotateZ.o" "KnightRN.phl[285]";
-connectAttr "RightFoot_Control_translateX.o" "KnightRN.phl[286]";
-connectAttr "RightFoot_Control_translateY.o" "KnightRN.phl[287]";
-connectAttr "RightFoot_Control_translateZ.o" "KnightRN.phl[288]";
-connectAttr "RightFoot_Control_visibility.o" "KnightRN.phl[289]";
-connectAttr "RightFoot_Control_scaleX.o" "KnightRN.phl[290]";
-connectAttr "RightFoot_Control_scaleY.o" "KnightRN.phl[291]";
-connectAttr "RightFoot_Control_scaleZ.o" "KnightRN.phl[292]";
-connectAttr "RightKnee_Control_translateX.o" "KnightRN.phl[293]";
-connectAttr "RightKnee_Control_translateY.o" "KnightRN.phl[294]";
-connectAttr "RightKnee_Control_translateZ.o" "KnightRN.phl[295]";
-connectAttr "RightKnee_Control_rotateX.o" "KnightRN.phl[296]";
-connectAttr "RightKnee_Control_rotateY.o" "KnightRN.phl[297]";
-connectAttr "RightKnee_Control_rotateZ.o" "KnightRN.phl[298]";
-connectAttr "RightKnee_Control_scaleX.o" "KnightRN.phl[299]";
-connectAttr "RightKnee_Control_scaleY.o" "KnightRN.phl[300]";
-connectAttr "RightKnee_Control_scaleZ.o" "KnightRN.phl[301]";
-connectAttr "RightKnee_Control_visibility.o" "KnightRN.phl[302]";
-connectAttr "RightLockHandle_translateY.o" "KnightRN.phl[303]";
-connectAttr "RightLockHandle_visibility.o" "KnightRN.phl[304]";
-connectAttr "LeftFoot_Control_rotateX.o" "KnightRN.phl[305]";
-connectAttr "LeftFoot_Control_rotateY.o" "KnightRN.phl[306]";
-connectAttr "LeftFoot_Control_rotateZ.o" "KnightRN.phl[307]";
-connectAttr "LeftFoot_Control_translateX.o" "KnightRN.phl[308]";
-connectAttr "LeftFoot_Control_translateY.o" "KnightRN.phl[309]";
-connectAttr "LeftFoot_Control_translateZ.o" "KnightRN.phl[310]";
-connectAttr "LeftFoot_Control_visibility.o" "KnightRN.phl[311]";
-connectAttr "LeftFoot_Control_scaleX.o" "KnightRN.phl[312]";
-connectAttr "LeftFoot_Control_scaleY.o" "KnightRN.phl[313]";
-connectAttr "LeftFoot_Control_scaleZ.o" "KnightRN.phl[314]";
-connectAttr "LeftKnee_Control_translateX.o" "KnightRN.phl[315]";
-connectAttr "LeftKnee_Control_translateY.o" "KnightRN.phl[316]";
-connectAttr "LeftKnee_Control_translateZ.o" "KnightRN.phl[317]";
-connectAttr "LeftKnee_Control_rotateX.o" "KnightRN.phl[318]";
-connectAttr "LeftKnee_Control_rotateY.o" "KnightRN.phl[319]";
-connectAttr "LeftKnee_Control_rotateZ.o" "KnightRN.phl[320]";
-connectAttr "LeftKnee_Control_scaleX.o" "KnightRN.phl[321]";
-connectAttr "LeftKnee_Control_scaleY.o" "KnightRN.phl[322]";
-connectAttr "LeftKnee_Control_scaleZ.o" "KnightRN.phl[323]";
-connectAttr "LeftKnee_Control_visibility.o" "KnightRN.phl[324]";
-connectAttr "LeftLockHandle_translateY.o" "KnightRN.phl[325]";
-connectAttr "LeftLockHandle_visibility.o" "KnightRN.phl[326]";
+connectAttr "Root_Control_translateX.o" "KnightRN.phl[200]";
+connectAttr "Root_Control_translateY.o" "KnightRN.phl[201]";
+connectAttr "Root_Control_translateZ.o" "KnightRN.phl[202]";
+connectAttr "Root_Control_rotateX.o" "KnightRN.phl[203]";
+connectAttr "Root_Control_rotateY.o" "KnightRN.phl[204]";
+connectAttr "Root_Control_rotateZ.o" "KnightRN.phl[205]";
+connectAttr "Root_Control_scaleX.o" "KnightRN.phl[206]";
+connectAttr "Root_Control_scaleY.o" "KnightRN.phl[207]";
+connectAttr "Root_Control_scaleZ.o" "KnightRN.phl[208]";
+connectAttr "Root_Control_visibility.o" "KnightRN.phl[209]";
+connectAttr "Hips_Control_translateX.o" "KnightRN.phl[210]";
+connectAttr "Hips_Control_translateY.o" "KnightRN.phl[211]";
+connectAttr "Hips_Control_translateZ.o" "KnightRN.phl[212]";
+connectAttr "Hips_Control_rotateX.o" "KnightRN.phl[213]";
+connectAttr "Hips_Control_rotateY.o" "KnightRN.phl[214]";
+connectAttr "Hips_Control_rotateZ.o" "KnightRN.phl[215]";
+connectAttr "Hips_Control_scaleX.o" "KnightRN.phl[216]";
+connectAttr "Hips_Control_scaleY.o" "KnightRN.phl[217]";
+connectAttr "Hips_Control_scaleZ.o" "KnightRN.phl[218]";
+connectAttr "Hips_Control_visibility.o" "KnightRN.phl[219]";
+connectAttr "Torso_Control_translateX.o" "KnightRN.phl[220]";
+connectAttr "Torso_Control_translateY.o" "KnightRN.phl[221]";
+connectAttr "Torso_Control_translateZ.o" "KnightRN.phl[222]";
+connectAttr "Torso_Control_rotateX.o" "KnightRN.phl[223]";
+connectAttr "Torso_Control_rotateY.o" "KnightRN.phl[224]";
+connectAttr "Torso_Control_rotateZ.o" "KnightRN.phl[225]";
+connectAttr "Torso_Control_scaleX.o" "KnightRN.phl[226]";
+connectAttr "Torso_Control_scaleY.o" "KnightRN.phl[227]";
+connectAttr "Torso_Control_scaleZ.o" "KnightRN.phl[228]";
+connectAttr "Torso_Control_visibility.o" "KnightRN.phl[229]";
+connectAttr "Head_Control_rotateX.o" "KnightRN.phl[230]";
+connectAttr "Head_Control_rotateY.o" "KnightRN.phl[231]";
+connectAttr "Head_Control_rotateZ.o" "KnightRN.phl[232]";
+connectAttr "Head_Control_scaleX.o" "KnightRN.phl[233]";
+connectAttr "Head_Control_scaleY.o" "KnightRN.phl[234]";
+connectAttr "Head_Control_scaleZ.o" "KnightRN.phl[235]";
+connectAttr "Head_Control_visibility.o" "KnightRN.phl[236]";
+connectAttr "LeftUpperArm_Control_translateX.o" "KnightRN.phl[237]";
+connectAttr "LeftUpperArm_Control_translateY.o" "KnightRN.phl[238]";
+connectAttr "LeftUpperArm_Control_translateZ.o" "KnightRN.phl[239]";
+connectAttr "LeftUpperArm_Control_rotateX.o" "KnightRN.phl[240]";
+connectAttr "LeftUpperArm_Control_rotateY.o" "KnightRN.phl[241]";
+connectAttr "LeftUpperArm_Control_rotateZ.o" "KnightRN.phl[242]";
+connectAttr "LeftUpperArm_Control_scaleX.o" "KnightRN.phl[243]";
+connectAttr "LeftUpperArm_Control_scaleY.o" "KnightRN.phl[244]";
+connectAttr "LeftUpperArm_Control_scaleZ.o" "KnightRN.phl[245]";
+connectAttr "LeftUpperArm_Control_visibility.o" "KnightRN.phl[246]";
+connectAttr "LeftLowerArm_Control_rotateX.o" "KnightRN.phl[247]";
+connectAttr "LeftLowerArm_Control_translateX.o" "KnightRN.phl[248]";
+connectAttr "LeftLowerArm_Control_translateY.o" "KnightRN.phl[249]";
+connectAttr "LeftLowerArm_Control_translateZ.o" "KnightRN.phl[250]";
+connectAttr "LeftLowerArm_Control_scaleX.o" "KnightRN.phl[251]";
+connectAttr "LeftLowerArm_Control_scaleY.o" "KnightRN.phl[252]";
+connectAttr "LeftLowerArm_Control_scaleZ.o" "KnightRN.phl[253]";
+connectAttr "LeftLowerArm_Control_visibility.o" "KnightRN.phl[254]";
+connectAttr "LeftHand_Control_translateX.o" "KnightRN.phl[255]";
+connectAttr "LeftHand_Control_translateY.o" "KnightRN.phl[256]";
+connectAttr "LeftHand_Control_translateZ.o" "KnightRN.phl[257]";
+connectAttr "LeftHand_Control_rotateX.o" "KnightRN.phl[258]";
+connectAttr "LeftHand_Control_rotateY.o" "KnightRN.phl[259]";
+connectAttr "LeftHand_Control_rotateZ.o" "KnightRN.phl[260]";
+connectAttr "LeftHand_Control_scaleX.o" "KnightRN.phl[261]";
+connectAttr "LeftHand_Control_scaleY.o" "KnightRN.phl[262]";
+connectAttr "LeftHand_Control_scaleZ.o" "KnightRN.phl[263]";
+connectAttr "LeftHand_Control_visibility.o" "KnightRN.phl[264]";
+connectAttr "Sword_Control_visibility1.o" "KnightRN.phl[265]";
+connectAttr "Sword_Control_translateX1.o" "KnightRN.phl[266]";
+connectAttr "Sword_Control_translateY1.o" "KnightRN.phl[267]";
+connectAttr "Sword_Control_translateZ1.o" "KnightRN.phl[268]";
+connectAttr "Sword_Control_rotateX1.o" "KnightRN.phl[269]";
+connectAttr "Sword_Control_rotateY1.o" "KnightRN.phl[270]";
+connectAttr "Sword_Control_rotateZ1.o" "KnightRN.phl[271]";
+connectAttr "Sword_Control_scaleX1.o" "KnightRN.phl[272]";
+connectAttr "Sword_Control_scaleY1.o" "KnightRN.phl[273]";
+connectAttr "Sword_Control_scaleZ1.o" "KnightRN.phl[274]";
+connectAttr "RightUpperArm_Control_translateX.o" "KnightRN.phl[275]";
+connectAttr "RightUpperArm_Control_translateY.o" "KnightRN.phl[276]";
+connectAttr "RightUpperArm_Control_translateZ.o" "KnightRN.phl[277]";
+connectAttr "RightUpperArm_Control_rotateX.o" "KnightRN.phl[278]";
+connectAttr "RightUpperArm_Control_rotateY.o" "KnightRN.phl[279]";
+connectAttr "RightUpperArm_Control_rotateZ.o" "KnightRN.phl[280]";
+connectAttr "RightUpperArm_Control_scaleX.o" "KnightRN.phl[281]";
+connectAttr "RightUpperArm_Control_scaleY.o" "KnightRN.phl[282]";
+connectAttr "RightUpperArm_Control_scaleZ.o" "KnightRN.phl[283]";
+connectAttr "RightUpperArm_Control_visibility.o" "KnightRN.phl[284]";
+connectAttr "RightLowerArm_Control_rotateX.o" "KnightRN.phl[285]";
+connectAttr "RightLowerArm_Control_translateX.o" "KnightRN.phl[286]";
+connectAttr "RightLowerArm_Control_translateY.o" "KnightRN.phl[287]";
+connectAttr "RightLowerArm_Control_translateZ.o" "KnightRN.phl[288]";
+connectAttr "RightLowerArm_Control_scaleX.o" "KnightRN.phl[289]";
+connectAttr "RightLowerArm_Control_scaleY.o" "KnightRN.phl[290]";
+connectAttr "RightLowerArm_Control_scaleZ.o" "KnightRN.phl[291]";
+connectAttr "RightLowerArm_Control_visibility.o" "KnightRN.phl[292]";
+connectAttr "RightHand_Control_translateX.o" "KnightRN.phl[293]";
+connectAttr "RightHand_Control_translateY.o" "KnightRN.phl[294]";
+connectAttr "RightHand_Control_translateZ.o" "KnightRN.phl[295]";
+connectAttr "RightHand_Control_rotateX.o" "KnightRN.phl[296]";
+connectAttr "RightHand_Control_rotateY.o" "KnightRN.phl[297]";
+connectAttr "RightHand_Control_rotateZ.o" "KnightRN.phl[298]";
+connectAttr "RightHand_Control_scaleX.o" "KnightRN.phl[299]";
+connectAttr "RightHand_Control_scaleY.o" "KnightRN.phl[300]";
+connectAttr "RightHand_Control_scaleZ.o" "KnightRN.phl[301]";
+connectAttr "RightHand_Control_visibility.o" "KnightRN.phl[302]";
+connectAttr "Sword_Control_visibility.o" "KnightRN.phl[303]";
+connectAttr "Sword_Control_translateX.o" "KnightRN.phl[304]";
+connectAttr "Sword_Control_translateY.o" "KnightRN.phl[305]";
+connectAttr "Sword_Control_translateZ.o" "KnightRN.phl[306]";
+connectAttr "Sword_Control_rotateX.o" "KnightRN.phl[307]";
+connectAttr "Sword_Control_rotateY.o" "KnightRN.phl[308]";
+connectAttr "Sword_Control_rotateZ.o" "KnightRN.phl[309]";
+connectAttr "Sword_Control_scaleX.o" "KnightRN.phl[310]";
+connectAttr "Sword_Control_scaleY.o" "KnightRN.phl[311]";
+connectAttr "Sword_Control_scaleZ.o" "KnightRN.phl[312]";
+connectAttr "RightFoot_Control_rotateX.o" "KnightRN.phl[313]";
+connectAttr "RightFoot_Control_rotateY.o" "KnightRN.phl[314]";
+connectAttr "RightFoot_Control_rotateZ.o" "KnightRN.phl[315]";
+connectAttr "RightFoot_Control_translateX.o" "KnightRN.phl[316]";
+connectAttr "RightFoot_Control_translateY.o" "KnightRN.phl[317]";
+connectAttr "RightFoot_Control_translateZ.o" "KnightRN.phl[318]";
+connectAttr "RightFoot_Control_visibility.o" "KnightRN.phl[319]";
+connectAttr "RightFoot_Control_scaleX.o" "KnightRN.phl[320]";
+connectAttr "RightFoot_Control_scaleY.o" "KnightRN.phl[321]";
+connectAttr "RightFoot_Control_scaleZ.o" "KnightRN.phl[322]";
+connectAttr "RightKnee_Control_translateX.o" "KnightRN.phl[323]";
+connectAttr "RightKnee_Control_translateY.o" "KnightRN.phl[324]";
+connectAttr "RightKnee_Control_translateZ.o" "KnightRN.phl[325]";
+connectAttr "RightKnee_Control_rotateX.o" "KnightRN.phl[326]";
+connectAttr "RightKnee_Control_rotateY.o" "KnightRN.phl[327]";
+connectAttr "RightKnee_Control_rotateZ.o" "KnightRN.phl[328]";
+connectAttr "RightKnee_Control_scaleX.o" "KnightRN.phl[329]";
+connectAttr "RightKnee_Control_scaleY.o" "KnightRN.phl[330]";
+connectAttr "RightKnee_Control_scaleZ.o" "KnightRN.phl[331]";
+connectAttr "RightKnee_Control_visibility.o" "KnightRN.phl[332]";
+connectAttr "RightLockHandle_translateY.o" "KnightRN.phl[333]";
+connectAttr "RightLockHandle_visibility.o" "KnightRN.phl[334]";
+connectAttr "LeftFoot_Control_rotateX.o" "KnightRN.phl[335]";
+connectAttr "LeftFoot_Control_rotateY.o" "KnightRN.phl[336]";
+connectAttr "LeftFoot_Control_rotateZ.o" "KnightRN.phl[337]";
+connectAttr "LeftFoot_Control_translateX.o" "KnightRN.phl[338]";
+connectAttr "LeftFoot_Control_translateY.o" "KnightRN.phl[339]";
+connectAttr "LeftFoot_Control_translateZ.o" "KnightRN.phl[340]";
+connectAttr "LeftFoot_Control_visibility.o" "KnightRN.phl[341]";
+connectAttr "LeftFoot_Control_scaleX.o" "KnightRN.phl[342]";
+connectAttr "LeftFoot_Control_scaleY.o" "KnightRN.phl[343]";
+connectAttr "LeftFoot_Control_scaleZ.o" "KnightRN.phl[344]";
+connectAttr "LeftKnee_Control_translateX.o" "KnightRN.phl[345]";
+connectAttr "LeftKnee_Control_translateY.o" "KnightRN.phl[346]";
+connectAttr "LeftKnee_Control_translateZ.o" "KnightRN.phl[347]";
+connectAttr "LeftKnee_Control_rotateX.o" "KnightRN.phl[348]";
+connectAttr "LeftKnee_Control_rotateY.o" "KnightRN.phl[349]";
+connectAttr "LeftKnee_Control_rotateZ.o" "KnightRN.phl[350]";
+connectAttr "LeftKnee_Control_scaleX.o" "KnightRN.phl[351]";
+connectAttr "LeftKnee_Control_scaleY.o" "KnightRN.phl[352]";
+connectAttr "LeftKnee_Control_scaleZ.o" "KnightRN.phl[353]";
+connectAttr "LeftKnee_Control_visibility.o" "KnightRN.phl[354]";
+connectAttr "LeftLockHandle_translateY.o" "KnightRN.phl[355]";
+connectAttr "LeftLockHandle_visibility.o" "KnightRN.phl[356]";
 connectAttr "Extras.di" "pCube1.do";
 connectAttr "polyCube1.out" "pCubeShape1.i";
 connectAttr "Extras.di" "directionalLight1.do";
@@ -4152,6 +4157,9 @@ connectAttr "LeftLockHandle_rotateZ.o" "KnightRN.phl[163]";
 connectAttr "LeftLockHandle_scaleX.o" "KnightRN.phl[164]";
 connectAttr "LeftLockHandle_scaleY.o" "KnightRN.phl[165]";
 connectAttr "LeftLockHandle_scaleZ.o" "KnightRN.phl[166]";
+connectAttr "Head_Control_translateX.o" "KnightRN.phl[197]";
+connectAttr "Head_Control_translateY.o" "KnightRN.phl[198]";
+connectAttr "Head_Control_translateZ.o" "KnightRN.phl[199]";
 connectAttr "layerManager.dli[1]" "Extras.id";
 connectAttr "lambert2.oc" "lambert2SG.ss";
 connectAttr "pCubeShape1.iog" "lambert2SG.dsm" -na;
