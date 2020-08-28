@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Castle.unity
-    guid: cac6ded163cbd4b10b217a3cfc7b5005
+    path: Assets/Scenes/Knight.unity
+    guid: cd8be21e2ae6445129a249433e1fbf78
   - enabled: 1
     path: Assets/Scenes/InGameUI.unity
     guid: 5ed5938d836d10a4abaa9917c86850e5

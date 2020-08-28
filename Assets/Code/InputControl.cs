@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -136,6 +135,9 @@ public class InputControl : MonoBehaviour {
 
     CameraControl.MouseInputX(Input.GetAxis("Mouse X"));
     CameraControl.MouseInputY(Input.GetAxis("Mouse Y"));
+
+    if (Input.GetKeyUp(KeyCode.Escape)) Application.Quit();
+
   }
 
   void PrimaryMapClickDown() {
