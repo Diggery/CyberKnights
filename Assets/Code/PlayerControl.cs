@@ -66,7 +66,10 @@ public class PlayerControl : MonoBehaviour, IControlTarget {
     animator.SetFloat("SideMove", moveDirection.x);
     cameraControl.SetPosition(transform.position + Vector3.up);
 
-    if (cluster) cluster.position = transform.position;
+    if (cluster) {
+      cluster.position = transform.position;
+      cluster.rotation = transform.rotation;
+    }
   }
 
   void OnAnimatorMove() {

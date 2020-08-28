@@ -56,13 +56,18 @@ public class ClusterControl : MonoBehaviour {
     set {
       if (KeepUpdated && (transform.position - value).sqrMagnitude > 1.0f) {
         transform.position = value;
-        Command(transform.position - Vector3.right, transform.position + Vector3.right);
+        Command(transform.position + transform.right, transform.position - transform.right);
       }
     }
   }
   public Quaternion rotation {
-    get; set; }
-
+    get { return transform.rotation; }
+    set {
+      if (KeepUpdated) {
+        transform.rotation = value;
+      }
+    }
+  }
 
   void Start() {
     Invoke("Init", 1);
